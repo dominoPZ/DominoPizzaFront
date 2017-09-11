@@ -64,18 +64,12 @@
 	};
 
 </script>
-<!-- Naver Anlytics 공통-->
-<script>
-var WCSLOG_URL = location.protocol == "https:" ? "https://wcs.naver.net/wcslog.js" : "http://wcs.naver.net/wcslog.js";
-document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"' %3E%3C/script%3E"));
-</script>
 <!-- // Naver Anlytics 공통-->
 
 <!-- 카이젠 공통-->
-<script data-kz-key="7944084e2b522564"
-data-kz-namespace="kzs"
-src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
-</script> 
+<script data-kz-key="7944084e2b522564" data-kz-namespace="kzs"
+	src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
+</script>
 <!-- 카이젠 공통-->
 
 </head>
@@ -89,10 +83,11 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<!-- //top_event_bnr -->
 
 	<!-- wrap  -->
-	<!-- 헤더 인클루드 -->
+	<div id="wrap">
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
 	
-<script>
+
+	<script>
 $(document).ready(function() {
 	$(".gnb_menu .menu04").addClass("on");
 });
