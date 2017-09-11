@@ -168,7 +168,7 @@ var chocolatChk = function() {
 			<div class="sub_title">
 				<ul class="sub_nav">
 					<li><a href="/main">HOME</a></li>
-					<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
+					<li><a href="<c:url value='/menuList.pz?ty=104'/> ">사이드디시</a></li>
 					<li><span>음료</span></li>
 				</ul>
 				<div class="sub_title_wrap">
@@ -178,8 +178,7 @@ var chocolatChk = function() {
 			<!-- //sub_title -->
 			<div class="tab_category">
 				<ul class="btn_tab">
-
-					<li class="sidedish"><a href="#">사이드디시</a></li>
+					<li class="sidedish"><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
 					<li class="C0202"><a
 						href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
 					<li class="C0203"><a
@@ -215,7 +214,7 @@ var chocolatChk = function() {
 														<!-- <span class="ico ico_tag">NEW</span> 신상품일 경우 추가 -->
 													</div>
 													<div class="prd_img_view">
-														<img src="<c:url value='/Pizza/Image/'/>${fn:replace(bvrg.d_img,' ', '')}"
+														<img src="<c:url value='/Pizza/Image/drink/'/>${fn:replace(bvrg.d_img,' ', '')}"
 															alt="${bvrg.d_name}" title="${bvrg.d_name}"/>
 													</div>
 												</div>

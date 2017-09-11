@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -258,7 +260,7 @@ var chocolatChk = function() {
 		<div class="sub_title">
 			<ul class="sub_nav">
 				<li><a href="/main">HOME</a></li>
-				<li><a href="<c:url value='/menuList.pz' />?ty=4">사이드디시</a></li>
+				<li><a href="<c:url value='/menuList.pz' />?ty=104">사이드디시</a></li>
 				<li><span>사이드디시</span></li>
 				</ul>
 			<div class="sub_title_wrap">
@@ -268,10 +270,9 @@ var chocolatChk = function() {
 		<!-- //sub_title -->
 		<div class="tab_category">
 			<ul class="btn_tab">
-
 	<li class="C0101"><a href="<c:url value='/menuList.pz' />?ty=4">사이드디시</a></li>
-				<li class="C0102"><a href="<c:url value='/menuList.pz' />?ty=4">음료</a></li>
-				<li class="C0104"><a href="<c:url value='/menuList.pz' />?ty=4">피클&소스</a></li>
+				<li class="C0102"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz' />">음료</a></li>
+				<li class="C0104"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz' />">피클&소스</a></li>
 		</ul>
 			<div class="tab_content_wrap">
 				<div class="tab_content active">
@@ -301,7 +302,7 @@ var chocolatChk = function() {
 										<div class="prd_tag">
 										<span class="ico ico_tag">NEW</span>
 										</div>
-										<div class="prd_img_view"><img src="<c:url value='/Pizza/Image/${dtos.s_img}' />" alt="꽃게 온더 피자 곡물도우"></div>
+										<div class="prd_img_view"><img src="<c:url value='/Pizza/Image/pizzalist/' />${fn:replace(dtos.s_img,' ','')}" alt="꽃게 온더 피자 곡물도우"></div>
 									</div>
 									<div class="prd_info">
 										<div class="prd_title">${dtos.s_name }</div>

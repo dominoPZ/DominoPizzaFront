@@ -20,10 +20,13 @@
     		<param-value>/WEB-INF/Config/*.xml</param-value>		
 		</init-param>
   </servlet>
+  
   <servlet-mapping>
 		<servlet-name>FrontController</servlet-name>
 		<url-pattern>*.pz</url-pattern>
   </servlet-mapping>
+  
+
   
   <!-- 한글 왜꺠지냐 -->
 <filter>

@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -150,16 +153,13 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
 	
-	
+
 
 <script>
 $(document).ready(function() {
 
 	$(".gnb_menu .menu01").addClass("on");
-	
-	$(".tab_category > ul > .C0101").addClass("active");
-
-
+	$(".tab_category > ul > .C${code}").addClass("active");
 	$(".minus").click(function() {
 		var obj = $(this).next().find("input");
 		var cnt = parseInt(obj.val()) - 1;
@@ -268,9 +268,9 @@ var chocolatChk = function() {
 		<div class="tab_category">
 			<ul class="btn_tab">
 
-	<li class="C0101"><a href="<c:url value='/menuList.pz?ty=101' />">곡물도우</a></li>
-				<li class="C0102"><a href="<c:url value='/menuList.pz?ty=102' />">프리미엄</a></li>
-				<li class="C0104"><a href="<c:url value='/menuList.pz?ty=103' />">클래식</a></li>
+	<li class="C101"><a href="<c:url value='/menuList.pz?ty=101' />">곡물도우</a></li>
+				<li class="C102"><a href="<c:url value='/menuList.pz?ty=102' />">프리미엄</a></li>
+				<li class="C103"><a href="<c:url value='/menuList.pz?ty=103' />">클래식</a></li>
 		</ul>
 			<div class="tab_content_wrap">
 				<div class="tab_content active">
@@ -302,7 +302,8 @@ var chocolatChk = function() {
 										<div class="prd_tag">
 										<span class="ico ico_tag">NEW</span>
 										</div>
-										<div class="prd_img_view"><img src="<c:url value='/Pizza/Image/pizzalist/${dtos.p_img}' />" alt="꽃게 온더 피자 곡물도우"></div>
+										
+										<div class="prd_img_view"><img src="<c:url value='/Pizza/Image/pizzalist'/>/${fn:replace(dtos.p_img,' ','')}" alt="꽃게 온더 피자 곡물도우"></div>
 									</div>
 									<div class="prd_info">
 										<div class="prd_title">${dtos.p_name }${namegok }</div>
@@ -316,8 +317,6 @@ var chocolatChk = function() {
 							
 						</c:forEach>
 	
-					
-
 
 						</ul>
 					</div>
