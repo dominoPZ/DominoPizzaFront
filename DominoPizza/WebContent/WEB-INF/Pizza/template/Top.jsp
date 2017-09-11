@@ -6,7 +6,7 @@
 
 
 		<!-- header -->
-		<div id="header">
+		<div id="header" style="background-color: white">
 				<div class="logo_area">
 					<div class="util_left">
 						<a href="javascript:;" class="btn_ico btn_menu">GNB</a>
