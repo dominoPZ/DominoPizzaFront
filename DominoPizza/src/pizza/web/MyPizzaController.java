@@ -60,7 +60,8 @@ public class MyPizzaController {
 	public String halfNHalf(Map map) throws Exception{
 		//첫번째 피자 리스트 출력용]
 		List<MyPizzaDTO> list = pizzaService.selectList(map);
-		map.put("pizzaList", list);
+		map.put("firstPizzaList", list);
+		//두번째 피자 리스트 출력용]
 		
 		
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";

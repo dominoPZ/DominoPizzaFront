@@ -76,10 +76,9 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 <!-- // Naver Anlytics 공통-->
 
 <!-- 카이젠 공통-->
-<script data-kz-key="7944084e2b522564"
-data-kz-namespace="kzs"
-src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
-</script> 
+<script data-kz-key="7944084e2b522564" data-kz-namespace="kzs"
+	src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
+</script>
 <!-- 카이젠 공통-->
 
 </head>
@@ -93,12 +92,11 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<!-- //top_event_bnr -->
 
 	<!-- wrap  -->
-	
-	<!-- 헤더 인클루드 -->
+	<div id="wrap">
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
+	
 
-
-<script>
+	<script>
 var pizzaList1, pizzaList2 = null;
 $(document).ready(function() {
 	$(".gnb_menu .menu04").addClass("on");
@@ -140,7 +138,7 @@ $(document).ready(function() {
 		if($(this).val() != "") {
 			$(".half_left").addClass("on");
 			//$(".half_left span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 첫 번째 피자" />');
-			$(".half_left span").html('<img src="<c:url value='/Pizza/Image/꽃게 온더 피자.png'/>" alt="선택한 첫 번째 피자"/>');
+			$(".half_left span").html('<img src="<c:url value='/Pizza/Image/꽃게온더피자.png'/>" alt="선택한 첫 번째 피자"/>');
 		} else {
 			$(".half_left").removeClass("on");
 			$(".half_left span").html("피자를 선택하세요.");
@@ -482,7 +480,7 @@ var closeLayer = function() {
 										<div class="sel_box">
 											<select id="pizza_select1">
 												<option value="">첫 번째 피자 선택</option>
-												<c:forEach items="${pizzaList}" var="pizza">
+												<c:forEach items="${firstPizzaList}" var="pizza">
 													<option value="${pizza.p_no}">${pizza.p_name}</option>
 												</c:forEach>												
 											</select>
@@ -492,8 +490,8 @@ var closeLayer = function() {
 									<div class="sel_box">
 										<select id="pizza_select2">
 													<option value="">두 번째 피자 선택</option>
-													<c:forEach items="${pizza}" var="pizza">
-													<option value="피자코드">${pizza.name}</option>
+												<c:forEach items="${pizzaList}" var="pizza">
+													<option value="${pizza.p_no}">${pizza.p_name}</option>
 												</c:forEach>	
 										</select>
 									</div>

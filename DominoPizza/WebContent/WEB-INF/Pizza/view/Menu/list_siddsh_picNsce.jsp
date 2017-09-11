@@ -93,9 +93,9 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<!-- //top_event_bnr -->
 
 	<!-- wrap  -->
-	<!-- 헤더 인클루드 -->
+	<div id="wrap">
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
-
+	
 <script>
 $(document).ready(function() {
 	
@@ -217,7 +217,7 @@ var chocolatChk = function() {
 
 	<li class="C0201"><a href="?dsp_ctgr=C0201">사이드디시</a></li>
 				<li class="C0202"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
-				<li class="C0203"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
+				<li class="active"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
 		</ul>
 			<div class="tab_content_wrap">
 				<div class="tab_content active">
