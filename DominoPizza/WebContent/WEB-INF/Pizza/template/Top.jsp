@@ -79,14 +79,12 @@
 
 
 					<li>
-						<a href="/event/list?gubun=E0200" class="menu05">이벤트</a>
+						<a href="<c:url value='/Pizza/event/EventMain.pz'/>" class="menu05">이벤트&혜택</a>
 						<div class="depth2">
 							<ul class="list_depth2">
 								<!-- li><a href="/event/list?gubun=E0100">오늘의 핫딜</a></li-->
-								<li><a href="/event/list?gubun=E0200">오늘의 이벤트</a></li>
-
-								<li><a href="/event/mania">매니아 혜택</a></li>
-								<li><a href="/event/discount">할인&제휴</a></li>
+								<li><a href="<c:url value='/Pizza/event/EventMain.pz'/>">오늘의 이벤트</a></li>
+								<li><a href="<c:url value='/Pizza/event/mania.pz'/>">매니아 혜택</a></li>
 <!-- 								<li><a href="/event/pizzaSchoolView">피자교실</a></li> -->
 							</ul>
 						</div>
@@ -94,7 +92,7 @@
 					
 					<li>
 					
-						<a href="/ecoupon/index" class="menu06">할인&제휴</a>
+						<a href="<c:url value='/Pizza/event/discount.pz'/>" class="menu06">할인</a>
 					
 					</li>
 					<li>
@@ -144,12 +142,11 @@
 							</ul>
 						</li>
 						<li>
-							<a href="/event/list?gubun=E0200">이벤트&할인</a>
+							<a href="<c:url value='/Pizza/event/EventMain.pz'/>">이벤트&혜택</a>
 							<ul class="list_depth2">
 								<!-- li><a href="#">오늘의 핫딜</a></li-->
-								<li><a href="/event/list?gubun=E0200">오늘의 이벤트</a></li>
-								<li><a href="/event/mania">매니아 혜택</a></li>
-								<li><a href="/event/discount">할인&제휴</a></li>
+								<li><a href="<c:url value='/Pizza/event/EventMain.pz'/>">오늘의 이벤트</a></li>
+								<li><a href="<c:url value='/Pizza/event/mania.pz'/>">매니아 혜택</a></li>
 							</ul>
 						</li>
 						<li>
