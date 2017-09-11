@@ -4,6 +4,9 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
+
+
+
 	<meta charset="euc-kr">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>도미노피자</title>
@@ -15,13 +18,19 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value='/Pizza/css/font.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css'/>">
 	<!-- https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css / /Pizza/css/layout.css -->
-<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/ui.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery.flexslider.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/selectbox.js'/>"></script><!-- js 수정함. -->
 	<script type="text/javascript" src="<c:url value='/Pizza/js/d2CommonUtil.js'/>"></script>
 	<%-- <script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js'/>"></script> --%> <!-- 오류 부분 -->
 	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js'/>"></script>
+	
+	<!-- 2] CDN(Content Deliver Network)주소 사용 -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<!-- Deprecated된 함수 사용시 아래 라이브러리 임베드 -->
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+	
 	<script type="text/javascript">
 	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
 	var CON_SSL_URL = "https://web.dominos.co.kr";
@@ -32,6 +41,7 @@
 	
 	
 	$(document).ready(function() {
+		
 		$.ajaxSetup({cache:false});
 		$(".gnb_menu .menu04").addClass("on");
 		setBasketCnt();
@@ -100,7 +110,7 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 var pizzaList1, pizzaList2 = null;
 $(document).ready(function() {
 	$(".gnb_menu .menu04").addClass("on");
-
+/* 
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -125,9 +135,10 @@ $(document).ready(function() {
 			}
 		}
 	});
-
+ */
 	//첫번째 피자 체인지 이벤트 발생시
 	$("#pizza_select1").change(function() {
+		alert("첫번째 피자 체인지 이벤트 발생");
 		$("#pizza_select2 option:gt(0)").remove();
 		$("#dough option:gt(0)").remove();
 		$("#size option:gt(0)").remove();
@@ -136,9 +147,11 @@ $(document).ready(function() {
 		$(".half_right span").html("피자를 선택하세요.");
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
+			alert("$(this).val():"+$(this).val());
 			$(".half_left").addClass("on");
 			//$(".half_left span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 첫 번째 피자" />');
-			$(".half_left span").html('<img src="<c:url value='/Pizza/Image/꽃게온더피자.png'/>" alt="선택한 첫 번째 피자"/>');
+			$(".half_left span").html('<img src="<c:url value='/Pizza/Image/pizzalist/꽃게온더피자H.png'/>" alt="선택한 첫 번째 피자"/>');
+			//$(".half_left span").html('<img src="<c:url value=/Pizza/Image/pizzalist/'+$(this).val()+'H.png" alt="선택한 첫 번째 피자" />');
 		} else {
 			$(".half_left").removeClass("on");
 			$(".half_left span").html("피자를 선택하세요.");
@@ -163,7 +176,7 @@ $(document).ready(function() {
 			 	}
 			},
 			error: function (error){
-				alert("다시 시도해주세요.");
+			/* 	alert("다시 시도해주세요."); */
 			}
 		});
 
@@ -481,7 +494,7 @@ var closeLayer = function() {
 											<select id="pizza_select1">
 												<option value="">첫 번째 피자 선택</option>
 												<c:forEach items="${firstPizzaList}" var="pizza">
-													<option value="${pizza.p_no}">${pizza.p_name}</option>
+													<option value="${pizza.p_name}">${pizza.p_name}</option>
 												</c:forEach>												
 											</select>
 										</div>
@@ -491,7 +504,7 @@ var closeLayer = function() {
 										<select id="pizza_select2">
 													<option value="">두 번째 피자 선택</option>
 												<c:forEach items="${pizzaList}" var="pizza">
-													<option value="${pizza.p_no}">${pizza.p_name}</option>
+													<option value="${pizza.p_name}">${pizza.p_name}</option>
 												</c:forEach>	
 										</select>
 									</div>
