@@ -123,6 +123,7 @@ $(document).ready(function() {
 		obj.val(cnt);
 	});
 
+	
 	$(".add").click(function() {
 		var obj = $(this).prev().find("input");
 		var cnt = parseInt(obj.val()) + 1;
