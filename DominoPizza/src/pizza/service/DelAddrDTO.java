@@ -1,7 +1,6 @@
 package pizza.service;
 
 public class DelAddrDTO {
-	
 	private String id;
 	private String st_no;
 	private String de_addr;

@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
      1]데이타베이스 연결정보 설정
      2]매퍼파일의 위치정보 설정
  -->
+ 
 <configuration>
 	<!--마이바티스에서 사용할 .properties(리소스파일) 설정 -->
 	<properties resource="mybatis/mybatis.properties"/>
@@ -19,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="BasketDTO" type="pizza.service.BasketDTO"/>
 		<typeAlias alias="StoresDTO" type="pizza.service.StoresDTO"/>
 		<typeAlias alias="DelAddrDTO" type="pizza.service.DelAddrDTO"/>
-	
 	
 	
 	

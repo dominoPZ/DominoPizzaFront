@@ -77,6 +77,7 @@ public class ServiceImpl implements pizza.service.Service {
 	}
 
 
+	
 
 	public StoresDTO deladdrsel(Map map) {
 		return dao.deladdrsel(map);

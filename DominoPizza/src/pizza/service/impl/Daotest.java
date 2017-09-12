@@ -93,7 +93,6 @@ public class Daotest {
 		map.put("xpos", xpos);
 		map.put("ypos", ypos);
 		
-		
 		return template.selectOne("mybatisDeladdrsel",map);
 	}
 

@@ -87,5 +87,4 @@ public class Order {
 		}
 		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
 	}
-
 }

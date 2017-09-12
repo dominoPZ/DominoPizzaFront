@@ -5,7 +5,6 @@
 <!-- 어느 컨트롤러에서 왔는지에 따라 분기 -->
 <c:choose>   
 
-
    
    <c:when test="${WHERE eq 'INS' }">
       <c:set var="SUC_MSG" value="정상적으로 등록되었습니다."/>
