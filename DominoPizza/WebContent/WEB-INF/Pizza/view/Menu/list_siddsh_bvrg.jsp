@@ -7,37 +7,26 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
-
-<meta charset="euc-kr">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>도미노피자</title>
-<meta name="viewport" id="viewport"
-	content="width=1119px, user-scalable=yes">
-<meta http-equiv='cache-control' content='no-cache'>
-<meta http-equiv='expires' content='0'>
-<meta http-equiv='pragma' content='no-cache'>
-<link rel="shortcut icon"
-	href="<c:url value='/Pizza/Image/favicon.ico'/>" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/Pizza/css/font.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css'/>">
-<!-- https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css / /Pizza/css/layout.css -->
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/Pizza/js/ui.js'/>"></script>
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/jquery.flexslider.js'/>"></script>
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/selectbox.js'/>"></script>
-<!-- js 수정함. -->
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/d2CommonUtil.js'/>"></script>
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/Cookie.js'/>"></script>
-<script type="text/javascript"
-	src="<c:url value='/Pizza/js/basket_w.js'/>"></script>
-<script type="text/javascript">
+	<meta charset="euc-kr">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>도미노피자</title>
+	<meta name="viewport" id="viewport" content="width=1119px, user-scalable=yes">
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	<link rel="shortcut icon" href="<c:url value='/Pizza/Image/favicon.ico'/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value='/Pizza/css/font.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css'/>">
+	<!-- https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css / /Pizza/css/layout.css -->
+	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/ui.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery.flexslider.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/selectbox.js'/>"></script>
+	<!-- js 수정함. -->
+	<script type="text/javascript" src="<c:url value='/Pizza/js/d2CommonUtil.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js'/>"></script>
+	<script type="text/javascript">
 	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
 	var CON_SSL_URL = "https://web.dominos.co.kr";
 	var CON_STATIC_URL = "https://cdn.dominos.co.kr/renewal2016/ko/w";
@@ -97,15 +86,15 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 	<!-- top_event_bnr -->
 	<div class="top_bnr top_event" id="lineBanner">
 		<div class="top_event_wrap">
-			<a href="javascript:;" class="btn_ico btn_event_close"
-				onclick="lineBannerClose(); return false;">close</a>
+			<a href="javascript:;" class="btn_ico btn_event_close" onclick="lineBannerClose(); return false;">close</a>
 		</div>
 	</div>
 	<!-- //top_event_bnr -->
 
 	<!-- wrap  -->
-	<!-- 헤더 인클루드 -->
+	<div id="wrap">
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
+	
 
 	<script>
 $(document).ready(function() {
@@ -123,7 +112,6 @@ $(document).ready(function() {
 		obj.val(cnt);
 	});
 
-	
 	$(".add").click(function() {
 		var obj = $(this).prev().find("input");
 		var cnt = parseInt(obj.val()) + 1;
@@ -170,7 +158,7 @@ var chocolatChk = function() {
 			<div class="sub_title">
 				<ul class="sub_nav">
 					<li><a href="/main">HOME</a></li>
-					<li><a href="<c:url value='/menuList.pz?ty=104'/> ">사이드디시</a></li>
+					<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
 					<li><span>음료</span></li>
 				</ul>
 				<div class="sub_title_wrap">
@@ -180,11 +168,10 @@ var chocolatChk = function() {
 			<!-- //sub_title -->
 			<div class="tab_category">
 				<ul class="btn_tab">
-					<li class="sidedish"><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
-					<li class="C0202"><a
-						href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
-					<li class="C0203"><a
-						href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
+
+					<li class="sidedish"><a href="#">사이드디시</a></li>
+					<li class="active"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
+					<li class="C0203"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
 				</ul>
 				<div class="tab_content_wrap">
 					<div class="tab_content active">
@@ -198,19 +185,18 @@ var chocolatChk = function() {
 							<!-- li 1번째 5번째 class="prd_list_rgt" 추가 -->
 							<ul>
 
-							
-										<c:set value="block" var="footDisplay"/>
-										<c:forEach var="bvrg" items="${bvrg}" varStatus="loop">
-											<c:if test="${(loop.count-1) % 4==0 }" var="pif">
-												<c:set value="prd_list_rgt" var="pclass" />
-											</c:if>
-											<c:if test="${!pif }">
-												<c:set value=" " var="pclass" />
-											</c:if>
+
+								<c:set value="block" var="footDisplay" />
+								<c:forEach var="bvrg" items="${bvrg}" varStatus="loop">
+									<c:if test="${(loop.count-1) % 4==0 }" var="pif">
+										<c:set value="prd_list_rgt" var="pclass" />
+									</c:if>
+									<c:if test="${!pif }">
+										<c:set value=" " var="pclass" />
+									</c:if>
 
 
 
-<<<<<<< HEAD
 									<li class="${pclass}">
 										<div class="prd_img">
 											<div class="prd_tag">
@@ -236,48 +222,16 @@ var chocolatChk = function() {
 													<div class="form_item">
 														<input type="text" id="${bvrg.dr_no}_qty" class="i_text"
 															value="1">
-=======
-											<li class="${pclass}">
-												<div class="prd_img">
-													<div class="prd_tag">
-														<!-- <span class="ico ico_tag">NEW</span> 신상품일 경우 추가 -->
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront.git
 													</div>
-													<div class="prd_img_view">
-														<img src="<c:url value='/Pizza/Image/drink/'/>${fn:replace(bvrg.d_img,' ', '')}"
-															alt="${bvrg.d_name}" title="${bvrg.d_name}"/>
-													</div>
+													<a href="javascript:;" class="add"><span
+														class="ico ico_add"></span></a>
 												</div>
-												<div class="prd_info">
-													<div class="prd_title">${bvrg.d_name}</div>
-												</div>
-												<div class="prd_price">
-													<p class="price_num">
-														<fmt:formatNumber value="${bvrg.d_price}" />
-														원</em>
-													</p>
-													<div class="prd_option">
-														<div class="input_num">
-															<a href="javascript:;" class="minus"><span
-																class="ico ico_minus"></span></a>
-															<div class="form_item">
-																<input type="text" id="${bvrg.dr_no}_qty" class="i_text"
-																	value="1">
-															</div>
-															<a href="javascript:;" class="add"><span
-																class="ico ico_add"></span></a>
-														</div>
-														<a href="javascript:addGoods('${bvrg.dr_no}');"
-															class="btn_ico btn_cart2">장바구니</a>
-													</div>
-												</div>
-											</li>
-											</c:forEach>
-						
-
-
-
-									
+												<a href="javascript:addGoods('${bvrg.dr_no}');"
+													class="btn_ico btn_cart2">장바구니</a>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
 
 
 							</ul>

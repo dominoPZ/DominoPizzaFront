@@ -204,7 +204,7 @@ var chocolatChk = function() {
 		<div class="sub_title">
 			<ul class="sub_nav">
 				<li><a href="/main">HOME</a></li>
-				<li><a href="<c:url value ='/menuList.pz?ty=104' />">사이드디시</a></li>
+				<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
 				<li><span>피클&소스</span></li>
 				</ul>
 			<div class="sub_title_wrap">
@@ -215,7 +215,7 @@ var chocolatChk = function() {
 		<div class="tab_category">
 			<ul class="btn_tab">
 
-	<li class="C0201"><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
+	<li class="C0201"><a href="?dsp_ctgr=C0201">사이드디시</a></li>
 				<li class="C0202"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
 				<li class="active"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
 		</ul>
@@ -245,12 +245,7 @@ var chocolatChk = function() {
 										<div class="prd_img">
 											<div class="prd_tag"></div>
 											<div class="prd_img_view">
-<<<<<<< HEAD
 												<img src="<c:url value='/Pizza/Image/sidedish/pickleNSouce/'/>${fn:replace(pcNsc.pc_img,' ', '')}" alt="${pcNsc.pc_name}" title="${pcNsc.pc_name}"/>
-=======
-												<img src="<c:url value='/Pizza/Image/pns/'/>${fn:replace(pcNsc.pc_img,' ', '')}" alt="${pcNsc.pc_name}" title="${pcNsc.pc_name}"/>
-												
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront.git
 											</div>
 										</div>
 										<div class="prd_info">
@@ -295,12 +290,7 @@ var chocolatChk = function() {
 										<div class="prd_img">
 											<div class="prd_tag"></div>
 											<div class="prd_img_view">
-<<<<<<< HEAD
 												<img src="<c:url value='/Pizza/Image/sidedish/pickleNSouce/'/>${fn:replace(pcNsc.sc_img,' ', '')}" alt="${pcNsc.sc_name}" title="${pcNsc.sc_name}"/>
-=======
-												<img src="<c:url value='/Pizza/Image/pns/'/>${fn:replace(pcNsc.sc_img,' ', '')}" alt="${pcNsc.sc_name}" title="${pcNsc.sc_name}"/>
-												
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront.git
 											</div>
 										</div>
 										<div class="prd_info">
