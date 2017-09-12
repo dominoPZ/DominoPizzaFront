@@ -148,14 +148,18 @@ $(document).ready(function() {
 
 		$(".half_right").removeClass("on");
 		$(".half_right span").html("피자를 선택하세요.");
+		
+		
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
-			alert("$(this).val() : "+$(this).val());
+			//alert("$(this).val(rep) : "+$(this).val().replace(/ /g, ''));
+			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_left").addClass("on");
-			//$(".half_left span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 첫 번째 피자" />');
-			//꽃게온더피자를 $(this).val()이걸로 바꿔처 그 이미지 출력해야함.
-			//"<img src='<c:url value="/Pizza/Image/pizzalist/'+꽃게온더피자+'H.png"/>' alt='선택한 첫 번째 피자'/>"
-			//"<img src='<c:url value="/Pizza/Image/pizzalist/꽃게온더피자H.png"/>' alt='선택한 첫 번째 피자'/>"
+	         var first = "<img src='";
+	         var second = '<c:url value="/Pizza/Image/pizzalist/'+value+'"/>';
+	         var all = first+second+"' alt='선택한 첫 번째 피자'/>";
+	         //alert(all);
+	         $(".half_left span").html(all);
 		} else {
 			$(".half_left").removeClass("on");
 			$(".half_left span").html("피자를 선택하세요.");
