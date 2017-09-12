@@ -76,7 +76,7 @@ geocoder.geocode({ 'address': address }, function (results, status) {
   }
   var ret = results[0].geometry.location;
 
-  top.document.location.href="<c:url value='AddrIn.pz' />?ret="+ret;
+  top.document.location.href="<c:url value='AddrIn.pz' />?ret="+ret+"&addr="+address;
   
 });
 

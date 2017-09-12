@@ -56,6 +56,7 @@ public class Order {
 	@RequestMapping("AddrIn.pz")
 	public String AddrIn(@RequestParam Map map, Model model,HttpSession session ,HttpServletRequest req) throws Exception{
 		String pos = map.get("ret").toString();
+		String addr = map.get("addr").toString();
 		String xposs=pos.replace(")", "").replace("(", "").split(",")[0].trim();
 		String yposs=pos.replace(")", "").replace("(", "").split(",")[1].trim();
 		String kind = "1";

@@ -471,8 +471,9 @@ var addBranchComplete = function(param) {
 									<tr id="${loop.count }">
 											<td>
 												<div class="order_adr">
-													<p class="addr_info">${fn:replace(dto.st_addr, "%&@#*^$@!", " ")}</p>
+													<p class="addr_info">${fn:replace(dto.de_addr, "%&@#*^$@!", " ")}</p>
 													<strong class="order_store_info">${dto.st_name }<span>(${dto.st_tel })</span></strong>
+													
 												</div>
 											</td>
 											<td class="txt_rgt">

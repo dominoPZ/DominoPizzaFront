@@ -13,6 +13,7 @@ public class StoresDTO {
 	 private String st_xpos;
 	 private String st_ypos;
 	 private String st;
+	 private String de_addr;
 	 
 	public String getSt_no() {
 		return st_no;
@@ -85,6 +86,12 @@ public class StoresDTO {
 	}
 	public void setSt(String st) {
 		this.st = st;
+	}
+	public String getDe_addr() {
+		return de_addr;
+	}
+	public void setDe_addr(String de_addr) {
+		this.de_addr = de_addr;
 	}
 	 
 	 
