@@ -9,10 +9,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import pizza.service.BasketDTO;
+import pizza.service.DelAddrDTO;
 import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
+import pizza.service.StoresDTO;
 
 
 @Repository
@@ -77,6 +79,30 @@ public class Daotest {
 
 	public int stinsert(BasketDTO dto) {
 		return template.insert("mybatisstinsert",dto);
+	}
+
+
+	public StoresDTO deladdrsel(Map map) {
+		
+		String pos = map.get("ret").toString();
+		String xposs=pos.replace(")", "").replace("(", "").split(",")[0].trim();
+		String yposs=pos.replace(")", "").replace("(", "").split(",")[1].trim();
+		System.out.println("x:"+xposs+" y:"+yposs);
+		float xpos = Float.parseFloat(xposs);
+		float ypos = Float.parseFloat(yposs);
+		map.put("xpos", xpos);
+		map.put("ypos", ypos);
+		
+		
+		return template.selectOne("mybatisDeladdrsel",map);
+	}
+
+	public int deladdrin(Map map) {
+		return template.insert("mybatisDeladdrin",map);
+	}
+
+	public List<StoresDTO> deladdrprint(Map map) {
+		return template.selectList("mybatisdeladdrprint",map);
 	}
 	
 	
