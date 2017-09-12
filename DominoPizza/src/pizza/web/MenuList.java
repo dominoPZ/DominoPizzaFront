@@ -40,8 +40,11 @@ public class MenuList {
 	@RequestMapping("/menuList.pz")
 	public String menuList(Model model, HttpServletRequest req) throws Exception{
 		int ty=0;
-		if(req.getParameter("ty")!=null)
+		if(req.getParameter("ty")!=null) {
+			req.setAttribute("code", req.getParameter("ty"));
 		ty = Integer.parseInt(req.getParameter("ty"));
+		System.out.println(ty);
+		}
 		System.out.println(ty);
 		System.out.println(req.getServletContext().getRealPath("/Mypizza"));
 		String sel="";

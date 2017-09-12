@@ -1,4 +1,3 @@
-	
 	<link href="${pageContext.request.contextPath}/Cafe/CSS/BootStrap.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/Cafe/CSS/datepicker.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/Cafe/CSS/common.css" rel="stylesheet">
