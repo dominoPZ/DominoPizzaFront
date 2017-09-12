@@ -6,8 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
 
 <mapper namespace="mybatis.mybatis">
-
-
 	<resultMap id="PizzaMenuListResult" type="PizzaMenuList">
 	    <result property="p_name" column="p_name"/>
 	    <result property="p_lprice" column="p_lprice"/>

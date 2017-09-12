@@ -65,7 +65,6 @@ public class MyPizzaController {
 		map.put("firstPizzaList", list);
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";
 	}
-	
 	//하프앤하프 메뉴 - 두번째 피자 리스트 출력용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/hnhSecondPizza.pz",produces="text/html; charset=UTF-8")

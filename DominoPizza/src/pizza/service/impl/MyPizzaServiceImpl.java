@@ -15,7 +15,6 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	public List<MyPizzaDTO> selectList(Map map) {
 		return dao.selectList(map);
 	}
-	
 	@Override
 	public List<MyPizzaDTO> selectSecondPizzaList(String firstPizza) {
 		return dao.selectSecondPizzaList(firstPizza);

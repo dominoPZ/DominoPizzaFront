@@ -82,7 +82,6 @@ $(document).ready(function() {
 		$("#pizza_select2 option:gt(0)").remove();
 
 		$(".half_right").removeClass("on");
-
 		alert("dfafasdf");
 
 			$.ajax({

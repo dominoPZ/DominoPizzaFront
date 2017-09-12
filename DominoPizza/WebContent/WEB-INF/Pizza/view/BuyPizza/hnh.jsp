@@ -165,7 +165,6 @@ $(document).ready(function() {
 			$(".half_left span").html("피자를 선택하세요.");
 			return;
 		}
-
 		$.ajax({
 			type: "POST",
 			url: "/goods/hnhMappingAjax",

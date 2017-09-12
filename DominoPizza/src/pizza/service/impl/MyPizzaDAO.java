@@ -18,7 +18,6 @@ public class MyPizzaDAO implements MyPizzaService{
 	public List<MyPizzaDTO> selectList(Map map) {
 		return template.selectList("pizzaSelectList", map);
 	}
-
 	@Override
 	public List<MyPizzaDTO> selectSecondPizzaList(String firstPizza) {
 		System.out.println("DAO");
