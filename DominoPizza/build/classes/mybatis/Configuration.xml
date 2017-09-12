@@ -25,8 +25,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!--  미나 -->
 	
-	
-
 		<typeAlias alias="MyPizzaDTO" type="pizza.service.MyPizzaDTO"/>
 		<typeAlias alias="ToppingDTO" type="pizza.service.ToppingDTO"/>
 		<typeAlias alias="SideDish_BeverageDTO" type="pizza.service.SideDish_BeverageDTO"/>

@@ -165,7 +165,6 @@ $(document).ready(function() {
 			$(".half_left span").html("피자를 선택하세요.");
 			return;
 		}
-
 		$.ajax({
 			type: "POST",
 			url: "/goods/hnhMappingAjax",
@@ -511,9 +510,7 @@ var closeLayer = function() {
 									<div class="sel_box">
 										<select id="pizza_select2">
 													<option value="">두 번째 피자 선택</option>
-												<c:forEach items="${pizzaList}" var="pizza">
-													<option value="${pizza.p_name}">${pizza.p_name}</option>
-												</c:forEach>	
+
 										</select>
 									</div>
 								</div>
