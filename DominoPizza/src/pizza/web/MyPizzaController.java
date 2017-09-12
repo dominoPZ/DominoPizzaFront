@@ -8,9 +8,12 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pizza.service.MyPizzaDTO;
 import pizza.service.SideDish_BeverageDTO;
@@ -55,17 +58,34 @@ public class MyPizzaController {
 	}
 	
 	
-	//하프앤하프 메뉴
+	//하프앤하프 메뉴 - 첫번째 피자 리스트 출력용
 	@RequestMapping("/Pizza/BuyPizza/hnh.pz")
 	public String halfNHalf(Map map) throws Exception{
-		//첫번째 피자 리스트 출력용]
 		List<MyPizzaDTO> list = pizzaService.selectList(map);
 		map.put("firstPizzaList", list);
-		//두번째 피자 리스트 출력용]
-		
-		
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";
 	}
+	
+	//하프앤하프 메뉴 - 두번째 피자 리스트 출력용
+	@ResponseBody
+	@RequestMapping(value="/Pizza/BuyPizza/hnhSecondPizza.pz",produces="text/html; charset=UTF-8")
+	public String halfNHalfSecondPizza(@RequestParam Map map) throws Exception{
+		List<MyPizzaDTO> SecondPizzaList=null;
+		//두번째 피자 리스트 출력용]
+		if(map.get("choiceFstPizza").toString() != null || map.get("choiceFstPizza").toString() != "") {
+			System.out.println("choiceFstPizza : "+map.get("choiceFstPizza").toString());
+			System.out.println("setP_name");
+			SecondPizzaList = pizzaService.selectSecondPizzaList(map.get("choiceFstPizza").toString());
+			System.out.println("SecondPizzaList");
+		}
+		for(MyPizzaDTO dto1 : SecondPizzaList) {
+			System.out.println("getP_name : "+dto1.getP_name());
+		}
+		return JSONArray.toJSONString(SecondPizzaList);
+	}	
+	
+	
+	
 	//하프앤하프&마이키친페이지에서 장바구니 담기
 	@RequestMapping("/Pizza/BuyPizza/addCart.pz")
 	public String addCart(HttpSession session, Map map) throws Exception{

@@ -76,12 +76,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <!--  미나 -->
  
-<!-- 하프앤하프페이지 첫번째 피자 목록 출력용 -->
+<!-- 하프앤하프페이지 - 첫 번째 피자 목록 출력용 -->
  <select id="pizzaSelectList" parameterType="java.util.Map" resultType="MyPizzaDTO">
   	SELECT * FROM PIZZA
  </select>
  
- 
+<!-- 하프앤하프페이지 - 첫번째 피자 선택에 따른 두 번째 피자 목록 출력용 -->
+ <select id="pizzaSecondSelectList" parameterType="java.lang.String" resultType="MyPizzaDTO">
+  	SELECT P_NAME FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='#{p_name, jdbcType=VARCHAR}') AND P_NAME != '#{p_name, jdbcType=VARCHAR}';
+ </select> 
  
  
  <!-- 추가토핑안내 페이지 출력용 -->

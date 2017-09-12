@@ -6,6 +6,7 @@ import java.util.Map;
 public interface MyPizzaService {
 	//목록용]
 	List<MyPizzaDTO> selectList(Map map);
+	List<MyPizzaDTO> selectSecondPizzaList(String firstPizza);
 	//상세보기용]
 	MyPizzaDTO selectOne(MyPizzaDTO dto);
 	//입력/수정/삭제용]
