@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -136,9 +138,10 @@ $(document).ready(function() {
 		}
 	});
  */
+ 
+
 	//첫번째 피자 체인지 이벤트 발생시
 	$("#pizza_select1").change(function() {
-		alert("첫번째 피자 체인지 이벤트 발생");
 		$("#pizza_select2 option:gt(0)").remove();
 		$("#dough option:gt(0)").remove();
 		$("#size option:gt(0)").remove();
@@ -147,11 +150,12 @@ $(document).ready(function() {
 		$(".half_right span").html("피자를 선택하세요.");
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
-			alert("$(this).val():"+$(this).val());
+			alert("$(this).val() : "+$(this).val());
 			$(".half_left").addClass("on");
 			//$(".half_left span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 첫 번째 피자" />');
-			$(".half_left span").html('<img src="<c:url value='/Pizza/Image/pizzalist/꽃게온더피자H.png'/>" alt="선택한 첫 번째 피자"/>');
-			//$(".half_left span").html('<img src="<c:url value=/Pizza/Image/pizzalist/'+$(this).val()+'H.png" alt="선택한 첫 번째 피자" />');
+			//꽃게온더피자를 $(this).val()이걸로 바꿔처 그 이미지 출력해야함.
+			//"<img src='<c:url value="/Pizza/Image/pizzalist/'+꽃게온더피자+'H.png"/>' alt='선택한 첫 번째 피자'/>"
+			//"<img src='<c:url value="/Pizza/Image/pizzalist/꽃게온더피자H.png"/>' alt='선택한 첫 번째 피자'/>"
 		} else {
 			$(".half_left").removeClass("on");
 			$(".half_left span").html("피자를 선택하세요.");

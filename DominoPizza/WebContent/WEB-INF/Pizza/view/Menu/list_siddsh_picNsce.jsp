@@ -290,7 +290,7 @@ var chocolatChk = function() {
 										<div class="prd_img">
 											<div class="prd_tag"></div>
 											<div class="prd_img_view">
-												<img src="<c:url value='/Pizza/Image/'/>${fn:replace(pcNsc.sc_img,' ', '')}" alt="${pcNsc.sc_name}" title="${pcNsc.sc_name}"/>
+												<img src="<c:url value='/Pizza/Image/sidedish/beverage/'/>${fn:replace(pcNsc.sc_img,' ', '')}" alt="${pcNsc.sc_name}" title="${pcNsc.sc_name}"/>
 											</div>
 										</div>
 										<div class="prd_info">

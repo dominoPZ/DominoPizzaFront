@@ -203,8 +203,7 @@ var chocolatChk = function() {
 												<!-- <span class="ico ico_tag">NEW</span> 신상품일 경우 추가 -->
 											</div>
 											<div class="prd_img_view">
-												<img
-													src="<c:url value='/Pizza/Image/'/>${fn:replace(bvrg.d_img,' ', '')}"
+												<img src="<c:url value='/Pizza/Image/sidedish/pickleNSouce/'/>${fn:replace(bvrg.d_img,' ', '')}"
 													alt="${bvrg.d_name}" title="${bvrg.d_name}" />
 											</div>
 										</div>
