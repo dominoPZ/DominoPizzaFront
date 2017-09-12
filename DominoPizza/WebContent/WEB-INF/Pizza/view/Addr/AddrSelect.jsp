@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -354,9 +357,10 @@ var addDelivery = function() {
 		alert("매장은 최대 5개까지 등록 가능합니다. 추가로 등록하시려면 리스트에서 불필요한 매장을 삭제해주세요.");
 		return;
 	}
+	
 
 	$("#adr_add iframe").remove();
-	$("#adr_add .pop_header").after("<iframe src='http://localhost:8082/DominoPizza/AddrSelectFrame.jsp' id='delFrame' frameborder='0' width='580' height='822' title='주소 검색'></iframe>");
+	$("#adr_add .pop_header").after("<iframe src='/DominoPizza/SelectAddrFrame.pz' id='delFrame' frameborder='0' width='580' height='822' title='주소 검색'></iframe>");
 	$("#adr_add").addClass("open");
 	var top = $(window).scrollTop();
 	$("#adr_add").find('.pop_wrap').css('top',top+30+'px');
@@ -463,11 +467,12 @@ var addBranchComplete = function(param) {
 									<col width="170px">
 								</colgroup>
 								<tbody>
-									<tr id="O_16926224">
+								<c:forEach var="dto" items="${list }" varStatus="loop" >
+									<tr id="${loop.count }">
 											<td>
 												<div class="order_adr">
-													<p class="addr_info">서울특별시 강남구 강남대로112길 11 101</p>
-													<strong class="order_store_info">논현점<span>(02-546-3082)</span></strong>
+													<p class="addr_info">${fn:replace(dto.st_addr, "%&@#*^$@!", " ")}</p>
+													<strong class="order_store_info">${dto.st_name }<span>(${dto.st_tel })</span></strong>
 												</div>
 											</td>
 											<td class="txt_rgt">
@@ -475,42 +480,7 @@ var addBranchComplete = function(param) {
 												<a href="javascript:deleteAddress('16926224');" class="btn"><span class="btn_txt">삭제</span></a>
 											</td>
 										</tr>
-									<tr id="O_16926231">
-											<td>
-												<div class="order_adr">
-													<p class="addr_info">서울특별시 강동구 강동대로53길 10 10</p>
-													<strong class="order_store_info">둔촌점<span>(02-478-0337)</span></strong>
-												</div>
-											</td>
-											<td class="txt_rgt">
-												<a href="javascript:setAddress('86313', '1', '16926231', 'N', '');" class="btn"><span class="btn_txt">선택</span></a>
-												<a href="javascript:deleteAddress('16926231');" class="btn"><span class="btn_txt">삭제</span></a>
-											</td>
-										</tr>
-									<tr id="O_16951430">
-											<td>
-												<div class="order_adr">
-													<p class="addr_info">대구광역시 달서구 달구벌대로199길 68-3 </p>
-													<strong class="order_store_info">대구성서점<span>(053-581-3082)</span></strong>
-												</div>
-											</td>
-											<td class="txt_rgt">
-												<a href="javascript:setAddress('86528', '1', '16951430', 'N', '');" class="btn"><span class="btn_txt">선택</span></a>
-												<a href="javascript:deleteAddress('16951430');" class="btn"><span class="btn_txt">삭제</span></a>
-											</td>
-										</tr>
-									<tr id="O_16952644">
-											<td>
-												<div class="order_adr">
-													<p class="addr_info">서울특별시 강남구 강남대로102길 42 101-101</p>
-													<strong class="order_store_info">동서초점<span>(02-532-3085)</span></strong>
-												</div>
-											</td>
-											<td class="txt_rgt">
-												<a href="javascript:setAddress('86540', '1', '16952644', 'N', '');" class="btn"><span class="btn_txt">선택</span></a>
-												<a href="javascript:deleteAddress('16952644');" class="btn"><span class="btn_txt">삭제</span></a>
-											</td>
-										</tr>
+								</c:forEach>
 									</tbody>
 							</table>
 						</div>

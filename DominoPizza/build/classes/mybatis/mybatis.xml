@@ -22,10 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</resultMap>
 
 
+
+
 <insert id="mybatisTest" parameterType="java.util.Map" >
 	insert into test values(#{id})
 </insert>
- 
+
+
+	<!-- 어진 --> 
  <select id="mybatisMenu" parameterType="java.util.Map" resultMap="PizzaMenuListResult" >
  select ${sel} FROM  ${fro} where  ${whe}
  </select>
@@ -61,6 +65,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <insert id="mybatisstinsert" parameterType="BasketDTO" >
  	INSERT INTO SALES_MENU VALUES(SEQ_SALES_MENU_SM_NO.NEXTVAL,SEQ_SALES_SA_NO.CURRVAL,'${doughno}','${kind}','${name}','${qty}','${size}','${price}')
  </insert>
+   <select id="mybatisDeladdrsel" parameterType="java.util.Map" resultType="StoresDTO" >
+   select s.* , sqrt(power(ABS(st_xpos-${xpos})*100000,2)+power(ABS(st_ypos-${ypos})*100000,2)) st from stores s where sqrt(power(ABS(st_xpos-${xpos})*100000,2)+power(ABS(st_ypos-${ypos})*100000,2)) <![CDATA[ < ]]> 1200 and rownum=1 order by st
+  </select> 
+
+	<insert id="mybatisDeladdrin"  parameterType="java.util.Map" >
+		INSERT INTO DELADDR VALUES(#{id},#{st_no},#{st_addr},#{kind})
+	</insert>
+	
+	<select id="mybatisdeladdrprint" parameterType="java.util.Map" resultType="StoresDTO" >
+		SELECT S.* FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE ID='${id}'
+	</select>
+
+
+ <!--  어진 끝 -->
  
   <!--  동준 -->
 <insert id="UserInsert" parameterType="pizza.service.impl.UserDto" >

@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import pizza.service.BasketDTO;
+import pizza.service.DelAddrDTO;
 import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
+import pizza.service.StoresDTO;
 
 
 
@@ -72,6 +74,21 @@ public class ServiceImpl implements pizza.service.Service {
 
 	public int stinsert(BasketDTO dto) {
 		return dao.stinsert(dto);
+	}
+
+
+
+	public StoresDTO deladdrsel(Map map) {
+		return dao.deladdrsel(map);
+	}
+
+	public int deladdrin(Map map) {
+		return dao.deladdrin(map);
+	}
+
+	public List<StoresDTO> deladdrprint(Map map) {
+		System.out.println("뭐야");
+		return dao.deladdrprint(map);
 	}
 	
 	

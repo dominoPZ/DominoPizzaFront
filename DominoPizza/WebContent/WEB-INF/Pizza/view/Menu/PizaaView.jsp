@@ -630,7 +630,7 @@ function share(optn) {
 						var img = imgDom.src;
 						var qtyDom = document.getElementById("qty");
 						var qty = qtyDom.value;
-						location.href="<c:url value='/Basket.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping= &doughno="+doughno;
+						location.href="<c:url value='/AddrSelect.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping= &doughno="+doughno;
 						</c:if>
 					}
 			</script>

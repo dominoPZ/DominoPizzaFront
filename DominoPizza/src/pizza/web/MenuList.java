@@ -98,14 +98,7 @@ public class MenuList {
 		return ret;
 	}
 	
-	@RequestMapping("/AddrSelect.pz")
-	public String AddrSelect(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
-		service.addrselect(map);
-		
-		
-		return null;
-		
-	}
+
 	
 	
 	@RequestMapping("/PizzaView.pz")
