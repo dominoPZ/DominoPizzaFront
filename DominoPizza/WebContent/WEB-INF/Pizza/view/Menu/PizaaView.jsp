@@ -801,8 +801,10 @@ function share(optn) {
 				<dt class="prd_option_tit">총 금액</dt>
 				<dd class="totalAmt">0 원</dd>
 			</dl>
-			<a href="javascript:;" id="top_btn_basket" class="btn btn_mdle btn_red"><span class="btn_txt">장바구니 담기</span></a>
+			<a href="#" onclick="smt();" id="top_btn_basket" class="btn btn_mdle btn_red"><span class="btn_txt">장바구니 담기</span></a>
 		</div>
+		
+		
 	</div>
 </div>
 <div class="pop_layer pop_type topping" id="topping_info_pop"></div>

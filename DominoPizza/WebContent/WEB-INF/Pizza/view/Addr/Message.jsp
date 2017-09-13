@@ -5,15 +5,22 @@
 <!-- 어느 컨트롤러에서 왔는지에 따라 분기 -->
 <c:choose>   
 
-
    
    <c:when test="${WHERE eq 'INS' }">
       <c:set var="SUC_MSG" value="정상적으로 등록되었습니다."/>
       <c:set var="FAIL_MSG" value="주변에 매장이 없습니다."/>
       <c:set var="SUC_URL" value="/AddrSelect.pz"/>
    </c:when>
-   
-   
+      <c:when test="${WHERE eq 'SID' }">
+      <c:set var="SUC_MSG" value="정상적으로 등록되었습니다."/>
+      <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
+      <c:set var="SUC_URL" value="menuList.pz?ty=101"/>
+   </c:when>
+      <c:when test="${WHERE eq 'BF' }">
+      <c:set var="SUC_MSG" value="주문신청이 정상적으로 처리되었습니다."/>
+      <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
+      <c:set var="SUC_URL" value="/Pizza/MainPage.pz"/>
+   </c:when>   
    
    
    <c:otherwise>
@@ -33,6 +40,14 @@
       <c:when test="${SUC_FAIL ==0}">
          alert("${FAIL_MSG}");
          history.back();
-      </c:when>      
+      </c:when>
+      <c:when test="${SUC_FAIL ==2}">
+      alert("${SUC_MSG}");
+      history.go(-2);
+   </c:when> 
+   <c:when test="${SUC_FAIL ==3}">
+   alert("${SUC_MSG}");
+   history.back();
+</c:when> 
    </c:choose>
 </script>

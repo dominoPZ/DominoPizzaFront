@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -16,7 +17,7 @@
 	<link rel="shortcut icon" href="https://cdn.dominos.co.kr/renewal2016/ko/w/img/favicon.ico"/>
 	<link rel="stylesheet" type="text/css" href="/resources/css/font.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css?v1.0">
-	
+
 	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js' />"></script>
 	<script type="text/javascript" src="https://cdn.dominos.co.kr/renewal2016/ko/w/js/ui.js"></script>
 	<script type="text/javascript" src="https://cdn.dominos.co.kr/renewal2016/ko/w/js/jquery.flexslider.js"></script>
@@ -25,14 +26,13 @@
 	<script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js' />"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js' />"></script>
 	
+	
 	<script type="text/javascript">
 	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
 	var CON_SSL_URL = "https://web.dominos.co.kr";
 	var CON_STATIC_URL = "https://cdn.dominos.co.kr/renewal2016/ko/w";
 
 	$(document).ready(function() {
-		$(".gnb_menu .menu01").addClass("on");
-		
 		$.ajaxSetup({cache:false});
 
 		setBasketCnt();
@@ -118,7 +118,13 @@
 		var order_no = $('#tracker_order_no').val();
 		location.href="/mypage/myOrderView?order_no="+order_no+"&pageNo=1"
 	};
-
+	
+	//페이코 회원 가입
+	function goLoginPop() 
+	{
+		if(location.pathname !== '/global/login')
+			location.href = '/global/login';
+	}
 </script>
 <!-- Naver Anlytics 공통-->
 <script>
@@ -147,346 +153,101 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<!-- wrap  -->
 	<div id="wrap">
 	
+	
+	
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
-	
-	
-<script type="text/javascript">
-var ajaxBasket = null;
-function goUrl(url){
-	location.href=url;
-}
 
-function addBasketGoods(goodsCode, qty){
-	var goodsType = 'addGD';
-
-	if(goodsCode.indexOf("RPZ") >= 0){
-		goodsType = 'addPZ';
-	}
-
-	var addBasketComplete = function() {
-		location.reload(true);
-	};
-
-	addBasket(goodsType, goodsCode, qty, "", "", addBasketComplete, "/basket/detail");
-}
-
-function changeBakset(goodsCode, seq, orgCnt, changeCnt) {
-
-	// update goods order cnt
-	 $.ajax({
-        url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "changeCT"
-			, goods_code : goodsCode
-			, goods_seq : seq
-			, goods_count : changeCnt
-			, count : orgCnt
-		},
-        success:function(data){
-			if(data.resultData.result != "success")
-				alert(data.resultData.msg);
-			location.reload();
-			//parent.location.reload();
-		},
-		beforeSend: function() {
-			$("#defaultLoading").show();
-	    },
-	    complete: function() {
-	    	$("#defaultLoading").hide();
-	    }
-	});
-}
-
-function changeGoodsCnt(goodsCode, seq, orgCnt, changeCnt){
-	var resultAjax = "";
-	var resultAjax2 = "";
-	if(ajaxBasket != null) {
-		alert("처리중인 작업이 있습니다. 잠시후에 다시 시도해 주세요.");
-		return;
-	}
-
-	if(changeCnt == 0) {
-		if(!confirm("해당 제품을 장바구니에서 삭제하시겠습니까?")){
-			return false;
-		}
-	}
-
-	if(goodsCode.indexOf("RPZ") < 0){
-		changeBakset(goodsCode, seq, orgCnt, changeCnt);
-		return;
-	}
-
-	// 사이드 반값 변경 체크
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "1338"
-		},
-        success:function(data){
-        	resultAjax = data.resultData.result;
-        },
-        beforeSend: function() {
-        	
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	
-	    }
-	});
-	
-	// 프레시 콤보 변경 체크
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "1341"
-		},
-        success:function(data){
-        	resultAjax2 = data.resultData.result;
-        },
-        beforeSend: function() {
-        	
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	
-	    }
-	});
-
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "168"
-		},
-        success:function(data){
-        	if(data.resultData.result == "removeAll" || resultAjax == "removeAll" || resultAjax2 == "removeAll") {
-				if(confirm("이벤트 피자를 반값/특가 사이드디시 수량보다 적게 변경하시면, 반값/특가 사이드디시가 모두 삭제됩니다.\n반값/특가 사이드디시를 모두 삭제하시겠습니까?"))
-					changeBakset(goodsCode, seq, orgCnt, changeCnt);
-			} else {
-				changeBakset(goodsCode, seq, orgCnt, changeCnt);
-			}
-        },
-        beforeSend: function() {
-        	ajaxBasket = "Y";
-        	$("#defaultLoading").show();
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	$("#defaultLoading").hide();
-	    }
-	});
-
-}
-
-var goBranch = function(){
-	if(confirm("주문매장 변경 시 장바구니의 제품은 모두 초기화됩니다. 주문매장을 변경하시겠습니까?")) {
-		location.href = "/basket/branch?returnUrl=/basket/detail";
-	}
-}
-
-function alertBranch(){
-	alert('"청담점 + 삼성점 합병운영 안내"\n2017.08.21(월)부터 기존 도미노피자 청담점 포장고객 도미노피자 삼성점으로 이용 부탁드립니다.');
-	location.href = ("/main");
-}
-</script>
 
 <!-- container -->
-<div id="container">
-	<!-- content -->
-	<div id="content" class="cart_payment">
+		<div id="container">
+			<!-- content -->
+			<div id="content" class="notice">
 
-		<!-- sub_title -->
-		<div class="sub_title">
-			<ul class="sub_nav">
-				<li><a href="#">HOME</a></li>
-				<li><span>장바구니</span></li>
-			</ul>
-			<div class="sub_title_wrap">
-				<h2>장바구니</h2>
-			</div>
-		</div>
-		<!-- //sub_title -->
-
-		<div class="order_cart">
-			<!-- 배달 -->
-			<div class="order_section order_type">
-					<div class="tit_order btn_tit2">
-						<strong>배달주문</strong>
-						<a href="javascript:goBranch();" class="btn"><span class="btn_txt">주문매장 변경</span></a>
-					</div>
-					<div class="order_adr">
-						<p class="addr_info">서울특별시 강남구 강남대로112길 11 101</p>
-						<strong class="order_store_info">서울 논현점<span>(02-546-3082)</span></strong>
+				<!-- sub_title -->
+				<div class="sub_title">
+					<ul class="sub_nav">
+						<li><a href="/main">HOME</a></li>
+						<li><a href="/bbs/newsList?type=N">공지사항</a></li>
+						<li><span>도미노뉴스</span></li>
+					</ul>
+					<div class="sub_title_wrap">
+						<h2>공지사항</h2>
 					</div>
 				</div>
-			<!-- // 배달 -->
-			<!-- 포장 -->
-			<!-- // 포장 -->
+				<!-- //sub_title -->
 
-			<div class="order_section cart_lst">
-					<div class="tit_order">
-						<strong>주문제품</strong>
-					</div>
-					<div class="cart_lst_warp">
-						<div class="cart_lst_tbl">
-							<table class="tbl_type">
-								<caption>주문제품 리스트</caption>
-								<colgroup>
-									<col>
-									<col width="90px">
-									<col width="250px">
-									<col width="100px">
-									<col width="100px">
-								</colgroup>
-								<thead>
-									<tr>
-										<th>제품정보</th>
-										<th>판매가격</th>
-										<th>추가토핑</th>
-										<th>수량</th>
-										<th>삭제</th>
-									</tr>
-								</thead>
-								<tbody>
-								<form action="LastOrder.pz" id="frs" method="post" >
-								
-								<c:forEach items="${BUYLIST}" var="map" varStatus="loop" >
-								<tr>
-								
-										<td>
-											<div class="prd_info_view">
-												<div class="prd_img">
-													<img src="<c:url value='/Pizza/Image/pizzalist/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
-																</div>
-												<div class="prd_info">
-													<div class="prd_name">
-														${map.name}</div>
-													<div class="prd_kinds">
-													${map.dough }
-													<c:if test="${map.size=='L' }" var="sizes" >
-													<span class="ico ico_s_large"></span></div>
-													</c:if>
-													<c:if test="${!sizes}"  >
-													<span class="ico ico_s_medium"></span></div>
-													</c:if>
-												</div>
+				<div class="notice_area">
+					<div class="tab_type">
+						<ul class="btn_tab">
+							<li class="active"><a href="/bbs/newsList?type=N">도미노뉴스</a></li>
+							<li><a href="/bbs/newsList?type=P">PRESS</a></li>
+						</ul>
+						<div class="tab_content_wrap">
+							<div class="tab_content active">
+								<form id="searchForm" name="searchForm" action="/bbs/newsList" method="post">
+									<input type="hidden" id="type" name="type" value="N" />
+									<input type="hidden" id="pageNo" name="pageNo" value="1" />
+									<div class="form_group" style="width:530px;">
+										<div class="form_field">
+											<div class="sel_box">
+												<select id="search" name="search">
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+													<option value="all">제목+내용</option>
+												</select>
 											</div>
-										</td>
-										<td><span id="qty${loop.count}" >${map.price }</span></td>
-										<td>
-										</td>
-										<td>
-										<div class="sel_box">
-											
-											<select name="qty" id="sel${loop.count }" onchange="qtychange('${map.price/map.qty }','qty${loop.count}','sel${loop.count }','${loop.count }')" title="수량">
-													<c:forEach var="i" begin="1" end="9">
-													<c:if test="${map.qty==i }" var="qtys" >
-													<option value="${i }" selected="selected">${i }</option>
-													</c:if>
-													<c:if test="${!qtys }" >
-													<option value="${i}">${i }</option>
-													</c:if>
-													
-													</c:forEach>
-													    </select>											
 										</div>
-										</td>
-										<td><a href="#self" onclick="changeGoodsCnt('RPZ133GL','1', 1, 0)" class="btn"><span class="btn_txt">삭제</span></a></td>
-									</tr>
-								<input type="hidden" value="${map.name }" name="name${loop.count }" >	
-								<input type="hidden" value="${map.size }" name="size${loop.count }" > 
-								<input type="hidden" value="${map.price }" id="Fprice${loop.count }" name="price${loop.count }" >
-								<input type="hidden" value="${map.qty }" id="Fqty${loop.count }" name="qty${loop.count }"  >
-								<c:set var="lengths" value="${loop.count }" />
-								</c:forEach>
-								<input type="text" value="${lengths }" name="lengths" >
-								</form>
-								</tbody>
-							</table>
-						</div>
-
-						
-						<div class="verlernen_area" id="recom_area" >
-							<div class="lst_type_dot">
-								<p>혹시,<br>잊지 않으셨나요?</p>
-								<div class="lst_wrap">
-
-									<ul>
-									<li>
-											<div class="lst_tr">
-												<p>아란치니(한입리조또)</p>
-												<a href="#self" onclick="addBasketGoods('RSD136M1', 1)" class="btn"><span class="btn_txt">담기</span></a>
+										<div class="form_field">
+											<div class="form_item">
+												<input type="text" id="conditionTemp" name="conditionTemp" class="i_text" value="">
+												<input type="hidden" id="condition" name="condition" class="i_text" value="">
 											</div>
-										</li>
-									</ul>
-								</div>
+										</div>
+										<div class="form_field">
+											<a href="javascript:fncSearch();" class="btn btn_srch"><span class="btn_txt">검색</span></a>
+										</div>
+									</div>
+								</form>
+								<p class="srch_result">총 <span>254</span>건</p>
+								<table class="tbl_lst">
+									<colgroup>
+										<col width="100px">
+										<col>
+										<col width="150px">
+										<col width="105px">
+									</colgroup>
+									<thead>
+										<tr>
+											<th class="tbl_num">번호</th>
+											<th class="tbl_name">제목</th>
+											<th class="tbl_date">등록일</th>
+											<th class="tbl_views">조회</th>
+										</tr>
+									</thead>
+									<tbody>
+									
+									<tr>
+											<td>254</td>
+											<td><a href="#none" onclick="goView('1964'); return false;">2017년 9월 프로야구 이벤트 당첨자 홈페이지 안내</a></td>
+											<td>2017-09-01</td>
+											<td>1208</td>
+										</tr>
+										
+										
+										</tbody>
+								</table>
+								<div class="page_nav">
+									<a href='javascript:;' class='btn_ico btn_first'>처음</a><a href='javascript:;' class='btn_ico btn_prev2'>이전</a><ul>
+										<li><strong>1</strong></li>  <li><a href='javascript:;' onclick='javascript:paging(2); return false;'>2</a></li>  <li><a href='javascript:;' onclick='javascript:paging(3); return false;'>3</a></li>  <li><a href='javascript:;' onclick='javascript:paging(4); return false;'>4</a></li>  <li><a href='javascript:;' onclick='javascript:paging(5); return false;'>5</a></li>  <li><a href='javascript:;' onclick='javascript:paging(6); return false;'>6</a></li>  <li><a href='javascript:;' onclick='javascript:paging(7); return false;'>7</a></li>  <li><a href='javascript:;' onclick='javascript:paging(8); return false;'>8</a></li>  <li><a href='javascript:;' onclick='javascript:paging(9); return false;'>9</a></li>  <li><a href='javascript:;' onclick='javascript:paging(10); return false;'>10</a></li></ul>
+									<a href='javascript:;' class='btn_ico btn_next2' onclick='javascript:paging(11, 1); return false;'>다음</a><a href='javascript:;' class='btn_ico btn_last' onclick='javascript:paging(26); return false;'>마지막</a></div>
 							</div>
 						</div>
-						<div class="basic_providing">
-							<dl>
-								<dt>※ 피클&amp;소스 기본 제공 안내</dt>
-								<dd>
-									<div class="lst_type v2">
-										<ul>
-											<li>L: 피클 2개 / 핫소스 2개 / 갈릭디핑소스 15g 2개, M: 피클 1개 / 핫소스 1개 / 갈릭디핑소스 15g 1개</li>
-											<li>씬, 더블크러스트 치즈멜팅 피자는 갈릭디핑소스 미 제공</li>
-											<li>사이드디시 &gt; 피클&amp;소스 추가 구매 가능</li>
-										</ul>
-									</div>
-								</dd>
-							</dl>
-						</div>
-					</div>
-				</div>
-				<div class="order_section cart_total">
-					<div class="tit_order">
-						<strong>총 주문 금액</strong>
-					</div>
-					<div class="cart_total_wrap">
-						<div class="price_wrap">
-							<p><span id="tprice">${TOTALPRICE }</span>원</p>
-						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
-						</div>
-						<div class="btn_wrap">
-						
-							<a href="<c:url value='/menuList.pz?ty=101' />" class="btn btn_mdle btn_basic"><span class="btn_txt">제품 추가 +</span></a>
-							<a href="#" onclick="frs.submit()" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">주문하시겠어요?</span></a>
-								</div>
-								
 					</div>
 				</div>
 			</div>
-	</div>
-	<!-- //content -->
-</div>
-<!-- //container -->
-<!-- LOGGER 환경변수 설정 -->
-<script type="text/javascript">
-	_TRK_PI = "OCVDE";	// 웹페이지의 성격 정의 - 장바구니 상세
-</script>
-<!-- // LOGGER 환경변수 설정 -->
+			<!-- //content -->
+		</div>
+		<!-- //container -->
 <!-- 로딩 이미지 -->
 		<div class="loading" id="defaultLoading" style="display:none;">
 			<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/img/loading.gif" alt="loading">
@@ -632,28 +393,63 @@ function alertBranch(){
 </div>
 <!-- 2017-05-08 // 챗봇 추가(e) -->
 		
-					<script>
-						function qtychange(price,qtys,sel,count){
-							var totald = document.getElementById('tprice');
-							var sel = document.getElementById(sel);
-							var oneprice = document.getElementById(qtys);
-							var fqty = document.getElementById('Fqty'+count);
-							var fprice = document.getElementById('Fprice'+count);
-							
-							alert(fqty.value);
-							alert(sel.value);
-							fqty.value = sel.value;
-							fprice.value=price*sel.value;
-							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);
-							oneprice.innerHTML = price*sel.value;
-							
-						}
-						
-					</script>
-						
-		
 </body>
 <script>
 cookieManager.makePCID("PCID", 10);
 </script>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+	var condition = $('#condition').val();
+	if(condition.indexOf('[[')>-1) {
+		condition = condition.replace('[[','[');
+	}
+
+	if(condition.indexOf(']]')>-1) {
+		condition = condition.replace(']]',']');
+	}
+	$('#conditionTemp').val(condition);
+});
+
+$('#conditionTemp').keyup(function(e){
+	if(e.keyCode == 13) {
+		if($('#conditionTemp').val() == '') {
+			alert('검색어를 입력해주세요');
+			return;
+		}
+
+		fncSearch();
+	}
+});
+
+function paging(no){
+	$("#pageNo").val(no);
+	$("#searchForm").submit();
+}
+
+function fncSearch() {
+	if($('#conditionTemp').val() == '') {
+		alert('검색어를 입력해주세요');
+		return;
+	}
+
+	var condition = $('#conditionTemp').val();
+	condition = condition.replace('[','[[');
+	condition = condition.replace(']',']]');
+
+	$('#condition').val(condition);
+	$('#pageNo').val(1);
+
+	$("#searchForm").attr("action", "/bbs/newsList");
+	$('#searchForm').submit();
+}
+
+var queryString;
+function setQueryString() {
+	queryString = $('#searchForm').serialize();
+}
+
+function goView(idx) {
+	$("#searchForm").attr("action", "/bbs/newsView?idx="+idx).submit();
+}
+</script>

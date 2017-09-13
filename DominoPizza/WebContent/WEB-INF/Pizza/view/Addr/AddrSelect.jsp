@@ -242,14 +242,17 @@ var selectOG = function() {
 };
 
 // 주문방법 + 배송지 및 매장 선택
-var setAddress = function(branch_code, branch_gb, sn, waiting_yn, alertMsg) {
+var setAddress = function(de_no,fr_no) {
+		
+		
+	/* 
 
 	//86326 : 이촌점, 86357 : 수지점, 86585 : 대덕점 , 신봉점 : 86693
 	/*
 	if(branch_code=="86326" || branch_code=="86357" || branch_code=="86585" || branch_code=="86693"){
 		alert("6/21부터 6/30까지 전화(1577-3082) 주문으로 신제품 주문 시 치즈 볼로네즈 스파게티 무료 증정 진행 중 (여타 할인과 중복 불가)");
 	}
-	*/
+
 	var order_gubun = $("#order_gubun").val();
 
 	if(order_gubun == "W" && $("#w_addr_sn").val() == sn) {
@@ -281,7 +284,8 @@ var setAddress = function(branch_code, branch_gb, sn, waiting_yn, alertMsg) {
 		addr_sn : sn
 	};
 
-	basketActionProc(param);
+	basketActionProc(param); */
+	
 };
 
 // 배송지 및 매장 삭제
@@ -468,15 +472,19 @@ var addBranchComplete = function(param) {
 								</colgroup>
 								<tbody>
 								<c:forEach var="dto" items="${list }" varStatus="loop" >
+								
 									<tr id="${loop.count }">
 											<td>
 												<div class="order_adr">
-													<p class="addr_info">${fn:replace(dto.st_addr, "%&@#*^$@!", " ")}</p>
+													<p class="addr_info">${fn:replace(dto.de_addr, "%&@#*^$@!", " ")}</p>
 													<strong class="order_store_info">${dto.st_name }<span>(${dto.st_tel })</span></strong>
+													
 												</div>
 											</td>
 											<td class="txt_rgt">
-												<a href="javascript:setAddress('86324', '1', '16926224', 'N', '');" class="btn"><span class="btn_txt">선택</span></a>
+											<input type="hidden" value="${dto.de_no }" name="de_no" >
+											<input type="hidden" value="${dto.de_no }" name="st_no" >
+												<a href="<c:url value='/SessionInDel.pz' />?de_no=${dto.de_no}&st_no=${dto.st_no}"  class="btn"><span onclick="submit()" class="btn_txt">선택</span></a>
 												<a href="javascript:deleteAddress('16926224');" class="btn"><span class="btn_txt">삭제</span></a>
 											</td>
 										</tr>

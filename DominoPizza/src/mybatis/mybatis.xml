@@ -67,14 +67,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select> 
 
 	<insert id="mybatisDeladdrin"  parameterType="java.util.Map" >
-		INSERT INTO DELADDR VALUES(#{id},#{st_no},#{st_addr},#{kind})
+		INSERT INTO DELADDR VALUES(SEQ_DELADDR_DE_NO.NEXTVAL,#{id},#{st_no},#{addr},#{kind})
 	</insert>
 	
 	<select id="mybatisdeladdrprint" parameterType="java.util.Map" resultType="StoresDTO" >
-		SELECT S.* FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE ID='${id}'
+		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE ID='${id}'
 	</select>
 
-
+	<select id="mybatissessionInDel" parameterType="java.util.Map" resultType="StoresDTO" >
+		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE DE_NO='${de_no}'
+	</select>
  <!--  어진 끝 -->
  
   <!--  동준 -->

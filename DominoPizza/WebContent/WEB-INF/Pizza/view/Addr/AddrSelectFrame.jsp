@@ -59,6 +59,7 @@ var marker = new google.maps.Marker({
 //위의 map: map,를 주석처리시 아래 메소드로 마커 표시
 marker.setMap(map);
 
+
 }/////////////////////showLocation
 function test() {
 var address = document.getElementById('addr1').value;
@@ -76,7 +77,7 @@ geocoder.geocode({ 'address': address }, function (results, status) {
   }
   var ret = results[0].geometry.location;
 
-  top.document.location.href="<c:url value='AddrIn.pz' />?ret="+ret;
+  top.document.location.href="<c:url value='AddrIn.pz' />?ret="+ret+"&addr="+address;
   
 });
 

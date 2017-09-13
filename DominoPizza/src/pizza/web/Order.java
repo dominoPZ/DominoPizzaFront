@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
@@ -33,15 +34,55 @@ public class Order {
 	private ServiceImpl service;
 	
 	@RequestMapping("/AddrSelect.pz")
-	public String AddrSelect(@RequestParam Map map, Model model, HttpSession session) throws Exception{
+	public String AddrSelect(@RequestParam Map map, Model model,HttpServletRequest req , HttpSession session) throws Exception{
 		String id = session.getAttribute("ID").toString();
-		List<StoresDTO> list = new Vector<StoresDTO>();
 		map.put("id", id);
+		String url="";
+		if(session.getAttribute("DE_NO")!=null) {
+
+			BasketDTO dto = new BasketDTO();
+			dto.setDough(map.get("dough").toString());
+			dto.setImg(map.get("img").toString());
+			dto.setName(map.get("na").toString());
+			String price="";
+			char[] pri = map.get("price").toString().toCharArray();
+			for(char cha : pri) {
+				if(cha >= '0' && cha <= '9')
+					price+=cha;
+			}
+			System.out.println(price);
+			dto.setPrice(price);
+			int totprice = 0;
+			if(session.getAttribute("TOTALPRICE")!=null)
+				totprice = Integer.parseInt(session.getAttribute("TOTALPRICE").toString());
+			dto.setQty(map.get("qty").toString());
+			dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
+			dto.setTopping(map.get("topping").toString());
+			dto.setKind(map.get("kind").toString());
+			dto.setDoughno(map.get("doughno").toString());
+			List<BasketDTO> list = new Vector<>();
+			if(session.getAttribute("BUYLIST")!=null)
+			list=(List<BasketDTO>)session.getAttribute("BUYLIST");
+			list.add(dto);
+			req.setAttribute("list", list);
+			session.setAttribute("BUYLIST", list);
+			session.setAttribute("BUYNUM", list.size());
+			totprice += Integer.parseInt(price);
+			session.setAttribute("TOTALPRICE", totprice);
+			req.setAttribute("SUC_FAIL", 1);
+			req.setAttribute("WHERE", "SID");
+			
+			url= "/WEB-INF/Pizza/view/Addr/Message.jsp";
+			
+		}else {
+		List<StoresDTO> list = new Vector<StoresDTO>();
 		list = service.deladdrprint(map);
 		System.out.println("???");
 		model.addAttribute("list",list);
+		url = "/WEB-INF/Pizza/view/Addr/AddrSelect.jsp";
+		}
 		
-		return "/WEB-INF/Pizza/view/Addr/AddrSelect.jsp";
+		return url;
 		
 	}
 
@@ -56,6 +97,7 @@ public class Order {
 	@RequestMapping("AddrIn.pz")
 	public String AddrIn(@RequestParam Map map, Model model,HttpSession session ,HttpServletRequest req) throws Exception{
 		String pos = map.get("ret").toString();
+		String addr = map.get("addr").toString();
 		String xposs=pos.replace(")", "").replace("(", "").split(",")[0].trim();
 		String yposs=pos.replace(")", "").replace("(", "").split(",")[1].trim();
 		String kind = "1";
@@ -86,5 +128,48 @@ public class Order {
 		}
 		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
 	}
-
+	
+	@RequestMapping("/SessionInDel.pz")
+	public String sessionInDel(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		String de_no = map.get("de_no").toString();
+		
+		StoresDTO dto =  service.sessionInDel(map);
+		
+		session.setAttribute("DE_ADDR", dto.getDe_addr());
+		session.setAttribute("ST_NO", dto.getSt_no());
+		
+		int res=0;
+		session.setAttribute("DE_NO", de_no);
+		if(de_no!=null)
+			res=2;
+		
+		req.setAttribute("SUC_FAIL", res);
+		req.setAttribute("WHERE", "SID");
+		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
+	}
+	
+	@RequestMapping("/GoBasket.pz")
+	public String GoBasket(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
+	}
+	
+	@RequestMapping("/LastOrder.pz")
+	public String LastOrder(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		int len=0;
+		List<BasketDTO> list = new Vector<BasketDTO>();
+		System.out.println("@!#@!#$@!$!@$");
+		if(map.get("lengths")!=null)
+		len = Integer.parseInt(map.get("lengths").toString());
+		System.out.println(len);
+		for(int i=1 ; i<=len ; i++) {
+			BasketDTO dto = new BasketDTO();
+			dto.setName(map.get("name"+i).toString());
+			
+		}
+		
+		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
+	}
+	
+	
+	
 }

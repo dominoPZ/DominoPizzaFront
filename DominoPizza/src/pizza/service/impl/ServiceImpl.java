@@ -77,6 +77,7 @@ public class ServiceImpl implements pizza.service.Service {
 	}
 
 
+	
 
 	public StoresDTO deladdrsel(Map map) {
 		return dao.deladdrsel(map);
@@ -89,6 +90,10 @@ public class ServiceImpl implements pizza.service.Service {
 	public List<StoresDTO> deladdrprint(Map map) {
 		System.out.println("뭐야");
 		return dao.deladdrprint(map);
+	}
+
+	public StoresDTO sessionInDel(Map map) {
+		return dao.sessionInDel(map);
 	}
 	
 	

@@ -93,7 +93,6 @@ public class Daotest {
 		map.put("xpos", xpos);
 		map.put("ypos", ypos);
 		
-		
 		return template.selectOne("mybatisDeladdrsel",map);
 	}
 
@@ -103,6 +102,10 @@ public class Daotest {
 
 	public List<StoresDTO> deladdrprint(Map map) {
 		return template.selectList("mybatisdeladdrprint",map);
+	}
+
+	public StoresDTO sessionInDel(Map map) {
+		return template.selectOne("mybatissessionInDel",map);
 	}
 	
 	
