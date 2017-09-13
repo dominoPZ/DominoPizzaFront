@@ -19,8 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="s_img" column="s_img"/>
  	</resultMap>
 
-
-
+	
 
 <insert id="mybatisTest" parameterType="java.util.Map" >
 	insert into test values(#{id})
@@ -98,10 +97,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  </select>
  
 <!-- 하프앤하프페이지 - 첫번째 피자 선택에 따른 두 번째 피자 목록 출력용 -->
- <select id="pizzaSecondSelectList" parameterType="java.lang.String" resultType="MyPizzaDTO">
-  	SELECT P_NAME FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='#{p_name, jdbcType=VARCHAR}') AND P_NAME != '#{p_name, jdbcType=VARCHAR}';
+ <select id="pizzaSecondSelectList" parameterType="MyPizzaDTO" resultType="MyPizzaDTO">
+  	SELECT * FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='${p_name}') AND P_NAME != '${p_name}'
  </select> 
  
+ <!-- 도우 출력용 -->
+ <select id="doughSelectList" resultType="DoughDTO">
+ 	SELECT * FROM DOUGH
+ </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->
  <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">

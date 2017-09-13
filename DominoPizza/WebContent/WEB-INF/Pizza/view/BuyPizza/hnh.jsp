@@ -152,13 +152,11 @@ $(document).ready(function() {
 		
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
-			//alert("$(this).val(rep) : "+$(this).val().replace(/ /g, ''));
 			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_left").addClass("on");
 	         var first = "<img src='";
 	         var second = '<c:url value="/Pizza/Image/pizzalist/'+value+'"/>';
 	         var all = first+second+"' alt='선택한 첫 번째 피자'/>";
-	         //alert(all);
 	         $(".half_left span").html(all);
 		} else {
 			$(".half_left").removeClass("on");
@@ -166,28 +164,22 @@ $(document).ready(function() {
 			return;
 		}
 		$.ajax({
-			type: "POST",
-			url: "/goods/hnhMappingAjax",
-			data: {code_01 : $(this).val()},
+			url: "<c:url value='/Pizza/BuyPizza/hnhSecondPizza.pz'/>",
+			data: {choiceFstPizza : $(this).val()},
+			type:"post",
+			dataType:"json",
 			success:function(data) {
-				pizzaList2 = data.resultData;
-			 	if(pizzaList2) {
-			 		$.each(pizzaList2, function(k, v) {
-			 			var isExist = false;
-			 			$.each($("#pizza_select2 option"), function() {
-			 				if(v.code_01 == $(this).val()) isExist = true;
-			 			});
-			 			if(!isExist)
-			 				$("#pizza_select2").append("<option value='"+v.code_01+"' data-price='"+v.price+"' data-code='"+v.hnh_code+"'>"+v.name+"</option>");
-			 		});
-			 	}
+				console.log("data : "+data);
+					$.each(data, function(i, item){
+						$("#pizza_select2").append("<option value='"+item["p_name"]+"'>"+item["p_name"]+"</option>");
+				}); 
 			},
 			error: function (error){
 			/* 	alert("다시 시도해주세요."); */
 			}
 		});
 
-		setTotalAmt();
+		//setTotalAmt();
 	});
 
 	$("#pizza_select2").change(function() {
@@ -195,8 +187,14 @@ $(document).ready(function() {
 		$("#size option:gt(0)").remove();
 
 		if($(this).val() != "") {
+			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_right").addClass("on");
-			$(".half_right span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 두 번째 피자" />');
+	         var first = "<img src='";
+	         var second = '<c:url value="/Pizza/Image/pizzalist/'+value+'"/>';
+	         var all = first+second+"' alt='선택한 두 번째 피자'/>";
+	         $(".half_right span").html(all);
+			
+			
 		} else {
 			$(".half_right").removeClass("on");
 			$(".half_right span").html("피자를 선택하세요.");
@@ -298,11 +296,27 @@ var addBasketComplete = function() {
 	window.setTimeout( function() {location.href="/goods/hnh?v="+new Date();}, 900);
 };
 
-
+//도우 가져오기
 var setDough = function() {
 	$("#dough option:gt(0)").remove();
 	$("#size option:gt(0)").remove();
-
+	
+	$.ajax({
+		url: "<c:url value='/Pizza/BuyPizza/dough.pz'/>",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			console.log("data : "+data);
+				$.each(data, function(i, item){
+					$("#dough").append("<option value='"+item["Dough_name"]+"'>"+item["Dough_name"]+"</option>");
+			}); 
+		},
+		error: function (error){
+		 	alert("다시 시도해주세요."); 
+		}
+	});
+	
+/* 	
 	$.each(pizzaList2, function(k, v) {
 		var val = v.gubun;
 		var nm = v.ctgr_nm;
@@ -316,7 +330,7 @@ var setDough = function() {
 		if(!isExist) {
 			$("#dough").append("<option value='"+val+"'>"+nm+"</option>");
 		}
-	});
+	}); */
 	setSize();
 };
 

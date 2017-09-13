@@ -9,17 +9,20 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pizza.service.DoughDTO;
 import pizza.service.MyPizzaDTO;
 import pizza.service.SideDish_BeverageDTO;
 import pizza.service.SideDish_PickleDTO;
 import pizza.service.SideDish_SauceDTO;
 import pizza.service.ToppingDTO;
+import pizza.service.impl.DoughServiceImpl;
 import pizza.service.impl.MyPizzaServiceImpl;
 import pizza.service.impl.SideDish_BeverageServiceImpl;
 import pizza.service.impl.SideDish_PickleServiceImpl;
@@ -38,6 +41,8 @@ public class MyPizzaController {
 	private SideDish_PickleServiceImpl sdds_Pickle;
 	@Resource(name="sideDish_SauceService")
 	private SideDish_SauceServiceImpl sdds_Sauce;
+	@Resource(name="doughService")
+	private DoughServiceImpl douService;
 	
 	//사이드 디쉬-음료페이지
 	@RequestMapping("/Pizza/Menu/sidedish_beverage.pz")
@@ -58,30 +63,50 @@ public class MyPizzaController {
 	}
 	
 	
-	//하프앤하프 메뉴 - 첫번째 피자 리스트 출력용
+	//하프앤하프 메뉴 - 첫번째 피자 리스트&피자 도우  출력용
 	@RequestMapping("/Pizza/BuyPizza/hnh.pz")
 	public String halfNHalf(Map map) throws Exception{
 		List<MyPizzaDTO> list = pizzaService.selectList(map);
 		map.put("firstPizzaList", list);
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";
 	}
-	//하프앤하프 메뉴 - 두번째 피자 리스트 출력용
+	
+	//하프앤하프 메뉴 - 첫번째 피자 선택에 따른 두번째 피자 리스트 출력용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/hnhSecondPizza.pz",produces="text/html; charset=UTF-8")
 	public String halfNHalfSecondPizza(@RequestParam Map map) throws Exception{
 		List<MyPizzaDTO> SecondPizzaList=null;
-		//두번째 피자 리스트 출력용]
 		if(map.get("choiceFstPizza").toString() != null || map.get("choiceFstPizza").toString() != "") {
-			System.out.println("choiceFstPizza : "+map.get("choiceFstPizza").toString());
-			System.out.println("setP_name");
-			SecondPizzaList = pizzaService.selectSecondPizzaList(map.get("choiceFstPizza").toString());
-			System.out.println("SecondPizzaList");
+			MyPizzaDTO dto = new MyPizzaDTO();
+			dto.setP_name(map.get("choiceFstPizza").toString());
+			SecondPizzaList = pizzaService.selectSecondPizzaList(dto);
 		}
+		List<Map> list = new Vector<Map>();
+		Map secondmap =null;
 		for(MyPizzaDTO dto1 : SecondPizzaList) {
-			System.out.println("getP_name : "+dto1.getP_name());
+			secondmap = new HashMap();
+			secondmap.put( "p_name", dto1.getP_name());
+			list.add(secondmap);
 		}
-		return JSONArray.toJSONString(SecondPizzaList);
+		return JSONArray.toJSONString(list);
 	}	
+	
+	//하프앤하프 메뉴 - 피자 도우 리스트 출력용
+	@ResponseBody
+	@RequestMapping("/Pizza/BuyPizza/dough.pz")
+	public String dough() throws Exception{
+		System.out.println("들어오니");
+		List<DoughDTO> Doughlist = douService.selectList();
+		List<Map> list = new Vector<Map>();
+		Map map =null;
+		for(DoughDTO dto : Doughlist) {
+			map = new HashMap();
+			map.put( "Dough_name", dto.getDough_name());
+			System.out.println("도우 : "+dto.getDough_name());
+			list.add(map);
+		}
+		return JSONArray.toJSONString(list);
+	}
 	
 	
 	

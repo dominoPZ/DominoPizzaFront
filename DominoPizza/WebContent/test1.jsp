@@ -80,16 +80,18 @@ $(document).ready(function() {
 	//첫번째 피자 체인지 이벤트 발생시
 	$("#pizza_select1").change(function() {
 		$("#pizza_select2 option:gt(0)").remove();
-
 		$(".half_right").removeClass("on");
-		alert("dfafasdf");
-
 			$.ajax({
 				url: "<c:url value='/Pizza/BuyPizza/hnhSecondPizza.pz'/>",
 				data: {choiceFstPizza : $(this).val()},
 				type:"post",
 				dataType:"json",
-				success:successArrayCallback,
+				success:function(data) {
+					console.log("data : "+data);
+ 					$.each(data, function(i, item){
+ 						$("#pizza_select2").append("<option value='"+item["p_name"]+"'>"+item["p_name"]+"</option>");
+					}); 
+				},
 				error:function(request,error){
 						console.log("code:"+request.status) //200일경우 응답은 정상이라는 의미
 						console.log("서버로부터 받은 데이타"+request.responseText);
@@ -146,7 +148,7 @@ $(document).ready(function() {
 			 }
 		});
  */
-		setTotalAmt();
+	//	setTotalAmt();
 	}); 
 
  
