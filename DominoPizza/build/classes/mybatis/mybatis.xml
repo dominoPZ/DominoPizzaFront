@@ -98,6 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	SELECT * FROM PIZZA
  </select>
  
+ 
 <!-- 하프앤하프페이지 - 첫번째 피자 선택에 따른 두 번째 피자 목록 출력용 -->
  <select id="pizzaSecondSelectList" parameterType="MyPizzaDTO" resultType="MyPizzaDTO">
   	SELECT * FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='${p_name}') AND P_NAME != '${p_name}'
