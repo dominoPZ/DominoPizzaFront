@@ -370,12 +370,12 @@ function alertBranch(){
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${list}" var="map" >
+								<c:forEach items="${BUYLIST}" var="map" >
 								<tr>
 										<td>
 											<div class="prd_info_view">
 												<div class="prd_img">
-													<img src="<c:url value='/Pizza/Image/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
+													<img src="<c:url value='/Pizza/Image/pizzalist/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
 																</div>
 												<div class="prd_info">
 													<div class="prd_name">
@@ -461,7 +461,8 @@ function alertBranch(){
 						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
 						</div>
 						<div class="btn_wrap">
-							<a href="<c:url value='/menuList.pz' />" class="btn btn_mdle btn_basic"><span class="btn_txt">제품 추가 +</span></a>
+						
+							<a href="<c:url value='/menuList.pz?ty=101' />" class="btn btn_mdle btn_basic"><span class="btn_txt">제품 추가 +</span></a>
 							<a href="<c:url value='/Project.pz' />" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">주문하시겠어요?</span></a>
 								</div>
 								

@@ -14,6 +14,7 @@ public class StoresDTO {
 	 private String st_ypos;
 	 private String st;
 	 private String de_addr;
+	 private String de_no;
 	 
 	public String getSt_no() {
 		return st_no;
@@ -92,6 +93,12 @@ public class StoresDTO {
 	}
 	public void setDe_addr(String de_addr) {
 		this.de_addr = de_addr;
+	}
+	public String getDe_no() {
+		return de_no;
+	}
+	public void setDe_no(String de_no) {
+		this.de_no = de_no;
 	}
 	 
 	 

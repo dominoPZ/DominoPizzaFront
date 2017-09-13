@@ -27,7 +27,8 @@
 							<li><a href="<c:url value='/User/MyPage.pz'/>">나의정보</a></li>
 						</c:if>
 							</ul>
-						<a href="javascript:goCart();" class="btn_ico btn_cart"><span class="cart_count">${num }</span>장바구니</a>
+							
+						<a href="<c:url value='/GoBasket.pz'/> " class="btn_ico btn_cart"><span class="cart_count">${BUYNUM }</span>장바구니</a>
 					</div>
 				</div>
 			<div class="menu_area">
