@@ -73,8 +73,8 @@ public class MyPizzaController {
 	
 	//하프앤하프 메뉴 - 첫번째 피자 선택에 따른 두번째 피자 리스트 출력용
 	@ResponseBody
-	@RequestMapping(value="/Pizza/BuyPizza/hnhSecondPizza.pz",produces="text/html; charset=UTF-8")
-	public String halfNHalfSecondPizza(@RequestParam Map map) throws Exception{
+	@RequestMapping(value="/Pizza/BuyPizza/hnhSecondPizza.pz", produces="text/html; charset=UTF-8")
+	public String halfNHalfSecondPizza(@RequestParam Map map, Model model) throws Exception{
 		List<MyPizzaDTO> SecondPizzaList=null;
 		if(map.get("choiceFstPizza").toString() != null || map.get("choiceFstPizza").toString() != "") {
 			MyPizzaDTO dto = new MyPizzaDTO();
@@ -91,25 +91,57 @@ public class MyPizzaController {
 		return JSONArray.toJSONString(list);
 	}	
 	
-	
 	//하프앤하프 메뉴 - 피자 도우 리스트 출력용
 	@ResponseBody
-	@RequestMapping("/Pizza/BuyPizza/dough.pz")
+	@RequestMapping(value="/Pizza/BuyPizza/dough.pz", produces="text/html; charset=UTF-8")
 	public String dough() throws Exception{
-		System.out.println("들어오니");
 		List<DoughDTO> Doughlist = douService.selectList();
 		List<Map> list = new Vector<Map>();
 		Map map =null;
 		for(DoughDTO dto : Doughlist) {
 			map = new HashMap();
 			map.put( "Dough_name", dto.getDough_name());
-			System.out.println("도우 : "+dto.getDough_name());
 			list.add(map);
 		}
 		return JSONArray.toJSONString(list);
 	}
+/*	
+	//하프앤하프 메뉴 - 피자, 사이즈 선택에 따른 가격 출력용
+	@ResponseBody
+	@RequestMapping(value="/Pizza/BuyPizza/pizzaPrice.pz", produces="text/html; charset=UTF-8")
+	public String pizzaPrice() throws Exception{
+		String 
+		DoughDTO> dto = pizzaService.priceSelectOne();
+		List<Map> list = new Vector<Map>();
+		Map map =null;
+		for(DoughDTO dto : Doughlist) {
+			map = new HashMap();
+			map.put( "Dough_name", dto.getDough_name());
+			list.add(map);
+		}
+		return JSONArray.toJSONString(list);
+	}
+	*/
 	
-	
+	//하프앤하프 메뉴 - 토핑 리스트 출력용
+	@ResponseBody
+	@RequestMapping(value="/Pizza/BuyPizza/topping.pz", produces="text/html; charset=UTF-8")
+	public String toppingList() throws Exception{
+		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
+		List<Map> list = new Vector<Map>();
+		Map map =null;
+		for(ToppingDTO dto : toppinglist) {
+			map = new HashMap();
+			map.put( "topping_name", dto.getT_name());
+			map.put( "topping_gram", dto.getT_gram());
+			map.put( "topping_img", dto.getT_img());
+			map.put( "topping_kind", dto.getT_kind());
+			map.put( "topping_price", dto.getT_price());
+			map.put( "topping_size", dto.getT_size());
+			list.add(map);
+		}
+		return JSONArray.toJSONString(list);
+	}	
 	
 	//하프앤하프&마이키친페이지에서 장바구니 담기
 	@RequestMapping("/Pizza/BuyPizza/addCart.pz")

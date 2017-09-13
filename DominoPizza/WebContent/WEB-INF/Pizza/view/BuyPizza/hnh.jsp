@@ -296,7 +296,6 @@ var addBasketComplete = function() {
 	window.setTimeout( function() {location.href="/goods/hnh?v="+new Date();}, 900);
 };
 
-
 //도우 가져오기
 var setDough = function() {
 	$("#dough option:gt(0)").remove();
@@ -340,18 +339,14 @@ var setSize = function() {
 	$("#size option:gt(0)").remove();
 
 	if($("#dough").val() != "") {
-		$.each(pizzaList2, function(k, v) {
-			if($("#pizza_select2").val() == v.code_01 && v.gubun == $("#dough").val()) {
-				$("#size").append("<option value='"+(v.hnh_code).substring(6,8)+"'>"+ v.sub_name + "</option>");
-			}
-		});
+		$("#size").append("<option value='L'>L</option>");
+		$("#size").append("<option value='M'>M</option>");
 	}
-
 	setTotalAmt();
 
 };
 
-//토핑 가져오기
+//토핑 가져오기 (토핑 추가하기 버튼 눌렀을 시 호출됨)
 var addToppingCheck = function() {
 	if($("#size").val() == "") {
 		alert("피자, 도우, 사이즈를 선택해주세요.");
@@ -364,19 +359,21 @@ var addToppingCheck = function() {
 	}
 
 	var size = $("#size").val();
-	var goods_code = $("#pizza_select1").val()+size+"/"+$("#pizza_select2").val()+size;
-
+	var goods_code = $("#pizza_select1").val()+"/"+$("#pizza_select2").val()+"/"+$("#dough").val()+"/"+size;
+	alert("goods_code : "+goods_code);
 	$.ajax({
 		type: "POST",
-		url: "/goods/pauseCheck",
-		data: { 'goods_code': goods_code },
+		url: "<c:url value='/Pizza/BuyPizza/topping.pz'/>",
+		//data: { 'goods_code': goods_code }, //첫번째 피자 + 두번쨰 피자 + 도우 + 사이즈를 넘김
+		dataType:"json",
 		success:function(data) {
-			if(data.resultData.result == "success") {
+			addTopping();
+/* 			if(data.resultData.result == "success") {
 				addTopping();
 			} else {
 				alert(data.resultData.result);
 				return;
-			}
+			} */
 		},
 		error: function (error){
 			alert("다시 시도해주세요.");
@@ -415,19 +412,22 @@ var addTopping = function() {
 };
 
 
-
+//피자, 도우, 사이즈 선택에 따른 가격 출력
 var setTotalAmt = function() {
 	if($("#size").val() == "" || $("#qty").val() == "") {
-		$("#totalAmt").text("0원");
+		$("#totalAmt").text("0원"); //hnh페이지 총 토탈 금액
 		return;
 	}
 
 	var price = 0;
+	//alert("코드값1:"+$("#pizza_select1").val()+$("#size").val());
 	$.each(pizzaList1, function(k, v) {
+		
 		if(v.hnh_code == ($("#pizza_select1").val()+$("#size").val()))
+			
 			price += parseInt(v.price) / 2;
 	});
-
+	//alert("코드값2:"+$("#pizza_select2").val()+$("#size").val());
 	$.each(pizzaList2, function(k, v) {
 		if(v.hnh_code == ($("#pizza_select2").val()+$("#size").val()))
 			price += parseInt(v.price) / 2;
@@ -546,10 +546,6 @@ var closeLayer = function() {
 											<div class="sel_box">
 												<select id="dough">
 													<option value="">선택</option>
-													<option value="104">오리지널</option>
-													<option value="115">나폴리</option>
-													<option value="103">씬</option>
-													<option value="203">곡물</option>
 												</select>
 											</div>
 										</div>
@@ -568,8 +564,6 @@ var closeLayer = function() {
 											<div class="sel_box">
 												<select name="" id="size">
 													<option value="">선택</option>
-													<option value="SM">M</option>
-													<option value="SL">L</option>
 												</select>
 											</div>
 										</div>
