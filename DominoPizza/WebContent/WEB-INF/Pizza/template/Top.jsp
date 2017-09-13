@@ -56,7 +56,7 @@
 						</div>
 					</li>
 					<li>
-						<a href="/event/list?gubun=E0100" class="menu03">특가제품</a>
+						<a href="/event/list?gubun=E0100" class="menu03">매장찾기</a>
 						<!--div class="depth2">
 							<ul class="list_depth2">
 								<li><a href="/event/list?gubun=E0100">오늘의 핫딜</a></li>
@@ -112,34 +112,29 @@
 				<div class="whole_menu_wrap">
 					<ul class="whole_menu">
 						<li>
-							<a href="/goods/list?dsp_ctgr=C0101">피자</a>
+							<a href="<c:url value='/menuList.pz' />?ty=101">피자</a>
 							<ul class="list_depth2">
 							
-								<li><a href="<c:url value='/menuList.pz' />">곡물도우</a></li>
-								<li><a href="/goods/list?dsp_ctgr=C0102">프리미엄</a></li>
-								<li><a href="/goods/list?dsp_ctgr=C0104">클래식</a></li>
+								<li><a href="<c:url value='/menuList.pz' />?ty=101">곡물도우</a></li>
+								<li><a href="<c:url value='/menuList.pz' />?ty=102">프리미엄</a></li>
+								<li><a href="<c:url value='/menuList.pz' />?ty=103">클래식</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="/goods/list?dsp_ctgr=C0201">사이드디시</a>
+							<a href="<c:url value='/menuList.pz' />?ty=104">사이드디시</a>
 							<ul class="list_depth2">
-								<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
-								<li><a href="/goods/list?dsp_ctgr=C0202">음료</a></li>
-								<li><a href="/goods/list?dsp_ctgr=C0203">피클&소스</a></li>
+								<li><a href="<c:url value='/menuList.pz' />?ty=104">사이드디시</a></li>
+								<li><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
+								<li><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">피클&소스</a></li>
 							</ul>
 						</li>
+
 						<li>
-							<a href="/event/list?gubun=E0100">특가제품</a>
+							<a href="<c:url value='/Pizza/BuyPizza/hnh.pz'/>">내맘대로 피자</a>
 							<ul class="list_depth2">
-								<li><a href="/event/list?gubun=E0100">특가제품</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="/goods/hnh">내맘대로 피자</a>
-							<ul class="list_depth2">
-								<li><a href="/goods/hnh">하프&하프</a></li>
-								<li><a href="/goods/mykitchen">마이 키친</a></li>
-								<li><a href="/goods/topping">추가 토핑 안내</a></li>
+								<li><a href="<c:url value='/Pizza/BuyPizza/hnh.pz'/>">하프&하프</a></li>
+								<li><a href="<c:url value='/Pizza/BuyPizza/mykitchen.pz'/>">마이 키친</a></li>
+								<li><a href="<c:url value='/Pizza/BuyPizza/topping.pz'/>">추가 토핑 안내</a></li>
 							</ul>
 						</li>
 						<li>

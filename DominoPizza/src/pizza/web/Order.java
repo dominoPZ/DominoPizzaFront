@@ -153,6 +153,23 @@ public class Order {
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
 	
+	@RequestMapping("/LastOrder.pz")
+	public String LastOrder(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		int len=0;
+		List<BasketDTO> list = new Vector<BasketDTO>();
+		System.out.println("@!#@!#$@!$!@$");
+		if(map.get("lengths")!=null)
+		len = Integer.parseInt(map.get("lengths").toString());
+		System.out.println(len);
+		for(int i=1 ; i<=len ; i++) {
+			BasketDTO dto = new BasketDTO();
+			dto.setName(map.get("name"+i).toString());
+			
+		}
+		
+		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
+	}
+	
 	
 	
 }
