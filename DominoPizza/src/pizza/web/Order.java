@@ -52,6 +52,9 @@ public class Order {
 			}
 			System.out.println(price);
 			dto.setPrice(price);
+			int totprice = 0;
+			if(session.getAttribute("TOTALPRICE")!=null)
+				totprice = Integer.parseInt(session.getAttribute("TOTALPRICE").toString());
 			dto.setQty(map.get("qty").toString());
 			dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
 			dto.setTopping(map.get("topping").toString());
@@ -64,6 +67,8 @@ public class Order {
 			req.setAttribute("list", list);
 			session.setAttribute("BUYLIST", list);
 			session.setAttribute("BUYNUM", list.size());
+			totprice += Integer.parseInt(price);
+			session.setAttribute("TOTALPRICE", totprice);
 			req.setAttribute("SUC_FAIL", 1);
 			req.setAttribute("WHERE", "SID");
 			
@@ -127,6 +132,12 @@ public class Order {
 	@RequestMapping("/SessionInDel.pz")
 	public String sessionInDel(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
 		String de_no = map.get("de_no").toString();
+		
+		StoresDTO dto =  service.sessionInDel(map);
+		
+		session.setAttribute("DE_ADDR", dto.getDe_addr());
+		session.setAttribute("ST_NO", dto.getSt_no());
+		
 		int res=0;
 		session.setAttribute("DE_NO", de_no);
 		if(de_no!=null)

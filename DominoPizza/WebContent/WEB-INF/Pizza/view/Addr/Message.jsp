@@ -16,7 +16,11 @@
       <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
       <c:set var="SUC_URL" value="menuList.pz?ty=101"/>
    </c:when>
-   
+      <c:when test="${WHERE eq 'BF' }">
+      <c:set var="SUC_MSG" value="주문신청이 정상적으로 처리되었습니다."/>
+      <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
+      <c:set var="SUC_URL" value="/Pizza/MainPage.pz"/>
+   </c:when>   
    
    
    <c:otherwise>

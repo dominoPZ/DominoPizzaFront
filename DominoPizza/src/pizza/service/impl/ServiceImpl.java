@@ -91,6 +91,10 @@ public class ServiceImpl implements pizza.service.Service {
 		System.out.println("뭐야");
 		return dao.deladdrprint(map);
 	}
+
+	public StoresDTO sessionInDel(Map map) {
+		return dao.sessionInDel(map);
+	}
 	
 	
 	

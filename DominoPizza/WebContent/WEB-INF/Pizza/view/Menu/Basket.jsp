@@ -370,8 +370,9 @@ function alertBranch(){
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${BUYLIST}" var="map" >
+								<c:forEach items="${BUYLIST}" var="map" varStatus="loop" >
 								<tr>
+								
 										<td>
 											<div class="prd_info_view">
 												<div class="prd_img">
@@ -391,26 +392,23 @@ function alertBranch(){
 												</div>
 											</div>
 										</td>
-										<td>${map.price }</td>
+										<td><span id="qty${loop.count}" >${map.price }</span></td>
 										<td>
 										</td>
 										<td>
-
 										<div class="sel_box">
 											
-											<select name="qty" onchange="changeGoodsCnt('RPZ133GL', '1', 1, $(this).val())" title="수량">
-												<option value="1" selected="selected">1</option>
-													    <option value="2" >2</option>
-													    <option value="3" >3</option>
-													    <option value="4" >4</option>
-													    <option value="5" >5</option>
-													    <option value="6" >6</option>
-													    <option value="7" >7</option>
-													    <option value="8" >8</option>
-													    <option value="9" >9</option>
+											<select name="qty" id="sel${loop.count }" onchange="qtychange('${map.price/map.qty }','qty${loop.count}','sel${loop.count }')" title="수량">
+													<c:forEach var="i" begin="1" end="9">
+													<c:if test="${map.qty==i }" var="qtys" >
+													<option value="${i }" selected="selected">${i }</option>
+													</c:if>
+													<c:if test="${!qtys }" >
+													<option value="${i}">${i }</option>
+													</c:if>
+													</c:forEach>
 													    </select>											
 										</div>
-
 										</td>
 										<td><a href="#self" onclick="changeGoodsCnt('RPZ133GL','1', 1, 0)" class="btn"><span class="btn_txt">삭제</span></a></td>
 									</tr>
@@ -419,6 +417,8 @@ function alertBranch(){
 								</tbody>
 							</table>
 						</div>
+
+						
 						<div class="verlernen_area" id="recom_area" >
 							<div class="lst_type_dot">
 								<p>혹시,<br>잊지 않으셨나요?</p>
@@ -457,7 +457,7 @@ function alertBranch(){
 					</div>
 					<div class="cart_total_wrap">
 						<div class="price_wrap">
-							<p>100,700원</p>
+							<p><span id="tprice">${TOTALPRICE }</span>원</p>
 						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
 						</div>
 						<div class="btn_wrap">
@@ -622,6 +622,18 @@ function alertBranch(){
 	</div>
 </div>
 <!-- 2017-05-08 // 챗봇 추가(e) -->
+		
+								<script>
+						function qtychange(price,qtys,sel){
+							var totald = document.getElementById('tprice');
+							var sel = document.getElementById(sel);
+							var oneprice = document.getElementById(qtys);
+							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);
+							oneprice.innerHTML = price*sel.value;
+						}
+						
+						</script>
+						
 		
 </body>
 <script>
