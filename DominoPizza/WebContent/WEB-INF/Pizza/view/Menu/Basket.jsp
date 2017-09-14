@@ -199,105 +199,11 @@ function changeBakset(goodsCode, seq, orgCnt, changeCnt) {
 	});
 }
 
-function changeGoodsCnt(goodsCode, seq, orgCnt, changeCnt){
-	var resultAjax = "";
-	var resultAjax2 = "";
-	if(ajaxBasket != null) {
-		alert("처리중인 작업이 있습니다. 잠시후에 다시 시도해 주세요.");
-		return;
-	}
-
-	if(changeCnt == 0) {
-		if(!confirm("해당 제품을 장바구니에서 삭제하시겠습니까?")){
-			return false;
+function changeGoodsCnt(idx){
+		if(confirm("해당 제품을 장바구니에서 삭제하시겠습니까?")){
+			location.href="<c:url value='sessionDelete.pz' />?idx="+idx;
 		}
-	}
-
-	if(goodsCode.indexOf("RPZ") < 0){
-		changeBakset(goodsCode, seq, orgCnt, changeCnt);
-		return;
-	}
-
-	// 사이드 반값 변경 체크
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "1338"
-		},
-        success:function(data){
-        	resultAjax = data.resultData.result;
-        },
-        beforeSend: function() {
-        	
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	
-	    }
-	});
 	
-	// 프레시 콤보 변경 체크
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "1341"
-		},
-        success:function(data){
-        	resultAjax2 = data.resultData.result;
-        },
-        beforeSend: function() {
-        	
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	
-	    }
-	});
-
-	$.ajax({
-		url:'/basket/basketProc',
-        type:'POST',
-        dataType:'json',
-        data: {
-			action_code : "checkChangeCT"
-				, goods_code : goodsCode
-				, goods_seq : seq
-				, goods_count : changeCnt
-				, count : orgCnt
-				, p_idx : "168"
-		},
-        success:function(data){
-        	if(data.resultData.result == "removeAll" || resultAjax == "removeAll" || resultAjax2 == "removeAll") {
-				if(confirm("이벤트 피자를 반값/특가 사이드디시 수량보다 적게 변경하시면, 반값/특가 사이드디시가 모두 삭제됩니다.\n반값/특가 사이드디시를 모두 삭제하시겠습니까?"))
-					changeBakset(goodsCode, seq, orgCnt, changeCnt);
-			} else {
-				changeBakset(goodsCode, seq, orgCnt, changeCnt);
-			}
-        },
-        beforeSend: function() {
-        	ajaxBasket = "Y";
-        	$("#defaultLoading").show();
-	    },
-	    complete: function() {
-	    	ajaxBasket = null;
-	    	$("#defaultLoading").hide();
-	    }
-	});
-
 }
 
 var goBranch = function(){
@@ -413,7 +319,7 @@ function alertBranch(){
 													    </select>											
 										</div>
 										</td>
-										<td><a href="#self" onclick="changeGoodsCnt('RPZ133GL','1', 1, 0)" class="btn"><span class="btn_txt">삭제</span></a></td>
+										<td><a href="#self" onclick="changeGoodsCnt('${loop.count}')" class="btn"><span class="btn_txt">삭제</span></a></td>
 									</tr>
 								<input type="hidden" value="${map.name }" name="name${loop.count }" >	
 								<input type="hidden" value="${map.size }" name="size${loop.count }" > 
@@ -643,8 +549,6 @@ function alertBranch(){
 							var fqty = document.getElementById('Fqty'+count);
 							var fprice = document.getElementById('Fprice'+count);
 							
-							alert(fqty.value);
-							alert(sel.value);
 							fqty.value = sel.value;
 							fprice.value=price*sel.value;
 							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);

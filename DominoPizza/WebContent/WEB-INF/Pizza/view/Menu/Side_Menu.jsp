@@ -297,7 +297,7 @@ var chocolatChk = function() {
 						<c:set value=" " var="pclass" />
 						</c:if>
 						<li class="${pclass}">
-							<a href="#">
+							<a href="<c:url value='/SideView.pz' />?s_no=${dtos.s_no}">
 								<div class="prd_img">
 										<div class="prd_tag">
 										<span class="ico ico_tag">NEW</span>

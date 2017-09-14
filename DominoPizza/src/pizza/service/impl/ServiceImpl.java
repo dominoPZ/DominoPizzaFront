@@ -13,6 +13,8 @@ import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
+import pizza.service.SNutrientDTO;
+import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
 
 
@@ -100,6 +102,14 @@ public class ServiceImpl implements pizza.service.Service {
 
 	public UserDto callUser(Map map) {
 		return dao.callUser(map);
+	}
+
+	public SideMenuList Sideview(Map map) {
+		return dao.sideView(map);
+	}
+
+	public SNutrientDTO snprint(Map map) {
+		return dao.snprint(map);
 	}
 	
 	

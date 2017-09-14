@@ -20,7 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       <typeAlias alias="BasketDTO" type="pizza.service.BasketDTO"/>
       <typeAlias alias="StoresDTO" type="pizza.service.StoresDTO"/>
       <typeAlias alias="DelAddrDTO" type="pizza.service.DelAddrDTO"/>
-   
+  	 <typeAlias alias="SideMenuList" type="pizza.service.SideMenuList"/>
+		 <typeAlias alias="SNutrientDTO" type="pizza.service.SNutrientDTO"/>
    
    
    <!--  미나 -->

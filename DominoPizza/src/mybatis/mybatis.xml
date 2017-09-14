@@ -83,6 +83,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+		<select id="mybatisSideMenuView" parameterType="java.util.Map" resultType="SideMenuList" >
+		SELECT * FROM SIDE WHERE S_NO=${s_no}
+		</select>
+	
+		<select id="mybatissnprint" parameterType="java.util.Map" resultType="SNutrientDTO" >
+		SELECT * FROM S_NUTRIENT WHERE S_NO=${s_no}
+		</select>
+	
+	
  <!--  어진 끝 -->
  
   <!--  동준 -->

@@ -45,6 +45,7 @@ public class Order {
 
 			//매장선택 되어 있을경우 장바구니에 저장
 			BasketDTO dto = new BasketDTO();
+			if(map.get("dough")!=null)
 			dto.setDough(map.get("dough").toString());
 			dto.setImg(map.get("img").toString());
 			dto.setName(map.get("na").toString());
@@ -60,9 +61,9 @@ public class Order {
 			if(session.getAttribute("TOTALPRICE")!=null)
 				totprice = Integer.parseInt(session.getAttribute("TOTALPRICE").toString());
 			dto.setQty(map.get("qty").toString());
+			if(map.get("size")!=null)
 			dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
-			dto.setTopping(map.get("topping").toString());
-			
+			if(map.get("topping")!=null) {
 			String toppings[] = req.getParameterValues("topping");
 			List<ToppingDTO> tlist = new Vector<ToppingDTO>();
 			for(String top : toppings) {
@@ -71,7 +72,9 @@ public class Order {
 			tlist.add(tdto);
 			}
 			dto.setToppingList(tlist);
+			}
 			dto.setKind(map.get("kind").toString());
+			if(map.get("doughno")!=null)
 			dto.setDoughno(map.get("doughno").toString());
 			List<BasketDTO> list = new Vector<>();
 			if(session.getAttribute("BUYLIST")!=null)
@@ -152,6 +155,19 @@ public class Order {
 			model.addAttribute("SUC_FAIL","0");
 		}
 		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
+	}
+	
+	
+	//장바구니 삭제
+	
+	@RequestMapping("/sessionDelete.pz")
+	public String sessionDelete(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		List<BasketDTO> list = (List<BasketDTO>)session.getAttribute("BUYLIST");
+		int idx = Integer.parseInt(map.get("idx").toString());
+		list.remove(idx-1);
+		session.setAttribute("BUYLIST", list);
+		session.setAttribute("BUYNUM", list.size()==0?null:list.size());
+		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";		
 	}
 	
 	@RequestMapping("/SessionInDel.pz")

@@ -8,7 +8,6 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.RequestWrapper;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,8 @@ import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
-import pizza.service.impl.Daotest;
+import pizza.service.SNutrientDTO;
+import pizza.service.SideMenuList;
 import pizza.service.impl.ServiceImpl;
 
 @Controller
@@ -71,7 +71,7 @@ public class MenuList {
 			whe = " p_kind = '클래식' ";
 			req.setAttribute("bimg", "클래식베너.png");
 		}else if(ty==104) {
-			sel = " S_NAME,S_PRICE,S_IMG ";
+			sel = " S_NAME,S_PRICE,S_IMG,S_NO ";
 			fro = " SIDE S ";
 			req.setAttribute("bimg", "사이드베너.png");
 		}
@@ -88,6 +88,7 @@ public class MenuList {
 		
 		List<PizzaMenuList> list = service.menuList(map);
 		
+		if(ty!=104)
 		for(PizzaMenuList pl : list) {
 			pl.setP_lprice((Integer.parseInt(pl.getP_lprice())+Integer.parseInt(pl.getD_price()))+"");
 			pl.setP_sprice((Integer.parseInt(pl.getP_sprice())+Integer.parseInt(pl.getD_price()))+"");
@@ -131,6 +132,24 @@ public class MenuList {
 		return "/WEB-INF/Pizza/view/Menu/PizaaView.jsp";
 		
 	}
+	
+	
+
+	@RequestMapping("/SideView.pz")
+	public String SideView(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
+		SideMenuList dto = new SideMenuList();
+		SNutrientDTO sndto = new SNutrientDTO();
+		dto = service.Sideview(map);
+		System.out.println(dto.getS_name());
+		sndto = service.snprint(map);
+		System.out.println(sndto.getS_kcal());
+		model.addAttribute("dto",dto);
+		model.addAttribute("sndto",sndto);
+		
+		return "/WEB-INF/Pizza/view/Menu/SideView.jsp";
+		
+	}
+	
 	
 	@RequestMapping("/Basket.pz")
 	public String Basket(@RequestParam Map map, HttpServletRequest req , HttpSession session) throws Exception{
