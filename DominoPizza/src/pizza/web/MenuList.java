@@ -52,20 +52,20 @@ public class MenuList {
 		String whe = "";
 		req.setAttribute("pages", ty);
 		if(ty==101) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
 			fro = " pizza p join pizza_dough pd on p.p_no = pd.p_no join dough d on d.dough_no = pd.dough_no ";
 			whe = " d.dough_no=4 ";
 			req.setAttribute("gok", 1);
 			req.setAttribute("bimg", "곡물베너.png");
 		}
 		else if(ty==102) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P_NO ";
-			fro = " pizza p ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
+			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
 			whe = " p_kind = '프리미엄' ";
 			req.setAttribute("bimg", "프리미엄베너.png");
 		}else if(ty==103) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P_NO ";
-			fro = " pizza p ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
+			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
 			whe = " p_kind = '클래식' ";
 			req.setAttribute("bimg", "클래식베너.png");
 		}else if(ty==104) {
@@ -85,6 +85,12 @@ public class MenuList {
 		
 		
 		List<PizzaMenuList> list = service.menuList(map);
+		
+		for(PizzaMenuList pl : list) {
+			pl.setP_lprice((Integer.parseInt(pl.getP_lprice())+Integer.parseInt(pl.getD_price()))+"");
+			pl.setP_sprice((Integer.parseInt(pl.getP_sprice())+Integer.parseInt(pl.getD_price()))+"");
+		}
+		
 		
 		model.addAttribute("dto",list);
 		
@@ -126,7 +132,6 @@ public class MenuList {
 	
 	@RequestMapping("/Basket.pz")
 	public String Basket(@RequestParam Map map, HttpServletRequest req , HttpSession session) throws Exception{
-		
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
 	

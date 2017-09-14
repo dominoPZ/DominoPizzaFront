@@ -77,6 +77,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="mybatissessionInDel" parameterType="java.util.Map" resultType="StoresDTO" >
 		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE DE_NO='${de_no}'
 	</select>
+	
+	<select id="mybatiscallUser" parameterType="java.lang.String" resultType="pizza.service.impl.UserDto" >
+		SELECT * from customer where id = '${id}'
+	</select>
+	
+	
  <!--  어진 끝 -->
  
   <!--  동준 -->

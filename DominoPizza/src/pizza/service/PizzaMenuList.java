@@ -8,6 +8,7 @@ public class PizzaMenuList {
 	private String p_img;
 	private String p_lprice;
 	private String p_sprice;
+	private String d_price;
 	
 	public String getId() {
 		return id;
@@ -44,6 +45,12 @@ public class PizzaMenuList {
 	}
 	public void setP_no(String p_no) {
 		this.p_no = p_no;
+	}
+	public String getD_price() {
+		return d_price;
+	}
+	public void setD_price(String d_price) {
+		this.d_price = d_price;
 	}
 	
 

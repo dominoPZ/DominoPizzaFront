@@ -337,8 +337,8 @@ function alertBranch(){
 						<a href="javascript:goBranch();" class="btn"><span class="btn_txt">주문매장 변경</span></a>
 					</div>
 					<div class="order_adr">
-						<p class="addr_info">서울특별시 강남구 강남대로112길 11 101</p>
-						<strong class="order_store_info">서울 논현점<span>(02-546-3082)</span></strong>
+						<p class="addr_info">${DE_ADDR }</p>
+						<strong class="order_store_info">${ST_NAME }<span>(${ST_TEL })</span></strong>
 					</div>
 				</div>
 			<!-- // 배달 -->
@@ -419,6 +419,9 @@ function alertBranch(){
 								<input type="hidden" value="${map.size }" name="size${loop.count }" > 
 								<input type="hidden" value="${map.price }" id="Fprice${loop.count }" name="price${loop.count }" >
 								<input type="hidden" value="${map.qty }" id="Fqty${loop.count }" name="qty${loop.count }"  >
+								<input type="hidden" value="${map.kind }" name="kind${loop.count }">
+								<input type="hidden" value="${map.size }" name="size${loop.count }">
+								
 								<c:set var="lengths" value="${loop.count }" />
 								</c:forEach>
 								<input type="text" value="${lengths }" name="lengths" >

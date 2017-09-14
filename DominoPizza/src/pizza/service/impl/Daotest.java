@@ -107,6 +107,10 @@ public class Daotest {
 	public StoresDTO sessionInDel(Map map) {
 		return template.selectOne("mybatissessionInDel",map);
 	}
+
+	public UserDto callUser(Map id) {
+		return template.selectOne("mybatiscallUser",id);
+	}
 	
 	
 }

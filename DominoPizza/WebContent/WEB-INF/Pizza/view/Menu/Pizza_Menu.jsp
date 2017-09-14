@@ -310,8 +310,8 @@ var chocolatChk = function() {
 									</div>
 							</a>
 							<div class="prd_price">
-							<p class="price_large"><span class="ico ico_s_large"></span>${dtos.p_sprice }<em>원</em></p>
-									<p class="price_medium"><span class="ico ico_s_medium"></span>${dtos.p_lprice }<em>원</em></p>
+							<p class="price_large"><span class="ico ico_s_large"></span>${dtos.p_lprice }<em>원</em></p>
+									<p class="price_medium"><span class="ico ico_s_medium"></span>${dtos.p_sprice }<em>원</em></p>
 								</div>
 							</li>
 							
