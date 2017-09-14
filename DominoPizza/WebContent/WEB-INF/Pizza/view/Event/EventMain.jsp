@@ -302,6 +302,7 @@ $(document).ready(function() {
 		//$(hashLocationName).focus();
 	}
 });
+/* 
 function fncMore(){
 	var pageNo;
    	pageNo = parseInt($('#pageNo').val())+1;
@@ -350,7 +351,8 @@ function fncMore(){
    	});
    	}
 }
- 
+  */
+  
 function goView(pageNo, seq, e){
 	document.location.hash = "#" + pageNo + "_" + seq;
 	location.href = "/event/view?seq="+seq+"&e="+e;
