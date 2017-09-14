@@ -204,7 +204,7 @@ var chocolatChk = function() {
 		<div class="sub_title">
 			<ul class="sub_nav">
 				<li><a href="/main">HOME</a></li>
-				<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
+				<li><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
 				<li><span>피클&소스</span></li>
 				</ul>
 			<div class="sub_title_wrap">
@@ -215,7 +215,7 @@ var chocolatChk = function() {
 		<div class="tab_category">
 			<ul class="btn_tab">
 
-	<li class="C0201"><a href="?dsp_ctgr=C0201">사이드디시</a></li>
+	<li class="C0201"><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
 				<li class="C0202"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
 				<li class="active"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
 		</ul>
@@ -256,20 +256,21 @@ var chocolatChk = function() {
 											</p>
 											<div class="prd_option">
 												<div class="input_num">
-													<a href="javascript:;" class="minus"><span
+													<a  onclick="pmins('${pcNsc.pc_no}')" class="minus"><span
 														class="ico ico_minus"></span></a>
 													<div class="form_item">
-														<input type="text" id="${pcNsc.pc_no}_qty" class="i_text"
+														<input type="text" id="${pcNsc.pc_no}_pqty" class="i_text"
 															value="1">
 													</div>
-													<a href="javascript:;" class="add"><span
+													<a onclick="padds('${pcNsc.pc_no}')" class="add"><span
 														class="ico ico_add"></span></a>
 												</div>
-												<a href="javascript:addGoods('${pcNsc.pc_no}');"
+												<a onclick="pbasket('${pcNsc.pc_no}')" style="cursor: pointer;"
 													class="btn_ico btn_cart2">장바구니</a>
 											</div>
 										</div>
 									</li>
+									
 									
 									</c:forEach>
 								
@@ -301,16 +302,16 @@ var chocolatChk = function() {
 											</p>
 											<div class="prd_option">
 												<div class="input_num">
-													<a href="javascript:;" class="minus"><span
+													<a onclick="smins('${pcNsc.sc_no}')" class="minus"><span
 														class="ico ico_minus"></span></a>
 													<div class="form_item">
-														<input type="text" id="${pcNsc.sc_no}_qty" class="i_text"
+														<input type="text" id="${pcNsc.sc_no}_sqty" class="i_text"
 															value="1">
 													</div>
-													<a href="javascript:;" class="add"><span
+													<a onclick="sadds('${pcNsc.sc_no}')" class="add"><span
 														class="ico ico_add"></span></a>
 												</div>
-												<a href="javascript:addGoods('${pcNsc.sc_no}');"
+												<a onclick="basket('${pcNsc.sc_no}')" style="cursor: pointer;"
 													class="btn_ico btn_cart2">장바구니</a>
 											</div>
 										</div>
@@ -318,10 +319,56 @@ var chocolatChk = function() {
 									
 									</c:forEach>
 							
+							
+							
+							
 							</ul>
 						</div>
 
 					</div>
+					
+				<script>
+					function padds(ids){
+								var spn = document.getElementById(ids+"_pqty");
+								spn.value = parseInt(spn.value)+1;
+								
+						}
+					function pmins(ids){
+							var spn = document.getElementById(ids+"_pqty");
+							if(parseInt(spn.value)!=1){
+							spn.value = parseInt(spn.value)-1;
+							}
+							
+						}
+					
+			function sadds(ids){
+						var spn = document.getElementById(ids+"_sqty");
+						spn.value = parseInt(spn.value)+1;
+				}
+
+			function smins(ids){
+					var spn = document.getElementById(ids+"_sqty");
+					if(parseInt(spn.value)!=1){
+					spn.value = parseInt(spn.value)-1;
+					}
+				}					
+
+			
+			function basket(ids){
+							var spn = document.getElementById(ids+"_sqty");
+							var qty = parseInt(spn.value);
+							location.href="<c:url value='#'/>?no="+ids+"&qty="+qty;
+						}
+			function pbasket(ids){
+				var spn = document.getElementById(ids+"_pqty");
+				var qty = parseInt(spn.value);
+				location.href="<c:url value='#'/>?no="+ids+"&qty="+qty+"kind=";
+			}
+			
+			</script>
+				
+				
+
 
 					<div class="lst_guide" style="${footDisplay}">
 					<ul>

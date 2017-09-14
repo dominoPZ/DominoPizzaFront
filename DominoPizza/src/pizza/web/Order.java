@@ -22,9 +22,12 @@ import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
+import pizza.service.SMenuDTO;
 import pizza.service.StoresDTO;
+import pizza.service.ToppingDTO;
 import pizza.service.impl.Daotest;
 import pizza.service.impl.ServiceImpl;
+import pizza.service.impl.UserDto;
 
 @Controller
 public class Order {
@@ -38,9 +41,11 @@ public class Order {
 		String id = session.getAttribute("ID").toString();
 		map.put("id", id);
 		String url="";
-		if(session.getAttribute("DE_NO")!=null) {
+		if(session.getAttribute("DE_NO")!=null && req.getParameter("reset")==null) {
 
+			//매장선택 되어 있을경우 장바구니에 저장
 			BasketDTO dto = new BasketDTO();
+			if(map.get("dough")!=null)
 			dto.setDough(map.get("dough").toString());
 			dto.setImg(map.get("img").toString());
 			dto.setName(map.get("na").toString());
@@ -56,9 +61,20 @@ public class Order {
 			if(session.getAttribute("TOTALPRICE")!=null)
 				totprice = Integer.parseInt(session.getAttribute("TOTALPRICE").toString());
 			dto.setQty(map.get("qty").toString());
+			if(map.get("size")!=null)
 			dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
-			dto.setTopping(map.get("topping").toString());
+			if(map.get("topping")!=null) {
+			String toppings[] = req.getParameterValues("topping");
+			List<ToppingDTO> tlist = new Vector<ToppingDTO>();
+			for(String top : toppings) {
+			ToppingDTO tdto = new ToppingDTO();
+			tdto.setTs_no(top);
+			tlist.add(tdto);
+			}
+			dto.setToppingList(tlist);
+			}
 			dto.setKind(map.get("kind").toString());
+			if(map.get("doughno")!=null)
 			dto.setDoughno(map.get("doughno").toString());
 			List<BasketDTO> list = new Vector<>();
 			if(session.getAttribute("BUYLIST")!=null)
@@ -74,7 +90,19 @@ public class Order {
 			
 			url= "/WEB-INF/Pizza/view/Addr/Message.jsp";
 			
-		}else {
+		}
+		else {/// 매장 선택 안 되었을경우 매장선택으로
+			if(req.getParameter("reset")!=null)
+			{
+			session.setAttribute("BUYLIST", null);	
+			session.setAttribute("BUYNUM", null);	
+			session.setAttribute("DE_ADDR",null);
+			session.setAttribute("ST_NO", null);
+			session.setAttribute("ST_NAME", null);
+			session.setAttribute("ST_TEL", null);
+			session.setAttribute("DE_NO", null);
+			}
+			
 		List<StoresDTO> list = new Vector<StoresDTO>();
 		list = service.deladdrprint(map);
 		System.out.println("???");
@@ -129,6 +157,19 @@ public class Order {
 		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
 	}
 	
+	
+	//장바구니 삭제
+	
+	@RequestMapping("/sessionDelete.pz")
+	public String sessionDelete(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		List<BasketDTO> list = (List<BasketDTO>)session.getAttribute("BUYLIST");
+		int idx = Integer.parseInt(map.get("idx").toString());
+		list.remove(idx-1);
+		session.setAttribute("BUYLIST", list);
+		session.setAttribute("BUYNUM", list.size()==0?null:list.size());
+		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";		
+	}
+	
 	@RequestMapping("/SessionInDel.pz")
 	public String sessionInDel(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
 		String de_no = map.get("de_no").toString();
@@ -137,6 +178,8 @@ public class Order {
 		
 		session.setAttribute("DE_ADDR", dto.getDe_addr());
 		session.setAttribute("ST_NO", dto.getSt_no());
+		session.setAttribute("ST_NAME", dto.getSt_name());
+		session.setAttribute("ST_TEL", dto.getSt_tel());
 		
 		int res=0;
 		session.setAttribute("DE_NO", de_no);
@@ -150,6 +193,7 @@ public class Order {
 	
 	@RequestMapping("/GoBasket.pz")
 	public String GoBasket(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
 	
@@ -161,13 +205,35 @@ public class Order {
 		if(map.get("lengths")!=null)
 		len = Integer.parseInt(map.get("lengths").toString());
 		System.out.println(len);
+		int k=0;
+		int totalPrice=0;
+		list = (List<BasketDTO>)session.getAttribute("BUYLIST");
 		for(int i=1 ; i<=len ; i++) {
-			BasketDTO dto = new BasketDTO();
-			dto.setName(map.get("name"+i).toString());
-			
+			list.get(k).setQty(map.get("qty"+i).toString());
+			list.get(k).setPrice(map.get("price"+i).toString());
+			System.out.println(list.get(k).getPrice());
+			totalPrice+=Integer.parseInt(list.get(k).getPrice());
+			k++;
 		}
+		UserDto userdto = callUser(session.getAttribute("ID").toString());
+		System.out.println(userdto.getName());
+		req.setAttribute("callUser", userdto);
+		req.setAttribute("Flist", list);
+		session.setAttribute("BUYLIST", list);
+		req.setAttribute("totalprice", totalPrice);
 		
-		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
+		return "/WEB-INF/Pizza/view/Menu/info.jsp";
+	}
+	
+	
+	
+	public UserDto callUser(String id) {
+		UserDto dto = new UserDto();
+		Map map = new HashMap<>();
+		map.put("id", id);
+		dto = service.callUser(map);
+		
+		return dto;
 	}
 	
 	

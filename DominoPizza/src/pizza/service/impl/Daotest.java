@@ -14,6 +14,8 @@ import pizza.service.DoughDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
+import pizza.service.SNutrientDTO;
+import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
 
 
@@ -106,6 +108,19 @@ public class Daotest {
 
 	public StoresDTO sessionInDel(Map map) {
 		return template.selectOne("mybatissessionInDel",map);
+	}
+
+	public UserDto callUser(Map id) {
+		return template.selectOne("mybatiscallUser",id);
+	}
+
+	public SideMenuList sideView(Map map) {
+		return template.selectOne("mybatisSideMenuView",map);
+	}
+
+	public SNutrientDTO snprint(Map map) {
+		System.out.println("ASD?");
+		return template.selectOne("mybatissnprint",map);
 	}
 	
 	

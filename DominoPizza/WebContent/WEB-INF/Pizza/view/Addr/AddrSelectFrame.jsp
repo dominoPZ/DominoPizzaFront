@@ -64,10 +64,11 @@ marker.setMap(map);
 function test() {
 var address = document.getElementById('addr1').value;
     address = address.split("(")[0];
+
     
 geocoder.geocode({ 'address': address }, function (results, status) {
   if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
+	  map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location

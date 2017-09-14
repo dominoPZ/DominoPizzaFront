@@ -158,7 +158,8 @@ var chocolatChk = function() {
 			<div class="sub_title">
 				<ul class="sub_nav">
 					<li><a href="/main">HOME</a></li>
-					<li><a href="/goods/list?dsp_ctgr=C0201">사이드디시</a></li>
+					<li><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
+					
 					<li><span>음료</span></li>
 				</ul>
 				<div class="sub_title_wrap">
@@ -169,7 +170,7 @@ var chocolatChk = function() {
 			<div class="tab_category">
 				<ul class="btn_tab">
 
-					<li class="sidedish"><a href="#">사이드디시</a></li>
+					<li class="sidedish"><a href="<c:url value='/menuList.pz?ty=104' />">사이드디시</a></li>
 					<li class="active"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz'/>">음료</a></li>
 					<li class="C0203"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz'/>">피클&소스</a></li>
 				</ul>
@@ -217,21 +218,43 @@ var chocolatChk = function() {
 											</p>
 											<div class="prd_option">
 												<div class="input_num">
-													<a href="javascript:;" class="minus"><span
+													<a title="${dvrg.dr_no }" onclick="mins('${bvrg.dr_no}')" class="minus"><span
 														class="ico ico_minus"></span></a>
 													<div class="form_item">
 														<input type="text" id="${bvrg.dr_no}_qty" class="i_text"
 															value="1">
 													</div>
-													<a href="javascript:;" class="add"><span
+													<a title="${dvrg.dr_no }" onclick="adds('${bvrg.dr_no}')" class="add"><span
 														class="ico ico_add"></span></a>
 												</div>
-												<a href="javascript:addGoods('${bvrg.dr_no}');"
+												<a onclick="basket('${bvrg.dr_no}')" style="cursor:pointer"
 													class="btn_ico btn_cart2">장바구니</a>
 											</div>
 										</div>
 									</li>
 								</c:forEach>
+
+					<script>
+						function adds(ids){
+								var spn = document.getElementById(ids+"_qty");
+								spn.value = parseInt(spn.value)+1;
+								
+						}
+						function mins(ids){
+							var spn = document.getElementById(ids+"_qty");
+							if(parseInt(spn.value)!=1){
+							spn.value = parseInt(spn.value)-1;
+							}
+							
+					}
+						
+						function basket(ids){
+							var spn = document.getElementById(ids+"_qty");
+							var qty = parseInt(spn.value);
+							location.href="<c:url value='#'/>?no="+ids+"&qty="+qty;
+						}	
+					
+					</script>
 
 
 							</ul>

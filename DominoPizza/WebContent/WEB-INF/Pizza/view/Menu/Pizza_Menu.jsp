@@ -33,7 +33,7 @@
 	var CON_SSL_URL = "https://web.dominos.co.kr";
 	var CON_STATIC_URL = "https://cdn.dominos.co.kr/renewal2016/ko/w";
 
-	$(document).ready(function() {
+	$(document).ready(() {
 		$.ajaxSetup({cache:false});
 
 		setBasketCnt();
@@ -44,7 +44,7 @@
 				type: "POST",
 				url: "/mypage/mainMyCouponInfoAjax",
 				dataType : "json",
-				success:function(data) {
+				success:(data) {
 				 	if (data.resultData.status == "success") {
 				 		$('#myMonth').text(data.resultData.myMonth+'월');
 				 		$('#myLevel').text(data.resultData.myLevel);
@@ -67,7 +67,7 @@
 					type: "POST",
 					url: "/mypage/leftMyOrderInfoAjax",
 					dataType : "json",
-					success:function(data) {
+					success:(data) {
 					 	if (data.resultData.status == "success") {
 					 		// 현재 주문 진행중인건이 있으면
 					 		if(data.resultData.ingOrderCnt > 0){
@@ -96,7 +96,7 @@
 			
 	});
 
-	function setBasketCnt() {
+	 setBasketCnt() {
 		var basketCnt = cookieManager.getCookie("BASKETCNT");
 		var basket = cookieManager.getCookie("BASKET");
 		var finish_basket = cookieManager.getCookie("FINISH_BASKET");
@@ -107,7 +107,7 @@
 			$(".cart_count").text(basketCnt);
 	}
 
-	var goCart = function() {
+	var goCart = () {
 		location.href="/basket/detail";
 	};
 
@@ -310,8 +310,8 @@ var chocolatChk = function() {
 									</div>
 							</a>
 							<div class="prd_price">
-							<p class="price_large"><span class="ico ico_s_large"></span>${dtos.p_sprice }<em>원</em></p>
-									<p class="price_medium"><span class="ico ico_s_medium"></span>${dtos.p_lprice }<em>원</em></p>
+							<p class="price_large"><span class="ico ico_s_large"></span>${dtos.p_lprice }<em>원</em></p>
+									<p class="price_medium"><span class="ico ico_s_medium"></span>${dtos.p_sprice }<em>원</em></p>
 								</div>
 							</li>
 							

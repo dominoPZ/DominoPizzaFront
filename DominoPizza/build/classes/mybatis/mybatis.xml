@@ -77,6 +77,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="mybatissessionInDel" parameterType="java.util.Map" resultType="StoresDTO" >
 		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE DE_NO='${de_no}'
 	</select>
+	
+	<select id="mybatiscallUser" parameterType="java.lang.String" resultType="pizza.service.impl.UserDto" >
+		SELECT * from customer where id = '${id}'
+	</select>
+	
+	
+		<select id="mybatisSideMenuView" parameterType="java.util.Map" resultType="SideMenuList" >
+		SELECT * FROM SIDE WHERE S_NO=${s_no}
+		</select>
+	
+		<select id="mybatissnprint" parameterType="java.util.Map" resultType="SNutrientDTO" >
+		SELECT * FROM S_NUTRIENT WHERE S_NO=${s_no}
+		</select>
+	
+	
  <!--  어진 끝 -->
  
   <!--  동준 -->
@@ -142,7 +157,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	SELECT * FROM SAUCE
  </select>
   
+<!-- 연주 -->
  
+<!-- 이벤트메인페이지 출력용 -->
+<select id="eventSelectMain" parameterType="java.util.Map" resultType="EventDTO">
+	SELECT * FROM EVENT
+</select>
  
  
  
