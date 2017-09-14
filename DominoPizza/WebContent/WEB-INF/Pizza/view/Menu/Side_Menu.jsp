@@ -264,7 +264,7 @@ var chocolatChk = function() {
 				<li><span>사이드디시</span></li>
 				</ul>
 			<div class="sub_title_wrap">
-				<h2>피자</h2>
+				<h2>사이드디시</h2>
 			</div>
 		</div>
 		<!-- //sub_title -->
