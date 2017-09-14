@@ -8,7 +8,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  -->
  
 <configuration>
-<<<<<<< HEAD
 	<!--마이바티스에서 사용할 .properties(리소스파일) 설정 -->
 	<properties resource="mybatis/mybatis.properties"/>
 	<!-- 자바빈 별칭:매퍼파일에서 환경설정 파일로 위치됨. -->
@@ -71,8 +70,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    </typeAliases>
    
    
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront
-
 
 
 
