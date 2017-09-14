@@ -4,6 +4,9 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
+
+
+
 	<meta charset="euc-kr">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>도미노피자</title>
@@ -14,13 +17,20 @@
 	<link rel="shortcut icon" href="<c:url value='/Pizza/Image/favicon.ico'/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/Pizza/css/font.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css'/>">
-<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
+	<!-- https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css / /Pizza/css/layout.css -->
+	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/ui.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery.flexslider.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/selectbox.js'/>"></script><!-- js 수정함. -->
 	<script type="text/javascript" src="<c:url value='/Pizza/js/d2CommonUtil.js'/>"></script>
 	<%-- <script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js'/>"></script> --%> <!-- 오류 부분 -->
 	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js'/>"></script>
+	
+	<!-- 2] CDN(Content Deliver Network)주소 사용 -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<!-- Deprecated된 함수 사용시 아래 라이브러리 임베드 -->
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+	
 	<script type="text/javascript">
 	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
 	var CON_SSL_URL = "https://web.dominos.co.kr";
@@ -103,7 +113,7 @@ var doughList;
 window.scrollTo(0, 0);
 $(document).ready(function() {
 	$(".gnb_menu .menu04").addClass("on");
-
+/* 
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -129,7 +139,8 @@ $(document).ready(function() {
 			}
 		}
 	});
-
+ */
+	
 	$("#dough").change(function() {
 		setSize();
 		removeTopping();
@@ -163,7 +174,7 @@ $(document).ready(function() {
 
 
 var setSize = function() {
-	$("#size option").remove();
+	//$("#size option").remove();
 	var dough = $("#dough").val();
 	var sizeVal = $("#size").val();
 	$.each(doughList, function(k, v) {
@@ -174,23 +185,25 @@ var setSize = function() {
 	setSource();
 };
 
+
 var setSource = function() {
-	$("#source option").remove();
+	//$("#source option").remove();
 	$.ajax({
 		type: "POST",
-		url: "/goods/mkSourceAjax",
+		url: "<c:url value='/Pizza/BuyPizza/mkChoiceVal.pz'/>",
 		data : {
 			code_01 : $("#size").val(),
 			gubun : $("#size option:selected").data("gubun"),
 			sub_name : $("#size option:selected").data("size"),
 		},
 		success:function(data) {
-			$.each(data.resultData, function(k, v) {
+			//alert("setSource:"+data);
+/* 			$.each(data.resultData, function(k, v) {
 				$("#source").append("<option value='"+v.code+"' data-price='"+v.price+"' "+((k == 0)? "selected" : "")+ ">"+v.name+"</option>");
-			});
+			}); */
 		},
 		error: function (error){
-			alert("다시 시도해주세요.");
+			alert("setSource() 다시 시도해주세요.");
 		}
 	});
 
@@ -258,21 +271,24 @@ var addToppingCheck = function() {
 
 	$.ajax({
 		type: "POST",
-		url: "/goods/pauseCheck",
+		url: "<c:url value='/Pizza/BuyPizza/choice.pz'/>",
 		data: {
 			'goods_code': $("#dough").val()+$("#size option:selected").data("size"),
 			'topping': $("#source").val()
 		},
 		success:function(data) {
-			if(data.resultData.result == "success") {
+ 			if(data == "success") {
+ 				//alert("값 넘기기 성공");
 				addTopping();
-			} else {
+			} 
+ 			/*
+ 			else {
 				alert(data.resultData.result);
 				return;
-			}
+			} */
 		},
 		error: function (error){
-			alert("다시 시도해주세요.");
+			alert("addToppingCheck() 다시 시도해주세요.");
 		}
 	});
 };
@@ -299,7 +315,7 @@ var addTopping = function() {
 		 	$("#topping_info_pop2").find('.pop_wrap').css('top',top+30+'px');
 		},
 		error: function (error){
-			alert("다시 시도해주세요.");
+			alert("addTopping()다시 시도해주세요.");
 		}
 	});
 };
@@ -314,8 +330,6 @@ var closeLayer = function() {
 var addBasketComplete = function() {
 	console.log("addBasketComplete함수 실행");
 		window.setTimeout( function() {location.href="<c:url value='/Pizza/BuyPizza/mykitchen.pz'/>?v="+new Date();}, 900);
-
-	}
 };
 </script>
 <!-- container -->
@@ -372,19 +386,23 @@ var addBasketComplete = function() {
 									<div class="option_title"><span class="bul">ㆍ</span>도우</div>
 										<div class="sel_box">
 											<select id="dough" class="select">
-												<option value="RPZ800H">씬</option>
-												<option value="RPZ800N">나폴리</option>
-												<option value="RPZ800S">오리지널</option>
-												<option value="RPZ802S">더블치즈</option>
+												<!-- 원래 option태그의 value값 : RPZ800H -->
+												<c:forEach var="item" items="${doughList}">
+													<option value="${item.dough_name}">${item.dough_name}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
 							</li>
 							<li>
+							
+							
 								<div class="option_box">
 									<div class="option_title"><span class="bul">ㆍ</span>사이즈</div>
 									<div class="sel_box">
 										<select id="size" class="select">
+											<option value='L'>L</option>
+											<option value='M'>M</option>
 										</select>
 									</div>
 								</div>
@@ -394,6 +412,9 @@ var addBasketComplete = function() {
 									<div class="option_title"><span class="bul">ㆍ</span>소스</div>
 									<div class="sel_box">
 										<select id="source" class="select">
+												<c:forEach var="item" items="${sauceList}">
+													<option value="${item.ps_name}">${item.ps_name}</option>
+												</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -487,6 +508,8 @@ var showLayer = function(layerNm) {
 		type: "GET",
 		url: "<c:url value='/Pizza/BuyPizza/mykitchen_mkIngredient.pz'/>",
 		success:function(data) {
+			console.log("data1:"+data);
+			console.log("data2:"+$(".pop_"+layerNm).html(data));
 			$(".pop_"+layerNm).html(data);
 			$(".pop_"+layerNm).addClass("open");
 			var top = $(window).scrollTop();

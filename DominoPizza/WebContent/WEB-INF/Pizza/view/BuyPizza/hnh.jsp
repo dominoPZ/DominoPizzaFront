@@ -175,13 +175,14 @@ $(document).ready(function() {
 				}); 
 			},
 			error: function (error){
-			/* 	alert("다시 시도해주세요."); */
+			 	alert("다시 시도해주세요."); 
 			}
 		});
 
-		//setTotalAmt();
+		setTotalAmt();
 	});
-
+ 
+	//두 번째 피자 체인지 이벤트 발생시
 	$("#pizza_select2").change(function() {
 		$("#dough option:gt(0)").remove();
 		$("#size option:gt(0)").remove();
@@ -213,14 +214,14 @@ $(document).ready(function() {
 		setTotalAmt();
 	});
 
-	/*$("#qty").change(function() {
+	$("#qty").change(function() {
 		if($(this).val() != "1") {
 			$("#pizzaQty").html(" X 피자("+$(this).val()+")");
 		} else {
 			$("#pizzaQty").html("");
 		}
 		setTotalAmt();
-	})*/;
+	});
 
 	$("#btn_basket").click(function() {
 		if($("#pizza_select1").val() == "") {
@@ -360,17 +361,19 @@ var addToppingCheck = function() {
 
 	var size = $("#size").val();
 	var goods_code = $("#pizza_select1").val()+"/"+$("#pizza_select2").val()+"/"+$("#dough").val()+"/"+size;
-	alert("goods_code : "+goods_code);
+	//alert("goods_code : "+goods_code);
 	$.ajax({
 		type: "POST",
-		url: "<c:url value='/Pizza/BuyPizza/topping.pz'/>",
-		//data: { 'goods_code': goods_code }, //첫번째 피자 + 두번쨰 피자 + 도우 + 사이즈를 넘김
-		dataType:"json",
+		url: "<c:url value='/Pizza/BuyPizza/choice.pz'/>",
+		data: { 'goods_code': goods_code }, //첫번째 피자 + 두번쨰 피자 + 도우 + 사이즈를 넘김
+		dataType:"text",
 		success:function(data) {
-			addTopping();
-/* 			if(data.resultData.result == "success") {
+ 			if(data == "success") {
+ 				//alert("값 넘기기 성공");
 				addTopping();
-			} else {
+			} 
+ 			/*
+ 			else {
 				alert(data.resultData.result);
 				return;
 			} */
@@ -385,6 +388,7 @@ var addToppingCheck = function() {
 
 //토핑 가져오기
 var addTopping = function() {
+	
 	if($("#size").val() == "") {
 		alert("피자, 도우, 사이즈를 선택해주세요.");
 		return;
@@ -394,14 +398,15 @@ var addTopping = function() {
 		alert("피자를 선택해주세요.");
 		return;
 	}
-
+	//alert("넘기는 값 : "+$("#pizza_select1").val()+$("#size").val());
+	//alert("addTopping!!!!!!!!!!!");
 	$("#topping_info_pop").html("");
 	$.ajax({
 		type: "POST",
-		url: "toppingLayer",
-		data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
+		url: "<c:url value='/Pizza/BuyPizza/toppingLayer.pz'/>",
+		//data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
 		success:function(data) {
-		 	$("#topping_info_pop").html(data).addClass("open");
+			$("#topping_info_pop").html(data).addClass("open");
 		 	var top = $(window).scrollTop();
 		 	$("#topping_info_pop").find('.pop_wrap').css('top',top+30+'px');
 		},
@@ -418,22 +423,46 @@ var setTotalAmt = function() {
 		$("#totalAmt").text("0원"); //hnh페이지 총 토탈 금액
 		return;
 	}
-
+	
+	
+	//사이즈까지 모두 선택후 아래 코드로 넘어감.
 	var price = 0;
-	//alert("코드값1:"+$("#pizza_select1").val()+$("#size").val());
+	$.ajax({
+		type: "POST",
+		data: { 'fstPizza': $("#pizza_select1").val(),
+				'size' : $("#size").val(), 
+				'scdPizza' : $("#pizza_select2").val(),
+				'dough' : $("#dough").val() },
+		url: "<c:url value='/Pizza/BuyPizza/pizzaPrice.pz'/>",
+		datatype: "text",
+		success:function(data) {
+			price = data;
+			alert(price);
+		},
+		error: function (error){
+			alert("다시 시도해주세요.");
+		}
+	});
+	
+/* 	
+	alert("코드값1:"+$("#pizza_select1").val()+$("#size").val());
+	
 	$.each(pizzaList1, function(k, v) {
-		
 		if(v.hnh_code == ($("#pizza_select1").val()+$("#size").val()))
-			
 			price += parseInt(v.price) / 2;
 	});
-	//alert("코드값2:"+$("#pizza_select2").val()+$("#size").val());
+	
+	alert("코드값2:"+$("#pizza_select2").val()+$("#size").val());
+	
 	$.each(pizzaList2, function(k, v) {
 		if(v.hnh_code == ($("#pizza_select2").val()+$("#size").val()))
 			price += parseInt(v.price) / 2;
 	});
 
-	var pizzaAmt = price * parseInt($("#qty").val());
+ */	
+	
+	//var pizzaAmt = price * parseInt($("#qty").val());
+	var pizzaAmt = price;
 	var toppingAmt = ($("#toppingTotalAmt").val() != "")? parseInt($("#toppingTotalAmt").val()) * parseInt($("#qty").val()) : 0;
 	$("#totalAmt").text((pizzaAmt + toppingAmt).cvtNumber() + "원");
 };

@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pizza.service.DoughDTO;
 import pizza.service.MyPizzaDTO;
+import pizza.service.PizzaSauceDTO;
 import pizza.service.SideDish_BeverageDTO;
 import pizza.service.SideDish_PickleDTO;
 import pizza.service.SideDish_SauceDTO;
 import pizza.service.ToppingDTO;
 import pizza.service.impl.DoughServiceImpl;
 import pizza.service.impl.MyPizzaServiceImpl;
+import pizza.service.impl.PizzaSauceServiceImpl;
 import pizza.service.impl.SideDish_BeverageServiceImpl;
 import pizza.service.impl.SideDish_PickleServiceImpl;
 import pizza.service.impl.SideDish_SauceServiceImpl;
@@ -43,6 +45,8 @@ public class MyPizzaController {
 	private SideDish_SauceServiceImpl sdds_Sauce;
 	@Resource(name="doughService")
 	private DoughServiceImpl douService;
+	@Resource(name="pizzaSauceService")
+	private PizzaSauceServiceImpl pizzaSauceService;
 	
 	//사이드 디쉬-음료페이지
 	@RequestMapping("/Pizza/Menu/sidedish_beverage.pz")
@@ -61,7 +65,6 @@ public class MyPizzaController {
 		map.put("sauce", sauceList);
 		return "/WEB-INF/Pizza/view/Menu/list_siddsh_picNsce.jsp";
 	}
-	
 	
 	//하프앤하프 메뉴 - 첫번째 피자 리스트&피자 도우  출력용
 	@RequestMapping("/Pizza/BuyPizza/hnh.pz")
@@ -105,29 +108,37 @@ public class MyPizzaController {
 		}
 		return JSONArray.toJSONString(list);
 	}
-/*	
-	//하프앤하프 메뉴 - 피자, 사이즈 선택에 따른 가격 출력용
+	
+	//하프앤하프 메뉴 - 피자 2개, 도우, 사이즈 선택에 따른 가격 출력용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/pizzaPrice.pz", produces="text/html; charset=UTF-8")
-	public String pizzaPrice() throws Exception{
-		String 
-		DoughDTO> dto = pizzaService.priceSelectOne();
-		List<Map> list = new Vector<Map>();
-		Map map =null;
-		for(DoughDTO dto : Doughlist) {
-			map = new HashMap();
-			map.put( "Dough_name", dto.getDough_name());
-			list.add(map);
-		}
-		return JSONArray.toJSONString(list);
+	public String pizzaPrice(@RequestParam Map map) throws Exception{
+		System.out.println("fstPizza : "+map.get("fstPizza"));
+		System.out.println("scdPizza : "+map.get("scdPizza"));
+		System.out.println("dough : "+map.get("dough"));
+		System.out.println("size : "+map.get("size"));
+		map.get("fstPizza");
+		map.get("scdPizza");
+		map.get("dough");
+		map.get("size");
+		//return JSONArray.toJSONString(list);
+		return "100000";
 	}
-	*/
 	
-	//하프앤하프 메뉴 - 토핑 리스트 출력용
+
+	//하프앤하프 & 마이키친 메뉴 - pauseCheck
 	@ResponseBody
-	@RequestMapping(value="/Pizza/BuyPizza/topping.pz", produces="text/html; charset=UTF-8")
+	@RequestMapping(value="/Pizza/BuyPizza/choice.pz", produces="text/html; charset=UTF-8")
+	public String pauseCheck(@RequestParam Map map) throws Exception{
+		System.out.println("하프앤하프 페이지 선택 : "+map.get("goods_code"));
+		System.out.println("마이키친 페이지 선택 : "+map.get("goods_code")+" / "+map.get("topping"));
+		return "success";
+	}	
+	
+	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트 출력용
+	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer.pz", produces="text/html; charset=UTF-8")
 	public String toppingList() throws Exception{
-		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
+/*		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
 		List<Map> list = new Vector<Map>();
 		Map map =null;
 		for(ToppingDTO dto : toppinglist) {
@@ -139,9 +150,36 @@ public class MyPizzaController {
 			map.put( "topping_price", dto.getT_price());
 			map.put( "topping_size", dto.getT_size());
 			list.add(map);
-		}
-		return JSONArray.toJSONString(list);
+		}*/
+		//return JSONArray.toJSONString(list);
+		//return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
+		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 	}	
+	
+	//하프앤하프 & 마이키친 메뉴 - 토핑 알레르기 유발성분 표 출력용
+	@RequestMapping(value="/Pizza/BuyPizza/toppingAllergic.pz", produces="text/html; charset=UTF-8")
+	public String toppingAllergicList() throws Exception{
+		
+		return "/WEB-INF/Pizza/view/BuyPizza/toppingAllergic.jsp";
+	}		
+	
+	//하프앤하프 & 마이키친 메뉴 - 토핑 정량 확인하기 표 출력용
+	@RequestMapping(value="/Pizza/BuyPizza/mkToppingQuantity.pz", produces="text/html; charset=UTF-8")
+	public String mkToppingQuantityList() throws Exception{
+
+		return "/WEB-INF/Pizza/view/BuyPizza/mkToppingQuantity.jsp";
+	}		
+
+	//마이키친 메뉴 - 사용자가 선택한 값 받아오기용
+	@ResponseBody
+	@RequestMapping(value="/Pizza/BuyPizza/mkChoiceVal.pz", produces="text/html; charset=UTF-8")
+	public String mkChoiceVal(@RequestParam Map map) throws Exception{
+		System.out.println("<mkChoiceVal>code_01 : " + map.get("code_01"));
+		System.out.println("<mkChoiceVal>gubun : " + map.get("gubun"));
+		System.out.println("<mkChoiceVal>sub_name : " + map.get("sub_name"));
+		return "아무거나~~";
+	}	
+	
 	
 	//하프앤하프&마이키친페이지에서 장바구니 담기
 	@RequestMapping("/Pizza/BuyPizza/addCart.pz")
@@ -153,11 +191,13 @@ public class MyPizzaController {
 		return "/WEB-INF/Pizza/view/BuyPizza/basket.jsp";
 	}	
 	
-	//마이키친 메뉴
+	//마이키친 메뉴 - 도우, 소스 출력용
 	@RequestMapping("/Pizza/BuyPizza/mykitchen.pz")
-	public String myKitchen() throws Exception{
-		
-		
+	public String myKitchen(Map map) throws Exception{
+		List<DoughDTO> Doughlist = douService.selectList();
+		map.put( "doughList", Doughlist);
+		List<PizzaSauceDTO> Saucelist = pizzaSauceService.selectList();
+		map.put( "sauceList", Saucelist);
 		return "/WEB-INF/Pizza/view/BuyPizza/mykitchen.jsp";
 	}
 	//마이키친 영양성분
@@ -202,7 +242,7 @@ public class MyPizzaController {
 		return "/WEB-INF/Pizza/view/BuyPizza/topping.jsp";
 	}
 	
-	//마이키친 토핑 추가하기
+	//기프트콘
 	@RequestMapping("/Pizza/BuyPizza/ecoupon.pz")
 	public String ecoupon() throws Exception{
 		

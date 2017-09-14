@@ -108,12 +108,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	SELECT * FROM DOUGH
  </select>
  
+  <!-- 피자_소스 출력용 -->
+ <select id="pizzaSauceSelectList" resultType="PizzaSauceDTO">
+ 	SELECT * FROM PIZZA_SAUCE
+ </select>
  
   <!-- 토핑추가하기 출력용 -->
  <select id="addToppingSelectList" resultType="ToppingDTO">
- 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM 
- 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
- 	ORDER BY T_NAME
+ 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND 
+	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
  </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->

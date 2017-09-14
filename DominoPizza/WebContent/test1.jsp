@@ -3,51 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE HTML>
-<html lang="ko">
-<head>
 
-
-
-	<meta charset="euc-kr">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>도미노피자</title>
-	<meta name="viewport" id="viewport" content="width=1119px, user-scalable=yes">
-	<meta http-equiv='cache-control' content='no-cache'>
-	<meta http-equiv='expires' content='0'>
-	<meta http-equiv='pragma' content='no-cache'>
-	<link rel="shortcut icon" href="<c:url value='/Pizza/Image/favicon.ico'/>"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='/Pizza/css/font.css'/>">
-	<link rel="stylesheet" type="text/css" href="<c:url value='https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css'/>">
-	<!-- https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css / /Pizza/css/layout.css -->
-	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/Pizza/js/ui.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery.flexslider.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/Pizza/js/selectbox.js'/>"></script><!-- js 수정함. -->
-	<script type="text/javascript" src="<c:url value='/Pizza/js/d2CommonUtil.js'/>"></script>
-	<%-- <script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js'/>"></script> --%> <!-- 오류 부분 -->
-	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js'/>"></script>
-	
-	<!-- 2] CDN(Content Deliver Network)주소 사용 -->
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
-	<!-- Deprecated된 함수 사용시 아래 라이브러리 임베드 -->
-	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-	
-	<script type="text/javascript">
-	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
-	var CON_SSL_URL = "https://web.dominos.co.kr";
-	var CON_STATIC_URL = "https://cdn.dominos.co.kr/renewal2016/ko/w";
-
-	
-	
-</script>
-
-</head>
-<body>
-
-<div class="pop_layer pop_type topping" id="topping_info_pop"><!-- 마이 키친 토핑 선택팝업(s) -->
+<!-- 마이 키친 토핑 선택팝업(s) -->
 <div class="bg"></div>
-<div class="pop_wrap" style="top: 430px;">
+<div class="pop_wrap" style="top: 330px;">
 	<div class="pop_header">
 		<h2>토핑 선택</h2>
 	</div>
@@ -64,14 +23,14 @@
 				<div class="tab_content active">
 					<div class="lst_topping_wrap">
 						<ul> <!-- class="bg_lst_gray" -->
-						<li class="T0100 toppingli" id="RTP183HL" style="">
+						<li class="T0100 toppingli active" id="RTP184HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP183.jpg" alt="칼라마리 큐브 32g(8ea)" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP184.jpg" alt="꽃게살 15g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>칼라마리 큐브 32g(8ea)</strong> <span>1,000 원</span></p>
+								<p><strong>꽃게살 15g</strong> <span>2,500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP183HL toppingselect" data-nm="칼라마리 큐브 32g(8ea)" data-code="RTP183HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP184HM toppingselect" data-nm="꽃게살 15g" data-code="RTP184HM" data-price="2500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -81,14 +40,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP184HL" style="">
+						<li class="T0100 toppingli active" id="RTP183HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP184.jpg" alt="꽃게살 25g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP183.jpg" alt="칼라마리 큐브 24g(6ea)" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>꽃게살 25g</strong> <span>3,500 원</span></p>
+								<p><strong>칼라마리 큐브 24g(6ea)</strong> <span>700 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP184HL toppingselect" data-nm="꽃게살 25g" data-code="RTP184HL" data-price="3500" title="topping">
+									<select name="toppingQty" class="RTP183HM toppingselect" data-nm="칼라마리 큐브 24g(6ea)" data-code="RTP183HM" data-price="700" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -98,14 +57,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0300 toppingli" id="RTP164HL" style="display:none;">
+						<li class="T0300 toppingli" id="RTP164HM" style="display:none;">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP164.jpg" alt="프로볼로네 치즈 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>프로볼로네 치즈 20g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP164HL toppingselect" data-nm="프로볼로네 치즈 20g" data-code="RTP164HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP164HM toppingselect" data-nm="프로볼로네 치즈 20g" data-code="RTP164HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -115,14 +74,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP165HL" style="">
+						<li class="T0100 toppingli" id="RTP165HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP165.jpg" alt="직화 스테이크 60g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP165.jpg" alt="직화 스테이크 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>직화 스테이크 60g</strong> <span>5,000 원</span></p>
+								<p><strong>직화 스테이크 40g</strong> <span>4,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP165HL toppingselect" data-nm="직화 스테이크 60g" data-code="RTP165HL" data-price="5000" title="topping">
+									<select name="toppingQty" class="RTP165HM toppingselect" data-nm="직화 스테이크 40g" data-code="RTP165HM" data-price="4000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -132,14 +91,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP173HL" style="">
+						<li class="T0100 toppingli" id="RTP174HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP173.jpg" alt="단호박빠스 30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP174.jpg" alt="와규 크럼블  20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>단호박빠스 30g</strong> <span>1,500 원</span></p>
+								<p><strong>와규 크럼블  20g</strong> <span>1,500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP173HL toppingselect" data-nm="단호박빠스 30g" data-code="RTP173HL" data-price="1500" title="topping">
+									<select name="toppingQty" class="RTP174HM toppingselect" data-nm="와규 크럼블  20g" data-code="RTP174HM" data-price="1500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -149,14 +108,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP174HL" style="">
+						<li class="T0100 toppingli" id="RTP175HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP174.jpg" alt="와규 크럼블  40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP175.jpg" alt="비스테카 스테이크  30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>와규 크럼블  40g</strong> <span>2,500 원</span></p>
+								<p><strong>비스테카 스테이크  30g</strong> <span>2,500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP174HL toppingselect" data-nm="와규 크럼블  40g" data-code="RTP174HL" data-price="2500" title="topping">
+									<select name="toppingQty" class="RTP175HM toppingselect" data-nm="비스테카 스테이크  30g" data-code="RTP175HM" data-price="2500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -166,31 +125,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP175HL" style="">
-								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP175.jpg" alt="비스테카 스테이크  50g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
-									<span class="ico ico_or_chk"></span>
-								</div>
-								<p><strong>비스테카 스테이크  50g</strong> <span>4,000 원</span></p>
-								<div class="sel_box">
-									<select name="toppingQty" class="RTP175HL toppingselect" data-nm="비스테카 스테이크  50g" data-code="RTP175HL" data-price="4000" title="topping">
-									<option value="0">0</option>
-								    <option value="1">1</option>
-								    <option value="2">2</option>
-								    <option value="3">3</option>
-								    <option value="4">4</option>
-								    <option value="5">5</option>
-								    </select>
-								</div>
-							</li>
-						<li class="T0300 toppingli" id="RTP153HL" style="display:none;">
+						<li class="T0300 toppingli" id="RTP153HM" style="display:none;">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP153.jpg" alt="보코치니 4개/20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>보코치니 4개/20g</strong> <span>2,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP153HL toppingselect" data-nm="보코치니 4개/20g" data-code="RTP153HL" data-price="2000" title="topping">
+									<select name="toppingQty" class="RTP153HM toppingselect" data-nm="보코치니 4개/20g" data-code="RTP153HM" data-price="2000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -200,14 +142,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP178HL" style="">
+						<li class="T0100 toppingli" id="RTP178HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP178.jpg" alt="브레이즈드 포크 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP178.jpg" alt="브레이즈드 포크 30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>브레이즈드 포크 40g</strong> <span>2,000 원</span></p>
+								<p><strong>브레이즈드 포크 30g</strong> <span>1,500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP178HL toppingselect" data-nm="브레이즈드 포크 40g" data-code="RTP178HL" data-price="2000" title="topping">
+									<select name="toppingQty" class="RTP178HM toppingselect" data-nm="브레이즈드 포크 30g" data-code="RTP178HM" data-price="1500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -217,14 +159,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0400 toppingli" id="RTP171HL" style="display:none;">
+						<li class="T0400 toppingli" id="RTP171HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP171.jpg" alt="만체고 치즈 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP171.jpg" alt="만체고 치즈 10g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>만체고 치즈 20g</strong> <span>1,000 원</span></p>
+								<p><strong>만체고 치즈 10g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP171HL toppingselect" data-nm="만체고 치즈 20g" data-code="RTP171HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP171HM toppingselect" data-nm="만체고 치즈 10g" data-code="RTP171HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -234,14 +176,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP172HL" style="">
+						<li class="T0100 toppingli" id="RTP172HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP172.jpg" alt="새송이 버섯  40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP172.jpg" alt="새송이 버섯  20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>새송이 버섯  40g</strong> <span>1,000 원</span></p>
+								<p><strong>새송이 버섯  20g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP172HL toppingselect" data-nm="새송이 버섯  40g" data-code="RTP172HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP172HM toppingselect" data-nm="새송이 버섯  20g" data-code="RTP172HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -251,14 +193,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP169HL" style="">
+						<li class="T0100 toppingli" id="RTP173HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP169.jpg" alt="킹 프론 4개" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP173.jpg" alt="단호박빠스 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>킹 프론 4개</strong> <span>5,000 원</span></p>
+								<p><strong>단호박빠스 20g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP169HL toppingselect" data-nm="킹 프론 4개" data-code="RTP169HL" data-price="5000" title="topping">
+									<select name="toppingQty" class="RTP173HM toppingselect" data-nm="단호박빠스 20g" data-code="RTP173HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -268,14 +210,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP170HL" style="">
+						<li class="T0100 toppingli" id="RTP169HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP170.jpg" alt="칼라마리 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP169.jpg" alt="킹 프론 3개" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>칼라마리 40g</strong> <span>1,500 원</span></p>
+								<p><strong>킹 프론 3개</strong> <span>4,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP170HL toppingselect" data-nm="칼라마리 40g" data-code="RTP170HL" data-price="1500" title="topping">
+									<select name="toppingQty" class="RTP169HM toppingselect" data-nm="킹 프론 3개" data-code="RTP169HM" data-price="4000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -285,14 +227,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0400 toppingli" id="RTP158HL" style="display:none;">
+						<li class="T0100 toppingli" id="RTP170HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP158.jpg" alt="파르메산 치즈 5g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP170.jpg" alt="칼라마리 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>파르메산 치즈 5g</strong> <span>1,000 원</span></p>
+								<p><strong>칼라마리 20g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP158HL toppingselect" data-nm="파르메산 치즈 5g" data-code="RTP158HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP170HM toppingselect" data-nm="칼라마리 20g" data-code="RTP170HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -302,14 +244,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0300 toppingli" id="RTP179HL" style="display:none;">
+						<li class="T0400 toppingli" id="RTP158HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP179.jpg" alt="생 모차렐라&amp;그뤼에르멜팅치즈 6개" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP158.jpg" alt="파르메산 치즈 3g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>생 모차렐라&amp;그뤼에르멜팅치즈 6개</strong> <span>6,000 원</span></p>
+								<p><strong>파르메산 치즈 3g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP179HL toppingselect" data-nm="생 모차렐라&amp;그뤼에르멜팅치즈 6개" data-code="RTP179HL" data-price="6000" title="topping">
+									<select name="toppingQty" class="RTP158HM toppingselect" data-nm="파르메산 치즈 3g" data-code="RTP158HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -319,14 +261,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP135HL" style="">
+						<li class="T0300 toppingli" id="RTP179HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP135.jpg" alt="프리미엄불고기 70g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP179.jpg" alt="생 모차렐라&amp;그뤼에르멜팅치즈 5개" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>프리미엄불고기 70g</strong> <span>4,000 원</span></p>
+								<p><strong>생 모차렐라&amp;그뤼에르멜팅치즈 5개</strong> <span>4,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP135HL toppingselect" data-nm="프리미엄불고기 70g" data-code="RTP135HL" data-price="4000" title="topping">
+									<select name="toppingQty" class="RTP179HM toppingselect" data-nm="생 모차렐라&amp;그뤼에르멜팅치즈 5개" data-code="RTP179HM" data-price="4000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -336,14 +278,31 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP136HL" style="">
+						<li class="T0100 toppingli" id="RTP135HM" style="">
+								<div class="img_topping">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP135.jpg" alt="프리미엄불고기 35g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<span class="ico ico_or_chk"></span>
+								</div>
+								<p><strong>프리미엄불고기 35g</strong> <span>2,000 원</span></p>
+								<div class="sel_box">
+									<select name="toppingQty" class="RTP135HM toppingselect" data-nm="프리미엄불고기 35g" data-code="RTP135HM" data-price="2000" title="topping">
+									<option value="0">0</option>
+								    <option value="1">1</option>
+								    <option value="2">2</option>
+								    <option value="3">3</option>
+								    <option value="4">4</option>
+								    <option value="5">5</option>
+								    </select>
+								</div>
+							</li>
+						<li class="T0100 toppingli" id="RTP136HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP136.jpg" alt="적양파(레드어니언) 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>적양파(레드어니언) 20g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP136HL toppingselect" data-nm="적양파(레드어니언) 20g" data-code="RTP136HL" data-price="500" title="topping">
+									<select name="toppingQty" class="RTP136HM toppingselect" data-nm="적양파(레드어니언) 20g" data-code="RTP136HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -353,14 +312,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP147HL" style="">
+						<li class="T0100 toppingli" id="RTP147HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP147.jpg" alt="선드라이토마토 5개/15g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP147.jpg" alt="선드라이토마토 3개/9g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>선드라이토마토 5개/15g</strong> <span>1,000 원</span></p>
+								<p><strong>선드라이토마토 3개/9g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP147HL toppingselect" data-nm="선드라이토마토 5개/15g" data-code="RTP147HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP147HM toppingselect" data-nm="선드라이토마토 3개/9g" data-code="RTP147HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -370,14 +329,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP051HL" style="">
+						<li class="T0100 toppingli" id="RTP051HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP051.jpg" alt="파인애플 8개/40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>파인애플 8개/40g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP051HL toppingselect" data-nm="파인애플 8개/40g" data-code="RTP051HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP051HM toppingselect" data-nm="파인애플 8개/40g" data-code="RTP051HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -387,14 +346,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP059HL" style="">
+						<li class="T0100 toppingli" id="RTP059HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP059.jpg" alt="올리브 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>올리브 20g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP059HL toppingselect" data-nm="올리브 20g" data-code="RTP059HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP059HM toppingselect" data-nm="올리브 20g" data-code="RTP059HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -404,14 +363,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0300 toppingli" id="RTP036HL" style="display:none;">
+						<li class="T0300 toppingli" id="RTP036HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP036.jpg" alt="도미노치즈 100g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP036.jpg" alt="도미노치즈 50g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>도미노치즈 100g</strong> <span>2,500 원</span></p>
+								<p><strong>도미노치즈 50g</strong> <span>1,500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP036HL toppingselect" data-nm="도미노치즈 100g" data-code="RTP036HL" data-price="2500" title="topping">
+									<select name="toppingQty" class="RTP036HM toppingselect" data-nm="도미노치즈 50g" data-code="RTP036HM" data-price="1500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -421,14 +380,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP042HL" style="">
+						<li class="T0100 toppingli" id="RTP042HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP042.jpg" alt="베이컨 8개/24g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>베이컨 8개/24g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP042HL toppingselect" data-nm="베이컨 8개/24g" data-code="RTP042HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP042HM toppingselect" data-nm="베이컨 8개/24g" data-code="RTP042HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -438,14 +397,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP054HL" style="">
+						<li class="T0100 toppingli" id="RTP054HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP054.jpg" alt="버섯 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>버섯 20g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP054HL toppingselect" data-nm="버섯 20g" data-code="RTP054HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP054HM toppingselect" data-nm="버섯 20g" data-code="RTP054HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -455,14 +414,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP045HL" style="">
+						<li class="T0100 toppingli" id="RTP045HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP045.jpg" alt="페퍼로니  8개/20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>페퍼로니  8개/20g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP045HL toppingselect" data-nm="페퍼로니  8개/20g" data-code="RTP045HL" data-price="500" title="topping">
+									<select name="toppingQty" class="RTP045HM toppingselect" data-nm="페퍼로니  8개/20g" data-code="RTP045HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -472,14 +431,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP049HL" style="">
+						<li class="T0100 toppingli" id="RTP049HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP049.jpg" alt="감자 8개/80g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>감자 8개/80g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP049HL toppingselect" data-nm="감자 8개/80g" data-code="RTP049HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP049HM toppingselect" data-nm="감자 8개/80g" data-code="RTP049HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -489,14 +448,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP044HL" style="">
+						<li class="T0100 toppingli" id="RTP044HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP044.jpg" alt="햄 8개/28g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>햄 8개/28g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP044HL toppingselect" data-nm="햄 8개/28g" data-code="RTP044HL" data-price="500" title="topping">
+									<select name="toppingQty" class="RTP044HM toppingselect" data-nm="햄 8개/28g" data-code="RTP044HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -506,14 +465,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP151HL" style="">
+						<li class="T0100 toppingli" id="RTP151HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP151.jpg" alt="마요네즈 30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP151.jpg" alt="마요네즈 15g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>마요네즈 30g</strong> <span>500 원</span></p>
+								<p><strong>마요네즈 15g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP151HL toppingselect" data-nm="마요네즈 30g" data-code="RTP151HL" data-price="500" title="topping">
+									<select name="toppingQty" class="RTP151HM toppingselect" data-nm="마요네즈 15g" data-code="RTP151HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -523,14 +482,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP130HL" style="">
+						<li class="T0100 toppingli" id="RTP130HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP130.jpg" alt="케이준 새우살 8개/62g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>케이준 새우살 8개/62g</strong> <span>4,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP130HL toppingselect" data-nm="케이준 새우살 8개/62g" data-code="RTP130HL" data-price="4000" title="topping">
+									<select name="toppingQty" class="RTP130HM toppingselect" data-nm="케이준 새우살 8개/62g" data-code="RTP130HM" data-price="4000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -540,14 +499,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0400 toppingli" id="RTP099HL" style="display:none;">
+						<li class="T0400 toppingli" id="RTP099HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP099.jpg" alt="호스래디시소스 30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP099.jpg" alt="호스래디시소스 15g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>호스래디시소스 30g</strong> <span>1,000 원</span></p>
+								<p><strong>호스래디시소스 15g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP099HL toppingselect" data-nm="호스래디시소스 30g" data-code="RTP099HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP099HM toppingselect" data-nm="호스래디시소스 15g" data-code="RTP099HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -557,14 +516,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP048HL" style="">
+						<li class="T0100 toppingli" id="RTP048HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP048.jpg" alt="불고기 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP048.jpg" alt="불고기 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>불고기 40g</strong> <span>1,000 원</span></p>
+								<p><strong>불고기 20g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP048HL toppingselect" data-nm="불고기 40g" data-code="RTP048HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP048HM toppingselect" data-nm="불고기 20g" data-code="RTP048HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -574,14 +533,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0300 toppingli" id="RTP037HL" style="display:none;">
+						<li class="T0300 toppingli" id="RTP037HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP037.jpg" alt="체더치즈 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP037.jpg" alt="체더치즈 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>체더치즈 40g</strong> <span>1,500 원</span></p>
+								<p><strong>체더치즈 20g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP037HL toppingselect" data-nm="체더치즈 40g" data-code="RTP037HL" data-price="1500" title="topping">
+									<select name="toppingQty" class="RTP037HM toppingselect" data-nm="체더치즈 20g" data-code="RTP037HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -591,14 +550,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0300 toppingli" id="RTP040HL" style="display:none;">
+						<li class="T0300 toppingli" id="RTP040HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP040.jpg" alt="카망베르 크림치즈 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP040.jpg" alt="카망베르 크림치즈 10g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>카망베르 크림치즈 20g</strong> <span>1,000 원</span></p>
+								<p><strong>카망베르 크림치즈 10g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP040HL toppingselect" data-nm="카망베르 크림치즈 20g" data-code="RTP040HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP040HM toppingselect" data-nm="카망베르 크림치즈 10g" data-code="RTP040HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -608,14 +567,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP050HL" style="">
+						<li class="T0100 toppingli" id="RTP050HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP050.jpg" alt="홍파프리카 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP050.jpg" alt="홍파프리카 10g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>홍파프리카 20g</strong> <span>1,000 원</span></p>
+								<p><strong>홍파프리카 10g</strong> <span>500 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP050HL toppingselect" data-nm="홍파프리카 20g" data-code="RTP050HL" data-price="1000" title="topping">
+									<select name="toppingQty" class="RTP050HM toppingselect" data-nm="홍파프리카 10g" data-code="RTP050HM" data-price="500" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -625,14 +584,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP053HL" style="">
+						<li class="T0100 toppingli" id="RTP053HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP053.jpg" alt="피망 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>피망 20g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP053HL toppingselect" data-nm="피망 20g" data-code="RTP053HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP053HM toppingselect" data-nm="피망 20g" data-code="RTP053HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -642,14 +601,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP056HL" style="">
+						<li class="T0100 toppingli" id="RTP056HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP056.jpg" alt="옥수수 40g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>옥수수 40g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP056HL toppingselect" data-nm="옥수수 40g" data-code="RTP056HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP056HM toppingselect" data-nm="옥수수 40g" data-code="RTP056HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -659,14 +618,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP057HL" style="">
+						<li class="T0100 toppingli" id="RTP057HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP057.jpg" alt="양파 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>양파 20g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP057HL toppingselect" data-nm="양파 20g" data-code="RTP057HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP057HM toppingselect" data-nm="양파 20g" data-code="RTP057HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -676,14 +635,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP063HL" style="">
+						<li class="T0100 toppingli" id="RTP063HM" style="">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP063.jpg" alt="로스트 포테이토 70g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP063.jpg" alt="로스트 포테이토 35g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>로스트 포테이토 70g</strong> <span>1,500 원</span></p>
+								<p><strong>로스트 포테이토 35g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP063HL toppingselect" data-nm="로스트 포테이토 70g" data-code="RTP063HL" data-price="1500" title="topping">
+									<select name="toppingQty" class="RTP063HM toppingselect" data-nm="로스트 포테이토 35g" data-code="RTP063HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -693,14 +652,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0500 toppingli" id="RTP116HL" style="display:none;">
+						<li class="T0500 toppingli" id="RTP116HM" style="display:none;">
 								<div class="img_topping">
-									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP116.jpg" alt="베이컨칩 30g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
+									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP116.jpg" alt="베이컨칩 15g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
-								<p><strong>베이컨칩 30g</strong> <span>1,500 원</span></p>
+								<p><strong>베이컨칩 15g</strong> <span>1,000 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP116HL toppingselect" data-nm="베이컨칩 30g" data-code="RTP116HL" data-price="1500" title="topping">
+									<select name="toppingQty" class="RTP116HM toppingselect" data-nm="베이컨칩 15g" data-code="RTP116HM" data-price="1000" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -710,14 +669,14 @@
 								    </select>
 								</div>
 							</li>
-						<li class="T0100 toppingli" id="RTP047HL" style="">
+						<li class="T0100 toppingli" id="RTP047HM" style="">
 								<div class="img_topping">
 									<img src="https://cdn.dominos.co.kr/admin/upload/topping/RTP047.jpg" alt="포크 20g" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/topping/topping_default.jpg'">
 									<span class="ico ico_or_chk"></span>
 								</div>
 								<p><strong>포크 20g</strong> <span>300 원</span></p>
 								<div class="sel_box">
-									<select name="toppingQty" class="RTP047HL toppingselect" data-nm="포크 20g" data-code="RTP047HL" data-price="300" title="topping">
+									<select name="toppingQty" class="RTP047HM toppingselect" data-nm="포크 20g" data-code="RTP047HM" data-price="300" title="topping">
 									<option value="0">0</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
@@ -738,10 +697,10 @@
 				<a href="javascript:toppingReset();" class="btn"><span class="btn_txt">초기화</span></a>
 			</div>
 			<div class="btn_fix_rgt">
-				<p><strong>토핑금액 : </strong><span id="toppingTotalAmount">총 0원</span></p>
+				<p><strong>토핑금액 : </strong><span id="toppingTotalAmount">총 7,100원</span></p>
 			</div>
 		</div>
-		<a href="javascript:setToppingCheck();" class="btn btn_mdle btn_red btn_block"><span class="btn_txt">토핑 추가하기 <span id="toppingTotalCnt"></span></span></a>
+		<a href="javascript:setToppingCheck();" class="btn btn_mdle btn_red btn_block"><span class="btn_txt">토핑 추가하기 <span id="toppingTotalCnt">(5)</span></span></a>
 
 	</div>
 	<a href="javascript:closeLayer();" class="btn_ico btn_close">닫기</a>
@@ -909,12 +868,3 @@ var showLayer = function(layerNm) {
 	});
 };
 </script>
-</div>
-
-<div style="background-color: pink"></div>
-
-
-
-</body>
-
-</html>

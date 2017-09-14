@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="SideDish_PickleDTO" type="pizza.service.SideDish_PickleDTO"/>
 		<typeAlias alias="SideDish_SauceDTO" type="pizza.service.SideDish_SauceDTO"/>
 		<typeAlias alias="DoughDTO" type="pizza.service.DoughDTO"/>
+		<typeAlias alias="PizzaSauceDTO" type="pizza.service.PizzaSauceDTO"/>		
 	</typeAliases>
 	
 	
