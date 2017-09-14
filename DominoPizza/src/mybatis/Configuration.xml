@@ -18,19 +18,20 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="PNutrientDTO" type="pizza.service.PNutrientDTO"/>
 		<typeAlias alias="BasketDTO" type="pizza.service.BasketDTO"/>
 		
-	
-	
-	
-	
 	<!--  미나 -->
-	
-	
 
 		<typeAlias alias="MyPizzaDTO" type="pizza.service.MyPizzaDTO"/>
 		<typeAlias alias="ToppingDTO" type="pizza.service.ToppingDTO"/>
 		<typeAlias alias="SideDish_BeverageDTO" type="pizza.service.SideDish_BeverageDTO"/>
 		<typeAlias alias="SideDish_PickleDTO" type="pizza.service.SideDish_PickleDTO"/>
 		<typeAlias alias="SideDish_SauceDTO" type="pizza.service.SideDish_SauceDTO"/>
+		
+		
+		
+	<!-- 연주 -->
+	
+		<typeAlias alias="EventDTO" type="pizza.service.EventDTO"/>
+		
 	</typeAliases>
 	
 	

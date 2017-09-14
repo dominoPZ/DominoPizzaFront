@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.RequestWrapper;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,7 @@ public class MenuList {
 		service.test(map);
 		return "/Pizza/view/Mainpage.jsp";
 	}*/
+	
 	
 	@RequestMapping("/menuList.pz")
 	public String menuList(Model model, HttpServletRequest req) throws Exception{

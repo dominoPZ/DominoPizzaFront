@@ -131,66 +131,51 @@ $(document).ready(function() {
 				<div class="sub_title">
 					<ul class="sub_nav">
 						<li><a href="/main">HOME</a></li>
-						<li><a href="<c:url value='/EventMain.pz'/>">이벤트&amp;혜택</a></li>
-						<li><span>오늘의 이벤트</span></li>
+						<li><span>이벤트&amp;혜택</span></li>
 					</ul>
 					<div class="sub_title_wrap">
 						<h2>이벤트&amp;혜택</h2>
 					</div>
 				</div>
 				<!-- //sub_title -->
-
-				<!-- tab -->
-
-				<div class="tab_type4 event">
-					<ul class="btn_tab">
-						<li class="E1"><a href="<c:url value='/eventMain.pz'/>?e=E101">오늘의 이벤트</a></li>
-						<li class="E2"><a href="/event/mania">매니아 혜택</a></li>
-					</ul>
-				</div>
-				<!-- //tab -->
-			<div class="event_main_container">
-				<ul id="addUl">
-				<c:forEach items="${eventmain }" var="eventmain" varStatus="loop">
-					<li style="display: list-item; margin-top: 22px" >
-						<a href="javascript:goView('${pageNo}','${eventmain.e_no }','E101');" 
-							style=" display: block;
-								    width: 100%;
-								    height: 100%;
-								    background: #fff;
-								    box-shadow: 1px 2px 3px rgba(69,52,27,0.56);">
-							<div class="event_card" id="${pageNo }_${eventmain.e_no}">
-								<div class="img_box">
-									<img src="https://cdn.dominos.co.kr/admin/upload/event/20170831_1OkQ02WS.jpg" alt="현대카드ZERO/M Edition2 신규발급시 피자할인쿠폰 증정!">
-								</div> 
-								<!-- //img_box -->
-								<div class="card_content" style="padding: 20px ">
-									<div class="title" style="font-weight: 500; margin-bottom: 5px; font-size: 20px">${eventmain.e_title }</div>
-									<div class="date" style="font-size: 15px">${eventmain.e_sdate } ~ ${eventmain.e_edate }</div>
-								</div>
-							</div>
-						</a>
-					</li>
-					
-				</c:forEach>
-				</ul>
-
-					<input type="hidden" id="pageNo" name="pageNo" value="1" />
-					<input type="hidden" id="e" name="e" value="E101" />
-					<div class="btn_wrap">
-						<div class="btn_fix_center" style="padding: 20px">
-							<a href="javascript:fncMore();" class="btn_tico btn_gray" id="more_btn"><span class="btn_txt">이벤트 더 보기</span><span class="ico ico_arr_dw3"></span></a>
+			<div class="event_datail">
+					<div class="event_detail_card">
+						<div class="event_title">
+							<div class="title">카카오톡 금액권 우와하게 반값</div>
+							<div class="desc">2017-09-11 ~ 2017-09-17</div>
 						</div>
+						<!-- //event_title -->
+						<div class="event_detail_view">
+							<div class="event_detail_view">
+	<div class="img_box">
+		<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/img/specials_event/event_list64.jpg" alt="">
+	</div>
+</div>
+<div class="event_guide">
+    <dl>
+        <dt>유의사항</dt>
+        <dd>
+            <ul>
+                <li>-25,000원 이상 주문시 사용 가능합니다. </li> 
+                <li>-금액할인권은 1주문 당 1장만 사용 가능합니다. </li>
+                <li>-주문 후 남은 잔액에 대해서는 환불이 불가합니다. </li>
+<li>-세트제품 및 여타할인과 중복할인은 불가합니다. (단, 반값 사이드디시 예외)</li>
+            </ul>
+        </dd>
+    </dl>
+</div></div>
+					</div>
+					<!-- //event_detail_card -->
+					<div class="btn_wrap">
+						<a href="/event/list?gubun=E0200" class="btn btn_mdle btn_gray btn_basic"><span class="btn_txt">목록</span></a>
 					</div>
 				</div>
+				<!-- //event_detail -->
+
 			</div>
 			<!-- //content -->
 		</div>
 		<!-- //container -->
-
-
-
-
 <!-- 로딩 이미지 -->
 		<div class="loading" id="defaultLoading" style="display:none;">
 			<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/img/loading.gif" alt="loading">
@@ -222,7 +207,6 @@ $(document).ready(function() {
 			</div>
 		</div>
 		<!-- //장바구니(e) -->
-
 		<jsp:include page="/WEB-INF/Pizza/template/foot.jsp"></jsp:include>
 		<!-- //footer -->
 	</div>
@@ -283,85 +267,3 @@ $(document).ready(function() {
 cookieManager.makePCID("PCID", 10);
 </script>
 </html>
-<script type="text/javascript">
-
-<!-- LOGGER 환경변수 설정 -->
-
-	_TRK_PI = "EVL";	// 웹페이지의 성격 정의 - 이벤트리스트
-<!-- // LOGGER 환경변수 설정 -->
-
-$(document).ready(function() {
-	$('#pageNo').val("1");
-
-	var hashLocationName = document.location.hash;
-	if(hashLocationName != ""){
-		var pageNo = (hashLocationName.replace("#","")).split("_")[0];
-		for(i=1; i<parseInt(pageNo); i++){
-			fncMore();
-		}
-		//$(hashLocationName).focus();
-	}
-});
-function fncMore(){
-	var pageNo;
-   	pageNo = parseInt($('#pageNo').val())+1;
-
-   	if(pageNo <= 2){
-   		$('#pageNo').val(pageNo);
-        $.ajax({
-            type: "POST",
-            url: "/event/eventMainAjax",
-            data: {
-           	 "e" : $('#e').val(),
-           	 "pageNo" : pageNo,
-            },
-            dataType: "json",
-            cache : false,
-            success: function(res) {
-                var html = "" ;
-                for(var i=0; i < res.resultData..length; i++) {
-   				var resData = res.resultData.[i];
-
-   				html += '		<li>';
-   				if(resData.link_url != null && resData.link_url != '') {
-   				html += '			<a href="javascript:goLinkView(\''+pageNo+'\',\''+resData.seq+'\',\''+resData.link_url+'\',\''+resData.target+'\');">';
-   				} else {
-   				html += '			<a href="javascript:goView(\''+pageNo+'\',\''+resData.seq+'\',\''+resData.e+'\');">';
-   				}
-   				html += '				<div class="event_card" id="'+pageNo+'_'+resData.seq+'">';
-    			html += '					<div class="img_box">';
-    			html += '						<img src="https://cdn.dominos.co.kr/admin/upload/event/'+ resData.file_nm +'" alt="'+ resData.title +'">';
-   				html += '					</div>';
-   				
-   				html += '					<div class="card_content">';
-   				html += '						<div class="title">'+ resData.title +'</div>';
-   				html += '						<div class="date">'+ resData.s_date.substring(0,10) +' ~ '+ resData.e_date.substring(0,10) +'</div>';
-   				html += '					</div>';
-   				html += '				</div>';
-   				html += '			</a>';
-   				html += '		</li>';
-                }
-                $('#addUl').append(html);
-                $('#more_btn').hide();
-            },
-            error: function(xhr, status, e) {
-                alert(e);
-            }
-   	});
-   	}
-}
- 
-function goView(pageNo, seq, e){
-	document.location.hash = "#" + pageNo + "_" + seq;
-	location.href = "/event/view?seq="+seq+"&e="+e;
-}
-
-function goLinkView(pageNo, seq, link_url, target){
-	if(target == "_blank") {
-		window.open("about:blank").location.href=link_url;
-	} else {
-		document.location.hash = "#" + pageNo + "_" + seq;
-		location.href = link_url;
-	}
-}
-</script>
