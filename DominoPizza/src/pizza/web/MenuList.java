@@ -54,20 +54,20 @@ public class MenuList {
 		String whe = "";
 		req.setAttribute("pages", ty);
 		if(ty==101) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
 			fro = " pizza p join pizza_dough pd on p.p_no = pd.p_no join dough d on d.dough_no = pd.dough_no ";
 			whe = " d.dough_no=4 ";
 			req.setAttribute("gok", 1);
 			req.setAttribute("bimg", "곡물베너.png");
 		}
 		else if(ty==102) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P_NO ";
-			fro = " pizza p ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
+			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
 			whe = " p_kind = '프리미엄' ";
 			req.setAttribute("bimg", "프리미엄베너.png");
 		}else if(ty==103) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P_NO ";
-			fro = " pizza p ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
+			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
 			whe = " p_kind = '클래식' ";
 			req.setAttribute("bimg", "클래식베너.png");
 		}else if(ty==104) {
@@ -88,6 +88,12 @@ public class MenuList {
 		
 		List<PizzaMenuList> list = service.menuList(map);
 		
+		for(PizzaMenuList pl : list) {
+			pl.setP_lprice((Integer.parseInt(pl.getP_lprice())+Integer.parseInt(pl.getD_price()))+"");
+			pl.setP_sprice((Integer.parseInt(pl.getP_sprice())+Integer.parseInt(pl.getD_price()))+"");
+		}
+		
+		
 		model.addAttribute("dto",list);
 		
 		String ret = "";
@@ -100,14 +106,7 @@ public class MenuList {
 		return ret;
 	}
 	
-	@RequestMapping("/AddrSelect.pz")
-	public String AddrSelect(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
-		service.addrselect(map);
-		
-		
-		return null;
-		
-	}
+
 	
 	
 	@RequestMapping("/PizzaView.pz")
@@ -133,49 +132,24 @@ public class MenuList {
 		
 	}
 	
-	
 	@RequestMapping("/Basket.pz")
 	public String Basket(@RequestParam Map map, HttpServletRequest req , HttpSession session) throws Exception{
-		BasketDTO dto = new BasketDTO();
-		dto.setDough(map.get("dough").toString());
-		dto.setImg(map.get("img").toString());
-		dto.setName(map.get("na").toString());
-		String price="";
-		char[] pri = map.get("price").toString().toCharArray();
-		for(char cha : pri) {
-			if(cha >= '0' && cha <= '9')
-				price+=cha;
-		}
-		System.out.println(price);
-		dto.setPrice(price);
-		dto.setQty(map.get("qty").toString());
-		dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
-		dto.setTopping(map.get("topping").toString());
-		dto.setKind(map.get("kind").toString());
-		dto.setDoughno(map.get("doughno").toString());
-		List<BasketDTO> list = new Vector<>();
-		if(session.getAttribute("list")!=null)
-		list=(List<BasketDTO>)session.getAttribute("list");
-		list.add(dto);
-		req.setAttribute("list", list);
-		session.setAttribute("list", list);
-		session.setAttribute("num", list.size());
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
 	
 	
 	@RequestMapping("Project.pz")
-	public String Project(@RequestParam Map map, HttpSession session)  throws Exception {
+	public String Project(@RequestParam Map map,HttpServletRequest req , HttpSession session)  throws Exception {
 
-		List<BasketDTO> list = (List<BasketDTO>)session.getAttribute("list");
+		List<BasketDTO> list = (List<BasketDTO>)session.getAttribute("BUYLIST");
 		int i = 0;
 		int k = 0;
 		String id=session.getAttribute("ID").toString();
 		
 		Map maps= new HashMap<>();
 		maps.put("id", id);
-		maps.put("st_no", 3);
-		maps.put("sa_addr", "서울특별시 금천구 가산동 월드메르디앙");
+		maps.put("st_no", session.getAttribute("ST_NO").toString());
+		maps.put("sa_addr", session.getAttribute("DE_ADDR").toString());
 		i = service.sinsert(maps);
 		for(BasketDTO dto : list ) {
 			System.out.println("??");
@@ -190,7 +164,6 @@ public class MenuList {
 			System.out.println(price);
 			System.out.println(dto.getDoughno());
 			
-
 			
 			// 5 - 2 - 4  직화스테이크 곡물도우
 
@@ -205,8 +178,15 @@ public class MenuList {
 			}
 			System.out.println("ASDasdasd");
 		}
+		if(k==1) {
+			session.removeAttribute("BUYLIST");
+			session.removeAttribute("BUYNUM");
+		}
 		
-		return "/Pizza/MainPage.pz";
+		req.setAttribute("SUC_FAIL", k);
+		req.setAttribute("WHERE", "BF");
+		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
+		
 	}
 	
 	

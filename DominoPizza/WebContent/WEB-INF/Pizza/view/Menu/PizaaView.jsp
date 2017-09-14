@@ -630,7 +630,7 @@ function share(optn) {
 						var img = imgDom.src;
 						var qtyDom = document.getElementById("qty");
 						var qty = qtyDom.value;
-						location.href="<c:url value='/Basket.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping= &doughno="+doughno;
+						location.href="<c:url value='/AddrSelect.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping= &doughno="+doughno;
 						</c:if>
 					}
 			</script>
@@ -801,8 +801,10 @@ function share(optn) {
 				<dt class="prd_option_tit">총 금액</dt>
 				<dd class="totalAmt">0 원</dd>
 			</dl>
-			<a href="javascript:;" id="top_btn_basket" class="btn btn_mdle btn_red"><span class="btn_txt">장바구니 담기</span></a>
+			<a href="#" onclick="smt();" id="top_btn_basket" class="btn btn_mdle btn_red"><span class="btn_txt">장바구니 담기</span></a>
 		</div>
+		
+		
 	</div>
 </div>
 <div class="pop_layer pop_type topping" id="topping_info_pop"></div>

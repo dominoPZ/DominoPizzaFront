@@ -1,11 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+	
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -17,10 +13,11 @@
 	<meta http-equiv='cache-control' content='no-cache'>
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
-	<link rel="shortcut icon" href="https://cdn.dominos.co.kr/renewal2016/ko/w/img/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='/Pizza/css/font.css' />">
-	<link rel="stylesheet" type="text/css" href="https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css?v1.0">
 	
+	<link rel="shortcut icon" href="https://cdn.dominos.co.kr/renewal2016/ko/w/img/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/resources/css/font.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.dominos.co.kr/renewal2016/ko/w/css/layout.css?v1.0">
+
 	<script type="text/javascript" src="<c:url value='/Pizza/js/jquery1.11.1.js' />"></script>
 	<script type="text/javascript" src="https://cdn.dominos.co.kr/renewal2016/ko/w/js/ui.js"></script>
 	<script type="text/javascript" src="https://cdn.dominos.co.kr/renewal2016/ko/w/js/jquery.flexslider.js"></script>
@@ -28,12 +25,14 @@
 	<script type="text/javascript" src="<c:url value='/Pizza/js/d2CommonUtil.js' />"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/Cookie.js' />"></script>
 	<script type="text/javascript" src="<c:url value='/Pizza/js/basket_w.js' />"></script>
+	
+	
 	<script type="text/javascript">
 	var CON_DOMAIN_URL = "http://web.dominos.co.kr";
 	var CON_SSL_URL = "https://web.dominos.co.kr";
 	var CON_STATIC_URL = "https://cdn.dominos.co.kr/renewal2016/ko/w";
 
-	$(document).ready(() {
+	$(document).ready(function() {
 		$.ajaxSetup({cache:false});
 
 		setBasketCnt();
@@ -44,7 +43,7 @@
 				type: "POST",
 				url: "/mypage/mainMyCouponInfoAjax",
 				dataType : "json",
-				success:(data) {
+				success:function(data) {
 				 	if (data.resultData.status == "success") {
 				 		$('#myMonth').text(data.resultData.myMonth+'월');
 				 		$('#myLevel').text(data.resultData.myLevel);
@@ -67,7 +66,7 @@
 					type: "POST",
 					url: "/mypage/leftMyOrderInfoAjax",
 					dataType : "json",
-					success:(data) {
+					success:function(data) {
 					 	if (data.resultData.status == "success") {
 					 		// 현재 주문 진행중인건이 있으면
 					 		if(data.resultData.ingOrderCnt > 0){
@@ -96,7 +95,7 @@
 			
 	});
 
-	 setBasketCnt() {
+	function setBasketCnt() {
 		var basketCnt = cookieManager.getCookie("BASKETCNT");
 		var basket = cookieManager.getCookie("BASKET");
 		var finish_basket = cookieManager.getCookie("FINISH_BASKET");
@@ -107,7 +106,7 @@
 			$(".cart_count").text(basketCnt);
 	}
 
-	var goCart = () {
+	var goCart = function() {
 		location.href="/basket/detail";
 	};
 
@@ -119,7 +118,13 @@
 		var order_no = $('#tracker_order_no').val();
 		location.href="/mypage/myOrderView?order_no="+order_no+"&pageNo=1"
 	};
-
+	
+	//페이코 회원 가입
+	function goLoginPop() 
+	{
+		if(location.pathname !== '/global/login')
+			location.href = '/global/login';
+	}
 </script>
 <!-- Naver Anlytics 공통-->
 <script>
@@ -137,8 +142,6 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 
 </head>
 <body>
-
-
 	<!-- top_event_bnr -->
 	<div class="top_bnr top_event" id="lineBanner">
 		<div class="top_event_wrap">
@@ -151,220 +154,100 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<div id="wrap">
 	
 	
+	
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
-	
 
-
-<script>
-$(document).ready(function() {
-
-	$(".gnb_menu .menu01").addClass("on");
-	$(".tab_category > ul > .C${code}").addClass("active");
-	$(".minus").click(function() {
-		var obj = $(this).next().find("input");
-		var cnt = parseInt(obj.val()) - 1;
-		if(cnt < 1) cnt = 1;
-
-		obj.val(cnt);
-	});
-
-	$(".add").click(function() {
-		var obj = $(this).prev().find("input");
-		var cnt = parseInt(obj.val()) + 1;
-		if(cnt > 99) cnt = 99;
-
-		obj.val(cnt);
-	});
-	
-	<!-- 2017-05-08 // 챗봇 추가(s) -->
-	$(document).ready(function(){
-		var showAlert = setTimeout(function() {
-			$('.chat_bubble').removeClass('active');
-		}, 5000);
-		$('.btn_chat').click(function(e){
-		
-				e.preventDefault();
-				$('.layer_chat').addClass('active');
-				$('body').addClass('fixed');
-				$('#chatUrl').attr('src', "https://domichat.dominos.co.kr:10000/pc/order.html?dominoId=erjin1230&customerName=이어진&customerHpNo=010-8288-2305");
-			
-		})
-		$('.layer_chat .btn_close').click(function(e){
-		
-				document.getElementById("chatUrl").contentWindow.postMessage("CHAT_CLOSE_REQUEST", "https://domichat.dominos.co.kr:10000");
-			
-		})
-		$('.chat_order .btn_close').click(function(e){
-			e.preventDefault();
-			$('.chat_order').addClass('active')
-			$('#chatUrl').attr('src', "https://domichat.dominos.co.kr:10000/pc/order.html?dominoId=erjin1230&customerName=이어진&customerHpNo=010-8288-2305");
-		})
-		$('.btn_chat').hover(function(e){
-			e.preventDefault();
-			$('.chat_bubble').addClass('active');
-		})
-		$('.btn_chat').mouseout(function(e){
-			e.preventDefault();
-			$('.chat_bubble').removeClass('active');
-		})
-	})
-	
-	window.onmessage = function(e){
-		if(e.data == "CHAT_CLOSE_ACCEPT"){
-			e.preventDefault();
-			$('.layer_chat').removeClass('active');
-			$('body').removeClass('fixed');
-			$('#chatUrl').attr('src', "https://domichat.dominos.co.kr:10000/pc/order.html?dominoId=erjin1230&customerName=이어진&customerHpNo=010-8288-2305");
-		}else
-			alert("챗봇 서버와 통신이 원할하지 않습니다. 새로고침 후에 사용해 주세요");
-	}
-});
-
-
-var qty = 0;
-var addGoods = function(goodsCode) {
-	qty = parseInt($("#"+goodsCode+"_qty").val());
-
-	var returnUrl = "/goods/list?dsp_ctgr=C0101";
-
-	addBasket("addGD", goodsCode, qty, "", "", addBasketComplete, returnUrl);
-};
-
-var addBasketComplete = function() {
-
-};
-
-var goView = function(menuCode, url) {
-	location.href = url;
-};
-
-var chocolatChk = function() {
-	if(confirm("해당 제품은 현재 900원 특가 프로모션 진행중입니다.\n특가제품 페이지로 이동하시겠습니까?")){
-		location.href = "/hotdeal/chocolat";
-	} else {
-		return;
-	}
-}
-
-</script>
 
 <!-- container -->
-<div id="container">
-	<!-- content -->
-	<div id="content" class="product">
+		<div id="container">
+			<!-- content -->
+			<div id="content" class="notice">
 
-		<!-- sub_title -->
-		<div class="sub_title">
-			<ul class="sub_nav">
-				<li><a href="/main">HOME</a></li>
-				<li><a href="/goods/list?dsp_ctgr=C0101">피자</a></li>
-				<li><span>곡물도우</span></li>
-				</ul>
-			<div class="sub_title_wrap">
-				<h2>피자</h2>
-			</div>
-		</div>
-		<!-- //sub_title -->
-		<div class="tab_category">
-			<ul class="btn_tab">
-
-	<li class="C101"><a href="<c:url value='/menuList.pz?ty=101' />">곡물도우</a></li>
-				<li class="C102"><a href="<c:url value='/menuList.pz?ty=102' />">프리미엄</a></li>
-				<li class="C103"><a href="<c:url value='/menuList.pz?ty=103' />">클래식</a></li>
-		</ul>
-			<div class="tab_content_wrap">
-				<div class="tab_content active">
-					<div class="visual_category">
-						<img src="<c:url value='/Pizza/Image/menub/${bimg } '/>" alt="">
-					</div>
-					<div class="lst_prd_type ">
-
-
-
-						<!-- li 1번째 5번째 class="prd_list_rgt" 추가 ★★★★ // 앞에 공백 제거해줌 -->
-						
-						
-						<ul>
-						
-						<c:if test="${gok==1 }">
-						<c:set var="namegok" value=" 곡물 도우" />
-						</c:if>
-						<c:forEach var="dtos" items="${dto }" varStatus="loop"  >
-						<c:if test="${(loop.count-1) % 4==0 }" var="pif" >
-						<c:set value="prd_list_rgt" var="pclass" />
-						</c:if>
-						<c:if test="${!pif }">
-						<c:set value=" " var="pclass" />
-						</c:if>
-						<li class="${pclass}">
-							<a href="<c:url value='/PizzaView.pz' />?p_no=${dtos.p_no}&gok=${gok}">
-								<div class="prd_img">
-										<div class="prd_tag">
-										<span class="ico ico_tag">NEW</span>
-										</div>
-										
-										<div class="prd_img_view"><img src="<c:url value='/Pizza/Image/pizzalist'/>/${fn:replace(dtos.p_img,' ','')}" alt="꽃게 온더 피자 곡물도우"></div>
-									</div>
-									<div class="prd_info">
-										<div class="prd_title">${dtos.p_name }${namegok }</div>
-									</div>
-							</a>
-							<div class="prd_price">
-							<p class="price_large"><span class="ico ico_s_large"></span>${dtos.p_lprice }<em>원</em></p>
-									<p class="price_medium"><span class="ico ico_s_medium"></span>${dtos.p_sprice }<em>원</em></p>
-								</div>
-							</li>
-							
-						</c:forEach>
-	
-
-						</ul>
-					</div>
-
-				</div>
-
-				<div class="lst_guide">
-					<ul>
-						<li>
-							※ 트윈크레페/올댓치즈 피자 상품권 이용 안내
-							<span>- 트윈크레페/올댓치즈 피자 단종으로 인해 해당 피자 상품권 구매 고객 대상으로 콜라 1.25L 무료제공하고 있습니다.<br>(주문금액 32,900원 초과 시 미제공) </span>
-						</li>
-						<li>
-							※ 도이치휠레 단종으로 인한 상품권 사용 안내
-							<span>- 타제품 주문 가능</span> (프리미엄 피자의 경우, 금액 추가)<br>
-							<span>- 동일 가격 제품 : 포테이토/슈퍼슈프림/슈퍼디럭스/베이컨체더치즈 더블치즈 엣지, 리얼바비큐 곡물도우  </span>
-						</li>
-						<li>※ 일부 리조트 및 특수매장은 상기 가격과 차이가 있음 </li>
-						<li>※ 모든 사진은 이미지 컷이므로 실제 제품과 다를 수 있습니다. </li>
+				<!-- sub_title -->
+				<div class="sub_title">
+					<ul class="sub_nav">
+						<li><a href="/main">HOME</a></li>
+						<li><a href="/bbs/newsList?type=N">공지사항</a></li>
+						<li><span>도미노뉴스</span></li>
 					</ul>
+					<div class="sub_title_wrap">
+						<h2>공지사항</h2>
+					</div>
 				</div>
-<div class="chat_order active">
-					<!-- 2017-07-06 // 챗봇 말풍선 추가(s) -->
-					<img class="chat_bubble active" src="http://cdn.dominos.co.kr/renewal2016/ko/w/img/domibubble.png" alt="챗봇말풍선">
-					<!-- 2017-07-06 // 챗봇 말풍선 추가(e) -->
-					<a href="#" class="btn_chat">채팅주문</a>
-					<a href="#" class="btn_close">닫기</a>
+				<!-- //sub_title -->
+
+				<div class="notice_area">
+					<div class="tab_type">
+						<ul class="btn_tab">
+							<li class="active"><a href="/bbs/newsList?type=N">도미노뉴스</a></li>
+							<li><a href="/bbs/newsList?type=P">PRESS</a></li>
+						</ul>
+						<div class="tab_content_wrap">
+							<div class="tab_content active">
+								<form id="searchForm" name="searchForm" action="/bbs/newsList" method="post">
+									<input type="hidden" id="type" name="type" value="N" />
+									<input type="hidden" id="pageNo" name="pageNo" value="1" />
+									<div class="form_group" style="width:530px;">
+										<div class="form_field">
+											<div class="sel_box">
+												<select id="search" name="search">
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+													<option value="all">제목+내용</option>
+												</select>
+											</div>
+										</div>
+										<div class="form_field">
+											<div class="form_item">
+												<input type="text" id="conditionTemp" name="conditionTemp" class="i_text" value="">
+												<input type="hidden" id="condition" name="condition" class="i_text" value="">
+											</div>
+										</div>
+										<div class="form_field">
+											<a href="javascript:fncSearch();" class="btn btn_srch"><span class="btn_txt">검색</span></a>
+										</div>
+									</div>
+								</form>
+								<p class="srch_result">총 <span>254</span>건</p>
+								<table class="tbl_lst">
+									<colgroup>
+										<col width="100px">
+										<col>
+										<col width="150px">
+										<col width="105px">
+									</colgroup>
+									<thead>
+										<tr>
+											<th class="tbl_num">번호</th>
+											<th class="tbl_name">제목</th>
+											<th class="tbl_date">등록일</th>
+											<th class="tbl_views">조회</th>
+										</tr>
+									</thead>
+									<tbody>
+									
+									<tr>
+											<td>254</td>
+											<td><a href="#none" onclick="goView('1964'); return false;">2017년 9월 프로야구 이벤트 당첨자 홈페이지 안내</a></td>
+											<td>2017-09-01</td>
+											<td>1208</td>
+										</tr>
+										
+										
+										</tbody>
+								</table>
+								<div class="page_nav">
+									<a href='javascript:;' class='btn_ico btn_first'>처음</a><a href='javascript:;' class='btn_ico btn_prev2'>이전</a><ul>
+										<li><strong>1</strong></li>  <li><a href='javascript:;' onclick='javascript:paging(2); return false;'>2</a></li>  <li><a href='javascript:;' onclick='javascript:paging(3); return false;'>3</a></li>  <li><a href='javascript:;' onclick='javascript:paging(4); return false;'>4</a></li>  <li><a href='javascript:;' onclick='javascript:paging(5); return false;'>5</a></li>  <li><a href='javascript:;' onclick='javascript:paging(6); return false;'>6</a></li>  <li><a href='javascript:;' onclick='javascript:paging(7); return false;'>7</a></li>  <li><a href='javascript:;' onclick='javascript:paging(8); return false;'>8</a></li>  <li><a href='javascript:;' onclick='javascript:paging(9); return false;'>9</a></li>  <li><a href='javascript:;' onclick='javascript:paging(10); return false;'>10</a></li></ul>
+									<a href='javascript:;' class='btn_ico btn_next2' onclick='javascript:paging(11, 1); return false;'>다음</a><a href='javascript:;' class='btn_ico btn_last' onclick='javascript:paging(26); return false;'>마지막</a></div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!-- 2017-07-06 // 챗봇 추가(e) -->		
 			</div>
+			<!-- //content -->
 		</div>
-	</div>
-	<!-- //content -->
-</div>
-<!-- //container -->
-
-<!-- LOGGER 환경변수 설정 -->
-<script type="text/javascript">
-	var goods_ctgr_nm = "";
-
-	
-	goods_ctgr_nm = "곡물도우";
-	
-
-	_TRK_PI = "PLV";			// 웹페이지의 성격 정의 - 상품리스트
-    _TRK_CP = "/메뉴/피자/"+goods_ctgr_nm;	// 카테고리명 전달
-</script>
-<!-- // LOGGER 환경변수 설정 -->
+		<!-- //container -->
 <!-- 로딩 이미지 -->
 		<div class="loading" id="defaultLoading" style="display:none;">
 			<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/img/loading.gif" alt="loading">
@@ -469,26 +352,36 @@ var chocolatChk = function() {
 
 </script>
 <!-- LOGGER(TM) TRACKING SCRIPT V.40 FOR logger.co.kr / 21550 : COMBINE TYPE / DO NOT ALTER THIS SCRIPT. -->
-<script type="text/javascript">var _TRK_LID="21550";var _L_TD="ssl.logger.co.kr";var _TRK_CDMN=".dominos.co.kr";</script>
-<script type="text/javascript">var _CDN_DOMAIN = location.protocol == "https:" ? "https://fs.bizspring.net" : "http://fs.bizspring.net";
-(function(b,s){var f=b.getElementsByTagName(s)[0],j=b.createElement(s);j.async=true;j.src='//fs.bizspring.net/fs4/bstrk.1.js';f.parentNode.insertBefore(j,f);})(document,'script');</script>
-<noscript><img alt="Logger Script" width="1" height="1" src="http://ssl.logger.co.kr/tracker.tsp?u=21550&amp;js=N" /></noscript>
-<!-- END OF LOGGER TRACKING SCRIPT -->
+	<script type="text/javascript">var _TRK_LID="21550";var _L_TD="ssl.logger.co.kr";var _TRK_CDMN=".dominos.co.kr";</script>
+	<script type="text/javascript">var _CDN_DOMAIN = location.protocol == "https:" ? "https://fs.bizspring.net" : "http://fs.bizspring.net";
+	(function(b,s){var f=b.getElementsByTagName(s)[0],j=b.createElement(s);j.async=true;j.src='//fs.bizspring.net/fs4/bstrk.1.js';f.parentNode.insertBefore(j,f);})(document,'script');</script>
+	<noscript><img alt="Logger Script" width="1" height="1" src="http://ssl.logger.co.kr/tracker.tsp?u=21550&amp;js=N" /></noscript>
+	<!-- END OF LOGGER TRACKING SCRIPT -->
+	
+	<!-- AceCounter Log Gathering Script V.70.2012031601-->
+	<script type="text/javascript" src="/resources/js/acecounter.js"></script>
+	<!-- AceCounter Log Gathering Script End -->
+	
+	<!-- Naver Anlytics 공통-->
+	<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
+	<script type="text/javascript">
+	if (!wcs_add) var wcs_add={};
+	wcs_add["wa"] = "s_273c36e36e8a";
+	if (!_nasa) var _nasa={};
+	wcs.inflow("dominos.co.kr");
+	wcs_do(_nasa);
+	</script>
+	<!-- // Naver Anlytics 공통 -->
 
-<!-- AceCounter Log Gathering Script V.70.2012031601-->
-<script type="text/javascript" src="/resources/js/acecounter.js"></script>
-<!-- AceCounter Log Gathering Script End -->
+	<!-- Google Tag Manager : dominos_web -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TR97KL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TR97KL');</script>
+	<!-- End Google Tag Manager -->
 
-<!-- Naver Anlytics 공통-->
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
-<script type="text/javascript">
-if (!wcs_add) var wcs_add={};
-wcs_add["wa"] = "s_273c36e36e8a";
-if (!_nasa) var _nasa={};
-wcs.inflow("dominos.co.kr");
-wcs_do(_nasa);
-</script>
-<!-- // Naver Anlytics 공통 -->
 <!-- 2017-05-08 // 챗봇 추가(s) -->
 
 <div class="layer_chat">
@@ -505,3 +398,58 @@ wcs_do(_nasa);
 cookieManager.makePCID("PCID", 10);
 </script>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+	var condition = $('#condition').val();
+	if(condition.indexOf('[[')>-1) {
+		condition = condition.replace('[[','[');
+	}
+
+	if(condition.indexOf(']]')>-1) {
+		condition = condition.replace(']]',']');
+	}
+	$('#conditionTemp').val(condition);
+});
+
+$('#conditionTemp').keyup(function(e){
+	if(e.keyCode == 13) {
+		if($('#conditionTemp').val() == '') {
+			alert('검색어를 입력해주세요');
+			return;
+		}
+
+		fncSearch();
+	}
+});
+
+function paging(no){
+	$("#pageNo").val(no);
+	$("#searchForm").submit();
+}
+
+function fncSearch() {
+	if($('#conditionTemp').val() == '') {
+		alert('검색어를 입력해주세요');
+		return;
+	}
+
+	var condition = $('#conditionTemp').val();
+	condition = condition.replace('[','[[');
+	condition = condition.replace(']',']]');
+
+	$('#condition').val(condition);
+	$('#pageNo').val(1);
+
+	$("#searchForm").attr("action", "/bbs/newsList");
+	$('#searchForm').submit();
+}
+
+var queryString;
+function setQueryString() {
+	queryString = $('#searchForm').serialize();
+}
+
+function goView(idx) {
+	$("#searchForm").attr("action", "/bbs/newsView?idx="+idx).submit();
+}
+</script>

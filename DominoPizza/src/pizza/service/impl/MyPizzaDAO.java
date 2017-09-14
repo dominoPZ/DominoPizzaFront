@@ -16,7 +16,11 @@ public class MyPizzaDAO implements MyPizzaService{
 	private SqlSessionTemplate template;
 	@Override
 	public List<MyPizzaDTO> selectList(Map map) {
-		return template.selectList("pizzaSelectList",map);
+		return template.selectList("pizzaSelectList", map);
+	}
+	@Override
+	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {
+		return template.selectList("pizzaSecondSelectList", dto);
 	}
 
 	@Override

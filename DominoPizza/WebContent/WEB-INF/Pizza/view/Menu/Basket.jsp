@@ -337,8 +337,8 @@ function alertBranch(){
 						<a href="javascript:goBranch();" class="btn"><span class="btn_txt">주문매장 변경</span></a>
 					</div>
 					<div class="order_adr">
-						<p class="addr_info">서울특별시 강남구 강남대로112길 11 101</p>
-						<strong class="order_store_info">서울 논현점<span>(02-546-3082)</span></strong>
+						<p class="addr_info">${DE_ADDR }</p>
+						<strong class="order_store_info">${ST_NAME }<span>(${ST_TEL })</span></strong>
 					</div>
 				</div>
 			<!-- // 배달 -->
@@ -370,12 +370,15 @@ function alertBranch(){
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${list}" var="map" >
+								<form action="LastOrder.pz" id="frs" method="post" >
+								
+								<c:forEach items="${BUYLIST}" var="map" varStatus="loop" >
 								<tr>
+								
 										<td>
 											<div class="prd_info_view">
 												<div class="prd_img">
-													<img src="<c:url value='/Pizza/Image/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
+													<img src="<c:url value='/Pizza/Image/pizzalist/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
 																</div>
 												<div class="prd_info">
 													<div class="prd_name">
@@ -391,34 +394,43 @@ function alertBranch(){
 												</div>
 											</div>
 										</td>
-										<td>${map.price }</td>
+										<td><span id="qty${loop.count}" >${map.price }</span></td>
 										<td>
 										</td>
 										<td>
-
 										<div class="sel_box">
 											
-											<select name="qty" onchange="changeGoodsCnt('RPZ133GL', '1', 1, $(this).val())" title="수량">
-												<option value="1" selected="selected">1</option>
-													    <option value="2" >2</option>
-													    <option value="3" >3</option>
-													    <option value="4" >4</option>
-													    <option value="5" >5</option>
-													    <option value="6" >6</option>
-													    <option value="7" >7</option>
-													    <option value="8" >8</option>
-													    <option value="9" >9</option>
+											<select name="qty" id="sel${loop.count }" onchange="qtychange('${map.price/map.qty }','qty${loop.count}','sel${loop.count }','${loop.count }')" title="수량">
+													<c:forEach var="i" begin="1" end="9">
+													<c:if test="${map.qty==i }" var="qtys" >
+													<option value="${i }" selected="selected">${i }</option>
+													</c:if>
+													<c:if test="${!qtys }" >
+													<option value="${i}">${i }</option>
+													</c:if>
+													
+													</c:forEach>
 													    </select>											
 										</div>
-
 										</td>
 										<td><a href="#self" onclick="changeGoodsCnt('RPZ133GL','1', 1, 0)" class="btn"><span class="btn_txt">삭제</span></a></td>
 									</tr>
-								</c:forEach>
+								<input type="hidden" value="${map.name }" name="name${loop.count }" >	
+								<input type="hidden" value="${map.size }" name="size${loop.count }" > 
+								<input type="hidden" value="${map.price }" id="Fprice${loop.count }" name="price${loop.count }" >
+								<input type="hidden" value="${map.qty }" id="Fqty${loop.count }" name="qty${loop.count }"  >
+								<input type="hidden" value="${map.kind }" name="kind${loop.count }">
+								<input type="hidden" value="${map.size }" name="size${loop.count }">
 								
+								<c:set var="lengths" value="${loop.count }" />
+								</c:forEach>
+								<input type="text" value="${lengths }" name="lengths" >
+								</form>
 								</tbody>
 							</table>
 						</div>
+
+						
 						<div class="verlernen_area" id="recom_area" >
 							<div class="lst_type_dot">
 								<p>혹시,<br>잊지 않으셨나요?</p>
@@ -457,12 +469,13 @@ function alertBranch(){
 					</div>
 					<div class="cart_total_wrap">
 						<div class="price_wrap">
-							<p>100,700원</p>
+							<p><span id="tprice">${TOTALPRICE }</span>원</p>
 						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
 						</div>
 						<div class="btn_wrap">
-							<a href="<c:url value='/menuList.pz' />" class="btn btn_mdle btn_basic"><span class="btn_txt">제품 추가 +</span></a>
-							<a href="<c:url value='/Project.pz' />" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">주문하시겠어요?</span></a>
+						
+							<a href="<c:url value='/menuList.pz?ty=101' />" class="btn btn_mdle btn_basic"><span class="btn_txt">제품 추가 +</span></a>
+							<a href="#" onclick="frs.submit()" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">주문하시겠어요?</span></a>
 								</div>
 								
 					</div>
@@ -621,6 +634,26 @@ function alertBranch(){
 	</div>
 </div>
 <!-- 2017-05-08 // 챗봇 추가(e) -->
+		
+					<script>
+						function qtychange(price,qtys,sel,count){
+							var totald = document.getElementById('tprice');
+							var sel = document.getElementById(sel);
+							var oneprice = document.getElementById(qtys);
+							var fqty = document.getElementById('Fqty'+count);
+							var fprice = document.getElementById('Fprice'+count);
+							
+							alert(fqty.value);
+							alert(sel.value);
+							fqty.value = sel.value;
+							fprice.value=price*sel.value;
+							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);
+							oneprice.innerHTML = price*sel.value;
+							
+						}
+						
+					</script>
+						
 		
 </body>
 <script>

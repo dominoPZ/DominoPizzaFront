@@ -1,7 +1,10 @@
 package pizza.service;
 
+import java.util.List;
+
 public class BasketDTO {
 	
+	private String no;
 	private String name;
 	private String price;
 	private String qty;
@@ -11,7 +14,7 @@ public class BasketDTO {
 	private String size;
 	private String doughno;
 	private String kind;
-	
+	private List<ToppingDTO> toppingList;
 	
 	public String getName() {
 		return name;
@@ -66,6 +69,12 @@ public class BasketDTO {
 	}
 	public void setKind(String kind) {
 		this.kind = kind;
+	}
+	public List<ToppingDTO> getToppingList() {
+		return toppingList;
+	}
+	public void setToppingList(List<ToppingDTO> toppingList) {
+		this.toppingList = toppingList;
 	}
 	 
 	

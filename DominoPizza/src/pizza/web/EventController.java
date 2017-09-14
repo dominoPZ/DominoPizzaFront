@@ -17,6 +17,7 @@ public class EventController {
 	@Resource(name="eventService")
 	private EventServiceImpl eventService;
 	
+	
 	// 이벤트메인페이지
 	@RequestMapping("/EventMain.pz")
 	public String eventMain(Map map) throws Exception{

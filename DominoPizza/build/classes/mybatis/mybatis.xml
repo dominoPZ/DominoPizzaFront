@@ -6,8 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
 
 <mapper namespace="mybatis.mybatis">
-
-
 	<resultMap id="PizzaMenuListResult" type="PizzaMenuList">
 	    <result property="p_name" column="p_name"/>
 	    <result property="p_lprice" column="p_lprice"/>
@@ -21,11 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="s_img" column="s_img"/>
  	</resultMap>
 
+	
 
 <insert id="mybatisTest" parameterType="java.util.Map" >
 	insert into test values(#{id})
 </insert>
- 
+
+
+	<!-- 어진 --> 
  <select id="mybatisMenu" parameterType="java.util.Map" resultMap="PizzaMenuListResult" >
  select ${sel} FROM  ${fro} where  ${whe}
  </select>
@@ -61,6 +62,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <insert id="mybatisstinsert" parameterType="BasketDTO" >
  	INSERT INTO SALES_MENU VALUES(SEQ_SALES_MENU_SM_NO.NEXTVAL,SEQ_SALES_SA_NO.CURRVAL,'${doughno}','${kind}','${name}','${qty}','${size}','${price}')
  </insert>
+   <select id="mybatisDeladdrsel" parameterType="java.util.Map" resultType="StoresDTO" >
+   select s.* , sqrt(power(ABS(st_xpos-${xpos})*100000,2)+power(ABS(st_ypos-${ypos})*100000,2)) st from stores s where sqrt(power(ABS(st_xpos-${xpos})*100000,2)+power(ABS(st_ypos-${ypos})*100000,2)) <![CDATA[ < ]]> 1200 and rownum=1 order by st
+  </select> 
+
+	<insert id="mybatisDeladdrin"  parameterType="java.util.Map" >
+		INSERT INTO DELADDR VALUES(SEQ_DELADDR_DE_NO.NEXTVAL,#{id},#{st_no},#{addr},#{kind})
+	</insert>
+	
+	<select id="mybatisdeladdrprint" parameterType="java.util.Map" resultType="StoresDTO" >
+		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE ID='${id}'
+	</select>
+
+	<select id="mybatissessionInDel" parameterType="java.util.Map" resultType="StoresDTO" >
+		SELECT S.*,DE_ADDR,DE_NO FROM STORES S JOIN DELADDR D ON D.ST_NO = S.ST_NO WHERE DE_NO='${de_no}'
+	</select>
+	
+	<select id="mybatiscallUser" parameterType="java.lang.String" resultType="pizza.service.impl.UserDto" >
+		SELECT * from customer where id = '${id}'
+	</select>
+	
+	
+ <!--  어진 끝 -->
  
   <!--  동준 -->
 <insert id="UserInsert" parameterType="pizza.service.impl.UserDto" >
@@ -76,16 +99,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <!--  미나 -->
  
-<!-- 하프앤하프페이지 첫번째 피자 목록 출력용 -->
+<!-- 하프앤하프페이지 - 첫 번째 피자 목록 출력용 -->
  <select id="pizzaSelectList" parameterType="java.util.Map" resultType="MyPizzaDTO">
   	SELECT * FROM PIZZA
  </select>
  
+<!-- 하프앤하프페이지 - 첫번째 피자 선택에 따른 두 번째 피자 목록 출력용 -->
+ <select id="pizzaSecondSelectList" parameterType="MyPizzaDTO" resultType="MyPizzaDTO">
+  	SELECT * FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='${p_name}') AND P_NAME != '${p_name}'
+ </select> 
+ 
+ <!-- 도우 출력용 -->
+ <select id="doughSelectList" resultType="DoughDTO">
+ 	SELECT * FROM DOUGH
+ </select>
  
  
+  <!-- 토핑추가하기 출력용 -->
+ <select id="addToppingSelectList" resultType="ToppingDTO">
+ 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM 
+ 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
+ 	ORDER BY T_NAME
+ </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->
- <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
+ <select id="ToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
  	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM 
  	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
  	WHERE T_SIZE != 'S'

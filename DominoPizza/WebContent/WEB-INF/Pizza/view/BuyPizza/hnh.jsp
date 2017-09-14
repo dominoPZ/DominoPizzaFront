@@ -152,43 +152,34 @@ $(document).ready(function() {
 		
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
-			//alert("$(this).val(rep) : "+$(this).val().replace(/ /g, ''));
 			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_left").addClass("on");
 	         var first = "<img src='";
 	         var second = '<c:url value="/Pizza/Image/pizzalist/'+value+'"/>';
 	         var all = first+second+"' alt='선택한 첫 번째 피자'/>";
-	         //alert(all);
 	         $(".half_left span").html(all);
 		} else {
 			$(".half_left").removeClass("on");
 			$(".half_left span").html("피자를 선택하세요.");
 			return;
 		}
-
 		$.ajax({
-			type: "POST",
-			url: "/goods/hnhMappingAjax",
-			data: {code_01 : $(this).val()},
+			url: "<c:url value='/Pizza/BuyPizza/hnhSecondPizza.pz'/>",
+			data: {choiceFstPizza : $(this).val()},
+			type:"post",
+			dataType:"json",
 			success:function(data) {
-				pizzaList2 = data.resultData;
-			 	if(pizzaList2) {
-			 		$.each(pizzaList2, function(k, v) {
-			 			var isExist = false;
-			 			$.each($("#pizza_select2 option"), function() {
-			 				if(v.code_01 == $(this).val()) isExist = true;
-			 			});
-			 			if(!isExist)
-			 				$("#pizza_select2").append("<option value='"+v.code_01+"' data-price='"+v.price+"' data-code='"+v.hnh_code+"'>"+v.name+"</option>");
-			 		});
-			 	}
+				console.log("data : "+data);
+					$.each(data, function(i, item){
+						$("#pizza_select2").append("<option value='"+item["p_name"]+"'>"+item["p_name"]+"</option>");
+				}); 
 			},
 			error: function (error){
 			/* 	alert("다시 시도해주세요."); */
 			}
 		});
 
-		setTotalAmt();
+		//setTotalAmt();
 	});
 
 	$("#pizza_select2").change(function() {
@@ -196,8 +187,14 @@ $(document).ready(function() {
 		$("#size option:gt(0)").remove();
 
 		if($(this).val() != "") {
+			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_right").addClass("on");
-			$(".half_right span").html('<img src="https://cdn.dominos.co.kr/admin/upload/hnh/'+$(this).val()+'.png" alt="선택한 두 번째 피자" />');
+	         var first = "<img src='";
+	         var second = '<c:url value="/Pizza/Image/pizzalist/'+value+'"/>';
+	         var all = first+second+"' alt='선택한 두 번째 피자'/>";
+	         $(".half_right span").html(all);
+			
+			
 		} else {
 			$(".half_right").removeClass("on");
 			$(".half_right span").html("피자를 선택하세요.");
@@ -299,11 +296,27 @@ var addBasketComplete = function() {
 	window.setTimeout( function() {location.href="/goods/hnh?v="+new Date();}, 900);
 };
 
-
+//도우 가져오기
 var setDough = function() {
 	$("#dough option:gt(0)").remove();
 	$("#size option:gt(0)").remove();
-
+	
+	$.ajax({
+		url: "<c:url value='/Pizza/BuyPizza/dough.pz'/>",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			console.log("data : "+data);
+				$.each(data, function(i, item){
+					$("#dough").append("<option value='"+item["Dough_name"]+"'>"+item["Dough_name"]+"</option>");
+			}); 
+		},
+		error: function (error){
+		 	alert("다시 시도해주세요."); 
+		}
+	});
+	
+/* 	
 	$.each(pizzaList2, function(k, v) {
 		var val = v.gubun;
 		var nm = v.ctgr_nm;
@@ -317,7 +330,7 @@ var setDough = function() {
 		if(!isExist) {
 			$("#dough").append("<option value='"+val+"'>"+nm+"</option>");
 		}
-	});
+	}); */
 	setSize();
 };
 
@@ -326,18 +339,14 @@ var setSize = function() {
 	$("#size option:gt(0)").remove();
 
 	if($("#dough").val() != "") {
-		$.each(pizzaList2, function(k, v) {
-			if($("#pizza_select2").val() == v.code_01 && v.gubun == $("#dough").val()) {
-				$("#size").append("<option value='"+(v.hnh_code).substring(6,8)+"'>"+ v.sub_name + "</option>");
-			}
-		});
+		$("#size").append("<option value='L'>L</option>");
+		$("#size").append("<option value='M'>M</option>");
 	}
-
 	setTotalAmt();
 
 };
 
-//토핑 가져오기
+//토핑 가져오기 (토핑 추가하기 버튼 눌렀을 시 호출됨)
 var addToppingCheck = function() {
 	if($("#size").val() == "") {
 		alert("피자, 도우, 사이즈를 선택해주세요.");
@@ -350,19 +359,21 @@ var addToppingCheck = function() {
 	}
 
 	var size = $("#size").val();
-	var goods_code = $("#pizza_select1").val()+size+"/"+$("#pizza_select2").val()+size;
-
+	var goods_code = $("#pizza_select1").val()+"/"+$("#pizza_select2").val()+"/"+$("#dough").val()+"/"+size;
+	alert("goods_code : "+goods_code);
 	$.ajax({
 		type: "POST",
-		url: "/goods/pauseCheck",
-		data: { 'goods_code': goods_code },
+		url: "<c:url value='/Pizza/BuyPizza/topping.pz'/>",
+		//data: { 'goods_code': goods_code }, //첫번째 피자 + 두번쨰 피자 + 도우 + 사이즈를 넘김
+		dataType:"json",
 		success:function(data) {
-			if(data.resultData.result == "success") {
+			addTopping();
+/* 			if(data.resultData.result == "success") {
 				addTopping();
 			} else {
 				alert(data.resultData.result);
 				return;
-			}
+			} */
 		},
 		error: function (error){
 			alert("다시 시도해주세요.");
@@ -401,19 +412,22 @@ var addTopping = function() {
 };
 
 
-
+//피자, 도우, 사이즈 선택에 따른 가격 출력
 var setTotalAmt = function() {
 	if($("#size").val() == "" || $("#qty").val() == "") {
-		$("#totalAmt").text("0원");
+		$("#totalAmt").text("0원"); //hnh페이지 총 토탈 금액
 		return;
 	}
 
 	var price = 0;
+	//alert("코드값1:"+$("#pizza_select1").val()+$("#size").val());
 	$.each(pizzaList1, function(k, v) {
+		
 		if(v.hnh_code == ($("#pizza_select1").val()+$("#size").val()))
+			
 			price += parseInt(v.price) / 2;
 	});
-
+	//alert("코드값2:"+$("#pizza_select2").val()+$("#size").val());
 	$.each(pizzaList2, function(k, v) {
 		if(v.hnh_code == ($("#pizza_select2").val()+$("#size").val()))
 			price += parseInt(v.price) / 2;
@@ -511,9 +525,7 @@ var closeLayer = function() {
 									<div class="sel_box">
 										<select id="pizza_select2">
 													<option value="">두 번째 피자 선택</option>
-												<c:forEach items="${pizzaList}" var="pizza">
-													<option value="${pizza.p_name}">${pizza.p_name}</option>
-												</c:forEach>	
+
 										</select>
 									</div>
 								</div>
@@ -534,10 +546,6 @@ var closeLayer = function() {
 											<div class="sel_box">
 												<select id="dough">
 													<option value="">선택</option>
-													<option value="104">오리지널</option>
-													<option value="115">나폴리</option>
-													<option value="103">씬</option>
-													<option value="203">곡물</option>
 												</select>
 											</div>
 										</div>
@@ -556,8 +564,6 @@ var closeLayer = function() {
 											<div class="sel_box">
 												<select name="" id="size">
 													<option value="">선택</option>
-													<option value="SM">M</option>
-													<option value="SL">L</option>
 												</select>
 											</div>
 										</div>

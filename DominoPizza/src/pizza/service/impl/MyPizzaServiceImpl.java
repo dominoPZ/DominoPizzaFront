@@ -16,6 +16,11 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 		return dao.selectList(map);
 	}
 	@Override
+	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {
+		return dao.selectSecondPizzaList(dto);
+	}
+
+	@Override
 	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
 		return dao.selectOne(dto);
 	}

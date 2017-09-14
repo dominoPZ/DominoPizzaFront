@@ -17,6 +17,85 @@
 <script type="text/javascript" src="/resources/js/d2CommonUtil.js"></script>
 </head>
 <body>
+
+<script>
+
+
+//구글 맵 API키값:AIzaSyDmAha71igXMISM4aYIpTHXnsUfEM6MfTc
+//주소로 위치 찾기용
+var geocoder;
+//지도 표시용
+var map;
+var latitude;
+var longitude;
+window.onload = function () {
+if (navigator.geolocation) {
+  //현재위치의 위도/경도 얻기]
+  navigator.geolocation.getCurrentPosition(showLocation);
+  //주소로 위치 찾기위한 지오코드 얻기]
+  geocoder = new google.maps.Geocoder();
+}
+
+};////////////////////onload
+
+var showLocation = function (position) {
+//위도 얻기]
+var latitude = position.coords.latitude;
+//경도 얻기]
+var longitude = position.coords.longitude;
+
+map = new google.maps.Map(document.getElementById('map'), {
+  center: { lat: latitude, lng: longitude },
+  scrollwheel: false,
+  zoom: 16
+});
+
+//Create a marker and set its position.
+var marker = new google.maps.Marker({
+ /* map: map,*/
+  position: { lat: latitude, lng: longitude },
+  title: '한국소프트웨어 인재개발원'
+});
+//위의 map: map,를 주석처리시 아래 메소드로 마커 표시
+marker.setMap(map);
+
+
+}/////////////////////showLocation
+function test() {
+var address = document.getElementById('addr1').value;
+    address = address.split("(")[0];
+
+    
+geocoder.geocode({ 'address': address }, function (results, status) {
+  if (status == 'OK') {
+	  map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+  } else {
+      alert(' 주소 호출시 오류가 발생하였습니다. 관리자에게 문의해주세요!!ㅠㅠ ' + status);
+  }
+  var ret = results[0].geometry.location;
+
+  top.document.location.href="<c:url value='AddrIn.pz' />?ret="+ret+"&addr="+address;
+  
+});
+
+}
+
+
+
+</script>
+		<div style="visibility: hidden;" >
+		
+        <div id="map" style="width:0px;height:0px"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmAha71igXMISM4aYIpTHXnsUfEM6MfTc"
+                async defer></script>
+		</div>
+
+
+
 <form id="searchFrm" name="searchFrm" id="searchFrm" action="/" method="get" onsubmit="return searchBranch();">
 <input type="hidden" name="xdot" id="xdot" value="" />
 <input type="hidden" name="ydot" id="ydot" value="" />
@@ -113,6 +192,9 @@
 </body>
 
 <script>
+
+
+
 var param = {};
 $(document).ready(function() {
 	$('.tab > .btn_tab>li>a').click(function(e){
@@ -464,6 +546,12 @@ function addDelivery(addr_type){
 
 <script>
 
+
+
+
+
+
+
 function openDaumPostcode() {
  var width = 500; //팝업창이 실행될때 위치지정
  var height = 600; //팝업창이 실행될때 위치지정
@@ -509,12 +597,7 @@ function openDaumPostcode() {
  });
 }
 
-function test(){
-	
-	
-	top.document.location.href="<c:url value='AddrSelect.pz' /> ";
-	
-} 
+
 
 </script>
 	
