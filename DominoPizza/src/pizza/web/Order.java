@@ -32,8 +32,6 @@ import pizza.service.impl.UserDto;
 
 @Controller
 public class Order {
-
-
 	@Resource(name="service")
 	private ServiceImpl service;
 	
@@ -72,6 +70,7 @@ public class Order {
 			tdto.setTs_no(top);
 			tlist.add(tdto);
 			}
+			
 			dto.setToppingList(tlist);
 			}
 			dto.setKind(map.get("kind").toString());
