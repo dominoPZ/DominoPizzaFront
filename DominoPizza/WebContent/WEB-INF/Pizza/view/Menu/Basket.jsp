@@ -375,8 +375,8 @@ function alertBranch(){
 					</div>
 					<div class="cart_total_wrap">
 						<div class="price_wrap">
-							<p><span id="tprice">${TOTALPRICE }</span>원</p>
 						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
+							<p><span id="tprice">${TOTALPRICE }</span>원</p>
 						</div>
 						<div class="btn_wrap">
 						
@@ -548,7 +548,6 @@ function alertBranch(){
 							var oneprice = document.getElementById(qtys);
 							var fqty = document.getElementById('Fqty'+count);
 							var fprice = document.getElementById('Fprice'+count);
-							
 							fqty.value = sel.value;
 							fprice.value=price*sel.value;
 							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);

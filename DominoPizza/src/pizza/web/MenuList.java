@@ -85,19 +85,20 @@ public class MenuList {
 		map.put("ty",ty);
 		System.out.println("dao 전");
 		
-		
+		if(ty!=104) {
 		List<PizzaMenuList> list = service.menuList(map);
-		
-		if(ty!=104)
 		for(PizzaMenuList pl : list) {
 			pl.setP_lprice((Integer.parseInt(pl.getP_lprice())+Integer.parseInt(pl.getD_price()))+"");
 			pl.setP_sprice((Integer.parseInt(pl.getP_sprice())+Integer.parseInt(pl.getD_price()))+"");
 		}
-		
-		
-		model.addAttribute("dto",list);
-		
+			model.addAttribute("dto",list);
+		}
+		else {
+			List<SideMenuList> list = service.menuList(map);
+			model.addAttribute("dto",list);
+		}
 		String ret = "";
+		
 		
 		if(ty==104)
 		ret = "/WEB-INF/Pizza/view/Menu/Side_Menu.jsp";
@@ -155,6 +156,9 @@ public class MenuList {
 	public String Basket(@RequestParam Map map, HttpServletRequest req , HttpSession session) throws Exception{
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
+	
+	
+	
 	
 	
 	@RequestMapping("Project.pz")

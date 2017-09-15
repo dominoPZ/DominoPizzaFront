@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML>
 <html lang="ko">
@@ -111,6 +112,12 @@ var selectPrmt = function(failReloadYN){
 	}
 }
 
+
+
+//라디오박스 체크
+
+
+
 </script>
 
 <!-- 도미노가 준비한 모든 할인 혜택 팝업(s)) -->
@@ -129,18 +136,43 @@ var selectPrmt = function(failReloadYN){
 								<dt>나만을 위한 쿠폰, 프로모션</dt>
 								<dd>
 									<ul>
-										<c:forEach items="${Slist }" var="dto" >
+										<c:forEach items="${Slist }" var="dto" varStatus="loop" >
 										<li>
 											<span class="custom_form">
-												<input type="radio" name="prmt"  id="${mc_no }" value="${dto.c_saile }">
+												<input type="radio" onchange="lck('${dto.mc_no}')" name="prmt" class="rad" id="${dto.mc_no }" value="${dto.c_saile }">
 													<label for="${dto.mc_no}" class="ip_rdo">
 														<em></em>
-														<span>${dto.c_name }</span>
+														<span id="${dto.mc_no }_a" >${dto.c_name }</span>
 													</label>
 											</span>
 											</li>
 										</c:forEach>
+											<script>
 											
+											function AddComma(data_value) {
+												return Number(data_value).toLocaleString('en');
+												}
+
+											
+											function lck(no){
+												var te = document.getElementById(""+no).value;
+												var minprice = document.getElementById("area_dc_price");
+												var minnumber=Number(parseInt(${TOTALPRICE})*(te/100)).toLocaleString('en');
+												minprice.innerHTML = "-"+minnumber+"원"; 
+												var fprice = document.getElementById("area_before_account_price2");
+												var fnprice = parseInt(${TOTALPRICE}*(1-te/100));
+												var cnamedom = document.getElementById("area_p_name");
+												
+												cnamedom.innerHTML = document.getElementById(no+"_a").innerHTML;
+												fnprice = Number(fnprice).toLocaleString('en');
+												fprice.innerHTML = fnprice;
+
+											}
+											
+											
+											
+											
+											</script>
 										</ul>
 								</dd>
 							</dl>
@@ -418,24 +450,27 @@ var selectPrmt = function(failReloadYN){
 		<div class="benefits_price">
 			<dl class="order_price">
 				<dt>주문금액</dt>
-				<dd><span id="area_total_price" data-price="35900">
-						35,900 원
+				<dd><span id="area_total_price" data-price="${TOTALPRICE }">
+						<fmt:formatNumber type="number" >
+						 ${TOTALPRICE }
+						</fmt:formatNumber>
+						 원
 					</span>
 					<em id="pzName" style="display:none;"></em></dd>
 			</dl>
 			<dl class="sale_price">
 				<dt>할인금액</dt>
 				<dd><span id="area_dc_price" data-price="7180">
-						-7,180 원
+						-0 원
 					</span>
 					<em id="area_p_name">[REGULAR쿠폰] 배달 피자 20% 할인</em>
 					</dd>
 			</dl>
 			<dl class="expected_price">
 				<dt>결제 예정금액</dt>
-				<dd><span id="area_before_account_price" data-price="35900" >
-						<del>35,900원</del>
-						28,720 원
+				<dd><span id="area_before_account_price" data-price="${TOTALPRICE }" >
+						<del><fmt:formatNumber>${TOTALPRICE }</fmt:formatNumber>원</del>
+						<span id="area_before_account_price2"><fmt:formatNumber>${TOTALPRICE }</fmt:formatNumber></span>원
 					</span>
 				</dd>
 			</dl>

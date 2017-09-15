@@ -114,8 +114,61 @@ public class Order {
 		return url;
 		
 	}
+	
+	
+	//음료 피클 장바구니에 저장
+	@RequestMapping("/DrinkPncBuy.pz")
+	public String DrinkPncBuy(@RequestParam Map map, Model model,HttpServletRequest req , HttpSession session) throws Exception{
+		String id = session.getAttribute("ID").toString();
+		map.put("id", id);
+		String where="";
+		String from="";
+		if(session.getAttribute("DE_NO")!=null && req.getParameter("reset")==null) {
+			if(req.getParameter("kind").equals("3")) {
+				//음료
+				from = " DRINK ";
+				where = " D_NO = ";
+				
+			}
+			else if(req.getParameter("kind").equals("4")) {
+				//피클
+				from = " PICKLE ";
+				where = " pc_no = ";
+				
+			}
+			else if(req.getParameter("kind").equals("5")) {
+				//소스
+				from = " sauce ";
+				where = " sc_no =  ";
+				
+			}
+			map.put("from", from);
+			
+			
+			
+		}else {/// 매장 선택 안 되었을경우 매장선택으로
+			if(req.getParameter("reset")!=null)
+			{
+			session.setAttribute("BUYLIST", null);	
+			session.setAttribute("BUYNUM", null);	
+			session.setAttribute("DE_ADDR",null);
+			session.setAttribute("ST_NO", null);
+			session.setAttribute("ST_NAME", null);
+			session.setAttribute("ST_TEL", null);
+			session.setAttribute("DE_NO", null);
+			}
+			
+		List<StoresDTO> list = new Vector<StoresDTO>();
+		list = service.deladdrprint(map);
+		System.out.println("???");
+		model.addAttribute("list",list);
+		}
+		
+		return "";
+	}
+	
 
-	@RequestMapping("SelectAddrFrame.pz")
+	@RequestMapping("/SelectAddrFrame.pz")
 	public String AddrSelectFrame(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
 	
 		
@@ -123,7 +176,7 @@ public class Order {
 		
 	}
 
-	@RequestMapping("AddrIn.pz")
+	@RequestMapping("/AddrIn.pz")
 	public String AddrIn(@RequestParam Map map, Model model,HttpSession session ,HttpServletRequest req) throws Exception{
 		String pos = map.get("ret").toString();
 		String addr = map.get("addr").toString();
@@ -202,9 +255,11 @@ public class Order {
 	public String CallLay(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
 		String id = session.getAttribute("ID").toString();
 		map.put("id", id);
-		List<SaileCouponDTO> list = service.callcoupon(map);
-		
-		
+		System.out.println(id);
+		List<SaileCouponDTO> list = new Vector<SaileCouponDTO>();
+		list = service.callcoupon(map);
+		req.setAttribute("Slist", list);
+		System.out.println(list.get(0).getC_name());
 		return "/WEB-INF/Pizza/view/Menu/CouponLay.jsp";
 	}
 	

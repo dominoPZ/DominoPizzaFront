@@ -12,6 +12,8 @@ public class SaileCouponDTO {
 	private String id;
 	private String c_sdate;
 	private String c_edate;
+	
+	
 	public String getC_no() {
 		return c_no;
 	}

@@ -287,6 +287,18 @@ var setGoodsBrief = function() {
 
 // 레이어 닫기 (다른할인 적용)
 var closePrmtLayer = function() {
+	alert("?");
+	var minprice = frams.contentWindow.document.getElementById("area_dc_price");
+	var fprice = frams.contentWindow.document.getElementById("area_before_account_price2");
+	var infomin = document.getElementById("infomin");
+	alert(minprice);
+	var infofprice = document.getElementById("infofprice");
+	alert(fprice);
+	infomin.innerHTML = minprice.innerHTML; 
+	infofprice.innerHTML = fprice.innerHTML; 
+	//cnamedom.innerHTML
+	
+	
 	$("#sale_benefits iframe").remove();
 	$("#sale_benefits").removeClass("open");
 };
@@ -305,9 +317,9 @@ var changePrmt = function() {
 	var url = "<c:url value='CouponLay.pz' />";
 	$("#sale_benefits iframe").remove();
 	if("N" == "001")
-		$("#sale_benefits .pop_header").after("<iframe src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
+		$("#sale_benefits .pop_header").after("<iframe name='frams' src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
 	else
-		$("#sale_benefits .pop_header").after("<iframe src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
+		$("#sale_benefits .pop_header").after("<iframe name='frams' src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
 	$("#sale_benefits").addClass("open");
 };
 
@@ -808,11 +820,11 @@ var goBranch = function(){
 					</div>
 			<dl class="sale_price">
 				<dt>할인 금액</dt>
-				<dd><span>0</span> 원</dd>
+				<dd><span id="infomin">0</span> 원</dd>
 			</dl>
 			<dl class="expected_price">
 				<dt>결제 예정 금액</dt>
-				<dd><span>${totalprice }</span> 원</dd>
+				<dd><span id="infofprice">${totalprice }</span> 원</dd>
 			</dl>
 			<p class="sale_push_guide">
 			</p>
