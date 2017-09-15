@@ -23,6 +23,7 @@ import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
 import pizza.service.SMenuDTO;
+import pizza.service.SaileCouponDTO;
 import pizza.service.StoresDTO;
 import pizza.service.ToppingDTO;
 import pizza.service.impl.Daotest;
@@ -197,6 +198,17 @@ public class Order {
 		return "/WEB-INF/Pizza/view/Menu/Basket.jsp";
 	}
 	
+	@RequestMapping("/CouponLay.pz")
+	public String CallLay(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
+		String id = session.getAttribute("ID").toString();
+		map.put("id", id);
+		List<SaileCouponDTO> list = service.callcoupon(map);
+		
+		
+		return "/WEB-INF/Pizza/view/Menu/CouponLay.jsp";
+	}
+	
+	
 	@RequestMapping("/LastOrder.pz")
 	public String LastOrder(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
 		int len=0;
@@ -235,6 +247,29 @@ public class Order {
 		
 		return dto;
 	}
+	
+	
+	
+	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트 출력용
+	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer_LEJ.pz", produces="text/html; charset=UTF-8")
+	public String toppingList() throws Exception{
+/*		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
+		List<Map> list = new Vector<Map>();
+		Map map =null;
+		for(ToppingDTO dto : toppinglist) {
+			map = new HashMap();
+			map.put( "topping_name", dto.getT_name());
+			map.put( "topping_gram", dto.getT_gram());
+			map.put( "topping_img", dto.getT_img());
+			map.put( "topping_kind", dto.getT_kind());
+			map.put( "topping_price", dto.getT_price());
+			map.put( "topping_size", dto.getT_size());
+			list.add(map);
+		}*/
+		//return JSONArray.toJSONString(list);
+		//return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
+		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer_LEJ.jsp";
+	}	
 	
 	
 	

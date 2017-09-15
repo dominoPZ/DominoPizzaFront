@@ -14,6 +14,7 @@ import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
 import pizza.service.SNutrientDTO;
+import pizza.service.SaileCouponDTO;
 import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
 
@@ -110,6 +111,10 @@ public class ServiceImpl implements pizza.service.Service {
 
 	public SNutrientDTO snprint(Map map) {
 		return dao.snprint(map);
+	}
+
+	public List<SaileCouponDTO> callcoupon(Map map) {
+		return dao.callcoupon(map);
 	}
 	
 	

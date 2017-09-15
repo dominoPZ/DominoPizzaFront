@@ -280,6 +280,68 @@ var setSize = function() {
 	setTotalAmt();
 };
 
+//토핑 가져오기 (토핑 추가하기 버튼 눌렀을 시 호출됨)
+var addToppingCheck = function() {
+	alert("!!");
+	var size = $("#size").val();
+	var goods_code="pizza";
+	//alert("goods_code : "+goods_code);
+	$.ajax({
+		type: "POST",
+		url: "<c:url value='/Pizza/BuyPizza/choice.pz'/>",
+		data: { 'goods_code': goods_code }, //첫번째 피자 + 두번쨰 피자 + 도우 + 사이즈를 넘김
+		dataType:"text",
+		success:function(data) {
+			if(data == "success") {
+				//alert("값 넘기기 성공");
+				addTopping();
+			} 
+			/*
+			else {
+				alert(data.resultData.result);
+				return;
+			} */
+		},
+		error: function (error){
+			alert("다시 시도해주세요.");
+		}
+	});
+};
+
+
+//토핑 가져오기
+var addTopping = function() {
+	
+	if($("#size").val() == "") {
+		alert("피자, 도우, 사이즈를 선택해주세요.");
+		return;
+	}
+
+	if($("#pizza_select1").val() == "") {
+		alert("피자를 선택해주세요.");
+		return;
+	}
+	//alert("넘기는 값 : "+$("#pizza_select1").val()+$("#size").val());
+	//alert("addTopping!!!!!!!!!!!");
+	$("#topping_info_pop").html("");
+	$.ajax({
+		type: "POST",
+		url: "<c:url value='/Pizza/BuyPizza/toppingLayer_LEJ.pz'/>",
+		//data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
+		success:function(data) {
+			$("#topping_info_pop").html(data).addClass("open");
+		 	var top = $(window).scrollTop();
+		 	$("#topping_info_pop").find('.pop_wrap').css('top',top+30+'px');
+		},
+		error: function (error){
+			alert("다시 시도해주세요.");
+		}
+	});
+};
+
+
+
+
 //토핑 가져오기
 /* var addToppingCheck = function() {
 	alert("베이컨칩 일시적으로 와규크럼블로 대체 → 상세내용은 도미노뉴스를 확인하시기 바랍니다.");

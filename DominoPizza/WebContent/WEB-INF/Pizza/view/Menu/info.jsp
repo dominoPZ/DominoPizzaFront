@@ -302,14 +302,15 @@ var changePrmt = function() {
 	}
 
 	alert("할인변경 시 도착 예정 시간이 초기화 됩니다.");
-
+	var url = "<c:url value='CouponLay.pz' />";
 	$("#sale_benefits iframe").remove();
 	if("N" == "001")
-		$("#sale_benefits .pop_header").after("<iframe src='/prmt/prmtLayer?outCd=001' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
+		$("#sale_benefits .pop_header").after("<iframe src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
 	else
-		$("#sale_benefits .pop_header").after("<iframe src='/prmt/prmtLayer' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
+		$("#sale_benefits .pop_header").after("<iframe src='"+url+"' frameborder='0' width='1000' height='1017' scrolling='no' title='할인'></iframe>");
 	$("#sale_benefits").addClass("open");
 };
+
 
 // reserve_gubun 변경
 var changeReserveGubun = function(obj) {
@@ -910,11 +911,79 @@ var goBranch = function(){
 				</div>
 				<!-- // 수령인 정보 -->
 				<!-- 도착 예정시간 -->
-				<div class="order_section order_arrive" id="time_info">
-					<div class="tit_order">
-						<strong>도착예정시간</strong>
-					</div>
+<div class="order_section order_payment">
+				<div class="tit_order">
+					<strong>결제방법</strong>
 				</div>
+				<div class="order_payment_info">
+
+
+					<dl class="payment_way2">
+							<dt>일반결제</dt>
+							<dd>
+								<div class="tab tab_type3">
+									<ul class="btn_tab">
+										<li class=""><a href="javascript:;" id="pay_method_4" data-hidedefault="2" data-value="9|4|Y" onclick="clickPayType('radio', this);">신용카드</a></li>
+										<li class="active"><a href="javascript:;" id="pay_method_6" data-hidedefault="" data-value="A|6|Y" onclick="clickPayType('radio', this);">휴대전화 결제</a></li>
+										</ul>
+									<div class="pay_method_sub_default" id="pay_method_sub_default_2" style="display: block;">
+										<p class="txt_payment"><span class="ico ico_payment_normal"></span>미리 결제하고 편하게 기다리기!</p>
+									</div>
+									<div class="tab_content_wrap" id="pay_method_sub_4" style="display: none;">
+											<div class="tab_content active">
+												<div class="form_group">
+													<div class="form_field">
+														<span class="custom_form">
+															<input type="checkbox" id="bccard_yn" name="bccard_yn" disabled="disabled">
+															<label for="bccard_yn" class="ip_chk">
+																<em></em><span>BC TOP 포인트 결제</span>
+															</label>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="tab_content"></div>
+										</div>
+									</div>
+							</dd>
+						</dl>
+					<dl class="payment_way3">
+							<dt>현장결제</dt>
+							<dd>
+								<div class="tab tab_type3">
+									<ul class="btn_tab">
+										<li class=""><a href="javascript:;" id="pay_method_3" data-hidedefault="" data-value="2|3|Y" onclick="clickPayType('radio', this);">신용카드</a></li>
+										<li class=""><a href="javascript:;" id="pay_method_1" data-hidedefault="3" data-value="1|1|Y" onclick="clickPayType('radio', this);">현금</a></li>
+										</ul>
+									<div class="pay_method_sub_default" id="pay_method_sub_default_3" style="display: block;">
+										<p class="txt_payment"><span class="ico ico_payment_spot"></span>제품 수령 시 만나서 결제하기! </p>
+									</div>
+									<div class="tab_content_wrap" id="pay_method_sub_1" style="display: none;">
+											<div class="tab_content"></div>
+											<div class="tab_content active">
+												<div class="form_group">
+													<div class="form_field">
+														<span class="custom_form">
+															<input type="checkbox" id="billyn" name="billyn" value="Y" disabled="disabled">
+															<label for="billyn" class="ip_chk">
+																<em></em><span>현금 영수증</span>
+															</label>
+														</span>
+													</div>
+												</div>
+												
+
+
+											</div>
+										</div>
+									</div>
+							</dd>
+						</dl>
+					</div>
+				<div class="order_payment_guide lst_type v2">
+				</div>
+			</div>
+			
 				<!-- // 도착 예정시간 -->
 			</div>
 

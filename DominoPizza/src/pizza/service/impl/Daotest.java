@@ -15,6 +15,7 @@ import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
 import pizza.service.SNutrientDTO;
+import pizza.service.SaileCouponDTO;
 import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
 
@@ -121,6 +122,10 @@ public class Daotest {
 	public SNutrientDTO snprint(Map map) {
 		System.out.println("ASD?");
 		return template.selectOne("mybatissnprint",map);
+	}
+
+	public List<SaileCouponDTO> callcoupon(Map map) {
+		return template.selectList("mybatiscallcoupon",map);
 	}
 	
 	
