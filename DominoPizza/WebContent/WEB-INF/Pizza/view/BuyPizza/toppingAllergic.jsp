@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <!-- 토핑 알레르기 유발성분 표 팝업(s) -->
 <div class="pop_layer pop_type pop_toppingAllergic" id="toppingAllergic">
 	<div class="pop_wrap" style="top: 338px;">

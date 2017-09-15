@@ -510,6 +510,7 @@ var setTopping = function() {
 	setTotalAmt();
 };
 
+
 var showLayer = function(layerNm) {
 	//alert("layerNm : "+layerNm);
 	
