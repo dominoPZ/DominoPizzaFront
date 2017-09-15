@@ -434,8 +434,7 @@ var setTotalAmt = function() {
 		url: "<c:url value='/Pizza/BuyPizza/pizzaPrice.pz'/>",
 		datatype: "text",
 		success:function(data) {
-			price = data;
-			alert(price);
+			price = data; //임시 데이터 100000 넘김.
 		},
 		error: function (error){
 			alert("다시 시도해주세요.");
