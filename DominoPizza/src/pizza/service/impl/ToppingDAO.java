@@ -16,8 +16,8 @@ public class ToppingDAO implements ToppingService{
 	@Resource(name="template")
 	private SqlSessionTemplate template;
 	@Override
-	public List<ToppingDTO> selectList(Map map) {
-		return template.selectList("ToppingSelectList", map);
+	public List<ToppingDTO> selectList() {
+		return template.selectList("ToppingSelectList");
 	}
 	
 	@Override
@@ -49,4 +49,9 @@ public class ToppingDAO implements ToppingService{
 		return 0;
 	}
 
+	@Override
+	public List<ToppingDTO> selectToppingallergyList() {
+		return template.selectList("toppingAllergySelectList");
+	}
+	
 }

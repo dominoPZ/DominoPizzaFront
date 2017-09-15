@@ -128,15 +128,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	SELECT * FROM PIZZA_SAUCE
  </select>
  
+   <!--토핑 알레르기 유발성분 출력용 -->
+ <select id="toppingAllergySelectList" resultType="ToppingDTO">
+ 	SELECT T_NAME, T_ALLERGY FROM TOPPING
+ </select>
+ 
   <!-- 토핑추가하기 출력용 -->
  <select id="addToppingSelectList" resultType="ToppingDTO">
- 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND 
+ 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND, T_PRICE
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
  </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->
- <select id="ToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
- 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM 
+ <select id="ToppingSelectList" resultType="ToppingDTO">
+	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_ALLERGY
  	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
  	WHERE T_SIZE != 'S'
  	ORDER BY T_NAME

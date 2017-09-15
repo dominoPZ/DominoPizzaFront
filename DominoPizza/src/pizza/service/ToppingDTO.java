@@ -12,6 +12,7 @@ public class ToppingDTO {
 	private String t_name;
 	private String t_img;
 	private String t_kind;
+	private String t_allergy;
 	
 	//프로그램 효율성을 위한 추가
 	private String ts_no;
@@ -66,6 +67,12 @@ public class ToppingDTO {
 	}
 	public void setT_gram(String t_gram) {
 		this.t_gram = t_gram;
+	}
+	public String getT_allergy() {
+		return t_allergy;
+	}
+	public void setT_allergy(String t_allergy) {
+		this.t_allergy = t_allergy;
 	}
 	
 	

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<!-- 2] CDN(Content Deliver Network)주소 사용 -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<!-- Deprecated된 함수 사용시 아래 라이브러리 임베드 -->
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+<script>
+$(function () {
+    $(".justOne").each(function () {
+        var rows = $(".justOne:contains('" + $(this).text() + "')");
+        if (rows.length > 1) {
+            rows.eq(0).attr("rowspan", rows.length);
+            rows.not(":eq(0)").remove(); 
+        } 
+    });
+});
+</script>
+
 
 <!-- 토핑 정량 확인하기 표 팝업(s)) -->
 <div class="pop_layer pop_type pop_mkToppingQuantity" id="mkToppingQuantity">
@@ -26,293 +43,30 @@
 								<tr>
 									<th>토핑</th>
 									<th>사이즈</th>
-									<th>수량(개)</th>
 									<th>그램(g)</th>
 									<th>가격(원)</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td rowspan="3">베이컨</td>
-									<td>L</td>
-									<td>16</td>
-									<td>48</td>
-									<td>2,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td>8</td>
-									<td>24</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td>6</td>
-									<td>18</td>
-									<td>500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">프리미엄불고기</td>
-									<td>L</td>
-									<td></td>
-									<td>105</td>
-									<td>6,000</td>
-								</tr>
-								<tr class="bg_tr_gray"><td>M</td>
-									<td></td>
-									<td>70</td>
-									<td>4,000</td>
-								</tr>
-								<tr class="bg_tr_gray"><td>S</td>
-									<td></td>
-									<td>35</td>
-									<td>2,000</td>
-								</tr>
-								<tr>
-									<td rowspan="3">햄</td>
-									<td>L</td>
-									<td>16</td>
-									<td>56</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td>8</td>
-									<td>28</td>
-									<td>500</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td>6</td>
-									<td>21</td>
-									<td>300</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">케이준새우살</td>
-									<td>L</td>
-									<td>16</td>
-									<td>124</td>
-									<td>6,000</td>
-								</tr>
-								<tr class="bg_tr_gray"><td>M</td>
-									<td>8</td>
-									<td>64</td>
-									<td>4,000</td>
-								</tr>
-								<tr class="bg_tr_gray"><td>S</td>
-									<td>6</td>
-									<td>45</td>
-									<td>2,000</td>
-								</tr>
-								<tr>
-									<td rowspan="3">불고기</td>
-									<td>L</td>
-									<td></td>
-									<td>80</td>
-									<td>2,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">양파</td>
-									<td>L</td>
-									<td></td>
-									<td>60</td>
-									<td>1,000</td>
-								</tr>
-								<tr class="bg_tr_gray">
-								<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-								    <td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>300</td>
-								</tr>
-								<tr>
-									<td rowspan="3">피망</td>
-									<td>L</td>
-									<td></td>
-									<td>60</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>500</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>300</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">버섯</td>
-									<td>L</td>
-									<td></td>
-									<td>60</td>
-									<td>1,000</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>300</td>
-								</tr>
-								<tr>
-									<td rowspan="3">옥수수</td>
-									<td>L</td>
-									<td></td>
-									<td>120</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td></td>
-									<td>80</td>
-									<td>500</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td></td>
-									<td>40</td>
-									<td>300</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">올리브</td>
-									<td>L</td>
-									<td></td>
-									<td>60</td>
-									<td>1,000</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>300</td>
-								</tr>
-								<tr>
-									<td rowspan="3">파인애플</td>
-									<td>L</td>
-									<td>16</td>
-									<td>80</td>
-									<td>1,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td>8</td>
-									<td>40</td>
-									<td>500</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td>6</td>
-									<td>30</td>
-									<td>300</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">모짜렐라치즈</td>
-									<td>L</td>
-									<td></td>
-									<td>150</td>
-									<td>3,500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>M</td>
-									<td></td>
-									<td>100</td>
-									<td>2,500</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>S</td>
-									<td></td>
-									<td>50</td>
-									<td>1,500</td>
-								</tr>
-								<tr>
-									<td rowspan="3">체다치즈</td>
-									<td>L</td>
-									<td></td>
-									<td>60</td>
-									<td>2,000</td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td></td>
-									<td>40</td>
-									<td>1,500</td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td></td>
-									<td>20</td>
-									<td>1,000</td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td rowspan="3">갈릭 플레이크</td>
-									<td>L</td>
-									<td>15</td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>M</td>
-									<td>10</td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr class="bg_tr_gray">
-									<td>S</td>
-									<td>5</td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td rowspan="3">페퍼고다치즈</td>
-									<td>L</td>
-									<td>24</td>
-									<td>60</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>M</td>
-									<td>16</td>
-									<td>40</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>S</td>
-									<td>8</td>
-									<td>20</td>
-									<td></td>
-								</tr>
+							                           
+								<c:set value="false" var="one" />
+								<c:forEach var="toppingList" items="${toppingList}" varStatus="loop">
+									<c:if test="${(loop.count) % 2 == 0 }" var="is">
+										<c:set value="bg_tr_gray" var="backColor" />
+									</c:if>
+									<c:if test="${!is}">
+										<c:set value=" " var="backColor" />
+									</c:if>
+									
+									<tr class="${backColor}">
+									
+										<td class="justOne">${toppingList.t_name}</td>
+										<td>${toppingList.t_size}</td>
+										<td>${toppingList.t_gram}</td>
+										<td>${toppingList.t_price}</td>
+									</tr>
+									
+								</c:forEach>																
 							</tbody>
 						</table>
 					</div>

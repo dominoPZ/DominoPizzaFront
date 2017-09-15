@@ -12,8 +12,8 @@ public class ToppingServiceImpl implements ToppingService{
 	@Resource(name="toppingDAO")
 	private ToppingDAO dao;
 	@Override
-	public List<ToppingDTO> selectList(Map map) {
-		return dao.selectList(map);
+	public List<ToppingDTO> selectList() {
+		return dao.selectList();
 	}
 	@Override
 	public List<ToppingDTO> selectAddToppingList() {
@@ -34,5 +34,9 @@ public class ToppingServiceImpl implements ToppingService{
 	@Override
 	public int delete(ToppingDTO dto) {
 		return dao.delete(dto);
+	}
+	@Override
+	public List<ToppingDTO> selectToppingallergyList() {
+		return dao.selectToppingallergyList();
 	}
 }

@@ -159,15 +159,17 @@ public class MyPizzaController {
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 알레르기 유발성분 표 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/toppingAllergic.pz", produces="text/html; charset=UTF-8")
-	public String toppingAllergicList() throws Exception{
-		
+	public String toppingAllergicList(Map map) throws Exception{
+		List<ToppingDTO> toppingList = toppService.selectToppingallergyList();
+		map.put("toppingList", toppingList);
 		return "/WEB-INF/Pizza/view/BuyPizza/toppingAllergic.jsp";
 	}		
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 정량 확인하기 표 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/mkToppingQuantity.pz", produces="text/html; charset=UTF-8")
-	public String mkToppingQuantityList() throws Exception{
-
+	public String mkToppingQuantityList(Map map) throws Exception{
+		List<ToppingDTO> toppingList = toppService.selectAddToppingList();
+		map.put("toppingList", toppingList);
 		return "/WEB-INF/Pizza/view/BuyPizza/mkToppingQuantity.jsp";
 	}		
 
@@ -221,12 +223,12 @@ public class MyPizzaController {
 	@RequestMapping("/Pizza/BuyPizza/topping.pz")
 	public String addTopping(Map map1) throws Exception{
 		//토핑 리스트 출력용]
-		List<ToppingDTO> list = toppService.selectList(map1);
+		List<ToppingDTO> list = toppService.selectList();
 		List list1 = new Vector();
 		String name = "";
 		Map map = null;
 		for(ToppingDTO dto: list){
-			if( !name.equals(dto.getT_name().toString())){
+			if( !name.equals(dto.getT_name().toString())){ //t_name에 값이 있다면
 				map = new HashMap();
 				map.put("t_name",dto.getT_name());
 				map.put(dto.getT_size()+"Price",dto.getT_price());
