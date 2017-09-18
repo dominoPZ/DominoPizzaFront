@@ -19,7 +19,10 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {
 		return dao.selectSecondPizzaList(dto);
 	}
-
+	@Override
+	public String hnhAddPriceSelectOne(Map map) {
+		return dao.hnhAddPriceSelectOne(map);
+	}
 	@Override
 	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
 		return dao.selectOne(dto);
@@ -36,4 +39,6 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	public int delete(MyPizzaDTO dto) {
 		return dao.delete(dto);
 	}
+
+
 }

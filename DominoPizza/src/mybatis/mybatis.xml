@@ -139,8 +139,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
   <!-- 토핑추가하기 출력용 -->
  <select id="addToppingSelectList" resultType="ToppingDTO">
- 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND, T_PRICE
+ 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
+	WHERE T_KIND='${T_KIND}'
+	ORDER BY T_NAME, T_SIZE DESC
  </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->
@@ -165,6 +167,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="sideDishSauceSelectList" parameterType="java.util.Map" resultType="SideDish_SauceDTO">
  	SELECT * FROM SAUCE
  </select>
+ 
+ <!-- 하프앤하프페이지 - 피자2개, 도우, 사이즈 선택에 따른 피자 가격 -->
+ <select id="addHalfNHalfPriceSelectOne" parameterType="java.util.Map" resultType="String">
+ 	SELECT SUM(${price}+(SELECT D_PRICE FROM DOUGH WHERE DOUGH_NAME='${dough}'))/2
+	FROM PIZZA
+	WHERE P_NAME='${fstPizza}' OR P_NAME='${scdPizza}'
+ </select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   
 <!-- 연주 -->
  

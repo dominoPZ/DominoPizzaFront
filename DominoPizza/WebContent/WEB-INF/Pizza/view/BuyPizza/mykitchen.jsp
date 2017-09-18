@@ -212,7 +212,7 @@ var setSource = function() {
 
 var setDoughPrice = function() {
 	$("#doughPrice").text("0 원");
-
+	//alert("선택된  : "+ $("#size option:selected").data("price"));
 	//if($("#source").val() != "")
 	$("#doughPrice").text( (parseInt($("#size option:selected").data("price"))).cvtNumber() + "원");
 

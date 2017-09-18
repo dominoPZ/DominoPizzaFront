@@ -8,6 +8,7 @@ public interface MyPizzaService {
 	List<MyPizzaDTO> selectList(Map map);
 	List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto);
 	//상세보기용]
+	String hnhAddPriceSelectOne(Map map);
 	MyPizzaDTO selectOne(MyPizzaDTO dto);
 	//입력/수정/삭제용]
 	int insert(MyPizzaDTO dto);

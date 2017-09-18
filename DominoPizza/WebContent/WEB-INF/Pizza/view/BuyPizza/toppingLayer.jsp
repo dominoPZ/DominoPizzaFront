@@ -481,6 +481,7 @@ $(".tab .btn_tab li a").click(function(e) {
 
 if($("#toppingList").val() != "") { // 토핑 초기 셋팅
    var toppingArr = $("#toppingList").val().split(",");
+   
    $.each($(".toppingselect"), function() {
       $.each($(this).find("option"), function() {
          var code = $(this).attr("value");
@@ -555,7 +556,7 @@ var setToppingTotalCnt = function(obj) {
 
 
 
-//토핑 추가하기 번튼 클릭시 호출
+//토핑 추가하기 버튼 클릭시 호출
 var setToppingCheck = function() {
    var toppingList = "";
 
@@ -567,7 +568,7 @@ var setToppingCheck = function() {
          toppingList += $(this).val();
       }
    });
-   //alert("toppingList : "+ toppingList);
+   //alert("0.toppingList : "+ toppingList);
    // "toppingList : RTP840HL:1" 출력. 선택한 것의 value값임.
    setTopping();
    
@@ -602,11 +603,10 @@ var setTopping = function() {
             toppingNmList += ",";
          }
          is += $(this).find("option:selected").data("price");
-         //alert(is);
          
          toppingTotalCnt += 1;
-         //alert($(this).data-name)
-         toppingList += $(this).data("code") + ":" + $(this).val();
+         //원래 코드 : toppingList += $(this).data("code") + ":" + $(this).val();
+         toppingList += $(this).val();
          toppingNmList += $(this).data("name") + " (" +$(this).data('weight')+ ")";
          totalAmt += $(this).find("option:selected").data("price");
       }

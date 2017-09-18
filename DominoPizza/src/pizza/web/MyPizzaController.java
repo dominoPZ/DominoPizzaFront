@@ -114,16 +114,22 @@ public class MyPizzaController {
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/pizzaPrice.pz", produces="text/html; charset=UTF-8")
 	public String pizzaPrice(@RequestParam Map map) throws Exception{
-		System.out.println("fstPizza : "+map.get("fstPizza"));
-		System.out.println("scdPizza : "+map.get("scdPizza"));
-		System.out.println("dough : "+map.get("dough"));
-		System.out.println("size : "+map.get("size"));
-		map.get("fstPizza");
-		map.get("scdPizza");
-		map.get("dough");
-		map.get("size");
-		//return JSONArray.toJSONString(list);
-		return "100000";
+		Map choicemap = new HashMap<>();
+		choicemap.put("fstPizza", map.get("fstPizza"));
+		choicemap.put("scdPizza", map.get("scdPizza"));
+		choicemap.put("dough", map.get("dough"));
+		choicemap.put("price", map.get("size").equals("M") ? "P_SPRICE" : "P_LPRICE" );
+
+/*		System.out.println("fstPizza : "+choicemap.get("fstPizza"));
+		System.out.println("scdPizza : "+choicemap.get("scdPizza"));
+		System.out.println("dough : "+choicemap.get("dough"));
+		System.out.println("size : "+ choicemap.get("price"));*/
+		//System.out.println("피자 가격 ; "+ pizzaService.hnhAddPriceSelectOne(choicemap));
+		int price = Integer.parseInt(pizzaService.hnhAddPriceSelectOne(choicemap));
+		//System.out.println("피자 가격2 ; "+ price);
+		//return price;
+		return pizzaService.hnhAddPriceSelectOne(choicemap);
+		
 	}
 	
 
@@ -136,10 +142,10 @@ public class MyPizzaController {
 		return "success";
 	}	
 	
-	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트 출력용
+	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트(토핑 추가하기) 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer.pz", produces="text/html; charset=UTF-8")
 	public String toppingList() throws Exception{
-/*		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
+		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
 		List<Map> list = new Vector<Map>();
 		Map map =null;
 		for(ToppingDTO dto : toppinglist) {
@@ -151,7 +157,7 @@ public class MyPizzaController {
 			map.put( "topping_price", dto.getT_price());
 			map.put( "topping_size", dto.getT_size());
 			list.add(map);
-		}*/
+		}
 		//return JSONArray.toJSONString(list);
 		//return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";

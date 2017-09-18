@@ -7,6 +7,8 @@
 <html lang="ko">
 <head>
 
+
+
 	<meta charset="euc-kr">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>도미노피자</title>
@@ -305,7 +307,6 @@ var setDough = function() {
 		type:"post",
 		dataType:"json",
 		success:function(data) {
-			console.log("data : "+data);
 				$.each(data, function(i, item){
 					$("#dough").append("<option value='"+item["Dough_name"]+"'>"+item["Dough_name"]+"</option>");
 			}); 
@@ -404,6 +405,7 @@ var addTopping = function() {
 		url: "<c:url value='/Pizza/BuyPizza/toppingLayer.pz'/>",
 		//data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
 		success:function(data) {
+			//console.log("data:" + data);
 			$("#topping_info_pop").html(data).addClass("open");
 		 	var top = $(window).scrollTop();
 		 	$("#topping_info_pop").find('.pop_wrap').css('top',top+30+'px');
@@ -434,7 +436,10 @@ var setTotalAmt = function() {
 		url: "<c:url value='/Pizza/BuyPizza/pizzaPrice.pz'/>",
 		datatype: "text",
 		success:function(data) {
-			price = data; //임시 데이터 100000 넘김.
+			price = data;
+			var pizzaAmt = parseInt(price) * parseInt($("#qty").val());
+			var toppingAmt = ($("#toppingTotalAmt").val() != "")? parseInt($("#toppingTotalAmt").val()) * parseInt($("#qty").val()) : 0;
+			$("#totalAmt").text((pizzaAmt + toppingAmt).cvtNumber() + "원");
 		},
 		error: function (error){
 			alert("다시 시도해주세요.");
@@ -457,11 +462,8 @@ var setTotalAmt = function() {
 	});
 
  */	
-	
-	//var pizzaAmt = price * parseInt($("#qty").val());
-	var pizzaAmt = price;
-	var toppingAmt = ($("#toppingTotalAmt").val() != "")? parseInt($("#toppingTotalAmt").val()) * parseInt($("#qty").val()) : 0;
-	$("#totalAmt").text((pizzaAmt + toppingAmt).cvtNumber() + "원");
+
+
 };
 
 var closeLayer = function() {

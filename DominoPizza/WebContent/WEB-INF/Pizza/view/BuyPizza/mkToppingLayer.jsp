@@ -350,6 +350,8 @@ $(".tab .btn_tab li a").click(function(e) {
 
 if($("#toppingList").val() != "") { // 토핑 초기 셋팅
 	var toppingArr = $("#toppingList").val().split(",");
+	//alert("4. toppingArr:"+toppingArr);
+	//옵션의 value값이 넘어옴.
 	$.each($(".toppingselect"), function() {
 		$.each($(this).find("option"), function() {
 			var code = $(this).attr("value");
@@ -468,7 +470,7 @@ var setTopping = function() {
 			toppingTotalCnt++;
 			toppingList += $(this).val();
 			totalAmt += parseInt($(this).find("option:selected").data("price"));
-
+			
 			html += '<li id="'+$(this).val()+'">'
 				+	'	<p class="topping_name">'+$(this).find("option:selected").data("name")+' ' + $(this).find("option:selected").data("weight") +'</p>'
 				+	'	<span class="bill_price">'+(parseInt($(this).find("option:selected").data("price"))).cvtNumber()+'</span>'
@@ -479,17 +481,11 @@ var setTopping = function() {
 	});
 
 
-	if("RPZ800H" == "RPZ803S") {
-		if(toppingTotalCnt > 5) {
-			alert("히든엣지 추가 토핑은 최대 5개까지 선택 가능합니다.");
-			return;
-		}
-	} else {
+	
 		if(toppingTotalCnt > 7) {
 			alert("추가 토핑은 최대 7개까지 선택 가능합니다.");
 			return;
 		}
-	}
 
 	$("#toppingList").val(toppingList);
 	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + "원");

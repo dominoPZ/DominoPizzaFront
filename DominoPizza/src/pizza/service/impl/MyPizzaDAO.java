@@ -24,10 +24,15 @@ public class MyPizzaDAO implements MyPizzaService{
 	}
 
 	@Override
+	public String hnhAddPriceSelectOne(Map map) {
+		return template.selectOne("addHalfNHalfPriceSelectOne", map);
+	}
+	
+	@Override
 	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
 		return null;
 	}
-
+	
 	@Override
 	public int insert(MyPizzaDTO dto) {
 		return 0;
@@ -42,5 +47,6 @@ public class MyPizzaDAO implements MyPizzaService{
 	public int delete(MyPizzaDTO dto) {
 		return 0;
 	}
+
 
 }
