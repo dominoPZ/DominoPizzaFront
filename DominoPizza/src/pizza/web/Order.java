@@ -16,9 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javafx.geometry.Side;
 import pizza.service.BasketDTO;
 import pizza.service.DelAddrDTO;
 import pizza.service.DoughDTO;
+import pizza.service.DrPnsDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
@@ -122,29 +124,80 @@ public class Order {
 		map.put("id", id);
 		String where="";
 		String from="";
+		String kind = req.getParameter("kind").toString();
+		System.out.println(kind);
+		System.out.println(kind.equals("4"));
 		if(session.getAttribute("DE_NO")!=null && req.getParameter("reset")==null) {
-			if(req.getParameter("kind").equals("3")) {
+			if(kind.equals("3")) {
 				//음료
 				from = " DRINK ";
-				where = " D_NO = ";
-				
+				where = " DR_NO = ";
 			}
-			else if(req.getParameter("kind").equals("4")) {
+			else if(kind.equals("4")) {
 				//피클
 				from = " PICKLE ";
 				where = " pc_no = ";
-				
+				System.out.println("들어는오냐??");
 			}
-			else if(req.getParameter("kind").equals("5")) {
+			else if(kind.equals("5")) {
 				//소스
 				from = " sauce ";
 				where = " sc_no =  ";
 				
 			}
 			map.put("from", from);
-			
-			
-			
+			map.put("where", where);
+			DrPnsDTO dto = service.getdpns(map);
+			BasketDTO bdto = new BasketDTO();
+			List<BasketDTO> list=new  Vector<>();
+				if((List<BasketDTO>)session.getAttribute("BUYLIST") != null)
+					list = (List<BasketDTO>)session.getAttribute("BUYLIST");
+				bdto.setQty(Integer.parseInt(map.get("qty").toString())+"");
+			if(kind.equals("3")) {
+				//음료
+				System.out.println("음료임!");
+				bdto.setNo(dto.getDr_no());
+				bdto.setName(dto.getD_name());
+				bdto.setImg(dto.getD_img());
+				bdto.setKind(map.get("kind").toString());
+				bdto.setPrice(Integer.parseInt(dto.getD_price())*Integer.parseInt(map.get("qty").toString())+"");
+				req.setAttribute("SUC_URL", "/Pizza/Menu/sidedish_beverage.pz");
+				
+			}
+			else if(kind.equals("4")) {
+				//피클
+				System.out.println("피클임!");
+				bdto.setNo(dto.getPc_no());
+				bdto.setName(dto.getPc_name());
+				bdto.setImg(dto.getPc_img());
+				bdto.setKind(map.get("kind").toString());
+				bdto.setPrice(Integer.parseInt(dto.getPc_price())*Integer.parseInt(map.get("qty").toString())+"");
+				req.setAttribute("SUC_URL", "/Pizza/Menu/sidedish_pickleNSouce.pz");
+			}
+			else if(kind.equals("5")) {
+				//소스
+				System.out.println("소스임!");
+				bdto.setNo(dto.getSc_no());
+				bdto.setName(dto.getSc_name());
+				bdto.setImg(dto.getSc_img());
+				bdto.setKind(map.get("kind").toString());
+				bdto.setPrice(Integer.parseInt(dto.getSc_price())*Integer.parseInt(map.get("qty").toString())+"");
+				req.setAttribute("SUC_URL", "/Pizza/Menu/sidedish_pickleNSouce.pz");
+			}
+				int totalpr=0;
+				if(session.getAttribute("TOTALPRICE")!=null)
+					totalpr = Integer.parseInt(session.getAttribute("TOTALPRICE").toString());
+				totalpr+=Integer.parseInt(bdto.getPrice());
+				session.setAttribute("TOTALPRICE", totalpr);
+				list.add(bdto);
+				int suc = 0;
+				if(bdto.getNo()!=null&&bdto.getNo().length()>0)
+					suc = 1;
+				session.setAttribute("BUYLIST", list);
+				session.setAttribute("BUYNUM", list.size());
+				req.setAttribute("SUC_FAIL",suc);
+				req.setAttribute("WHERE", "DPNS");
+				System.out.println(bdto.getImg());
 		}else {/// 매장 선택 안 되었을경우 매장선택으로
 			if(req.getParameter("reset")!=null)
 			{
@@ -157,13 +210,13 @@ public class Order {
 			session.setAttribute("DE_NO", null);
 			}
 			
+		
 		List<StoresDTO> list = new Vector<StoresDTO>();
 		list = service.deladdrprint(map);
 		System.out.println("???");
 		model.addAttribute("list",list);
 		}
-		
-		return "";
+		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
 	}
 	
 
@@ -217,6 +270,9 @@ public class Order {
 	public String sessionDelete(@RequestParam Map map,HttpServletRequest req, HttpSession session) {
 		List<BasketDTO> list = (List<BasketDTO>)session.getAttribute("BUYLIST");
 		int idx = Integer.parseInt(map.get("idx").toString());
+		int a =Integer.parseInt(list.get(idx-1).getPrice());
+		if(session.getAttribute("TOTALPRICE")!=null);
+		session.setAttribute("TOTALPRICE",Integer.parseInt(session.getAttribute("TOTALPRICE").toString())-a);
 		list.remove(idx-1);
 		session.setAttribute("BUYLIST", list);
 		session.setAttribute("BUYNUM", list.size()==0?null:list.size());

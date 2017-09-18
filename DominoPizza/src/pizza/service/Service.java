@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 
 import pizza.service.impl.Daotest;
+import pizza.service.impl.UserDto;
 
  public interface Service{
 	
@@ -26,6 +27,11 @@ import pizza.service.impl.Daotest;
 	int deladdrin(Map map) throws Exception;	
 	List<StoresDTO> deladdrprint(Map map) throws Exception;
 	StoresDTO sessionInDel(Map map) throws Exception;
+	List<SaileCouponDTO> callcoupon(Map map);
+	UserDto callUser(Map map);
+	SideMenuList Sideview(Map map);
+	SNutrientDTO snprint(Map map);
+	DrPnsDTO getdpns(Map map);
 	
 
 }

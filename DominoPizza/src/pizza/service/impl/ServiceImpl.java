@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import pizza.service.BasketDTO;
 import pizza.service.DelAddrDTO;
 import pizza.service.DoughDTO;
+import pizza.service.DrPnsDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
@@ -53,68 +54,71 @@ public class ServiceImpl implements pizza.service.Service {
 		return 0;
 	}
 	
-	
+	@Override
 	public int addrselect(Map map) {
 		return dao.addrselect(map);
 		
 	}
-
+	@Override
 	public PizzaDTO pizzaview(Map map) {
 		return dao.pizzaview(map);
 	}
-
+	@Override
 	public List<DoughDTO> doughlist(Map map) {
 		return dao.doughlist(map);
 	}
-
+	@Override
 	public List<PNutrientDTO> pnutrient(Map map) {
 		return dao.pnutrient(map);
 	}
-
+	@Override
 	public int sinsert(Map map) {
 		return dao.sinsert(map);
 		
 	}
-
+	@Override
 	public int stinsert(BasketDTO dto) {
 		return dao.stinsert(dto);
 	}
 
 
 	
-
+	@Override
 	public StoresDTO deladdrsel(Map map) {
 		return dao.deladdrsel(map);
 	}
-
+	@Override
 	public int deladdrin(Map map) {
 		return dao.deladdrin(map);
 	}
-
+	@Override
 	public List<StoresDTO> deladdrprint(Map map) {
 		return dao.deladdrprint(map);
 	}
-
+	@Override
 	public StoresDTO sessionInDel(Map map) {
 		return dao.sessionInDel(map);
 	}
 
-
-
+	@Override
 	public UserDto callUser(Map map) {
 		return dao.callUser(map);
 	}
-
+	@Override
 	public SideMenuList Sideview(Map map) {
 		return dao.sideView(map);
 	}
-
+	@Override
 	public SNutrientDTO snprint(Map map) {
 		return dao.snprint(map);
 	}
-
+	@Override
 	public List<SaileCouponDTO> callcoupon(Map map) {
 		return dao.callcoupon(map);
+	}
+	@Override
+	public DrPnsDTO getdpns(Map map) {
+		return dao.getdpns(map);
 	}
 	
 	

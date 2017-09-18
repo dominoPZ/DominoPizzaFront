@@ -286,9 +286,8 @@ var setGoodsBrief = function() {
 };
 
 // 레이어 닫기 (다른할인 적용)
-var closePrmtLayer = function() {
-	alert("?");
-	var minprice = frams.contentWindow.document.getElementById("area_dc_price");
+var closePrmtLayer = function(fp,fm,sname,sno) {
+/* 	var minprice = frams.contentWindow.document.getElementById("area_dc_price");
 	var fprice = frams.contentWindow.document.getElementById("area_before_account_price2");
 	var infomin = document.getElementById("infomin");
 	alert(minprice);
@@ -296,12 +295,27 @@ var closePrmtLayer = function() {
 	alert(fprice);
 	infomin.innerHTML = minprice.innerHTML; 
 	infofprice.innerHTML = fprice.innerHTML; 
-	//cnamedom.innerHTML
-	
-	
+	cnamedom.innerHTML
 	$("#sale_benefits iframe").remove();
 	$("#sale_benefits").removeClass("open");
+	*/
+	<c:set value='testa' var="testa" />
+	$("#sale_benefits iframe").remove();
+	$("#sale_benefits").removeClass("open");
+	var fprice = document.getElementById("infofprice");
+	fprice.innerHTML=fp;
+	$(".minprice").html(fm);
+	$(".fprice").html(fp);
+	$(".sname").html(sname);
+	$("#mc_no").val(sno);
+	$("#sa_price").val(fp);
+/* 	var minprice = document.getElementById("infomin");
+	minprice.innerHTML=fm;
+	var sale_push = document.getElementById("sale_push");
+	sale_push.innerHTML=sname; */
+	alert(document.getElementById("sa_price").value);
 };
+
 
 // 다른할인 적용
 var changePrmt = function() {
@@ -419,9 +433,17 @@ var recipientChange = function(){
 	}
 };
 
+
+
+
 // 결제방법 클릭시 체크 (하위 체크박스 disable 관련)
 var clickPayType = function(type, obj) {
-
+	$(".active").removeClass("active");
+	$(obj).parent('li').addClass('active');
+	var sapay = document.getElementById("sapay");
+	sapay.value=$(obj).html();
+	var sapayType= document.getElementById("sapayType");
+	sapayType.value=$(obj).parent('li').val();
 	if(type == "radio"){
 		var hidedefault = $(obj).data('hidedefault');
 		var data = $(obj).data('value').split('|');
@@ -795,7 +817,7 @@ var goBranch = function(){
 								<span style="display:none;" id="goods_name_brief">${dto.name }${dto.size } (${dto.qty })</span>
 							</td>
 							<td>${dto.qty }</td>
-							<td>${dto.price }</td>
+							<td><fmt:formatNumber>${dto.price }</fmt:formatNumber> </td>
 						</tr>
 
 						</c:forEach>
@@ -816,15 +838,15 @@ var goBranch = function(){
 		<div class="order_sale_info">
 			<div class="sale_push">
 				
-						※ 할인을 선택해주세요.
+						<span id="sale_push" class="sname" >※ 할인을 선택해주세요.</span>
 					</div>
 			<dl class="sale_price">
 				<dt>할인 금액</dt>
-				<dd><span id="infomin">0</span> 원</dd>
+				<dd><span id="infomin" class="minprice">0</span> 원</dd>
 			</dl>
 			<dl class="expected_price">
 				<dt>결제 예정 금액</dt>
-				<dd><span id="infofprice">${totalprice }</span> 원</dd>
+				<dd><span id="infofprice" class="fprice"><fmt:formatNumber>${totalprice }</fmt:formatNumber> </span> 원</dd>
 			</dl>
 			<p class="sale_push_guide">
 			</p>
@@ -935,11 +957,11 @@ var goBranch = function(){
 							<dd>
 								<div class="tab tab_type3">
 									<ul class="btn_tab">
-										<li class=""><a href="javascript:;" id="pay_method_4" data-hidedefault="2" data-value="9|4|Y" onclick="clickPayType('radio', this);">신용카드</a></li>
-										<li class="active"><a href="javascript:;" id="pay_method_6" data-hidedefault="" data-value="A|6|Y" onclick="clickPayType('radio', this);">휴대전화 결제</a></li>
+										<li class="" value="1" ><a href="javascript:;" id="pay_method_4" data-hidedefault="2" data-value="9|4|Y" onclick="clickPayType('radio', this);">신용카드 바로결제</a></li>
+										<li class="" value="1" ><a href="javascript:;" id="pay_method_6" data-hidedefault="" data-value="A|6|Y" onclick="clickPayType('radio', this);">휴대전화 바로결제</a></li>
 										</ul>
 									<div class="pay_method_sub_default" id="pay_method_sub_default_2" style="display: block;">
-										<p class="txt_payment"><span class="ico ico_payment_normal"></span>미리 결제하고 편하게 기다리기!</p>
+										<p class="txt_payment"><!-- <span class="ico ico_payment_normal"></span> --></p><!-- 클릭시 아래 문구 뜸 -->
 									</div>
 									<div class="tab_content_wrap" id="pay_method_sub_4" style="display: none;">
 											<div class="tab_content active">
@@ -948,7 +970,7 @@ var goBranch = function(){
 														<span class="custom_form">
 															<input type="checkbox" id="bccard_yn" name="bccard_yn" disabled="disabled">
 															<label for="bccard_yn" class="ip_chk">
-																<em></em><span>BC TOP 포인트 결제</span>
+																<em></em><span></span><!-- 클릭시 아래 문구 떳음 -->
 															</label>
 														</span>
 													</div>
@@ -964,11 +986,11 @@ var goBranch = function(){
 							<dd>
 								<div class="tab tab_type3">
 									<ul class="btn_tab">
-										<li class=""><a href="javascript:;" id="pay_method_3" data-hidedefault="" data-value="2|3|Y" onclick="clickPayType('radio', this);">신용카드</a></li>
-										<li class=""><a href="javascript:;" id="pay_method_1" data-hidedefault="3" data-value="1|1|Y" onclick="clickPayType('radio', this);">현금</a></li>
+										<li class="" value="2" ><a href="#" id="pay_method_3" data-hidedefault="" data-value="2|3|Y" onclick="clickPayType('radio', this);">신용카드 현장결제</a></li>
+										<li class="" value="2" ><a href="3" id="pay_method_1" data-hidedefault="" data-value="1|1|Y" onclick="clickPayType('radio', this);">현금으로 현장결제</a></li>
 										</ul>
 									<div class="pay_method_sub_default" id="pay_method_sub_default_3" style="display: block;">
-										<p class="txt_payment"><span class="ico ico_payment_spot"></span>제품 수령 시 만나서 결제하기! </p>
+										<p class="txt_payment"><!-- <span class="ico ico_payment_spot"></span> --></p>
 									</div>
 									<div class="tab_content_wrap" id="pay_method_sub_1" style="display: none;">
 											<div class="tab_content"></div>
@@ -1012,15 +1034,15 @@ var goBranch = function(){
 				<div class="order_total_info">
 					<dl class="price_total">
 						<dt>총 주문 금액</dt>
-						<dd></dd>
+						<dd><fmt:formatNumber>${TOTALPRICE }</fmt:formatNumber></dd>
 					</dl>
 					<dl class="price_sale">
 						<dt>할인 금액</dt>
-						<dd></dd>
+						<dd class="minprice" ></dd>
 					</dl>
-					<dl class="price_expected">
+					<dl >
 						<dt>결제 예정 금액</dt>
-						<dd></dd>
+						<dd class="fprice" ></dd>
 					</dl>
 					<div class="order_complete">
 						<span class="custom_form" id="quick_save_check" style="display:none;">
@@ -1029,7 +1051,14 @@ var goBranch = function(){
 								<em></em><span>이 주문 퀵 오더로 설정하기</span>
 							</label>
 						</span>
+						<!-- 결제 완료버튼 폼 태그 -->
+						<form>
+						<input type="hidden" name="mc_no" id="mc_no" value="0" />
+						<input type="hidden" name="sa_price" id="sa_price" value="0" />
+						<input type="hidden" name="sa_pay" id="sapay" value="0" />
+						<input type="hidden" name="sa_payType" id="sapayType" value="0" />
 						<a href="javascript:;" id="doOrder" onclick="doOrder()" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">결제 및 주문완료</span></a>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -1038,6 +1067,12 @@ var goBranch = function(){
 	</div>
 </form>
 </div>
+
+<script>
+// 결제 완료 버튼 눌렀을 때
+
+</script>
+
 
 <!-- 배달주소 등록 팝업 -->
 <div class="pop_layer pop_type" id="adr_add">

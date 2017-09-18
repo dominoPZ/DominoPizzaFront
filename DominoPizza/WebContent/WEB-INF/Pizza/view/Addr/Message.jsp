@@ -21,7 +21,10 @@
       <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
       <c:set var="SUC_URL" value="/Pizza/MainPage.pz"/>
    </c:when>   
-   
+   <c:when test="${WHERE eq 'DPNS' }">
+      <c:set var="SUC_MSG" value="장바구니에 저장되었습니다."/>
+      <c:set var="FAIL_MSG" value="오류가 발생하였습니다."/>
+   </c:when>     
    
    <c:otherwise>
       <c:set var="SUC_MSG" value="삭제 성공"/>
