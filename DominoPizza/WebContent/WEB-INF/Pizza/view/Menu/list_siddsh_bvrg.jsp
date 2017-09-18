@@ -251,7 +251,7 @@ var chocolatChk = function() {
 						function basket(ids){
 							var spn = document.getElementById(ids+"_qty");
 							var qty = parseInt(spn.value);
-							location.href="<c:url value='#'/>?no="+ids+"&qty="+qty;
+							location.href="<c:url value='/DrinkPncBuy.pz'/>?no="+ids+"&qty="+qty+"&kind=3";
 						}	
 					
 					</script>

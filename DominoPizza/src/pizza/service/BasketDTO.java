@@ -76,6 +76,12 @@ public class BasketDTO {
 	public void setToppingList(List<ToppingDTO> toppingList) {
 		this.toppingList = toppingList;
 	}
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
 	 
 	
 	

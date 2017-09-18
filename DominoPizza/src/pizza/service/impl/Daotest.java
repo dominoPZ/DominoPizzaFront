@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import pizza.service.BasketDTO;
 import pizza.service.DelAddrDTO;
 import pizza.service.DoughDTO;
+import pizza.service.DrPnsDTO;
 import pizza.service.PNutrientDTO;
 import pizza.service.PizzaDTO;
 import pizza.service.PizzaMenuList;
@@ -126,6 +127,10 @@ public class Daotest {
 
 	public List<SaileCouponDTO> callcoupon(Map map) {
 		return template.selectList("mybatiscallcoupon",map);
+	}
+
+	public DrPnsDTO getdpns(Map map) {
+		return template.selectOne("mybatisgetdpns",map);
 	}
 	
 	

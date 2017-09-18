@@ -320,8 +320,6 @@ var chocolatChk = function() {
 									</c:forEach>
 							
 							
-							
-							
 							</ul>
 						</div>
 
@@ -357,12 +355,12 @@ var chocolatChk = function() {
 			function basket(ids){
 							var spn = document.getElementById(ids+"_sqty");
 							var qty = parseInt(spn.value);
-							location.href="<c:url value='#'/>?no="+ids+"&qty="+qty;
+							location.href="<c:url value='/DrinkPncBuy.pz'/>?no="+ids+"&qty="+qty+"&kind=5";
 						}
 			function pbasket(ids){
 				var spn = document.getElementById(ids+"_pqty");
 				var qty = parseInt(spn.value);
-				location.href="<c:url value='#'/>?no="+ids+"&qty="+qty+"kind=";
+				location.href="<c:url value='/DrinkPncBuy.pz'/>?no="+ids+"&qty="+qty+"&kind=4";
 			}
 			
 			</script>

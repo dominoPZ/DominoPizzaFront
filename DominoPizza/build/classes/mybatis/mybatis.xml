@@ -94,6 +94,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="mybatiscallcoupon" parameterType="java.util.Map" resultType="SaileCouponDTO" >
 		SELECT * FROM SAILE_COUPON S JOIN MY_CUPON MC ON MC.C_NO=S.C_NO WHERE ID='${id}'
 		</select>
+		
+		<select id="mybatisgetdpns" parameterType="java.util.Map" resultType="DrPnsDTO" >
+		select * FROM  ${from}  where  ${where}  ${no}
+		</select>
+	
 	
 	
  <!--  어진 끝 -->

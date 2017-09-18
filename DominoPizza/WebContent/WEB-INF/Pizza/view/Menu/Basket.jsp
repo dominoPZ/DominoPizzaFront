@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -284,23 +284,36 @@ function alertBranch(){
 										<td>
 											<div class="prd_info_view">
 												<div class="prd_img">
+												<c:if test="${map.kind=='1' }" >
 													<img src="<c:url value='/Pizza/Image/pizzalist/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
-																</div>
+												</c:if>
+												<c:if test="${map.kind=='2' }" >
+													<img src="<c:url value='/Pizza/Image/pizzalist/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
+												</c:if>
+												<c:if test="${map.kind=='3' }" >
+													<img src="<c:url value='/Pizza/Image/sidedish/beverage/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
+												</c:if>
+												<c:if test="${map.kind=='4' || map.kind=='5' }" >
+													<img src="<c:url value='/Pizza/Image/sidedish/pickleNSouce/${map.img}' />" alt="브레이즈드 포크 곡물도우" onerror="this.src='https://cdn.dominos.co.kr/admin/upload/goods/goods_default.jpg'" />
+												</c:if>
+													</div>
 												<div class="prd_info">
 													<div class="prd_name">
 														${map.name}</div>
 													<div class="prd_kinds">
 													${map.dough }
+													<c:if test="${map.kind=='1' }" >
 													<c:if test="${map.size=='L' }" var="sizes" >
 													<span class="ico ico_s_large"></span></div>
 													</c:if>
 													<c:if test="${!sizes}"  >
 													<span class="ico ico_s_medium"></span></div>
 													</c:if>
+													</c:if>
 												</div>
 											</div>
 										</td>
-										<td><span id="qty${loop.count}" >${map.price }</span></td>
+										<td><span id="qty${loop.count}" ><fmt:formatNumber type="number">${map.price }</fmt:formatNumber> </span></td>
 										<td>
 										</td>
 										<td>
@@ -376,7 +389,7 @@ function alertBranch(){
 					<div class="cart_total_wrap">
 						<div class="price_wrap">
 						<span class="txt_sale_guide">※ 할인은 다음 페이지(주문서작성)에서 적용 가능합니다.</span>
-							<p><span id="tprice">${TOTALPRICE }</span>원</p>
+							<p><span id="tprice"><fmt:formatNumber type="number">${TOTALPRICE }</fmt:formatNumber></span>원</p>
 						</div>
 						<div class="btn_wrap">
 						
@@ -550,9 +563,8 @@ function alertBranch(){
 							var fprice = document.getElementById('Fprice'+count);
 							fqty.value = sel.value;
 							fprice.value=price*sel.value;
-							totald.innerHTML = parseInt(totald.innerHTML)-parseInt(oneprice.innerHTML)+parseInt(price*sel.value);
-							oneprice.innerHTML = price*sel.value;
-							
+							totald.innerHTML =Number(parseInt(totald.innerHTML.replace(",",""))-parseInt(oneprice.innerHTML.replace(",",""))+parseInt(price*sel.value)).toLocaleString('en');
+							oneprice.innerHTML = Number(price*sel.value).toLocaleString('en');
 						}
 						
 					</script>

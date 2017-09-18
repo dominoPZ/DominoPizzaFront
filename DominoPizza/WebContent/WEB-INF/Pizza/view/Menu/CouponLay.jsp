@@ -88,20 +88,15 @@ var selectPrmt = function(failReloadYN){
 		prmtData.action_code = 'selectDC';
 
 		$.ajax({
-			url : '/basket/basketAction',
+			url : '#',
 			type : 'POST',
 			async: false,
 			dataType : 'json',
 			data : prmtData,
 			success : function(data) {
-				if(data.status == "success"){
+				if(true){
 					parent.getOrderInfoDetail("N");
-					$("#area_dc_price").html((data.resultData.dc_price).cvtNumber()+"원");
-					$("#area_p_name").html(data.resultData.p_name);
-					$("#area_before_account_price").html("<del>35,900원</del> "+(data.resultData.account_price).cvtNumber()+"원");
-					if(!firstApproach)
-						alert("할인이 적용되었습니다.");
-// 					parent.closePrmtLayer();
+					parent.closePrmtLayer();
 				} else {
 					alert(data.msg);
 					if(failReloadYN == 'Y') location.reload();
@@ -148,11 +143,10 @@ var selectPrmt = function(failReloadYN){
 											</li>
 										</c:forEach>
 											<script>
-											
+											var fnprice="";
 											function AddComma(data_value) {
 												return Number(data_value).toLocaleString('en');
 												}
-
 											
 											function lck(no){
 												var te = document.getElementById(""+no).value;
@@ -162,12 +156,14 @@ var selectPrmt = function(failReloadYN){
 												var fprice = document.getElementById("area_before_account_price2");
 												var fnprice = parseInt(${TOTALPRICE}*(1-te/100));
 												var cnamedom = document.getElementById("area_p_name");
-												
+												var fsno = document.getElementById("fsno");
+												fsno.value=no;
 												cnamedom.innerHTML = document.getElementById(no+"_a").innerHTML;
 												fnprice = Number(fnprice).toLocaleString('en');
 												fprice.innerHTML = fnprice;
-
+												
 											}
+											
 											
 											
 											
@@ -184,6 +180,13 @@ var selectPrmt = function(failReloadYN){
 							<dd>
 								<ul>
 									<li>
+										cnamedom.innerHTML = document.getElementById(no+"_a").innerHTML;
+												fnprice = Number(fnprice).toLocaleString('en');
+												fprice.innerHTML = fnprice;
+												<c:set value='fnprice' var='fnprice' scope="session" />
+												<c:set value='minprice.innerHTML' var='minnumber' scope="session" />
+												alert(${minnumber});
+												alert(${fnprice});
 											<span class="custom_form">
 												<input type="radio" name="prmt" id="cp115" value="115">
 												<label for="cp115" class="ip_rdo">
@@ -463,7 +466,7 @@ var selectPrmt = function(failReloadYN){
 				<dd><span id="area_dc_price" data-price="7180">
 						-0 원
 					</span>
-					<em id="area_p_name">[REGULAR쿠폰] 배달 피자 20% 할인</em>
+					<em id="area_p_name"> </em>
 					</dd>
 			</dl>
 			<dl class="expected_price">
@@ -471,13 +474,23 @@ var selectPrmt = function(failReloadYN){
 				<dd><span id="area_before_account_price" data-price="${TOTALPRICE }" >
 						<del><fmt:formatNumber>${TOTALPRICE }</fmt:formatNumber>원</del>
 						<span id="area_before_account_price2"><fmt:formatNumber>${TOTALPRICE }</fmt:formatNumber></span>원
+						<input type="hidden" value="" id="fsno" >
 					</span>
 				</dd>
 			</dl>
 		</div>
-		<a href="javascript:parent.closePrmtLayer();" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">확인</span></a>
+		<a href="javascript:layclose();" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">확인</span></a>
 	</div>
 </div>
+
+<script>
+	function layclose(){
+		parent.closePrmtLayer(document.getElementById("area_before_account_price2").innerHTML,document.getElementById("area_dc_price").innerHTML
+		,document.getElementById("area_p_name").innerHTML,document.getElementById("fsno").value	
+		);
+	}
+
+</script>
 
 </body>
 </html>
