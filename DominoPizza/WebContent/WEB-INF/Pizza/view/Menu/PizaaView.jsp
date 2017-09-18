@@ -282,7 +282,6 @@ var setSize = function() {
 
 //토핑 가져오기 (토핑 추가하기 버튼 눌렀을 시 호출됨)
 var addToppingCheck = function() {
-	alert("!!");
 	var size = $("#size").val();
 	var goods_code="pizza";
 	//alert("goods_code : "+goods_code);
@@ -307,6 +306,7 @@ var addToppingCheck = function() {
 		}
 	});
 };
+
 
 
 //토핑 가져오기
@@ -340,8 +340,6 @@ var addTopping = function() {
 };
 
 
-
-
 //토핑 가져오기
 /* var addToppingCheck = function() {
 	alert("베이컨칩 일시적으로 와규크럼블로 대체 → 상세내용은 도미노뉴스를 확인하시기 바랍니다.");
@@ -364,8 +362,6 @@ var addTopping = function() {
 };
  */
  
- 
- 
 // 토핑 가져오기
 /* var addTopping = function() {
 	$("#topping_info_pop").html("");
@@ -386,15 +382,12 @@ var addTopping = function() {
 }; */
 
 
-
-
 var setTotalAmt = function() {
 
 	var pizzaAmt = parseInt($("#"+$("#size").val()).data("price")) * parseInt($("#qty").val());
 	var toppingAmt = ($("#toppingTotalAmt").val() != "")? parseInt($("#toppingTotalAmt").val()) * parseInt($("#qty").val()) : 0;
 	$(".totalAmt").text((pizzaAmt + toppingAmt).cvtNumber() + "원");
 };
-
 
 /* 
 //영양성분 조회
@@ -678,8 +671,12 @@ function share(optn) {
 					function smt(){
 						<c:if test="${empty ID }" var="idc" >
 						alert("로그인 후 이용가능합니다.");
+						location.href="<c:url value='/User/Login.pz' />";
 						</c:if>
 						<c:if test="${!idc}">
+						<c:if test="${empty DE_ADDR }" var="idc" >
+						location.href="<c:url value='/AddrSelect.pz' />";
+						</c:if>
 						var priceDom = document.getElementById("price");
 						var price = priceDom.innerHTML;
 						var doughDom = document.getElementById("dough");

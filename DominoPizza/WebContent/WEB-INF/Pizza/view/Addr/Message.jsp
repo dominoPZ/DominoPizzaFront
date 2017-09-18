@@ -52,5 +52,9 @@
    alert("${SUC_MSG}");
    history.back();
 </c:when> 
+<c:when test="${SUC_FAIL ==9}">
+alert("매장을 선택해주세요.");
+location.href='<c:url value="/AddrCh.pz"/>';
+</c:when> 
    </c:choose>
 </script>

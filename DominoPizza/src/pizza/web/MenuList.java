@@ -22,6 +22,7 @@ import pizza.service.PizzaMenuList;
 import pizza.service.SNutrientDTO;
 import pizza.service.SideMenuList;
 import pizza.service.impl.ServiceImpl;
+import pizza.service.impl.UserDto;
 
 @Controller
 public class MenuList {
@@ -37,6 +38,23 @@ public class MenuList {
 		service.test(map);
 		return "/Pizza/view/Mainpage.jsp";
 	}*/
+	
+	@RequestMapping("/Pizza/MainPage.pz")
+	public String main(Map map,HttpSession session, HttpServletRequest req) throws Exception{
+		
+		if(session.getAttribute("ID")!=null) {
+			UserDto dto= new UserDto();
+			String id =session.getAttribute("ID").toString();
+			map.put("id", id);
+			dto = service.callUser(map);
+			map.put("dto", dto);
+		}
+			
+		
+		
+		return "/WEB-INF/Pizza/view/Mainpage.jsp";
+	}
+	
 	
 	
 	@RequestMapping("/menuList.pz")

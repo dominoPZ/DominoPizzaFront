@@ -208,7 +208,7 @@ function changeGoodsCnt(idx){
 
 var goBranch = function(){
 	if(confirm("주문매장 변경 시 장바구니의 제품은 모두 초기화됩니다. 주문매장을 변경하시겠습니까?")) {
-		location.href = "/basket/branch?returnUrl=/basket/detail";
+		location.href = "<c:url value='/AddrSelect.pz' />?reset=1";
 	}
 }
 

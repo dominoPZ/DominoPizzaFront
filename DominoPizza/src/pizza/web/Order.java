@@ -103,23 +103,54 @@ public class Order {
 			session.setAttribute("ST_NAME", null);
 			session.setAttribute("ST_TEL", null);
 			session.setAttribute("DE_NO", null);
+			session.setAttribute("TOTALPRICE", null);
 			}
-			
 		List<StoresDTO> list = new Vector<StoresDTO>();
 		list = service.deladdrprint(map);
 		System.out.println("???");
 		model.addAttribute("list",list);
-		url = "/WEB-INF/Pizza/view/Addr/AddrSelect.jsp";
+//		url = "/WEB-INF/Pizza/view/Addr/AddrSelect.jsp";
+		url= "/WEB-INF/Pizza/view/Addr/Message.jsp";
+		req.setAttribute("SUC_FAIL", "9");
 		}
 		
 		return url;
 		
 	}
 	
+	@RequestMapping("/AddrCh.pz")
+	public String AddrCh(@RequestParam Map map,HttpServletRequest req ,HttpSession session,Model model) throws Exception{
+		String id = session.getAttribute("ID").toString();
+		map.put("id", id);
+		String url="";
+		if(req.getParameter("reset")!=null)
+		{
+		session.setAttribute("BUYLIST", null);	
+		session.setAttribute("BUYNUM", null);	
+		session.setAttribute("DE_ADDR",null);
+		session.setAttribute("ST_NO", null);
+		session.setAttribute("ST_NAME", null);
+		session.setAttribute("ST_TEL", null);
+		session.setAttribute("DE_NO", null);
+		}
+		
+	List<StoresDTO> list = new Vector<StoresDTO>();
+	list = service.deladdrprint(map);
+	System.out.println("???");
+	model.addAttribute("list",list);
+		
+		return  "/WEB-INF/Pizza/view/Addr/AddrSelect.jsp";
+	}
+	
 	
 	//음료 피클 장바구니에 저장
 	@RequestMapping("/DrinkPncBuy.pz")
 	public String DrinkPncBuy(@RequestParam Map map, Model model,HttpServletRequest req , HttpSession session) throws Exception{
+		String url = "";
+		if(session.getAttribute("ID")==null) {
+			url="/User/Login.pz";
+		}
+		else {
 		String id = session.getAttribute("ID").toString();
 		map.put("id", id);
 		String where="";
@@ -128,6 +159,7 @@ public class Order {
 		System.out.println(kind);
 		System.out.println(kind.equals("4"));
 		if(session.getAttribute("DE_NO")!=null && req.getParameter("reset")==null) {
+			url = "/WEB-INF/Pizza/view/Addr/Message.jsp";
 			if(kind.equals("3")) {
 				//음료
 				from = " DRINK ";
@@ -210,13 +242,15 @@ public class Order {
 			session.setAttribute("DE_NO", null);
 			}
 			
-		
+		url= "/WEB-INF/Pizza/view/Addr/Message.jsp";
+		req.setAttribute("SUC_FAIL", "9");
 		List<StoresDTO> list = new Vector<StoresDTO>();
 		list = service.deladdrprint(map);
 		System.out.println("???");
 		model.addAttribute("list",list);
 		}
-		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
+		}
+		return url;
 	}
 	
 
@@ -294,7 +328,6 @@ public class Order {
 		session.setAttribute("DE_NO", de_no);
 		if(de_no!=null)
 			res=2;
-		
 		req.setAttribute("SUC_FAIL", res);
 		req.setAttribute("WHERE", "SID");
 		return "/WEB-INF/Pizza/view/Addr/Message.jsp";
@@ -343,7 +376,7 @@ public class Order {
 		req.setAttribute("Flist", list);
 		session.setAttribute("BUYLIST", list);
 		req.setAttribute("totalprice", totalPrice);
-		
+		session.setAttribute("TOTALPRICE", totalPrice);
 		return "/WEB-INF/Pizza/view/Menu/info.jsp";
 	}
 	
