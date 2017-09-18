@@ -470,7 +470,7 @@ var setTopping = function() {
 			toppingTotalCnt++;
 			toppingList += $(this).val();
 			totalAmt += parseInt($(this).find("option:selected").data("price"));
-			
+			 
 			html += '<li id="'+$(this).val()+'">'
 				+	'	<p class="topping_name">'+$(this).find("option:selected").data("name")+' ' + $(this).find("option:selected").data("weight") +'</p>'
 				+	'	<span class="bill_price">'+(parseInt($(this).find("option:selected").data("price"))).cvtNumber()+'</span>'

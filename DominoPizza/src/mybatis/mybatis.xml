@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
 	WHERE T_KIND='${T_KIND}'
 	ORDER BY T_NAME, T_SIZE DESC
- </select>
+ </select> 
  
  <!-- 추가토핑안내 페이지 출력용 -->
  <select id="ToppingSelectList" resultType="ToppingDTO">

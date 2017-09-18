@@ -216,7 +216,7 @@ var setDoughPrice = function() {
 	//if($("#source").val() != "")
 	$("#doughPrice").text( (parseInt($("#size option:selected").data("price"))).cvtNumber() + "원");
 
-	setTotalAmt();
+	setTotalAmt(); 
 };
 
 var removeTopping = function() {

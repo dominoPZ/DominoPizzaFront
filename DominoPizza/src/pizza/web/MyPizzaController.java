@@ -157,7 +157,7 @@ public class MyPizzaController {
 			map.put( "topping_price", dto.getT_price());
 			map.put( "topping_size", dto.getT_size());
 			list.add(map);
-		}
+		} 
 		//return JSONArray.toJSONString(list);
 		//return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
