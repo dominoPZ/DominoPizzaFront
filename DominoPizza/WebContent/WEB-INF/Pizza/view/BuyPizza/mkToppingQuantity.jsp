@@ -35,15 +35,10 @@
 							                           
 								<c:set value="false" var="one" />
 								<c:forEach var="toppingList" items="${toppingList}" varStatus="loop">
-									<c:if test="${(loop.count) % 2 == 0 }" var="is">
-										<c:set value="bg_tr_gray" var="backColor" />
-									</c:if>
-									<c:if test="${!is}">
-										<c:set value=" " var="backColor" />
-									</c:if>
-									<tr class="${backColor}">
+		
+									<tr class=" "> <!-- bg_tr_gray제거 -->
 									<c:if test="${(loop.count) % 3 == 1 }">
-										<td rowspan="3">${${toppingList.t_name}</td>
+										<td rowspan="3">${toppingList.t_name}</td>
 									</c:if>
 										<td>${toppingList.t_size}</td>
 										<td>${toppingList.t_gram}</td>

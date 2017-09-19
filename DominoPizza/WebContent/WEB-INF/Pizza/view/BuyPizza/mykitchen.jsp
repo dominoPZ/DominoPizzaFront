@@ -303,12 +303,12 @@ var addTopping = function() {
 	$("#topping_info_pop2").html("");
 	$.ajax({
 		type: "POST",
-		url: "<c:url value='/Pizza/BuyPizza/toppingLayer.pz?go=mk'/>",
-/* 		data: {
+		url: "<c:url value='/Pizza/BuyPizza/mykitchen_mkToppingLayer.pz'/>",
+		data: {
 			'code_01': $("#dough").val(),
 			'gubun' : $("#size option:selected").data("gubun"),
 			'sub_name' : $("#size option:selected").data("size")
-		}, */
+		},
 		success:function(data) {
 		 	$("#topping_info_pop2").html(data).addClass("open");
 		 	var top = $(window).scrollTop();
