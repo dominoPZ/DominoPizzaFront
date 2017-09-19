@@ -16,8 +16,16 @@ public class ToppingServiceImpl implements ToppingService{
 		return dao.selectList();
 	}
 	@Override
-	public List<ToppingDTO> selectAddToppingList() {
-		return dao.selectAddToppingList();
+	public List<ToppingDTO> selectAddToppingList(Map map) {
+		return dao.selectAddToppingList(map);
+	}
+	@Override
+	public List<ToppingDTO> selectToppingNameList(Map map) {
+		return dao.selectToppingNameList(map);
+	}
+	@Override
+	public List<ToppingDTO> selectToppingKindList() {
+		return dao.selectToppingKindList();
 	}
 	@Override
 	public ToppingDTO selectOne(ToppingDTO dto) {
@@ -39,4 +47,5 @@ public class ToppingServiceImpl implements ToppingService{
 	public List<ToppingDTO> selectToppingallergyList() {
 		return dao.selectToppingallergyList();
 	}
+
 }

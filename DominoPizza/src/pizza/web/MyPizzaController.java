@@ -119,47 +119,57 @@ public class MyPizzaController {
 		choicemap.put("scdPizza", map.get("scdPizza"));
 		choicemap.put("dough", map.get("dough"));
 		choicemap.put("price", map.get("size").equals("M") ? "P_SPRICE" : "P_LPRICE" );
-
-/*		System.out.println("fstPizza : "+choicemap.get("fstPizza"));
-		System.out.println("scdPizza : "+choicemap.get("scdPizza"));
-		System.out.println("dough : "+choicemap.get("dough"));
-		System.out.println("size : "+ choicemap.get("price"));*/
-		//System.out.println("피자 가격 ; "+ pizzaService.hnhAddPriceSelectOne(choicemap));
-		int price = Integer.parseInt(pizzaService.hnhAddPriceSelectOne(choicemap));
-		//System.out.println("피자 가격2 ; "+ price);
-		//return price;
 		return pizzaService.hnhAddPriceSelectOne(choicemap);
-		
 	}
 	
-
 	//하프앤하프 & 마이키친 메뉴 - pauseCheck
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/choice.pz", produces="text/html; charset=UTF-8")
 	public String pauseCheck(@RequestParam Map map) throws Exception{
-		System.out.println("하프앤하프 페이지 선택 : "+map.get("goods_code"));
-		System.out.println("마이키친 페이지 선택 : "+map.get("goods_code")+" / "+map.get("topping"));
+		//System.out.println("하프앤하프 페이지 선택 : "+map.get("goods_code"));
+		//System.out.println("마이키친 페이지 선택 : "+map.get("goods_code")+" / "+map.get("topping"));
 		return "success";
 	}	
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트(토핑 추가하기) 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer.pz", produces="text/html; charset=UTF-8")
-	public String toppingList() throws Exception{
-		List<ToppingDTO> toppinglist = toppService.selectAddToppingList();
-		List<Map> list = new Vector<Map>();
-		Map map =null;
-		for(ToppingDTO dto : toppinglist) {
-			map = new HashMap();
-			map.put( "topping_name", dto.getT_name());
-			map.put( "topping_gram", dto.getT_gram());
-			map.put( "topping_img", dto.getT_img());
-			map.put( "topping_kind", dto.getT_kind());
-			map.put( "topping_price", dto.getT_price());
-			map.put( "topping_size", dto.getT_size());
-			list.add(map);
-		} 
-		//return JSONArray.toJSONString(list);
-		//return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
+	public String toppingList(Map map) throws Exception{
+		List<ToppingDTO> kindList = toppService.selectToppingKindList();
+		Map deliverymap = new HashMap();
+		String kind="", name="", img="", Ssize="", Sprice="", Msize="", Mprice="", Lsize="", Lprice="";
+		ToppingDTO dto4;
+		List saveList = new Vector();
+		for(ToppingDTO dto1 : kindList) {
+			deliverymap.put("toppingKind", dto1.getT_kind());
+			List<ToppingDTO> nameList = toppService.selectToppingNameList(deliverymap);
+			for(ToppingDTO dto2 : nameList) {
+				deliverymap.put("toppingName", dto2.getT_name());
+				List<ToppingDTO> toppingList = toppService.selectAddToppingList(deliverymap);
+				for(ToppingDTO dto3 : toppingList) {
+					switch(dto3.getT_size()) {
+					case "S": Ssize = dto3.getT_size(); Sprice = dto3.getT_price();
+						break;
+					case "M": Msize = dto3.getT_size(); Mprice = dto3.getT_price();
+						break;
+					default : Lsize = dto3.getT_size(); Lprice = dto3.getT_price();
+								kind = dto3.getT_kind(); name = dto3.getT_name(); img = dto3.getT_img();
+					}
+				}
+				dto4 = new ToppingDTO();
+				dto4.setT_kind(kind);
+				dto4.setT_name(name);
+				dto4.setT_img(img);
+				dto4.setT_Ssize(Ssize);
+				dto4.setT_Sprice(Sprice);
+				dto4.setT_Msize(Msize);
+				dto4.setT_Mprice(Mprice);
+				dto4.setT_Lsize(Lsize);
+				dto4.setT_Lprice(Lprice);
+				saveList.add(dto4);
+				//saveList.add(e)
+			}
+			map.put("list", saveList);
+		}
 		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 	}	
 	
@@ -174,7 +184,7 @@ public class MyPizzaController {
 	//하프앤하프 & 마이키친 메뉴 - 토핑 정량 확인하기 표 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/mkToppingQuantity.pz", produces="text/html; charset=UTF-8")
 	public String mkToppingQuantityList(Map map) throws Exception{
-		List<ToppingDTO> toppingList = toppService.selectAddToppingList();
+		List<ToppingDTO> toppingList = toppService.selectAddToppingList(null);
 		map.put("toppingList", toppingList);
 		return "/WEB-INF/Pizza/view/BuyPizza/mkToppingQuantity.jsp";
 	}		

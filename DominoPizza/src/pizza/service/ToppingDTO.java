@@ -20,6 +20,13 @@ public class ToppingDTO {
 	private String t_price;
 	private String t_gram;
 	
+	private String t_Ssize;
+	private String t_Sprice;
+	private String t_Msize;
+	private String t_Mprice;
+	private String t_Lsize;
+	private String t_Lprice;
+	
 	public String getT_code() {
 		return t_code;
 	}
@@ -73,6 +80,48 @@ public class ToppingDTO {
 	}
 	public void setT_allergy(String t_allergy) {
 		this.t_allergy = t_allergy;
+	}
+	public SqlSessionTemplate getTemplate() {
+		return template;
+	}
+	public void setTemplate(SqlSessionTemplate template) {
+		this.template = template;
+	}
+	public String getT_Ssize() {
+		return t_Ssize;
+	}
+	public void setT_Ssize(String t_Ssize) {
+		this.t_Ssize = t_Ssize;
+	}
+	public String getT_Sprice() {
+		return t_Sprice;
+	}
+	public void setT_Sprice(String t_Sprice) {
+		this.t_Sprice = t_Sprice;
+	}
+	public String getT_Msize() {
+		return t_Msize;
+	}
+	public void setT_Msize(String t_Msize) {
+		this.t_Msize = t_Msize;
+	}
+	public String getT_Mprice() {
+		return t_Mprice;
+	}
+	public void setT_Mprice(String t_Mprice) {
+		this.t_Mprice = t_Mprice;
+	}
+	public String getT_Lsize() {
+		return t_Lsize;
+	}
+	public void setT_Lsize(String t_Lsize) {
+		this.t_Lsize = t_Lsize;
+	}
+	public String getT_Lprice() {
+		return t_Lprice;
+	}
+	public void setT_Lprice(String t_Lprice) {
+		this.t_Lprice = t_Lprice;
 	}
 	
 	
