@@ -64,7 +64,7 @@ marker.setMap(map);
 function test() {
 var address = document.getElementById('addr1').value;
     address = address.split("(")[0];
-
+    
     
 geocoder.geocode({ 'address': address }, function (results, status) {
   if (status == 'OK') {
@@ -87,6 +87,7 @@ geocoder.geocode({ 'address': address }, function (results, status) {
 
 
 </script>
+
 		<div style="visibility: hidden;" >
 		
         <div id="map" style="width:0px;height:0px"></div>

@@ -42,6 +42,8 @@ public class MenuList {
 	@RequestMapping("/Pizza/MainPage.pz")
 	public String main(Map map,HttpSession session, HttpServletRequest req) throws Exception{
 		
+		String src = service.getsrc();
+		System.out.println(src+"!!!");
 		if(session.getAttribute("ID")!=null) {
 			UserDto dto= new UserDto();
 			String id =session.getAttribute("ID").toString();
@@ -60,6 +62,7 @@ public class MenuList {
 	@RequestMapping("/menuList.pz")
 	public String menuList(Model model, HttpServletRequest req) throws Exception{
 		int ty=0;
+		
 		if(req.getParameter("ty")!=null) {
 			req.setAttribute("code", req.getParameter("ty"));
 		ty = Integer.parseInt(req.getParameter("ty"));

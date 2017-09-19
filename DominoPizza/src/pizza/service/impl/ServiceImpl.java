@@ -120,6 +120,10 @@ public class ServiceImpl implements pizza.service.Service {
 	public DrPnsDTO getdpns(Map map) {
 		return dao.getdpns(map);
 	}
+
+	public String getsrc() {
+		return dao.getsrc();
+	}
 	
 	
 	
