@@ -22,6 +22,7 @@ import pizza.service.PizzaMenuList;
 import pizza.service.SNutrientDTO;
 import pizza.service.SideMenuList;
 import pizza.service.impl.ServiceImpl;
+import pizza.service.impl.UserDto;
 
 @Controller
 public class MenuList {
@@ -38,10 +39,33 @@ public class MenuList {
 		return "/Pizza/view/Mainpage.jsp";
 	}*/
 	
+	@RequestMapping("/Pizza/MainPage.pz")
+	public String main(Map map,HttpSession session, HttpServletRequest req) throws Exception{
+		
+		System.out.println(req.getServletContext().getRealPath("/Pizza/Image"));
+		map.put("src", req.getServletContext().getRealPath("/Pizza/Image"));
+		
+		service.setsrc(map);
+		
+		if(session.getAttribute("ID")!=null) {
+			UserDto dto= new UserDto();
+			String id =session.getAttribute("ID").toString();
+			map.put("id", id);
+			dto = service.callUser(map);
+			map.put("dto", dto);
+		}
+			
+		
+		
+		return "/WEB-INF/Pizza/view/Mainpage.jsp";
+	}
+	
+	
 	
 	@RequestMapping("/menuList.pz")
 	public String menuList(Model model, HttpServletRequest req) throws Exception{
 		int ty=0;
+		
 		if(req.getParameter("ty")!=null) {
 			req.setAttribute("code", req.getParameter("ty"));
 		ty = Integer.parseInt(req.getParameter("ty"));
@@ -140,12 +164,12 @@ public class MenuList {
 	public String SideView(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
 		SideMenuList dto = new SideMenuList();
 		SNutrientDTO sndto = new SNutrientDTO();
+		System.out.println("뭡니까?");
 		dto = service.Sideview(map);
 		System.out.println(dto.getS_name());
 		sndto = service.snprint(map);
-		System.out.println(sndto.getS_kcal());
-		model.addAttribute("dto",dto);
-		model.addAttribute("sndto",sndto);
+		req.setAttribute("dto",dto);
+		req.setAttribute("sndto",sndto);
 		
 		return "/WEB-INF/Pizza/view/Menu/SideView.jsp";
 		

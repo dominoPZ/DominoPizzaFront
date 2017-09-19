@@ -79,7 +79,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="mybatiscallUser" parameterType="java.lang.String" resultType="pizza.service.impl.UserDto" >
-		SELECT * from customer where id = '${id}'
+		select name,r.r_name r_name,
+	(select count(*) from customer c join my_cupon mc on c.id=mc.id where c.id='${id}') coupon
+	 from customer c join cr_join cj on c.id=cj.id 
+	join rating r on r.r_no=cj.r_no
+	where c.id='${id}'
 	</select>
 	
 	
@@ -94,6 +98,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="mybatiscallcoupon" parameterType="java.util.Map" resultType="SaileCouponDTO" >
 		SELECT * FROM SAILE_COUPON S JOIN MY_CUPON MC ON MC.C_NO=S.C_NO WHERE ID='${id}'
 		</select>
+<<<<<<< HEAD
+=======
+		
+		<select id="mybatisgetdpns" parameterType="java.util.Map" resultType="DrPnsDTO" >
+		select * FROM  ${from}  where  ${where}  ${no}
+		</select>
+		
+		<insert id="mybatissetsrc" parameterType="java.util.Map"  >
+		INSERT INTO IMGSRC VALUES('${src}')
+		</insert>
+		
+		<delete id="mybatisdelsrc">
+		delete imgsrc
+		</delete>
+		
+>>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront
 	
 	
  <!--  어진 끝 -->

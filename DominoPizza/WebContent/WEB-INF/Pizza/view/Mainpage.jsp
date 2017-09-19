@@ -141,6 +141,14 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 		<div class="quick_menu">
 			<a href="javascript:goOrder('O');" class="quick_order"><span>온라인<br>주문하기</span></a>
 		</div>
+		
+		<script>
+		// 사이드 퀵메뉴 온라인주문하기
+		function goOrder(O){
+			location.href="<c:url value='/menuList.pz?ty=101' />";
+		}
+		</script>
+		
 <!-- 		<div class="quick_menu2">
 			<a href="javascript:goOrder('Q');" class="quick_order2"></a>
 		</div> --> <!-- 퀵 오더 있던곳 -->
@@ -219,34 +227,23 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 		<!-- customer_info -->
 		<div class="customer_info">
 		<ul>
-			<li>
-						<a href="/global/login">
+			<c:if test="${empty ID }" var="idc" >
+					<li>
+						<a href="<c:url value='/User/Login.pz' />">
 							<div class="img_info">
 								<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/images/img_customer_info_2.png" alt="">
 							</div>
-							<c:if test="${empty ID }" var="idc" >
+							
 							<div class="txt_info">
 								<p>로그인하시면<br>풍성한 혜택이 가득!</p>
 								<div class="txt_info_right">
 									<span class="blue_box">로그인</span>
 								</div>
 							</div>
-							</c:if>
-							<c:if test="${!idc }">
-							<div class="txt_info">
-								<p>${NAME }님 환영합니다!.<br>도미노피자</p>
-
-								<div class="txt_info_right">
-									<!-- 
-									 <span class="blue_box">로그인</span>
-									 -->
-								</div>
-							</div>
-							</c:if>
 							
 						</a>
 					</li>
-				<li>
+									<li>
 					<a href="/event/mania">
 						<div class="img_info">
 							<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/images/img_customer_info2_2.png" alt="">
@@ -258,7 +255,44 @@ document.write(unescape("%3Cscript type='text/javascript' src='" + WCSLOG_URL +"
 							</div>
 						</div>
 					</a>
+				</li>		
+							
+							</c:if>
+							
+					<c:if test="${!idc }">
+					<li>
+					<a href="/mypage/myLevel">
+						<div class="img_info">
+							<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/images/img_customer_info.png" alt="">
+						</div>
+						<div class="txt_info">
+							<p><span id="myMonth"></span> ${dto.name }님은<br><strong class="txt_royal" id="myLevel">${dto.r_name }</strong> 등급입니다.</p>
+							<div class="txt_info_right">
+								<span class="blue_box">혜택보기</span>
+							</div>
+						</div>
+					</a>
 				</li>
+					<li class="exist_coupon">
+					<a href="/mypage/myCoupon">
+						<div class="img_info">
+							<img src="https://cdn.dominos.co.kr/renewal2016/ko/w/images/img_customer_info2.png" alt="">
+						</div>
+						<div class="txt_info">
+							<p><span>${dto.name }</span> 님의<br>사용 가능한 쿠폰은?</p>
+							<div class="txt_info_right bar_line">
+								<p class="coupon_info" id="myCouponCnt">${dto.coupon }</p>
+								<span class="bar"></span>
+
+							</div>
+						</div>
+					</a>
+				</li>
+				
+				
+				
+				</c:if>
+
 				<li>
 					<a href="/branch">
 						<div class="img_info">

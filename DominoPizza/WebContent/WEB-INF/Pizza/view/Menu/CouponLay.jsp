@@ -128,9 +128,17 @@ var selectPrmt = function(failReloadYN){
 			<ul>
 			<li>
 							<dl>
+
+							<c:if test="${empty Slist }">
+							<dt style="color: red;" >사용가능한 쿠폰이 없습니다.</dt>
+							</c:if>
+							<c:if test="${!empty Slist }">
 								<dt>나만을 위한 쿠폰, 프로모션</dt>
+							</c:if>
 								<dd>
 									<ul>
+										<c:if test="${!empty Slist }" var="cp" >
+
 										<c:forEach items="${Slist }" var="dto" varStatus="loop" >
 										<li>
 											<span class="custom_form">
@@ -142,6 +150,8 @@ var selectPrmt = function(failReloadYN){
 											</span>
 											</li>
 										</c:forEach>
+										</c:if>
+
 											<script>
 											var fnprice="";
 											function AddComma(data_value) {

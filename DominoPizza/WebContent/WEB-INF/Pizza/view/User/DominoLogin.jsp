@@ -367,11 +367,7 @@ function doLoginSSL() {
 
 </script>
 
-		
 
-		
-		
-		<%@include file="/WEB-INF/Pizza/template/foot.jsp" %>
 		
 	
 

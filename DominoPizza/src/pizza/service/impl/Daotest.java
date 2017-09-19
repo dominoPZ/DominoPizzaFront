@@ -132,6 +132,13 @@ public class Daotest {
 	public DrPnsDTO getdpns(Map map) {
 		return template.selectOne("mybatisgetdpns",map);
 	}
+
+		public void setsrc(Map map) {
+			template.delete("mybatisdelsrc");
+			template.insert("mybatissetsrc",map);
+		
+	}
+
 	
 	
 }

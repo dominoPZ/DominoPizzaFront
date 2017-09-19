@@ -12,7 +12,23 @@ public class UserDto {
 	private String post;
 	private String birth;
 	
+	//메인페이지 등급 및 쿠폰용
+	private String r_name;
+	private String coupon;
 	
+	
+	public String getR_name() {
+		return r_name;
+	}
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
+	}
+	public String getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
+	}
 	//Getter Setter
 	public String getEmail() {
 		return email;

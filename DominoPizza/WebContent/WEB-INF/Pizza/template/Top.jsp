@@ -29,6 +29,7 @@
 							</ul>
 							
 						<a href="<c:url value='/GoBasket.pz'/> " class="btn_ico btn_cart"><span class="cart_count">${BUYNUM }</span>장바구니</a>
+						
 					</div>
 				</div>
 			<div class="menu_area">

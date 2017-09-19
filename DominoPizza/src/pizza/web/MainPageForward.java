@@ -1,6 +1,9 @@
 package pizza.web;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainPageForward {
 
-	@RequestMapping("/Pizza/MainPage.pz")
-	public String main() throws Exception{
-		
-		return "/WEB-INF/Pizza/view/Mainpage.jsp";
-	}
+//버림
 	
 }

@@ -208,7 +208,7 @@ function changeGoodsCnt(idx){
 
 var goBranch = function(){
 	if(confirm("주문매장 변경 시 장바구니의 제품은 모두 초기화됩니다. 주문매장을 변경하시겠습니까?")) {
-		location.href = "/basket/branch?returnUrl=/basket/detail";
+		location.href = "<c:url value='/AddrSelect.pz' />?reset=1";
 	}
 }
 
@@ -234,6 +234,9 @@ function alertBranch(){
 			</div>
 		</div>
 		<!-- //sub_title -->
+
+
+    	<c:if test="${!empty BUYNUM }" var='isnull' >
 
 		<div class="order_cart">
 			<!-- 배달 -->
@@ -343,7 +346,7 @@ function alertBranch(){
 								
 								<c:set var="lengths" value="${loop.count }" />
 								</c:forEach>
-								<input type="text" value="${lengths }" name="lengths" >
+								<input type="hidden" value="${lengths }" name="lengths" >
 								</form>
 								</tbody>
 							</table>
@@ -400,9 +403,40 @@ function alertBranch(){
 					</div>
 				</div>
 			</div>
+</c:if>
+
+<c:if test="${!isnull }">
+
+		<div class="order_cart">
+			<!-- 배달 -->
+			<!-- // 배달 -->
+			<!-- 포장 -->
+			<!-- // 포장 -->
+
+			<div class="order_section cart_none">
+					<span class="ico ico_cart_n2"></span>
+					<div class="cart_lst_none">
+						<dl>
+							<dt>장바구니가 비어있습니다.</dt>
+							<dd>도미노피자의 맛있는 메뉴를 마음껏 골라 담으세요!</dd>
+						</dl>
+					</div>
+					<div class="btn_wrap">
+						<div class="btn_fix_center">
+							<a href="<c:url value='/menuList.pz?ty=101' />" class="btn btn_mdle btn_gray btn_basic"><span class="btn_txt">신제품 보러 가기</span></a>
+							<a href="<c:url value='/menuList.pz?ty=104' />" class="btn btn_mdle btn_gray btn_basic"><span class="btn_txt">다른 제품 둘러보기</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+</c:if>
+
 	</div>
 	<!-- //content -->
 </div>
+
+
 <!-- //container -->
 <!-- LOGGER 환경변수 설정 -->
 <script type="text/javascript">

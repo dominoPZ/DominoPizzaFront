@@ -251,7 +251,16 @@ var chocolatChk = function() {
 						function basket(ids){
 							var spn = document.getElementById(ids+"_qty");
 							var qty = parseInt(spn.value);
+							<c:if test="${empty ID }" var="idc" >
+							alert("로그인 후 이용가능합니다.");
+							location.href="<c:url value='/User/Login.pz' />";
+							</c:if>
+							<c:if test="${!idc}" >
+							<c:if test="${empty DE_ADDR }" var="idc" >
+							location.href="<c:url value='/AddrSelect.pz' />";
+							</c:if>
 							location.href="<c:url value='/DrinkPncBuy.pz'/>?no="+ids+"&qty="+qty+"&kind=3";
+							</c:if>
 						}	
 					
 					</script>
