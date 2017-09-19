@@ -347,7 +347,6 @@ public class Order {
 		List<SaileCouponDTO> list = new Vector<SaileCouponDTO>();
 		list = service.callcoupon(map);
 		req.setAttribute("Slist", list);
-		System.out.println(list.get(0).getC_name());
 		return "/WEB-INF/Pizza/view/Menu/CouponLay.jsp";
 	}
 	

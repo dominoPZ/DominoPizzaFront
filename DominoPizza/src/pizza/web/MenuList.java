@@ -42,8 +42,11 @@ public class MenuList {
 	@RequestMapping("/Pizza/MainPage.pz")
 	public String main(Map map,HttpSession session, HttpServletRequest req) throws Exception{
 		
-		String src = service.getsrc();
-		System.out.println(src+"!!!");
+		System.out.println(req.getServletContext().getRealPath("/Pizza/Image"));
+		map.put("src", req.getServletContext().getRealPath("/Pizza/Image"));
+		
+		service.setsrc(map);
+		
 		if(session.getAttribute("ID")!=null) {
 			UserDto dto= new UserDto();
 			String id =session.getAttribute("ID").toString();
@@ -161,12 +164,12 @@ public class MenuList {
 	public String SideView(@RequestParam Map map, Model model, HttpServletRequest req) throws Exception{
 		SideMenuList dto = new SideMenuList();
 		SNutrientDTO sndto = new SNutrientDTO();
+		System.out.println("뭡니까?");
 		dto = service.Sideview(map);
 		System.out.println(dto.getS_name());
 		sndto = service.snprint(map);
-		System.out.println(sndto.getS_kcal());
-		model.addAttribute("dto",dto);
-		model.addAttribute("sndto",sndto);
+		req.setAttribute("dto",dto);
+		req.setAttribute("sndto",sndto);
 		
 		return "/WEB-INF/Pizza/view/Menu/SideView.jsp";
 		

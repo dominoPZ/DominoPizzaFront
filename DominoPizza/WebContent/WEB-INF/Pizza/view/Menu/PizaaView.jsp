@@ -705,7 +705,7 @@ function share(optn) {
 						<div class="tab_content active">
 							<div class="detail_view_info">
 								<p>${dto.p_detail}
-								</p><p><img id="p_img" alt="" src="<c:url value='/Pizza/Image/${dto.p_dimg}' />"><br></p></div>
+								</p><p><img id="p_img" alt="" src="<c:url value='/Pizza/Image/pizzalist/${dto.p_dimg}' />"><br></p></div>
 						</div>
 						<div class="tab_content">
 							<div class="detail_view_topping">

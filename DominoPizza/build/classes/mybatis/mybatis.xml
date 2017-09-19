@@ -102,7 +102,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="mybatisgetdpns" parameterType="java.util.Map" resultType="DrPnsDTO" >
 		select * FROM  ${from}  where  ${where}  ${no}
 		</select>
-	
+		
+		<insert id="mybatissetsrc" parameterType="java.util.Map"  >
+		INSERT INTO IMGSRC VALUES('${src}')
+		</insert>
+		
+		<delete id="mybatisdelsrc">
+		delete imgsrc
+		</delete>
+		
 	
 	
  <!--  어진 끝 -->

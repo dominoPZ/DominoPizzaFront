@@ -69,8 +69,8 @@ public class UserController {
 		
 		return "/WEB-INF/Pizza/view/User/Join.jsp";
 	}
+
 	
-	//濡쒓렇�씤 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/User/Login.pz")
 	public String loginView() throws Exception{
 		return "/WEB-INF/Pizza/view/User/DominoLogin.jsp";
