@@ -21,8 +21,19 @@ public class ToppingDAO implements ToppingService{
 	}
 	
 	@Override
-	public List<ToppingDTO> selectAddToppingList() {
-		return template.selectList("addToppingSelectList");
+	public List<ToppingDTO> selectAddToppingList(Map map) {
+		return template.selectList("addToppingSelectList", map);
+	}
+	
+	@Override
+	public List<ToppingDTO> selectToppingNameList(Map map) {
+		return template.selectList("toppingNameSelectList", map);
+	}
+	
+	
+	@Override
+	public List<ToppingDTO> selectToppingKindList() {
+		return template.selectList("toppingKindSelectList");
 	}
 
 	@Override

@@ -2,22 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<!-- 2] CDN(Content Deliver Network)주소 사용 -->
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
-	<!-- Deprecated된 함수 사용시 아래 라이브러리 임베드 -->
-	<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
-<script>
-$(function () {
-    $(".justOne").each(function () {
-        var rows = $(".justOne:contains('" + $(this).text() + "')");
-        if (rows.length > 1) {
-            rows.eq(0).attr("rowspan", rows.length);
-            rows.not(":eq(0)").remove(); 
-        } 
-    });
-});
-</script>
-
 
 <!-- 토핑 정량 확인하기 표 팝업(s)) -->
 <div class="pop_layer pop_type pop_mkToppingQuantity" id="mkToppingQuantity">
@@ -57,10 +41,10 @@ $(function () {
 									<c:if test="${!is}">
 										<c:set value=" " var="backColor" />
 									</c:if>
-									
 									<tr class="${backColor}">
-									
-										<td class="justOne">${toppingList.t_name}</td>
+									<c:if test="${(loop.count) % 3 == 1 }">
+										<td rowspan="3">${${toppingList.t_name}</td>
+									</c:if>
 										<td>${toppingList.t_size}</td>
 										<td>${toppingList.t_gram}</td>
 										<td>${toppingList.t_price}</td>
