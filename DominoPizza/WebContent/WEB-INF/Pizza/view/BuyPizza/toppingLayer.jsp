@@ -65,18 +65,15 @@
 											<select name="toppingCode" class="select toppingselect"
 												style="">
 												<option value="">선택</option>
-												<option value="${list.t_name}" data-price="${list.t_Sprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Ssize}">
-									${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
-								 </option>
-												<option value="${list.t_name}" data-price="${list.t_Mprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Msize}">
-									${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
-								 </option>
-												<option value="${list.t_name}" data-price="${list.t_Lprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Lsize}">
-									${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
-								 </option>
+												<option value="${list.t_name}" data-price="${list.t_Sprice}" data-name="${list.t_name}" data-weight="${list.t_Ssize}">
+												${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
+								 				</option>
+												<option value="${list.t_name}" data-price="${list.t_Mprice}" data-name="${list.t_name}" data-weight="${list.t_Msize}">
+												${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
+								 				</option>
+												<option value="${list.t_name}" data-price="${list.t_Lprice}" data-name="${list.t_name}" data-weight="${list.t_Lsize}">
+												${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
+								 				</option>
 											</select>
 										</div>
 									</li>

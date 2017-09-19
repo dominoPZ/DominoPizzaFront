@@ -133,10 +133,11 @@ public class MyPizzaController {
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트(토핑 추가하기) 출력용
 	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer.pz", produces="text/html; charset=UTF-8")
-	public String toppingList(Map map) throws Exception{
+	public String toppingList(@RequestParam Map map, Model model) throws Exception{
 		List<ToppingDTO> kindList = toppService.selectToppingKindList();
 		Map deliverymap = new HashMap();
 		String kind="", name="", img="", Ssize="", Sprice="", Msize="", Mprice="", Lsize="", Lprice="";
+		//Map savemap;
 		ToppingDTO dto4;
 		List saveList = new Vector();
 		for(ToppingDTO dto1 : kindList) {
@@ -146,6 +147,7 @@ public class MyPizzaController {
 				deliverymap.put("toppingName", dto2.getT_name());
 				List<ToppingDTO> toppingList = toppService.selectAddToppingList(deliverymap);
 				for(ToppingDTO dto3 : toppingList) {
+					//System.out.println("3.t_detail:"+dto3.getT_kind()+"/"+dto3.getT_name()+"/"+dto3.getT_img()+"/"+dto3.getT_size()+"/"+dto3.getT_price());
 					switch(dto3.getT_size()) {
 					case "S": Ssize = dto3.getT_size(); Sprice = dto3.getT_price();
 						break;
@@ -155,6 +157,7 @@ public class MyPizzaController {
 								kind = dto3.getT_kind(); name = dto3.getT_name(); img = dto3.getT_img();
 					}
 				}
+				System.out.println("4.t_detail: "+kind+"/"+name+"/"+img+"/"+Ssize+"/"+Sprice+"/"+Msize+"/"+Mprice+"/"+Lsize+"/"+Lprice);
 				dto4 = new ToppingDTO();
 				dto4.setT_kind(kind);
 				dto4.setT_name(name);
@@ -168,9 +171,12 @@ public class MyPizzaController {
 				saveList.add(dto4);
 				//saveList.add(e)
 			}
-			map.put("list", saveList);
+			model.addAttribute("list", saveList);
 		}
-		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
+//		if(map.get("go").equals("mk"))
+//			return "/WEB-INF/Pizza/view/BuyPizza/mkToppingLayer.jsp";
+//		else
+			return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 	}	
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 알레르기 유발성분 표 출력용
