@@ -76,7 +76,6 @@ public class UserController {
 		return "/WEB-INF/Pizza/view/User/DominoLogin.jsp";
 	}
 	
-	//�븘�씠�뵒 鍮꾨�踰덊샇 李얘린 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/User/DominoSearchforIDorPWD.pz")
 	public String SearchIDorPw() throws Exception{
 		return "/WEB-INF/Pizza/view/User/DominoSearchforIDorPWD.jsp";
@@ -94,37 +93,30 @@ public class UserController {
 	}
 	
 	
-	//濡쒓렇�씤 泥섎━
 	@RequestMapping("/User/LoginCheck.pz")
 	public void LoginCheck(HttpServletRequest req,HttpServletResponse resp,UserDto dto,UserDao dao) throws Exception{
 		PrintWriter pw = resp.getWriter();
 		
-		//�븳湲� 泥섎━
 		
 		JSONObject json = new JSONObject();
 		System.out.println("id : "+dto.getId());
 		System.out.println("pwd : "+dto.getPwd());
 		String id = dto.getId();
 		String result = "";
-
-		try {
-			result = service.loginCheck(dto);	
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("�쉶�썝媛믪� : "+result);
+		
+		result = service.loginCheck(dto);	
+		
 		req.setAttribute("WHERE","SEC");
 		req.setAttribute("SUC_FAIL",result);
 		
-		if(result.length()>0) {	
+		if(result!=null && result.length()>0) {	
 			pw.write("/DominoPizza/Pizza/MainPage.pz");
 			req.getSession().setAttribute("ID", dto.getId());
 			req.getSession().setAttribute("NAME", result);
 		}
-		
 		else {
 			pw.write("http://localhost:8081/DominoPizza/User/Login.pz");
+			
 		}
 		pw.flush();
 		pw.close();
