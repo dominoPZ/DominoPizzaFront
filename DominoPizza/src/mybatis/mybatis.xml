@@ -154,13 +154,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	SELECT T_NAME, T_ALLERGY FROM TOPPING
  </select>
  
-  <!-- 토핑추가하기 출력용 -->
- <select id="addToppingSelectList" resultType="ToppingDTO">
+ <!-- 토핑 분류 출력용 -->
+<select id="toppingKindSelectList" resultType="ToppingDTO">
+ 	SELECT T_KIND FROM TOPPING GROUP BY T_KIND ORDER BY T_KIND
+</select>
+ <!-- 토핑 분류에 해당하는 토핑명 출력용 -->
+<select id="toppingNameSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
+ 	SELECT T_NAME FROM TOPPING WHERE T_KIND='${toppingKind}'
+</select> 
+  <!-- 토핑 추가하기&토핑정량 확인하기 출력용 -->
+ <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
  	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
-	WHERE T_KIND='${T_KIND}'
-	ORDER BY T_NAME, T_SIZE DESC
- </select> 
+	<if test="toppingName != null">
+		WHERE T_NAME='${toppingName}'
+		ORDER BY T_NAME, T_SIZE DESC
+	</if>
+ </select>
  
  <!-- 추가토핑안내 페이지 출력용 -->
  <select id="ToppingSelectList" resultType="ToppingDTO">
