@@ -136,7 +136,6 @@ public class MyPizzaController {
 	public String toppingList(Map map) throws Exception{
 		List<ToppingDTO> kindList = toppService.selectToppingKindList();
 		Map deliverymap = new HashMap();
-		String kind="", name="", img="", Ssize="", Sprice="", Msize="", Mprice="", Lsize="", Lprice="";
 		ToppingDTO dto4;
 		List saveList = new Vector();
 		for(ToppingDTO dto1 : kindList) {
@@ -145,28 +144,18 @@ public class MyPizzaController {
 			for(ToppingDTO dto2 : nameList) {
 				deliverymap.put("toppingName", dto2.getT_name());
 				List<ToppingDTO> toppingList = toppService.selectAddToppingList(deliverymap);
+				dto4 = new ToppingDTO();
 				for(ToppingDTO dto3 : toppingList) {
 					switch(dto3.getT_size()) {
-					case "S": Ssize = dto3.getT_size(); Sprice = dto3.getT_price();
+					case "S": dto4.setT_Ssize(dto3.getT_size()); dto4.setT_Sprice(dto3.getT_price());
 						break;
-					case "M": Msize = dto3.getT_size(); Mprice = dto3.getT_price();
+					case "M": dto4.setT_Msize(dto3.getT_size()); dto4.setT_Mprice(dto3.getT_price());
 						break;
-					default : Lsize = dto3.getT_size(); Lprice = dto3.getT_price();
-								kind = dto3.getT_kind(); name = dto3.getT_name(); img = dto3.getT_img();
+					default : dto4.setT_Lsize(dto3.getT_size()); dto4.setT_Lprice(dto3.getT_price());
+						dto4.setT_kind(dto3.getT_kind()); dto4.setT_name(dto3.getT_name()); dto4.setT_img(dto3.getT_img());
 					}
 				}
-				dto4 = new ToppingDTO();
-				dto4.setT_kind(kind);
-				dto4.setT_name(name);
-				dto4.setT_img(img);
-				dto4.setT_Ssize(Ssize);
-				dto4.setT_Sprice(Sprice);
-				dto4.setT_Msize(Msize);
-				dto4.setT_Mprice(Mprice);
-				dto4.setT_Lsize(Lsize);
-				dto4.setT_Lprice(Lprice);
 				saveList.add(dto4);
-				//saveList.add(e)
 			}
 			map.put("list", saveList);
 		}
