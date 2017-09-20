@@ -98,8 +98,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="mybatiscallcoupon" parameterType="java.util.Map" resultType="SaileCouponDTO" >
 		SELECT * FROM SAILE_COUPON S JOIN MY_CUPON MC ON MC.C_NO=S.C_NO WHERE ID='${id}'
 		</select>
-<<<<<<< HEAD
-=======
 		
 		<select id="mybatisgetdpns" parameterType="java.util.Map" resultType="DrPnsDTO" >
 		select * FROM  ${from}  where  ${where}  ${no}
@@ -113,7 +111,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete imgsrc
 		</delete>
 		
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront
 	
 	
  <!--  어진 끝 -->
@@ -204,11 +201,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM PIZZA
 	WHERE P_NAME='${fstPizza}' OR P_NAME='${scdPizza}'
  </select>
- 
- 
- 
- 
- 
  
  
  

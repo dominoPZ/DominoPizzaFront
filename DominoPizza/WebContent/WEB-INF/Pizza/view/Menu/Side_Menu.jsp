@@ -270,7 +270,7 @@ var chocolatChk = function() {
 		<!-- //sub_title -->
 		<div class="tab_category">
 			<ul class="btn_tab">
-	<li class="C0101"><a href="<c:url value='/menuList.pz' />?ty=4">사이드디시</a></li>
+				<li class="C0101"><a href="<c:url value='/menuList.pz' />?ty=104">사이드디시</a></li>
 				<li class="C0102"><a href="<c:url value='/Pizza/Menu/sidedish_beverage.pz' />">음료</a></li>
 				<li class="C0104"><a href="<c:url value='/Pizza/Menu/sidedish_pickleNSouce.pz' />">피클&소스</a></li>
 		</ul>

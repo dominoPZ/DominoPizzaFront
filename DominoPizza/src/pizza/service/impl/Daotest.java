@@ -48,10 +48,10 @@ public class Daotest {
 			
 			count = template.selectList("mybatisSideMenu",map);
 		}
-		else
+		else {
 			count = template.selectList("mybatisMenu",map);
-		
-		
+		}
+		System.out.println("바티스 내부"+count.size());
 	/*	else if(map.get("ty").toString().equals("2"))
 			count = template.selectList("mybatisMen2",map);
 		else if(map.get("ty").toString().equals("3"))

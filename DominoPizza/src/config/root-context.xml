@@ -16,6 +16,8 @@
 
      <!-- 마이바티스 지원을 위한 빈 등록 -->    
      <!--  1]SqlSessionFactory -->
+     
+     
      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
      	<!-- 데이타소스:데이타베이스 연결정보 -->
      	<property name="dataSource" ref="datasourceByJNDI"/>
@@ -23,9 +25,13 @@
 		<property name="configLocation" value="classpath:mybatis/Configuration.xml"/>
      </bean>
      
+     
      <!-- 2]SqlSessionTemplate -->
      <bean id="template" name="template" class="org.mybatis.spring.SqlSessionTemplate">
      	<constructor-arg ref="sqlSessionFactory"/>
      </bean>
+     
+     
+     
      
 </beans>
