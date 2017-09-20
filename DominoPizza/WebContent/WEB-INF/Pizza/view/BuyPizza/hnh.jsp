@@ -224,6 +224,7 @@ $(document).ready(function() {
 	});
 
 	$("#btn_basket").click(function() {
+		
 		if($("#pizza_select1").val() == "") {
 			alert("첫 번째 피자를 선택해주세요.");
 			return;
