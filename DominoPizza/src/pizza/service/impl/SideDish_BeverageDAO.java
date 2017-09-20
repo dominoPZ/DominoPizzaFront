@@ -17,28 +17,7 @@ public class SideDish_BeverageDAO implements SideDish_BeverageService{
 	private SqlSessionTemplate template;
 	
 	@Override
-	public List<SideDish_BeverageDTO> selectList(Map map) {
-		return template.selectList("sideDishBvrgSelectList", map);
+	public List<SideDish_BeverageDTO> selectList() {
+		return template.selectList("sideDishBvrgSelectList");
 	}
-
-	@Override
-	public SideDish_BeverageDTO selectOne(SideDish_BeverageDTO dto) {
-		return null;
-	}
-
-	@Override
-	public int insert(SideDish_BeverageDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int update(SideDish_BeverageDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int delete(SideDish_BeverageDTO dto) {
-		return 0;
-	}
-
 }

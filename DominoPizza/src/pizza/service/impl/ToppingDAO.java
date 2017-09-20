@@ -30,39 +30,19 @@ public class ToppingDAO implements ToppingService{
 		return template.selectList("toppingNameSelectList", map);
 	}
 	
-	
 	@Override
 	public List<ToppingDTO> selectToppingKindList() {
 		return template.selectList("toppingKindSelectList");
 	}
 
 	@Override
-	public ToppingDTO selectOne(ToppingDTO dto) {
-		
-		return null;
-	}
-
-	@Override
-	public int insert(ToppingDTO dto) {
-		
-		return 0;
-	}
-
-	@Override
-	public int update(ToppingDTO dto) {
-		
-		return 0;
-	}
-
-	@Override
-	public int delete(ToppingDTO dto) {
-		
-		return 0;
-	}
-
-	@Override
 	public List<ToppingDTO> selectToppingallergyList() {
 		return template.selectList("toppingAllergySelectList");
+	}
+
+	@Override
+	public List<ToppingDTO> selectToppingNutrientList() {
+		return template.selectList("toppingNutrientSelectList");
 	}
 	
 }

@@ -52,7 +52,7 @@ public class MyPizzaController {
 	//사이드 디쉬-음료페이지
 	@RequestMapping("/Pizza/Menu/sidedish_beverage.pz")
 	public String sidedish_beverage(Map map) throws Exception{
-		List<SideDish_BeverageDTO> list = sdds_Bvrg.selectList(map);
+		List<SideDish_BeverageDTO> list = sdds_Bvrg.selectList();
 		map.put("bvrg", list);
 		return "/WEB-INF/Pizza/view/Menu/list_siddsh_bvrg.jsp";
 	}
@@ -60,8 +60,8 @@ public class MyPizzaController {
 	//사이드 디쉬-피클&소스페이지
 	@RequestMapping("/Pizza/Menu/sidedish_pickleNSouce.pz")
 	public String sidedish_pickleNSouce(Map map) throws Exception{
-		List<SideDish_PickleDTO> pickleList = sdds_Pickle.selectList(map);
-		List<SideDish_SauceDTO> sauceList = sdds_Sauce.selectList(map);
+		List<SideDish_PickleDTO> pickleList = sdds_Pickle.selectList();
+		List<SideDish_SauceDTO> sauceList = sdds_Sauce.selectList();
 		map.put("pickle", pickleList);
 		map.put("sauce", sauceList);
 		return "/WEB-INF/Pizza/view/Menu/list_siddsh_picNsce.jsp";
@@ -228,7 +228,7 @@ public class MyPizzaController {
 		return "/WEB-INF/Pizza/view/BuyPizza/mykitchen.jsp";
 	}
 	
-	//마이키친 영양성분
+	//마이키친 영양성분 표
 	@RequestMapping("/Pizza/BuyPizza/mykitchen_mkIngredient.pz")
 	public String mykitchen_mkIngredient() throws Exception{
 		

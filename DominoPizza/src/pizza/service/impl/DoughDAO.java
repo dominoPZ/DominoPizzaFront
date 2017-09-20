@@ -21,25 +21,4 @@ public class DoughDAO implements DoughService{
 	public List<DoughDTO> selectList() {
 		return template.selectList("doughSelectList");
 	}
-	
-	@Override
-	public DoughDTO selectOne(DoughDTO dto) {
-		return null;
-	}
-
-	@Override
-	public int insert(DoughDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int update(DoughDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int delete(DoughDTO dto) {
-		return 0;
-	}
-	
 }

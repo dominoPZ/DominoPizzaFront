@@ -23,22 +23,4 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	public String hnhAddPriceSelectOne(Map map) {
 		return dao.hnhAddPriceSelectOne(map);
 	}
-	@Override
-	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
-		return dao.selectOne(dto);
-	}
-	@Override
-	public int insert(MyPizzaDTO dto) {
-		return dao.insert(dto);
-	}
-	@Override
-	public int update(MyPizzaDTO dto) {
-		return dao.update(dto);
-	}
-	@Override
-	public int delete(MyPizzaDTO dto) {
-		return dao.delete(dto);
-	}
-
-
 }

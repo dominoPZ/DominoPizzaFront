@@ -20,24 +20,4 @@ public class DoughServiceImpl implements DoughService{
 		return dao.selectList();
 	}
 
-	@Override
-	public DoughDTO selectOne(DoughDTO dto) {
-		return dao.selectOne(dto);
-	}
-
-	@Override
-	public int insert(DoughDTO dto) {
-		return dao.insert(dto);
-	}
-
-	@Override
-	public int update(DoughDTO dto) {
-		return dao.update(dto);
-	}
-
-	@Override
-	public int delete(DoughDTO dto) {
-		return dao.delete(dto);
-	}
-	
 }

@@ -131,77 +131,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!--  미나 -->
  
 <!-- 하프앤하프페이지 - 첫 번째 피자 목록 출력용 -->
- <select id="pizzaSelectList" resultType="MyPizzaDTO">
-  	SELECT * FROM PIZZA
- </select>
+<select id="pizzaSelectList" resultType="MyPizzaDTO">
+	SELECT * FROM PIZZA
+</select>
  
 <!-- 하프앤하프페이지 - 첫번째 피자 선택에 따른 두 번째 피자 목록 출력용 -->
- <select id="pizzaSecondSelectList" parameterType="MyPizzaDTO" resultType="MyPizzaDTO">
-  	SELECT * FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='${p_name}') AND P_NAME != '${p_name}'
- </select> 
- 
- <!-- 도우 출력용 -->
- <select id="doughSelectList" resultType="DoughDTO">
- 	SELECT * FROM DOUGH
- </select>
- 
-  <!-- 피자_소스 출력용 -->
- <select id="pizzaSauceSelectList" resultType="PizzaSauceDTO">
- 	SELECT * FROM PIZZA_SAUCE
- </select>
- 
-   <!--토핑 알레르기 유발성분 출력용 -->
- <select id="toppingAllergySelectList" resultType="ToppingDTO">
- 	SELECT T_NAME, T_ALLERGY FROM TOPPING
- </select>
- 
- <!-- 토핑 분류 출력용 -->
-<select id="toppingKindSelectList" resultType="ToppingDTO">
- 	SELECT T_KIND FROM TOPPING GROUP BY T_KIND ORDER BY T_KIND
-</select>
- <!-- 토핑 분류에 해당하는 토핑명 출력용 -->
-<select id="toppingNameSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
- 	SELECT T_NAME FROM TOPPING WHERE T_KIND='${toppingKind}'
+<select id="pizzaSecondSelectList" parameterType="MyPizzaDTO" resultType="MyPizzaDTO">
+	SELECT * FROM PIZZA WHERE P_KIND=(SELECT P_KIND FROM PIZZA WHERE P_NAME='${p_name}') AND P_NAME != '${p_name}'
 </select> 
-  <!-- 토핑 추가하기&토핑정량 확인하기 출력용 -->
- <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
- 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
+ 
+<!-- 도우 출력용 -->
+<select id="doughSelectList" resultType="DoughDTO">
+	SELECT * FROM DOUGH
+</select>
+ 
+<!-- 피자_소스 출력용 -->
+<select id="pizzaSauceSelectList" resultType="PizzaSauceDTO">
+	SELECT * FROM PIZZA_SAUCE
+</select>
+ 
+<!--토핑 알레르기 유발성분 출력용 -->
+<select id="toppingAllergySelectList" resultType="ToppingDTO">
+	SELECT T_NAME, T_ALLERGY FROM TOPPING WHERE T_ALLERGY IS NOT NULL
+</select>
+
+<select id="toppingNutrientSelectList" resultType="ToppingDTO">
+	SELECT T_NAME, TN.* FROM T_NUTRIENT TN JOIN TOPPING T ON TN.T_CODE = T.T_CODE
+</select>
+
+<!-- 토핑 분류 출력용 -->
+<select id="toppingKindSelectList" resultType="ToppingDTO">
+	SELECT T_KIND FROM TOPPING GROUP BY T_KIND ORDER BY T_KIND
+</select>
+
+<!-- 토핑 분류에 해당하는 토핑명 출력용 -->
+<select id="toppingNameSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
+	SELECT T_NAME FROM TOPPING WHERE T_KIND='${toppingKind}'
+</select> 
+ 
+<!-- 토핑 추가하기&토핑정량 확인하기 출력용 -->
+<select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
+	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
 	<if test="toppingName != null">
 		WHERE T_NAME='${toppingName}'
 		ORDER BY T_NAME, T_SIZE DESC
 	</if>
- </select>
+</select>
  
- <!-- 추가토핑안내 페이지 출력용 -->
- <select id="ToppingSelectList" resultType="ToppingDTO">
+<!-- 추가토핑안내 페이지 출력용 -->
+<select id="ToppingSelectList" resultType="ToppingDTO">
 	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_ALLERGY
- 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
- 	WHERE T_SIZE != 'S'
- 	ORDER BY T_NAME
- </select>
+	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
+	WHERE T_SIZE != 'S'
+	ORDER BY T_NAME
+</select>
  
 <!-- 사이드 디쉬-음료리스트 출력용 -->
- <select id="sideDishBvrgSelectList" parameterType="java.util.Map" resultType="SideDish_BeverageDTO">
- 	SELECT * FROM DRINK
- </select>
+<select id="sideDishBvrgSelectList" resultType="SideDish_BeverageDTO">
+	SELECT * FROM DRINK
+</select>
  
 <!-- 사이드 디쉬-피클 출력용 -->
- <select id="sideDishPickleSelectList" parameterType="java.util.Map" resultType="SideDish_PickleDTO">
- 	SELECT * FROM PICKLE
- </select>
+<select id="sideDishPickleSelectList" resultType="SideDish_PickleDTO">
+	SELECT * FROM PICKLE
+</select>
  
 <!-- 사이드 디쉬-소스 출력용 -->
- <select id="sideDishSauceSelectList" parameterType="java.util.Map" resultType="SideDish_SauceDTO">
- 	SELECT * FROM SAUCE
- </select>
+<select id="sideDishSauceSelectList" resultType="SideDish_SauceDTO">
+	SELECT * FROM SAUCE
+</select>
  
- <!-- 하프앤하프페이지 - 피자2개, 도우, 사이즈 선택에 따른 피자 가격 -->
- <select id="addHalfNHalfPriceSelectOne" parameterType="java.util.Map" resultType="String">
- 	SELECT SUM(${price}+(SELECT D_PRICE FROM DOUGH WHERE DOUGH_NAME='${dough}'))/2
+<!-- 하프앤하프페이지 - 피자2개, 도우, 사이즈 선택에 따른 피자 가격 -->
+<select id="addHalfNHalfPriceSelectOne" parameterType="java.util.Map" resultType="String">
+	SELECT SUM(${price}+(SELECT D_PRICE FROM DOUGH WHERE DOUGH_NAME='${dough}'))/2
 	FROM PIZZA
 	WHERE P_NAME='${fstPizza}' OR P_NAME='${scdPizza}'
- </select>
+</select>
  
  
  <!-- 연주 -->
