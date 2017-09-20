@@ -204,14 +204,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  </select>
  
  
- 
-<<<<<<< HEAD
- 
- 
-=======
->>>>>>> branch 'master' of https://github.com/dominoPZ/DominoPizzaFront
-  
-<!-- 연주 -->
+ <!-- 연주 -->
  
 <!-- 이벤트메인페이지 출력용 -->
 <select id="eventSelectMain" parameterType="java.util.Map" resultType="EventDTO">

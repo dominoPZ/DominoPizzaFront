@@ -192,9 +192,9 @@ public class MyPizzaController {
 	@RequestMapping(value="/Pizza/BuyPizza/mkChoiceVal.pz", produces="text/html; charset=UTF-8")
 	public String mkChoiceVal(@RequestParam Map map, Model model) throws Exception{
 
-		System.out.println("<mkChoiceVal>doughName : " + map.get("doughName"));
-		System.out.println("<mkChoiceVal>size : " + map.get("size"));
-		System.out.println("<mkChoiceVal>sauce : " + map.get("sauce"));
+		//System.out.println("<mkChoiceVal>doughName : " + map.get("doughName"));
+		//System.out.println("<mkChoiceVal>size : " + map.get("size"));
+		//System.out.println("<mkChoiceVal>sauce : " + map.get("sauce"));
 		
 		return "아무거나~~";
 	}	
