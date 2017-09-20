@@ -136,7 +136,9 @@
 
 
 <script>
-$(".tab_main").show(); //처음에 메인 토핑리스트부터 보이게 설정.
+//$(".tab_main").show(); //처음에 메인 토핑리스트부터 보이게 설정.
+$(".tab_cheese").hide();
+$(".tab_after").hide();
 
 $(".tab .btn_tab li a").click(function(e) {
    e.preventDefault();

@@ -403,7 +403,9 @@ var addTopping = function() {
 	$.ajax({
 		type: "POST",
 		url: "<c:url value='/Pizza/BuyPizza/toppingLayer.pz'/>",
-		//data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
+		data: { 'where':'hnh'
+			//'code_01': $("#pizza_select1").val()+$("#size").val() 
+			},
 		success:function(data) {
 			//console.log("data:" + data);
 			$("#topping_info_pop").html(data).addClass("open");

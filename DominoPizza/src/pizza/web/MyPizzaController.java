@@ -132,11 +132,10 @@ public class MyPizzaController {
 	}	
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 리스트(토핑 추가하기) 출력용
-	@RequestMapping(value="/Pizza/BuyPizza/toppingLayer.pz", produces="text/html; charset=UTF-8")
-	public String toppingList(Map map) throws Exception{
+	@RequestMapping(value= {"/Pizza/BuyPizza/toppingLayer.pz","/Pizza/BuyPizza/mykitchen_mkToppingLayer.pz"}, produces="text/html; charset=UTF-8")
+	public String toppingList(@RequestParam String where, Map map) throws Exception{
 		List<ToppingDTO> kindList = toppService.selectToppingKindList();
 		Map deliverymap = new HashMap();
-		String kind="", name="", img="", Ssize="", Sprice="", Msize="", Mprice="", Lsize="", Lprice="";
 		ToppingDTO dto4;
 		List saveList = new Vector();
 		for(ToppingDTO dto1 : kindList) {
@@ -145,32 +144,23 @@ public class MyPizzaController {
 			for(ToppingDTO dto2 : nameList) {
 				deliverymap.put("toppingName", dto2.getT_name());
 				List<ToppingDTO> toppingList = toppService.selectAddToppingList(deliverymap);
+				dto4 = new ToppingDTO();
 				for(ToppingDTO dto3 : toppingList) {
 					switch(dto3.getT_size()) {
-					case "S": Ssize = dto3.getT_size(); Sprice = dto3.getT_price();
+					case "S": dto4.setT_Ssize(dto3.getT_size()); dto4.setT_Sprice(dto3.getT_price());
 						break;
-					case "M": Msize = dto3.getT_size(); Mprice = dto3.getT_price();
+					case "M": dto4.setT_Msize(dto3.getT_size()); dto4.setT_Mprice(dto3.getT_price());
 						break;
-					default : Lsize = dto3.getT_size(); Lprice = dto3.getT_price();
-								kind = dto3.getT_kind(); name = dto3.getT_name(); img = dto3.getT_img();
+					default : dto4.setT_Lsize(dto3.getT_size()); dto4.setT_Lprice(dto3.getT_price());
+						dto4.setT_kind(dto3.getT_kind()); dto4.setT_name(dto3.getT_name()); dto4.setT_img(dto3.getT_img());
 					}
 				}
-				dto4 = new ToppingDTO();
-				dto4.setT_kind(kind);
-				dto4.setT_name(name);
-				dto4.setT_img(img);
-				dto4.setT_Ssize(Ssize);
-				dto4.setT_Sprice(Sprice);
-				dto4.setT_Msize(Msize);
-				dto4.setT_Mprice(Mprice);
-				dto4.setT_Lsize(Lsize);
-				dto4.setT_Lprice(Lprice);
 				saveList.add(dto4);
-				//saveList.add(e)
 			}
 			map.put("list", saveList);
 		}
-		return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
+		if(where.equals("mk")) return "/WEB-INF/Pizza/view/BuyPizza/mkToppingLayer.jsp";
+		else return "/WEB-INF/Pizza/view/BuyPizza/toppingLayer.jsp";
 	}	
 	
 	//하프앤하프 & 마이키친 메뉴 - 토핑 알레르기 유발성분 표 출력용
@@ -193,9 +183,9 @@ public class MyPizzaController {
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/mkChoiceVal.pz", produces="text/html; charset=UTF-8")
 	public String mkChoiceVal(@RequestParam Map map) throws Exception{
-		System.out.println("<mkChoiceVal>code_01 : " + map.get("code_01"));
-		System.out.println("<mkChoiceVal>gubun : " + map.get("gubun"));
-		System.out.println("<mkChoiceVal>sub_name : " + map.get("sub_name"));
+//		System.out.println("<mkChoiceVal>code_01 : " + map.get("code_01"));
+//		System.out.println("<mkChoiceVal>gubun : " + map.get("gubun"));
+//		System.out.println("<mkChoiceVal>sub_name : " + map.get("sub_name"));
 		return "아무거나~~";
 	}	
 	
@@ -226,15 +216,6 @@ public class MyPizzaController {
 		
 		return "/WEB-INF/Pizza/view/BuyPizza/mkIngredient.jsp";
 	}
-	//마이키친 토핑 추가하기
-	@RequestMapping("/Pizza/BuyPizza/mykitchen_mkToppingLayer.pz")
-	public String mykitchen_addTopping() throws Exception{
-		
-		
-		return "/WEB-INF/Pizza/view/BuyPizza/mkToppingLayer.jsp";
-	}
-	
-	
 	//추가토핑안내 메뉴
 	@RequestMapping("/Pizza/BuyPizza/topping.pz")
 	public String addTopping(Map map1) throws Exception{

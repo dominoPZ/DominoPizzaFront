@@ -304,10 +304,10 @@ var addTopping = function() {
 	$.ajax({
 		type: "POST",
 		url: "<c:url value='/Pizza/BuyPizza/mykitchen_mkToppingLayer.pz'/>",
-		data: {
-			'code_01': $("#dough").val(),
+		data: {'where':'mk'
+/* 			'code_01': $("#dough").val(),
 			'gubun' : $("#size option:selected").data("gubun"),
-			'sub_name' : $("#size option:selected").data("size")
+			'sub_name' : $("#size option:selected").data("size") */
 		},
 		success:function(data) {
 		 	$("#topping_info_pop2").html(data).addClass("open");
