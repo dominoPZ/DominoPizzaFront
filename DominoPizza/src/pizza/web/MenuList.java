@@ -85,13 +85,13 @@ public class MenuList {
 			req.setAttribute("bimg", "곡물베너.png");
 		}
 		else if(ty==102) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
-			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO ";
+			fro = " PIZZA P ";
 			whe = " p_kind = '프리미엄' ";
 			req.setAttribute("bimg", "프리미엄베너.png");
 		}else if(ty==103) {
-			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO,D_PRICE ";
-			fro = " PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO = P.P_NO JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO ";
+			sel = " P_NAME,P_SPRICE,P_LPRICE,P_IMG,P.P_NO ";
+			fro = " PIZZA P ";
 			whe = " p_kind = '클래식' ";
 			req.setAttribute("bimg", "클래식베너.png");
 		}else if(ty==104) {
@@ -108,14 +108,16 @@ public class MenuList {
 		map.put("fro", fro);
 		map.put("ty",ty);
 		System.out.println("dao 전");
-		
 		if(ty!=104) {
 		List<PizzaMenuList> list = service.menuList(map);
 		for(PizzaMenuList pl : list) {
+			if(pl.getD_price()!=null) {
 			pl.setP_lprice((Integer.parseInt(pl.getP_lprice())+Integer.parseInt(pl.getD_price()))+"");
 			pl.setP_sprice((Integer.parseInt(pl.getP_sprice())+Integer.parseInt(pl.getD_price()))+"");
+			}
 		}
 			model.addAttribute("dto",list);
+			System.out.println("사이즈 : "+list.size());
 		}
 		else {
 			List<SideMenuList> list = service.menuList(map);
