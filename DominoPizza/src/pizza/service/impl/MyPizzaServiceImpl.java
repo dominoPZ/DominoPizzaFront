@@ -12,8 +12,8 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	@Resource(name="myPizzaDAO")
 	private MyPizzaDAO dao;
 	@Override
-	public List<MyPizzaDTO> selectList(Map map) {
-		return dao.selectList(map);
+	public List<MyPizzaDTO> selectList() {
+		return dao.selectList();
 	}
 	@Override
 	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {

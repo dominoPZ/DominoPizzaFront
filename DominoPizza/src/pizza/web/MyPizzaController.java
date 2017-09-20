@@ -70,8 +70,16 @@ public class MyPizzaController {
 	//하프앤하프 메뉴 - 첫번째 피자 리스트&피자 도우  출력용
 	@RequestMapping("/Pizza/BuyPizza/hnh.pz")
 	public String halfNHalf(Map map) throws Exception{
-		List<MyPizzaDTO> list = pizzaService.selectList(map);
-		map.put("firstPizzaList", list);
+		List<MyPizzaDTO> list = pizzaService.selectList();
+		List<MyPizzaDTO> pizzaList = new Vector();
+		for(MyPizzaDTO dto : list) {
+			if(!dto.getP_kind().equals("마이키친") && !dto.getP_kind().equals("하프앤하프")) {
+				MyPizzaDTO dto2=new MyPizzaDTO();
+				dto2.setP_name(dto.getP_name());
+				pizzaList.add(dto2);
+			}
+		}
+		map.put("firstPizzaList", pizzaList);
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";
 	}
 	
@@ -182,10 +190,12 @@ public class MyPizzaController {
 	//마이키친 메뉴 - 사용자가 선택한 값 받아오기용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/mkChoiceVal.pz", produces="text/html; charset=UTF-8")
-	public String mkChoiceVal(@RequestParam Map map) throws Exception{
-//		System.out.println("<mkChoiceVal>code_01 : " + map.get("code_01"));
-//		System.out.println("<mkChoiceVal>gubun : " + map.get("gubun"));
-//		System.out.println("<mkChoiceVal>sub_name : " + map.get("sub_name"));
+	public String mkChoiceVal(@RequestParam Map map, Model model) throws Exception{
+
+		System.out.println("<mkChoiceVal>doughName : " + map.get("doughName"));
+		System.out.println("<mkChoiceVal>size : " + map.get("size"));
+		System.out.println("<mkChoiceVal>sauce : " + map.get("sauce"));
+		
 		return "아무거나~~";
 	}	
 	
@@ -200,15 +210,24 @@ public class MyPizzaController {
 		return "/WEB-INF/Pizza/view/BuyPizza/basket.jsp";
 	}	
 	
-	//마이키친 메뉴 - 도우, 소스 출력용
+	//마이키친 메뉴 - 마이키친 기본 피자 가격, 도우, 소스 출력용
 	@RequestMapping("/Pizza/BuyPizza/mykitchen.pz")
 	public String myKitchen(Map map) throws Exception{
+		List<MyPizzaDTO> list = pizzaService.selectList();
+		List<MyPizzaDTO> myPizzaPriceList = new Vector();
+		for(MyPizzaDTO dto : list) {
+			if(dto.getP_kind().equals("마이키친")) {
+				map.put("Mprice", dto.getP_sprice());
+				map.put("Lprice", dto.getP_lprice());
+			}
+		}
 		List<DoughDTO> Doughlist = douService.selectList();
 		map.put( "doughList", Doughlist);
 		List<PizzaSauceDTO> Saucelist = pizzaSauceService.selectList();
 		map.put( "sauceList", Saucelist);
 		return "/WEB-INF/Pizza/view/BuyPizza/mykitchen.jsp";
 	}
+	
 	//마이키친 영양성분
 	@RequestMapping("/Pizza/BuyPizza/mykitchen_mkIngredient.pz")
 	public String mykitchen_mkIngredient() throws Exception{
@@ -216,6 +235,7 @@ public class MyPizzaController {
 		
 		return "/WEB-INF/Pizza/view/BuyPizza/mkIngredient.jsp";
 	}
+	
 	//추가토핑안내 메뉴
 	@RequestMapping("/Pizza/BuyPizza/topping.pz")
 	public String addTopping(Map map1) throws Exception{

@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!--  미나 -->
  
 <!-- 하프앤하프페이지 - 첫 번째 피자 목록 출력용 -->
- <select id="pizzaSelectList" parameterType="java.util.Map" resultType="MyPizzaDTO">
+ <select id="pizzaSelectList" resultType="MyPizzaDTO">
   	SELECT * FROM PIZZA
  </select>
  
@@ -200,6 +200,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM PIZZA
 	WHERE P_NAME='${fstPizza}' OR P_NAME='${scdPizza}'
  </select>
+ 
+ 
+ 
  
  
   

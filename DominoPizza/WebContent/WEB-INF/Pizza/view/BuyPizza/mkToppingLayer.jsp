@@ -192,7 +192,6 @@ $(".toppingselect").change(function() {
 	} else {
 		$(this).parent().parent().removeClass("active");
 	}
-
 	setToppingTotalCnt($(this));
 });
 
@@ -218,6 +217,7 @@ var setToppingTotalCnt = function(obj) {
 		alert("추가 토핑은 최대 7개까지 선택 가능합니다.");
 		reset = true;
 	}
+	
 	if(reset) {
 		obj.val("");
 		obj.parent().parent().find(".ico_or_chk").hide();

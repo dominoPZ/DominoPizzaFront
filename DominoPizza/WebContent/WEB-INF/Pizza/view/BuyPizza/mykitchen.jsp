@@ -108,7 +108,7 @@ src="//cdn.kaizenplatform.net/s/79/44084e2b522564.js" charset="utf-8">
 	<jsp:include page="/WEB-INF/Pizza/template/Top.jsp" />
 	
 
-	<script>
+<script>
 var doughList;
 window.scrollTo(0, 0);
 $(document).ready(function() {
@@ -140,6 +140,9 @@ $(document).ready(function() {
 		}
 	});
  */
+ 	//페이지 로딩시 리스트의 첫번째 도우 자동 선택되게 설정
+	$("#dough option:eq(0)").prop("selected", true);
+	setSize();
 	
 	$("#dough").change(function() {
 		setSize();
@@ -177,10 +180,6 @@ var setSize = function() {
 	//$("#size option").remove();
 	var dough = $("#dough").val();
 	var sizeVal = $("#size").val();
-	$.each(doughList, function(k, v) {
-		if(v.ref_code == dough)
-			$("#size").append("<option value='"+v.code_01+"' data-price='"+v.price+"' data-gubun='"+v.gubun+"' data-size='"+v.sub_name+"'>"+v.sub_name+"</option>");
-	});
 	$("#size option:eq(0)").prop("selected", true);
 	setSource();
 };
@@ -190,11 +189,11 @@ var setSource = function() {
 	//$("#source option").remove();
 	$.ajax({
 		type: "POST",
-		url: "<c:url value='/Pizza/BuyPizza/mkChoiceVal.pz'/>",
+		url: "<c:url value='/Pizza/BuyPizza/mkChoiceVal.pz'/>", //최종 선택한 값이 넘어감.
 		data : {
-			code_01 : $("#size").val(),
-			gubun : $("#size option:selected").data("gubun"),
-			sub_name : $("#size option:selected").data("size"),
+			doughName : $("#dough option:selected").val(),
+			size : $("#size option:selected").val(),
+			sauce : $("#source option:selected").val(),
 		},
 		success:function(data) {
 			//alert("setSource:"+data);
@@ -203,7 +202,7 @@ var setSource = function() {
 			}); */
 		},
 		error: function (error){
-			alert("setSource() 다시 시도해주세요.");
+			alert("다시 시도해주세요.");
 		}
 	});
 
@@ -211,11 +210,10 @@ var setSource = function() {
 };
 
 var setDoughPrice = function() {
-	$("#doughPrice").text("0 원");
-	//alert("선택된  : "+ $("#size option:selected").data("price"));
+	$("#doughPrice").text("0 원"); //기본 금액
 	//if($("#source").val() != "")
-	$("#doughPrice").text( (parseInt($("#size option:selected").data("price"))).cvtNumber() + "원");
-
+	//선택한 사이즈에 따른 기본피자 가격 + 도우 가격
+	$("#doughPrice").text( ((parseInt($("#size option:selected").data("price")))+($("#dough option:selected").data("price"))).cvtNumber() + "원");
 	setTotalAmt(); 
 };
 
@@ -241,7 +239,7 @@ var setToppingPrice = function() {
 	});
 
 	$("#toppingList").val(toppingList);
-	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + "원");
+	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + " 원");
 
 	if(toppingList != "") {
 		var totalAmtStr = totalAmt.cvtNumber();
@@ -288,7 +286,7 @@ var addToppingCheck = function() {
 			} */
 		},
 		error: function (error){
-			alert("addToppingCheck() 다시 시도해주세요.");
+			alert("다시 시도해주세요.");
 		}
 	});
 };
@@ -315,7 +313,7 @@ var addTopping = function() {
 		 	$("#topping_info_pop2").find('.pop_wrap').css('top',top+30+'px');
 		},
 		error: function (error){
-			alert("addTopping()다시 시도해주세요.");
+			alert("다시 시도해주세요.");
 		}
 	});
 };
@@ -388,7 +386,7 @@ var addBasketComplete = function() {
 											<select id="dough" class="select">
 												<!-- 원래 option태그의 value값 : RPZ800H -->
 												<c:forEach var="item" items="${doughList}">
-													<option value="${item.dough_name}">${item.dough_name}</option>
+													<option value="${item.dough_name}" data-price="${item.d_price}">${item.dough_name}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -401,8 +399,8 @@ var addBasketComplete = function() {
 									<div class="option_title"><span class="bul">ㆍ</span>사이즈</div>
 									<div class="sel_box">
 										<select id="size" class="select">
-											<option value='L'>L</option>
-											<option value='M'>M</option>
+											<option value='L' data-price="${Lprice}">L</option>
+											<option value='M' data-price="${Mprice}">M</option>
 										</select>
 									</div>
 								</div>
@@ -516,7 +514,7 @@ var showLayer = function(layerNm) {
 			$(".pop_"+layerNm).find('.pop_wrap').css('top',top+30+'px');
 		},
 		error: function (error){
-			alert("다시시도해주세요. 마이키친 영양성분");
+			alert("다시 시도해주세요.");
 		}
 	});
 };
