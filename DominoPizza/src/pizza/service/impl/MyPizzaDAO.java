@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import pizza.service.MyPizzaDTO;
 import pizza.service.MyPizzaService;
+import pizza.service.PNutrientDTO;
 @Repository
 public class MyPizzaDAO implements MyPizzaService{
 	@Resource(name="template")
@@ -26,6 +27,11 @@ public class MyPizzaDAO implements MyPizzaService{
 	@Override
 	public String hnhAddPriceSelectOne(Map map) {
 		return template.selectOne("addHalfNHalfPriceSelectOne", map);
+	}
+	
+	@Override
+	public List<PNutrientDTO> PizzaNutrientSelectList() {
+		return template.selectList("pizzaDoughNutrientSelectList");
 	}
 
 }

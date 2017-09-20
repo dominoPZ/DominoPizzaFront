@@ -7,4 +7,5 @@ public interface MyPizzaService {
 	List<MyPizzaDTO> selectList();
 	List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto);
 	String hnhAddPriceSelectOne(Map map);
+	List<PNutrientDTO> PizzaNutrientSelectList();
 }

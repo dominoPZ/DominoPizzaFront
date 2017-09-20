@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import pizza.service.MyPizzaDTO;
 import pizza.service.MyPizzaService;
+import pizza.service.PNutrientDTO;
 
 @Service("myPizzaService")
 public class MyPizzaServiceImpl implements MyPizzaService{
@@ -22,5 +23,9 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 	@Override
 	public String hnhAddPriceSelectOne(Map map) {
 		return dao.hnhAddPriceSelectOne(map);
+	}
+	@Override
+	public List<PNutrientDTO> PizzaNutrientSelectList() {
+		return dao.PizzaNutrientSelectList();
 	}
 }

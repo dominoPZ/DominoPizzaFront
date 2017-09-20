@@ -150,11 +150,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT * FROM PIZZA_SAUCE
 </select>
  
-<!--토핑 알레르기 유발성분 출력용 -->
+<!-- 토핑 알레르기 유발성분 출력용 -->
 <select id="toppingAllergySelectList" resultType="ToppingDTO">
 	SELECT T_NAME, T_ALLERGY FROM TOPPING WHERE T_ALLERGY IS NOT NULL
 </select>
 
+<!-- 마이키친] 토핑 영양성분 출력용 - 피자 부분-->
+<select id="pizzaDoughNutrientSelectList" resultType="PNutrientDTO">
+	SELECT P.P_NAME,D.DOUGH_NAME,PN.*
+	FROM PIZZA P JOIN PIZZA_DOUGH PD ON PD.P_NO=P.P_NO
+	JOIN DOUGH D ON D.DOUGH_NO = PD.DOUGH_NO
+	JOIN P_NUTRIENT PN ON PN.D_NO=PD.D_NO
+	WHERE P.P_NO=2
+</select>
+
+<!-- 마이키친] 토핑 영양성분 출력용 - 토핑 부분-->
 <select id="toppingNutrientSelectList" resultType="ToppingDTO">
 	SELECT T_NAME, TN.* FROM T_NUTRIENT TN JOIN TOPPING T ON TN.T_CODE = T.T_CODE
 </select>

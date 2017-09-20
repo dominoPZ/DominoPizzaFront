@@ -504,10 +504,8 @@ var addBasketComplete = function() {
 var showLayer = function(layerNm) {
 	$.ajax({
 		type: "GET",
-		url: "<c:url value='/Pizza/BuyPizza/mykitchen_mkIngredient.pz'/>",
+		url: "<c:url value='/Pizza/BuyPizza/'/>"+layerNm+".pz", 
 		success:function(data) {
-			console.log("data1:"+data);
-			console.log("data2:"+$(".pop_"+layerNm).html(data));
 			$(".pop_"+layerNm).html(data);
 			$(".pop_"+layerNm).addClass("open");
 			var top = $(window).scrollTop();

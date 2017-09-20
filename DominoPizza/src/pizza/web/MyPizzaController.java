@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pizza.service.DoughDTO;
 import pizza.service.MyPizzaDTO;
+import pizza.service.PNutrientDTO;
 import pizza.service.PizzaSauceDTO;
 import pizza.service.SideDish_BeverageDTO;
 import pizza.service.SideDish_PickleDTO;
@@ -229,10 +230,12 @@ public class MyPizzaController {
 	}
 	
 	//마이키친 영양성분 표
-	@RequestMapping("/Pizza/BuyPizza/mykitchen_mkIngredient.pz")
-	public String mykitchen_mkIngredient() throws Exception{
-		
-		
+	@RequestMapping("/Pizza/BuyPizza/mkIngredient.pz")
+	public String mykitchen_mkIngredient(Map map) throws Exception{
+		List<ToppingDTO> toppNutrlist = toppService.selectToppingNutrientList();
+		map.put("toppingNutrientList", toppNutrlist);
+		List<PNutrientDTO> pizzNutrlist = pizzaService.PizzaNutrientSelectList();
+		map.put("pizzaNutrientList", pizzNutrlist);
 		return "/WEB-INF/Pizza/view/BuyPizza/mkIngredient.jsp";
 	}
 	
