@@ -4,13 +4,12 @@ import java.util.List;
 
 public class BasketDTO {
 	
-	private String no;
-	private String name;
-	private String price;
+	private String no; //피자 넘버
+	private String name; //피자 이름
+	private String price; //피자 가격
 	private String qty;
 	private String dough;
 	private String img;
-	private String topping;
 	private String size;
 	private String doughno;
 	private String kind;
@@ -45,12 +44,6 @@ public class BasketDTO {
 	}
 	public void setImg(String img) {
 		this.img = img;
-	}
-	public String getTopping() {
-		return topping;
-	}
-	public void setTopping(String topping) {
-		this.topping = topping;
 	}
 	public String getSize() {
 		return size;

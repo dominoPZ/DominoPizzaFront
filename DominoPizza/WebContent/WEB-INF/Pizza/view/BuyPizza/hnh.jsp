@@ -227,7 +227,7 @@ $(document).ready(function() {
 	});
 	
 	
-	//장바구니 담기 버튼 클릭시 호출
+	//장바구니 담기 버튼 클릭시 호출 - 유효성 체크
 	$("#btn_basket").click(function() {
 		if($("#pizza_select1").val() == "") {
 			alert("첫 번째 피자를 선택해주세요.");
@@ -253,34 +253,45 @@ $(document).ready(function() {
 			return;
 		}
 
-		var goods_code = $("#pizza_select1").val() +"/"+ $("#pizza_select2").val() +"/"+ $("#dough").val() +"/"+ $("#size").val();  
-/* 		alert("goods_code : "+ goods_code);
-		alert("toppingList : "+ $("#toppingList").val());
-		alert("toppingSize : "+ $("#toppingSize").val());
-		alert("toppingPrice : "+ $("#toppingPrice").val()); */
-		addBasket(goods_code, $("#qty").val(), $("#toppingList").val(), $("#toppingSize").val(), $("#toppingPrice").val());
+		var goods_code = $("#pizza_select1").val() +","+ $("#pizza_select2").val() +","+ $("#dough").val() +","+ $("#size").val();  
+		addBasket(goods_code, $("#qty").val(), $("#toppingSize_no").val());
 	});
 
 	
- 	var addBasket = function(choicePizza, qty, choiceToppingName, choiceToppingSize, choiceToppingPrice) {
+ 	var addBasket = function(choicePizza, qtyVal, choiceToppingsize_no) {
 		<c:if test="${empty ID }" var="idc" >
 			alert("로그인 후 이용가능합니다.");
 			location.href="<c:url value='/User/Login.pz' />";
 		</c:if>
 		<c:if test="${!idc}" >
-			<c:if test="${empty DE_ADDR }">
-				addBasketComplete();
-			</c:if>
-			
+			addBasketComplete(choicePizza, qtyVal, choiceToppingsize_no);
 		</c:if>
-		
 	};
 	 
-	var addBasketComplete = function() {
-		window.setTimeout( function() {location.href="<c:url value='/AddrSelect.pz'/>"}, 900);
+	var addBasketComplete = function(choicePizza, qtyVal, choiceToppingsize_no) {
+		//var no = ;
+		var name = $("#pizza_select1").val() +"/"+ $("#pizza_select2").val();
+		var price = $("#totalAmt").data("price");
+		var qty = qtyVal;
+		var dough = $("#dough").val();
+		var img = "<c:url value='/Pizza/Image/pizzalist/하프앤하프.jpg'/>";
+		var size = $("#size").val();
+		alert("img : "+img);
+		//var doughno = ;
+		//var kind = ;
+		var topping = choiceToppingsize_no;
+		location.href="<c:url value='/AddrSelect.pz' />?&na="+name+"&size="+size+"&dough="+dough+"&price="+price+"&qty="+qty+"&topping="+topping;
+		
+/* 		
+ 		window.setTimeout( function() {
+			$(".loading").css("display","none");
+			location.href="<c:url value='/AddrSelect.pz?pzz="+choicePizza+"&qt="+qty+"&pzPrc="+$("#totalAmt").data("price")+"&tp="+choiceToppingsize_no+"'/>";
+		}, 800); 
+		$(".loading").css("display","block");
+		
+		 */
 	};
 
-	
 	
 	$(".minus").click(function() {
 		var cnt = parseInt($("#qty").val()) - 1;
@@ -466,7 +477,8 @@ var setTotalAmt = function() {
 			price = data;
 			var pizzaAmt = parseInt(price) * parseInt($("#qty").val());
 			var toppingAmt = ($("#toppingTotalAmt").val() != "")? parseInt($("#toppingTotalAmt").val()) * parseInt($("#qty").val()) : 0;
-			$("#totalAmt").text((pizzaAmt + toppingAmt).cvtNumber() + "원");
+			$("#totalAmt").data("price", parseInt(pizzaAmt + toppingAmt)); //.cvtNumber() : 천단위 콤마찍기
+			$("#totalAmt").text($("#totalAmt").data("price").cvtNumber() + "원");
 		},
 		error: function (error){
 			alert("다시 시도해주세요.");
@@ -638,8 +650,7 @@ var closeLayer = function() {
 
 							<div class="btn_balloon balloon_rgt">
 								<input type="hidden" id="toppingList" value="" />
-								<input type="hidden" id="toppingSize" value="" />
-								<input type="hidden" id="toppingPrice" value="" />
+								<input type="hidden" id="toppingSize_no" value="" />
 								<input type="hidden" id="toppingNmList" value="" />
 								<input type="hidden" id="toppingTotalAmt" value="0" />
 								<a href="javascript:addToppingCheck();" class="btn"><span class="btn_txt">토핑 추가하기</span></a>
@@ -677,7 +688,7 @@ var closeLayer = function() {
 
 			<!-- 장바구니 버튼 -->
 			<div class="price_totalsum">
-				<div class="price">총 금액 : <span id="totalAmt">0원</span></div>
+				<div class="price">총 금액 : <span id="totalAmt" data-price="0">0원</span></div>
 				<a href="javascript:;" id="btn_basket" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">장바구니 담기</span></a>
 			</div>
 		</div>

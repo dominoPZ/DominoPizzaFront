@@ -46,7 +46,7 @@
 										<c:otherwise>
 											<c:set value="tab_after" var="tabMenu" />
 										</c:otherwise>
-									</c:choose>
+									</c:choose> 
 									<li class="${tabMenu} toppingli" style="">
 										<div class="img_topping">
 											<img
@@ -65,15 +65,15 @@
 											<select name="toppingCode" class="select toppingselect" style="">
 												<option value="">선택</option>
 												<option value="${list.t_name}" data-price="${list.t_Sprice}" 
-													data-name="${list.t_name}" data-weight="${list.t_Ssize}">
+													data-name="${list.t_name}" data-weight="${list.t_Ssize}" data-no="${list.ts_no}">
 													${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
 								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Mprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Msize}">
+													data-name="${list.t_name}" data-weight="${list.t_Msize}" data-no="${list.ts_no}">
 													${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
 								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Lprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Lsize}">
+													data-name="${list.t_name}" data-weight="${list.t_Lsize}" data-no="${list.ts_no}">
 													${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
 								 				</option>
 											</select>
@@ -262,8 +262,7 @@ var is=0;
 //선택한 토핑 테이블 출력을 위한 함수
 var setTopping = function() {
    var toppingList = "";
-   var toppingSize = "";
-   var toppingPrice = "";
+   var toppingSize_no = "";
    var totalAmt = 0;
    var toppingNmList = "";
    var toppingTotalCnt = 0;
@@ -273,15 +272,11 @@ var setTopping = function() {
             toppingList += ",";
             toppingNmList += ",";
          }
-         if(toppingSize != "") {
-        	 toppingSize += ",";
-          }
-         toppingSize += $(this).find("option:selected").data("weight");
          
-         if(toppingPrice != "") {
-        	 toppingPrice += ",";
+         if(toppingSize_no != "") {
+        	 toppingSize_no += ",";
           }
-         toppingPrice += $(this).find("option:selected").data("price");
+         toppingSize_no += $(this).find("option:selected").data("no");
          
          is += $(this).find("option:selected").data("price");
          toppingTotalCnt += 1;
@@ -298,13 +293,11 @@ var setTopping = function() {
    }
 
 /* 		alert("레이어toppingList : "+ toppingList);
-		alert("레이어toppingSize : "+ toppingSize);
-		alert("레이어toppingPrice : "+ toppingPrice); 
+		alert("레이어toppingSize_no : "+ toppingSize_no); 
     */
    
    $("#toppingList").val(toppingList);
-   $("#toppingSize").val(toppingSize);
-   $("#toppingPrice").val(toppingPrice);
+   $("#toppingSize_no").val(toppingSize_no);
    $("#toppingTotalAmt").val(totalAmt);
    $("#toppingNmList").val(toppingNmList);
 

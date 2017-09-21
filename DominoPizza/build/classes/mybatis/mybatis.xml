@@ -186,7 +186,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <!-- 토핑 추가하기&토핑정량 확인하기 출력용 -->
 <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
-	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
+	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND, TS_NO
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
 	<if test="toppingName != null">
 		WHERE T_NAME='${toppingName}'
