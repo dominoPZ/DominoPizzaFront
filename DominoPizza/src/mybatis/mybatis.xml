@@ -114,6 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete imgsrc
 		</delete>
 
+
  <!--  어진 끝 -->
  
   <!--  동준 -->

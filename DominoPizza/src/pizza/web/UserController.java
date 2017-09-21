@@ -94,7 +94,7 @@ public class UserController {
 	
 	
 	@RequestMapping("/User/LoginCheck.pz")
-	public void LoginCheck(HttpServletRequest req,HttpServletResponse resp,UserDto dto,UserDao dao) throws Exception{
+	public void LoginCheck(HttpServletRequest req,HttpSession session ,HttpServletResponse resp,UserDto dto,UserDao dao) throws Exception{
 		PrintWriter pw = resp.getWriter();
 		
 		
@@ -108,11 +108,12 @@ public class UserController {
 		
 		req.setAttribute("WHERE","SEC");
 		req.setAttribute("SUC_FAIL",result);
-		
+	
 		if(result!=null && result.length()>0) {	
 			pw.write("/DominoPizza/Pizza/MainPage.pz");
-			req.getSession().setAttribute("ID", dto.getId());
-			req.getSession().setAttribute("NAME", result);
+			session.setAttribute("ID", id);
+			System.out.println(session.getAttribute("ID")+"@@");
+			session.setAttribute("NAME", result);
 		}
 		else {
 			pw.write("http://localhost:8081/DominoPizza/User/Login.pz");
