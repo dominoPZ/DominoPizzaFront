@@ -420,6 +420,7 @@ var arriveTime = function(reserve_cho, orgId, targetId, timeType) {
 var recipientChange = function(){
 	if($("input:checkbox[id='recipient']").is(":checked")){
 		$("#customerName").val("${callUser.name}");
+		alert("${callUser.tel}");
 		$("#tel1").val("${callUser.tel}".split('-')[0]);
 		$("#tel2").val("${callUser.tel}".split('-')[1]);
 		$("#tel3").val("${callUser.tel}".split('-')[2]);
@@ -898,12 +899,7 @@ var goBranch = function(){
 										<div class="form_field">
 											<div class="sel_box">
 												<select id="tel1" name="tel1" title="휴대전화번호">
-													<option value="010">010</option>
-													<option value="011">011</option>
-													<option value="016">016</option>
-													<option value="017">017</option>
-													<option value="018">018</option>
-													<option value="019">019</option>
+													<option value="010" selected="selected" >010</option>
 												</select>
 											</div>
 										</div>

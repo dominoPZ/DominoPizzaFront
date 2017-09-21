@@ -633,7 +633,8 @@ function share(optn) {
 							</dl>
 							<div class="btn_prd_style">
 								<div class="btn_balloon balloon_rgt">
-									<input type="hidden" id="toppingList" value="" />
+									<input type="text" id="toppingList" value="" />
+									<input type="text" id="toppingSize_no" value="" />
 									<input type="hidden" id="toppingNmList" value="" />
 									<input type="hidden" id="toppingTotalAmt" value="0" />
 
@@ -692,8 +693,11 @@ function share(optn) {
 						var img = imgDom.src;
 						var qtyDom = document.getElementById("qty");
 						var qty = qtyDom.value;
+						var ts_no = document.getElementById("toppingSize_no");
+						var tsno = ts_no.value;
+						alert(tsno);
 						alert("price : " + price +" / dough : " +dough +" / size : " +size+"img : " + img +" / qty : " +qty );
-						location.href="<c:url value='/AddrSelect.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping= &doughno="+doughno;
+						location.href="<c:url value='/AddrSelect.pz' />?kind=1&na=${dto.p_name}&no=${dto.p_no}&size="+size+"&dough="+dough+"&price="+price+"&img=${dto.p_img}&namez="+"&qty="+qty+"&topping="+tsno+"&doughno="+doughno;
 						</c:if>
 					}
 			</script>
