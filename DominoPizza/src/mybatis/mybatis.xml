@@ -113,7 +113,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<delete id="mybatisdelsrc">
 		delete imgsrc
 		</delete>
-
+		
+		<select id="mybatiscallTopping" parameterType="java.util.Map" resultType="ToppingDTO" >
+		SELECT * FROM TOPPING_SIZE TS JOIN TOPPING T ON T.T_CODE = TS.T_CODE WHERE TS_NO='${ts_no}'
+		</select>
+		
 
  <!--  어진 끝 -->
  
