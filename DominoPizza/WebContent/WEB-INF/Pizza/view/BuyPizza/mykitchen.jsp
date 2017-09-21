@@ -170,11 +170,37 @@ $(document).ready(function() {
 		}
 
 		var toppingList = $("#source").val() + ":1," + $("#toppingList").val();
-		addBasket("addPZ", $("#size").val(), "1", toppingList, "", addBasketComplete, "/goods/mykitchen");
+		addBasket();
 	});
 
 });
 
+
+	var addBasket = function(choicePizza, qtyVal, choiceToppingsize_no) {
+		<c:if test="${empty ID }" var="idc" >
+			alert("로그인 후 이용가능합니다.");
+			location.href="<c:url value='/User/Login.pz' />";
+		</c:if>
+		<c:if test="${!idc}" >
+			addBasketComplete();
+		</c:if>
+	};
+	
+	var addBasketComplete = function() {
+		var name = $("#pizza_select1").val() +"/"+ $("#pizza_select2").val();
+		var price = $("#totalAmt").data("price");
+		var qty = 1; //마이키친은 수량 없음.
+		var dough = $("#dough").val();
+		var img = "<c:url value='/Pizza/Image/pizzalist/마이키친.jpg'/>";
+		var size = $("#size").val();
+		var mkSauce = $("#source").val();
+		alert("img : "+img);
+		//var doughno = ;
+		//var kind = ;
+		var topping = choiceToppingsize_no;
+		locat
+		
+	};
 
 var setSize = function() {
 	//$("#size option").remove();
@@ -325,10 +351,7 @@ var closeLayer = function() {
 
 
 
-var addBasketComplete = function() {
-	console.log("addBasketComplete함수 실행");
-		window.setTimeout( function() {location.href="<c:url value='/Pizza/BuyPizza/mykitchen.pz'/>?v="+new Date();}, 900);
-};
+
 </script>
 <!-- container -->
 <div id="container">
@@ -471,7 +494,7 @@ var addBasketComplete = function() {
 		<div class="mykitchen_sumtotal">
 			<div class="form_group">
 				<div class="form_l">
-					<p class="total_num">총 금액 : <em id="totalAmt">0 원</em></p>
+					<p class="total_num">총 금액 : <em id="totalAmt" data-price="0">0 원</em></p>
 				</div>
 				<div class="form_r">
 					<!-- 2016-09-28 //버튼 클래스 추가(s) -->

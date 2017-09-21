@@ -13,6 +13,8 @@ public class BasketDTO {
 	private String size;
 	private String doughno;
 	private String kind;
+	private String mkSauce;
+	
 	private List<ToppingDTO> toppingList;
 	
 	public String getName() {
@@ -75,9 +77,10 @@ public class BasketDTO {
 	public void setNo(String no) {
 		this.no = no;
 	}
-	 
-	
-	
-	 
-
+	public String getMkSauce() {
+		return mkSauce;
+	}
+	public void setMkSauce(String mkSauce) {
+		this.mkSauce = mkSauce;
+	}
 }
