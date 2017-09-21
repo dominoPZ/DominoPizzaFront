@@ -46,7 +46,7 @@
 										<c:otherwise>
 											<c:set value="tab_after" var="tabMenu" />
 										</c:otherwise>
-									</c:choose> 
+									</c:choose>
 									<li class="${tabMenu} toppingli" style="">
 										<div class="img_topping">
 											<img

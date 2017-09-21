@@ -176,7 +176,7 @@ $(document).ready(function() {
 });
 
 
-	var addBasket = function(choicePizza, qtyVal, choiceToppingsize_no) {
+	var addBasket = function() {
 		<c:if test="${empty ID }" var="idc" >
 			alert("로그인 후 이용가능합니다.");
 			location.href="<c:url value='/User/Login.pz' />";
@@ -187,19 +187,18 @@ $(document).ready(function() {
 	};
 	
 	var addBasketComplete = function() {
-		var name = $("#pizza_select1").val() +"/"+ $("#pizza_select2").val();
-		var price = $("#totalAmt").data("price");
-		var qty = 1; //마이키친은 수량 없음.
 		var dough = $("#dough").val();
-		var img = "<c:url value='/Pizza/Image/pizzalist/마이키친.jpg'/>";
 		var size = $("#size").val();
 		var mkSauce = $("#source").val();
-		alert("img : "+img);
-		//var doughno = ;
-		//var kind = ;
-		var topping = choiceToppingsize_no;
-		locat
-		
+		var img = "<c:url value='/Pizza/Image/pizzalist/마이키친.jpg'/>";
+		var qty = 1; //마이키친은 수량 없음.
+		var price = $("#totalAmt").data("price");
+		var topping = $("#toppingSize_no").val();
+ 		window.setTimeout( function() {
+			$(".loading").css("display","none");
+		location.href="<c:url value='/AddrSelect.pz' />?size="+size+"&dough="+dough+"&mkSauce="+mkSauce+"&price="+price+"&img="+img+"&qty="+qty+"&topping="+topping;
+		}, 800); 
+		$(".loading").css("display","block");
 	};
 
 var setSize = function() {
@@ -282,7 +281,7 @@ var setToppingPrice = function() {
 var setTotalAmt = function() {
 	var totalPrice = parseInt($("#doughPrice").text().replaceAll(",", "").replaceAll("원", ""));
 	totalPrice += parseInt($("#toppingTotalAmt").text().replaceAll(",", "").replaceAll("원", ""));
-
+	$("#totalAmt").data("price", totalPrice);
 	$("#totalAmt").text(totalPrice.cvtNumber() + "원");
 };
 
@@ -459,6 +458,7 @@ var closeLayer = function() {
 				</div>
 				<div class="stepcard_content">
 					<input type="hidden" id="toppingList" value="" />
+					<input type="hidden" id="toppingSize_no" value="" />
 					<input type="hidden" id="toppingNmList" value="" />
 					<div class="topping_card">
 						<div class="topping_desc">
@@ -498,7 +498,7 @@ var closeLayer = function() {
 				</div>
 				<div class="form_r">
 					<!-- 2016-09-28 //버튼 클래스 추가(s) -->
-					<a href="/Pizza/BuyPizza/addCart.pz" class="btn btn_mdle btn_basic btn_red" id="btn_basket"><span class="btn_txt">장바구니 담기</span></a>
+					<a href="javascript:;" class="btn btn_mdle btn_basic btn_red" id="btn_basket"><span class="btn_txt">장바구니 담기</span></a>
 					<!-- 2016-09-28 //버튼 클래스 추가(e) -->
 				</div>
 			</div>

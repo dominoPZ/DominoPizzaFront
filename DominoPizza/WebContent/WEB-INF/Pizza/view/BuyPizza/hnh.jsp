@@ -276,12 +276,14 @@ $(document).ready(function() {
 		var dough = $("#dough").val();
 		var img = "<c:url value='/Pizza/Image/pizzalist/하프앤하프.jpg'/>";
 		var size = $("#size").val();
-		alert("img : "+img);
 		//var doughno = ;
 		//var kind = ;
 		var topping = choiceToppingsize_no;
-		location.href="<c:url value='/AddrSelect.pz' />?&na="+name+"&size="+size+"&dough="+dough+"&price="+price+"&qty="+qty+"&topping="+topping;
-		
+ 		window.setTimeout( function() {
+			$(".loading").css("display","none");
+			location.href="<c:url value='/AddrSelect.pz' />?na="+name+"&size="+size+"&dough="+dough+"&price="+price+"&qty="+qty+"&topping="+topping+"&img="+img;
+		}, 800); 
+		$(".loading").css("display","block");
 /* 		
  		window.setTimeout( function() {
 			$(".loading").css("display","none");

@@ -83,17 +83,17 @@
 												style="">
 												<option value="">선택</option>
 												<option value="${list.t_name}" data-price="${list.t_Sprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Ssize}">
-									${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
-								 </option>
+													data-name="${list.t_name}" data-weight="${list.t_Ssize}" data-no="${list.ts_no}">
+													${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
+								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Mprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Msize}">
-									${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
-								 </option>
+													data-name="${list.t_name}" data-weight="${list.t_Msize}" data-no="${list.ts_no}">
+													${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
+								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Lprice}"
-													data-name="${list.t_name}" data-weight="${list.t_Lsize}">
-									${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
-								 </option>
+													data-name="${list.t_name}" data-weight="${list.t_Lsize}" data-no="${list.ts_no}">
+													${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
+								 				</option>
 											</select>
 										</div>
 									</li>
@@ -276,6 +276,7 @@ var setToppingCheck = function() {
 var setTopping = function() {
 	var toppingList = "";
 	var totalAmt = 0;
+	var toppingSize_no = "";
 	var toppingNmList = "";
 	var toppingTotalCnt = 0;
 	var html = "";
@@ -284,6 +285,12 @@ var setTopping = function() {
 			if(toppingList != "") {
 				toppingList += ",";
 			}
+			
+	        if(toppingSize_no != "") {
+	         	toppingSize_no += ",";
+	        }
+	        toppingSize_no += $(this).find("option:selected").data("no");
+
 			toppingTotalCnt++;
 			toppingList += $(this).val();
 			totalAmt += parseInt($(this).find("option:selected").data("price"));
@@ -305,6 +312,7 @@ var setTopping = function() {
 		}
 
 	$("#toppingList").val(toppingList);
+	$("#toppingSize_no").val(toppingSize_no);
 	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + " 원");
 	$("#toppingDisplayList").html(html);
 	if(toppingList != "") {
