@@ -306,12 +306,12 @@ function alertBranch(){
 													<div class="prd_kinds">
 													${map.dough }
 													<c:if test="${map.kind=='1' }" >
-													<c:if test="${map.size=='L' }" var="sizes" >
-													<span class="ico ico_s_large"></span></div>
-													</c:if>
-													<c:if test="${!sizes}"  >
-													<span class="ico ico_s_medium"></span></div>
-													</c:if>
+														<c:if test="${map.size=='L' }" var="sizes" >
+															<span class="ico ico_s_large"></span></div>
+														</c:if>
+														<c:if test="${!sizes}"  >
+															<span class="ico ico_s_medium"></span></div>
+														</c:if>
 													</c:if>
 												</div>
 											</div>

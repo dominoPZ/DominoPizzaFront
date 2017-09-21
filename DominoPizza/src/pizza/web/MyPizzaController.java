@@ -161,7 +161,7 @@ public class MyPizzaController {
 					case "M": dto4.setT_Msize(dto3.getT_size()); dto4.setT_Mprice(dto3.getT_price());
 						break;
 					default : dto4.setT_Lsize(dto3.getT_size()); dto4.setT_Lprice(dto3.getT_price());
-						dto4.setT_kind(dto3.getT_kind()); dto4.setT_name(dto3.getT_name()); dto4.setT_img(dto3.getT_img());
+						dto4.setT_kind(dto3.getT_kind()); dto4.setT_name(dto3.getT_name()); dto4.setT_img(dto3.getT_img()); dto4.setTs_no(dto3.getTs_no());
 					}
 				}
 				saveList.add(dto4);
