@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="mybatiscallUser" parameterType="java.lang.String" resultType="pizza.service.impl.UserDto" >
-		select name,r.r_name r_name,
+		select name,r.r_name r_name,tel,
 	(select count(*) from customer c join my_cupon mc on c.id=mc.id where c.id='${id}') coupon
 	 from customer c join cr_join cj on c.id=cj.id 
 	join rating r on r.r_no=cj.r_no
@@ -186,7 +186,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <!-- 토핑 추가하기&토핑정량 확인하기 출력용 -->
 <select id="addToppingSelectList" parameterType="java.util.Map" resultType="ToppingDTO">
-	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND, TS_NO
+	SELECT T_NAME, T_SIZE, T_PRICE, T_GRAM, T_IMG, T_KIND
 	FROM TOPPING T JOIN TOPPING_SIZE S ON T.T_CODE = S.T_CODE
 	<if test="toppingName != null">
 		WHERE T_NAME='${toppingName}'

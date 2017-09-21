@@ -67,8 +67,14 @@ public class Order {
          if(map.get("size")!=null)
             dto.setSize(map.get("size").toString().toUpperCase().contains("L")?"L":"M");
          System.out.println("size2: "+dto.getSize());
+         if(req.getParameter("mksauce")!=null && req.getParameter("masauce").toString().trim().length()>0) {
+        	 dto.setMkSauce(req.getParameter("mksauce"));
+         }
+         
          
          if(map.get("topping")!=null&&map.get("topping").toString().trim().length()>0) {
+        	 System.out.println("토핑 들어옴");
+        	 System.out.println(req.getParameter("topping"));
             String toppings[] = map.get("topping").toString().split(",");
             //String toppings[] = req.getParameterValues("topping");
             List<ToppingDTO> tlist = new Vector<ToppingDTO>();
