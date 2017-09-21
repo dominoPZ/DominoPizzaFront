@@ -152,6 +152,9 @@ $(document).ready(function() {
 		
 		//피자 반쪽 이미지 왼쪽
 		if($(this).val() != "") {
+			
+			
+			
 			var value = $(this).val().replace(/ /g, '')+"H.png";
 			$(".half_left").addClass("on");
 	         var first = "<img src='";

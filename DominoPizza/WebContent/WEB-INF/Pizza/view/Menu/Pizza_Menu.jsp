@@ -273,10 +273,12 @@ var chocolatChk = function() {
 				<li class="C103"><a href="<c:url value='/menuList.pz?ty=103' />">클래식</a></li>
 		</ul>
 			<div class="tab_content_wrap">
+			
 				<div class="tab_content active">
 					<div class="visual_category">
 						<img src="<c:url value='/Pizza/Image/menub/${bimg } '/>" alt="">
 					</div>
+					
 					<div class="lst_prd_type ">
 
 
