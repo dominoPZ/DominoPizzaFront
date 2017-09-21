@@ -27,6 +27,12 @@ public class ToppingDTO {
 	private String t_Lsize;
 	private String t_Lprice;
 	
+	private String t_kcal;
+	private String t_protein;
+	private String t_sfat;
+	private String t_natrium;
+	private String t_sugar;
+	
 	public String getT_code() {
 		return t_code;
 	}
@@ -122,6 +128,36 @@ public class ToppingDTO {
 	}
 	public void setT_Lprice(String t_Lprice) {
 		this.t_Lprice = t_Lprice;
+	}
+	public String getT_kcal() {
+		return t_kcal;
+	}
+	public void setT_kcal(String t_kcal) {
+		this.t_kcal = t_kcal;
+	}
+	public String getT_protein() {
+		return t_protein;
+	}
+	public void setT_protein(String t_protein) {
+		this.t_protein = t_protein;
+	}
+	public String getT_sfat() {
+		return t_sfat;
+	}
+	public void setT_sfat(String t_sfat) {
+		this.t_sfat = t_sfat;
+	}
+	public String getT_natrium() {
+		return t_natrium;
+	}
+	public void setT_natrium(String t_natrium) {
+		this.t_natrium = t_natrium;
+	}
+	public String getT_sugar() {
+		return t_sugar;
+	}
+	public void setT_sugar(String t_sugar) {
+		this.t_sugar = t_sugar;
 	}
 	
 	

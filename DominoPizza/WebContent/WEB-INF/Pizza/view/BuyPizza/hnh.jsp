@@ -225,7 +225,9 @@ $(document).ready(function() {
 		}
 		setTotalAmt();
 	});
-
+	
+	
+	//장바구니 담기 버튼 클릭시 호출
 	$("#btn_basket").click(function() {
 		if($("#pizza_select1").val() == "") {
 			alert("첫 번째 피자를 선택해주세요.");
@@ -251,12 +253,35 @@ $(document).ready(function() {
 			return;
 		}
 
-		var goods_code = $("#pizza_select1").val() + $("#size").val() + "/" + $("#pizza_select2").val() + $("#size").val();
-
-		addBasket("addPZ", goods_code, $("#qty").val(), $("#toppingList").val(), "", addBasketComplete, "/goods/hnh");
+		var goods_code = $("#pizza_select1").val() +"/"+ $("#pizza_select2").val() +"/"+ $("#dough").val() +"/"+ $("#size").val();  
+/* 		alert("goods_code : "+ goods_code);
+		alert("toppingList : "+ $("#toppingList").val());
+		alert("toppingSize : "+ $("#toppingSize").val());
+		alert("toppingPrice : "+ $("#toppingPrice").val()); */
+		addBasket(goods_code, $("#qty").val(), $("#toppingList").val(), $("#toppingSize").val(), $("#toppingPrice").val());
 	});
 
+	
+ 	var addBasket = function(choicePizza, qty, choiceToppingName, choiceToppingSize, choiceToppingPrice) {
+		<c:if test="${empty ID }" var="idc" >
+			alert("로그인 후 이용가능합니다.");
+			location.href="<c:url value='/User/Login.pz' />";
+		</c:if>
+		<c:if test="${!idc}" >
+			<c:if test="${empty DE_ADDR }">
+				addBasketComplete();
+			</c:if>
+			
+		</c:if>
+		
+	};
+	 
+	var addBasketComplete = function() {
+		window.setTimeout( function() {location.href="<c:url value='/AddrSelect.pz'/>"}, 900);
+	};
 
+	
+	
 	$(".minus").click(function() {
 		var cnt = parseInt($("#qty").val()) - 1;
 		if(cnt < 1) cnt = 1;
@@ -296,9 +321,6 @@ var removeTopping = function() {
 };
 
 
-var addBasketComplete = function() {
-	window.setTimeout( function() {location.href="/goods/hnh?v="+new Date();}, 900);
-};
 
 //도우 가져오기
 var setDough = function() {
@@ -616,6 +638,8 @@ var closeLayer = function() {
 
 							<div class="btn_balloon balloon_rgt">
 								<input type="hidden" id="toppingList" value="" />
+								<input type="hidden" id="toppingSize" value="" />
+								<input type="hidden" id="toppingPrice" value="" />
 								<input type="hidden" id="toppingNmList" value="" />
 								<input type="hidden" id="toppingTotalAmt" value="0" />
 								<a href="javascript:addToppingCheck();" class="btn"><span class="btn_txt">토핑 추가하기</span></a>
@@ -654,7 +678,7 @@ var closeLayer = function() {
 			<!-- 장바구니 버튼 -->
 			<div class="price_totalsum">
 				<div class="price">총 금액 : <span id="totalAmt">0원</span></div>
-				<a href="<c:url value='/Pizza/BuyPizza/addCart.pz'/>" id="btn_basket" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">장바구니 담기</span></a>
+				<a href="javascript:;" id="btn_basket" class="btn btn_mdle btn_red btn_basic"><span class="btn_txt">장바구니 담기</span></a>
 			</div>
 		</div>
 		<!-- //halfandhalf_container -->

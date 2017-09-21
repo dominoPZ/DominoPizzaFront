@@ -6,14 +6,15 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import pizza.service.MyPizzaDTO;
 import pizza.service.MyPizzaService;
+import pizza.service.PNutrientDTO;
 
 @Service("myPizzaService")
 public class MyPizzaServiceImpl implements MyPizzaService{
 	@Resource(name="myPizzaDAO")
 	private MyPizzaDAO dao;
 	@Override
-	public List<MyPizzaDTO> selectList(Map map) {
-		return dao.selectList(map);
+	public List<MyPizzaDTO> selectList() {
+		return dao.selectList();
 	}
 	@Override
 	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {
@@ -24,21 +25,7 @@ public class MyPizzaServiceImpl implements MyPizzaService{
 		return dao.hnhAddPriceSelectOne(map);
 	}
 	@Override
-	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
-		return dao.selectOne(dto);
+	public List<PNutrientDTO> PizzaNutrientSelectList() {
+		return dao.PizzaNutrientSelectList();
 	}
-	@Override
-	public int insert(MyPizzaDTO dto) {
-		return dao.insert(dto);
-	}
-	@Override
-	public int update(MyPizzaDTO dto) {
-		return dao.update(dto);
-	}
-	@Override
-	public int delete(MyPizzaDTO dto) {
-		return dao.delete(dto);
-	}
-
-
 }

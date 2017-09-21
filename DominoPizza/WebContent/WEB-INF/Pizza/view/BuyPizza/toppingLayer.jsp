@@ -62,21 +62,20 @@
 										</p>
 
 										<div class="sel_box">
-											<select name="toppingCode" class="select toppingselect"
-												style="">
+											<select name="toppingCode" class="select toppingselect" style="">
 												<option value="">선택</option>
-												<option value="${list.t_name}" data-price="${list.t_Sprice}"
+												<option value="${list.t_name}" data-price="${list.t_Sprice}" 
 													data-name="${list.t_name}" data-weight="${list.t_Ssize}">
-									${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
-								 </option>
+													${list.t_Ssize}:<fmt:formatNumber value="${list.t_Sprice}"/>원
+								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Mprice}"
 													data-name="${list.t_name}" data-weight="${list.t_Msize}">
-									${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
-								 </option>
+													${list.t_Msize}:<fmt:formatNumber value="${list.t_Mprice}"/>원
+								 				</option>
 												<option value="${list.t_name}" data-price="${list.t_Lprice}"
 													data-name="${list.t_name}" data-weight="${list.t_Lsize}">
-									${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
-								 </option>
+													${list.t_Lsize}:<fmt:formatNumber value="${list.t_Lprice}"/>원
+								 				</option>
 											</select>
 										</div>
 									</li>
@@ -226,18 +225,18 @@ var setToppingTotalCnt = function(obj) {
 
 
 
-//토핑 추가하기 버튼 클릭시 호출
+//토핑 추가하기 버튼 클릭시 호출(토핑 레이어 안)
 var setToppingCheck = function() {
    var toppingList = "";
-
    $(".toppingselect").each(function() {
       if($(this).val() != "") {
          if(toppingList != "") {
             toppingList += ",";
          }
-         toppingList += $(this).val();
-      }
+         toppingList += $(this).val();         
+      }      
    });
+   
    //alert("0.toppingList : "+ toppingList);
    // "toppingList : RTP840HL:1" 출력. 선택한 것의 value값임.
    setTopping();
@@ -263,6 +262,8 @@ var is=0;
 //선택한 토핑 테이블 출력을 위한 함수
 var setTopping = function() {
    var toppingList = "";
+   var toppingSize = "";
+   var toppingPrice = "";
    var totalAmt = 0;
    var toppingNmList = "";
    var toppingTotalCnt = 0;
@@ -272,8 +273,17 @@ var setTopping = function() {
             toppingList += ",";
             toppingNmList += ",";
          }
-         is += $(this).find("option:selected").data("price");
+         if(toppingSize != "") {
+        	 toppingSize += ",";
+          }
+         toppingSize += $(this).find("option:selected").data("weight");
          
+         if(toppingPrice != "") {
+        	 toppingPrice += ",";
+          }
+         toppingPrice += $(this).find("option:selected").data("price");
+         
+         is += $(this).find("option:selected").data("price");
          toppingTotalCnt += 1;
          //원래 코드 : toppingList += $(this).data("code") + ":" + $(this).val();
          toppingList += $(this).val();
@@ -287,8 +297,14 @@ var setTopping = function() {
       return;
    }
 
-
+/* 		alert("레이어toppingList : "+ toppingList);
+		alert("레이어toppingSize : "+ toppingSize);
+		alert("레이어toppingPrice : "+ toppingPrice); 
+    */
+   
    $("#toppingList").val(toppingList);
+   $("#toppingSize").val(toppingSize);
+   $("#toppingPrice").val(toppingPrice);
    $("#toppingTotalAmt").val(totalAmt);
    $("#toppingNmList").val(toppingNmList);
 

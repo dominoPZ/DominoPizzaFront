@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pizza.service.DoughDTO;
 import pizza.service.MyPizzaDTO;
+import pizza.service.PNutrientDTO;
 import pizza.service.PizzaSauceDTO;
 import pizza.service.SideDish_BeverageDTO;
 import pizza.service.SideDish_PickleDTO;
@@ -52,7 +53,7 @@ public class MyPizzaController {
 	//사이드 디쉬-음료페이지
 	@RequestMapping("/Pizza/Menu/sidedish_beverage.pz")
 	public String sidedish_beverage(Map map) throws Exception{
-		List<SideDish_BeverageDTO> list = sdds_Bvrg.selectList(map);
+		List<SideDish_BeverageDTO> list = sdds_Bvrg.selectList();
 		map.put("bvrg", list);
 		return "/WEB-INF/Pizza/view/Menu/list_siddsh_bvrg.jsp";
 	}
@@ -60,8 +61,8 @@ public class MyPizzaController {
 	//사이드 디쉬-피클&소스페이지
 	@RequestMapping("/Pizza/Menu/sidedish_pickleNSouce.pz")
 	public String sidedish_pickleNSouce(Map map) throws Exception{
-		List<SideDish_PickleDTO> pickleList = sdds_Pickle.selectList(map);
-		List<SideDish_SauceDTO> sauceList = sdds_Sauce.selectList(map);
+		List<SideDish_PickleDTO> pickleList = sdds_Pickle.selectList();
+		List<SideDish_SauceDTO> sauceList = sdds_Sauce.selectList();
 		map.put("pickle", pickleList);
 		map.put("sauce", sauceList);
 		return "/WEB-INF/Pizza/view/Menu/list_siddsh_picNsce.jsp";
@@ -70,8 +71,16 @@ public class MyPizzaController {
 	//하프앤하프 메뉴 - 첫번째 피자 리스트&피자 도우  출력용
 	@RequestMapping("/Pizza/BuyPizza/hnh.pz")
 	public String halfNHalf(Map map) throws Exception{
-		List<MyPizzaDTO> list = pizzaService.selectList(map);
-		map.put("firstPizzaList", list);
+		List<MyPizzaDTO> list = pizzaService.selectList();
+		List<MyPizzaDTO> pizzaList = new Vector();
+		for(MyPizzaDTO dto : list) {
+			if(!dto.getP_kind().equals("마이키친") && !dto.getP_kind().equals("하프앤하프")) {
+				MyPizzaDTO dto2=new MyPizzaDTO();
+				dto2.setP_name(dto.getP_name());
+				pizzaList.add(dto2);
+			}
+		}
+		map.put("firstPizzaList", pizzaList);
 		return "/WEB-INF/Pizza/view/BuyPizza/hnh.jsp";
 	}
 	
@@ -182,10 +191,12 @@ public class MyPizzaController {
 	//마이키친 메뉴 - 사용자가 선택한 값 받아오기용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/mkChoiceVal.pz", produces="text/html; charset=UTF-8")
-	public String mkChoiceVal(@RequestParam Map map) throws Exception{
-//		System.out.println("<mkChoiceVal>code_01 : " + map.get("code_01"));
-//		System.out.println("<mkChoiceVal>gubun : " + map.get("gubun"));
-//		System.out.println("<mkChoiceVal>sub_name : " + map.get("sub_name"));
+	public String mkChoiceVal(@RequestParam Map map, Model model) throws Exception{
+
+		//System.out.println("<mkChoiceVal>doughName : " + map.get("doughName"));
+		//System.out.println("<mkChoiceVal>size : " + map.get("size"));
+		//System.out.println("<mkChoiceVal>sauce : " + map.get("sauce"));
+		
 		return "아무거나~~";
 	}	
 	
@@ -200,22 +211,34 @@ public class MyPizzaController {
 		return "/WEB-INF/Pizza/view/BuyPizza/basket.jsp";
 	}	
 	
-	//마이키친 메뉴 - 도우, 소스 출력용
+	//마이키친 메뉴 - 마이키친 기본 피자 가격, 도우, 소스 출력용
 	@RequestMapping("/Pizza/BuyPizza/mykitchen.pz")
 	public String myKitchen(Map map) throws Exception{
+		List<MyPizzaDTO> list = pizzaService.selectList();
+		List<MyPizzaDTO> myPizzaPriceList = new Vector();
+		for(MyPizzaDTO dto : list) {
+			if(dto.getP_kind().equals("마이키친")) {
+				map.put("Mprice", dto.getP_sprice());
+				map.put("Lprice", dto.getP_lprice());
+			}
+		}
 		List<DoughDTO> Doughlist = douService.selectList();
 		map.put( "doughList", Doughlist);
 		List<PizzaSauceDTO> Saucelist = pizzaSauceService.selectList();
 		map.put( "sauceList", Saucelist);
 		return "/WEB-INF/Pizza/view/BuyPizza/mykitchen.jsp";
 	}
-	//마이키친 영양성분
-	@RequestMapping("/Pizza/BuyPizza/mykitchen_mkIngredient.pz")
-	public String mykitchen_mkIngredient() throws Exception{
-		
-		
+	
+	//마이키친 영양성분 표
+	@RequestMapping("/Pizza/BuyPizza/mkIngredient.pz")
+	public String mykitchen_mkIngredient(Map map) throws Exception{
+		List<ToppingDTO> toppNutrlist = toppService.selectToppingNutrientList();
+		map.put("toppingNutrientList", toppNutrlist);
+		List<PNutrientDTO> pizzNutrlist = pizzaService.PizzaNutrientSelectList();
+		map.put("pizzaNutrientList", pizzNutrlist);
 		return "/WEB-INF/Pizza/view/BuyPizza/mkIngredient.jsp";
 	}
+	
 	//추가토핑안내 메뉴
 	@RequestMapping("/Pizza/BuyPizza/topping.pz")
 	public String addTopping(Map map1) throws Exception{

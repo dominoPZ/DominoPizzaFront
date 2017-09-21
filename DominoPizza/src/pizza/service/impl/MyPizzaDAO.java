@@ -10,13 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import pizza.service.MyPizzaDTO;
 import pizza.service.MyPizzaService;
+import pizza.service.PNutrientDTO;
 @Repository
 public class MyPizzaDAO implements MyPizzaService{
 	@Resource(name="template")
 	private SqlSessionTemplate template;
 	@Override
-	public List<MyPizzaDTO> selectList(Map map) {
-		return template.selectList("pizzaSelectList", map);
+	public List<MyPizzaDTO> selectList() {
+		return template.selectList("pizzaSelectList");
 	}
 	@Override
 	public List<MyPizzaDTO> selectSecondPizzaList(MyPizzaDTO dto) {
@@ -29,24 +30,8 @@ public class MyPizzaDAO implements MyPizzaService{
 	}
 	
 	@Override
-	public MyPizzaDTO selectOne(MyPizzaDTO dto) {
-		return null;
+	public List<PNutrientDTO> PizzaNutrientSelectList() {
+		return template.selectList("pizzaDoughNutrientSelectList");
 	}
-	
-	@Override
-	public int insert(MyPizzaDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int update(MyPizzaDTO dto) {
-		return 0;
-	}
-
-	@Override
-	public int delete(MyPizzaDTO dto) {
-		return 0;
-	}
-
 
 }

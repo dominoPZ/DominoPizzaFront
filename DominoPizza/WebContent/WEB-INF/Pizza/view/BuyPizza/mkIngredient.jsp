@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 영양성분 표 팝업(s)) -->
 <div class="pop_layer pop_type open" id="mykitchen_nutrient">
@@ -41,17 +42,25 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="txt_align_lft">오리지널L</td>
-									<td>784</td>
-									<td>1조각</td>
-									<td>98</td>
-									<td>253</td>
-									<td>10</td>
-									<td>4</td>
-									<td>469</td>
-									<td>4</td>
-								</tr>
+								<c:forEach items="${pizzaNutrientList}" var="item" varStatus="loop">
+									<c:if test="${loop.count % 2== 0}" var="isEven">
+										<c:set value="bg_tr_gray" var="addClass"/>
+									</c:if>
+									<c:if test="${!isEven}">
+										<c:set value="" var="addClass"/>
+									</c:if>
+									<tr class="${addClass}">
+										<td>${item.dough_name}${item.n_size}</td> <!-- 이름 왼쪽정렬 class="txt_align_lft" 삭제 -->
+										<td>${item.n_gram}</td>
+										<td>${item.n_stan}</td>
+										<td>${item.n_stangram}</td>
+										<td>${item.n_kcal}</td>
+										<td>${item.n_protein}</td>
+										<td>${item.n_sfat}</td>
+										<td>${item.n_natrium}</td>
+										<td>${item.n_sugar}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</dd>
@@ -78,22 +87,23 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="txt_align_lft">양파</td>
-									<td>25</td>
-									<td>0.8(1.33%)</td>
-									<td>0</td>
-									<td>7(0.35%)</td>
-									<td>3.99</td>
+							<c:forEach items="${toppingNutrientList}" var="item" varStatus="loop">
+								<c:if test="${loop.count % 2== 0}" var="isEven">
+									<c:set value="bg_tr_gray" var="addClass"/>
+								</c:if>
+								<c:if test="${!isEven}">
+									<c:set value="" var="addClass"/>
+								</c:if>
+								<tr class="${addClass}">
+									<td>${item.t_name}</td> <!-- 이름 왼쪽정렬 class="txt_align_lft" 삭제 -->
+									<td>${item.t_kcal}</td>
+									<td>${item.t_protein}</td>
+									<td>${item.t_sfat}</td>
+									<td>${item.t_natrium}</td>
+									<td>${item.t_sugar}</td>
 								</tr>
-								<tr class="bg_tr_gray">
-									<td class="txt_align_lft">피망</td>
-									<td>20</td>
-									<td>0.8(1.33%)</td>
-									<td>0</td>
-									<td>7.5(0.38%)</td>
-									<td>1.92</td>
-								</tr>
+							</c:forEach>
+
 							</tbody>
 						</table>
 					</dd>

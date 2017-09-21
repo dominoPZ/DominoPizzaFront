@@ -10,13 +10,16 @@ public class MyPizzaDTO {
 	
 	private String p_no;
 	private String p_name;
-	private String p_price;
-	private String p_list;
+	private String p_kind;
 	private String p_topping;
+	private String p_sprice;
+	private String p_lprice;
 	private String p_origin;
 	private String p_img;
+	private String p_himg;
+	private String p_dimg;
 	private String p_detail;
-	private String p_grain;
+	
 	public String getP_no() {
 		return p_no;
 	}
@@ -29,23 +32,29 @@ public class MyPizzaDTO {
 	public void setP_name(String p_name) {
 		this.p_name = p_name;
 	}
-	public String getP_price() {
-		return p_price;
+	public String getP_kind() {
+		return p_kind;
 	}
-	public void setP_price(String p_price) {
-		this.p_price = p_price;
-	}
-	public String getP_list() {
-		return p_list;
-	}
-	public void setP_list(String p_list) {
-		this.p_list = p_list;
+	public void setP_kind(String p_kind) {
+		this.p_kind = p_kind;
 	}
 	public String getP_topping() {
 		return p_topping;
 	}
 	public void setP_topping(String p_topping) {
 		this.p_topping = p_topping;
+	}
+	public String getP_sprice() {
+		return p_sprice;
+	}
+	public void setP_sprice(String p_sprice) {
+		this.p_sprice = p_sprice;
+	}
+	public String getP_lprice() {
+		return p_lprice;
+	}
+	public void setP_lprice(String p_lprice) {
+		this.p_lprice = p_lprice;
 	}
 	public String getP_origin() {
 		return p_origin;
@@ -59,18 +68,22 @@ public class MyPizzaDTO {
 	public void setP_img(String p_img) {
 		this.p_img = p_img;
 	}
+	public String getP_himg() {
+		return p_himg;
+	}
+	public void setP_himg(String p_himg) {
+		this.p_himg = p_himg;
+	}
+	public String getP_dimg() {
+		return p_dimg;
+	}
+	public void setP_dimg(String p_dimg) {
+		this.p_dimg = p_dimg;
+	}
 	public String getP_detail() {
 		return p_detail;
 	}
 	public void setP_detail(String p_detail) {
 		this.p_detail = p_detail;
 	}
-	public String getP_grain() {
-		return p_grain;
-	}
-	public void setP_grain(String p_grain) {
-		this.p_grain = p_grain;
-	}
-	
-	
 }

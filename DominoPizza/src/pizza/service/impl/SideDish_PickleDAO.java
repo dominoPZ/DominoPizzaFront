@@ -17,32 +17,8 @@ public class SideDish_PickleDAO implements SideDish_PickleService {
 	private SqlSessionTemplate template;
 
 	@Override
-	public List<SideDish_PickleDTO> selectList(Map map) {
-		return template.selectList("sideDishPickleSelectList", map);
-	}
-
-	@Override
-	public SideDish_PickleDTO selectOne(SideDish_PickleDTO dto) {
-		
-		return null;
-	}
-
-	@Override
-	public int insert(SideDish_PickleDTO dto) {
-		
-		return 0;
-	}
-
-	@Override
-	public int update(SideDish_PickleDTO dto) {
-		
-		return 0;
-	}
-
-	@Override
-	public int delete(SideDish_PickleDTO dto) {
-		
-		return 0;
+	public List<SideDish_PickleDTO> selectList() {
+		return template.selectList("sideDishPickleSelectList");
 	}
 	
 }

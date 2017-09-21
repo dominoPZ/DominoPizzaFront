@@ -111,7 +111,7 @@
 				<a href="javascript:toppingReset();" class="btn"><span class="btn_txt">초기화</span></a>
 			</div>
 			<div class="btn_fix_rgt">
-				<p><strong>토핑금액 : </strong><span id="toppingTotalAmount">총 0원</span></p>
+				<p><strong>토핑금액 : </strong><span id="toppingTotalAmount">총 0 원</span></p>
 			</div>
 		</div>
 			<a href="javascript:setToppingCheck();" class="btn btn_mdle btn_red btn_block">
@@ -192,7 +192,6 @@ $(".toppingselect").change(function() {
 	} else {
 		$(this).parent().parent().removeClass("active");
 	}
-
 	setToppingTotalCnt($(this));
 });
 
@@ -218,6 +217,7 @@ var setToppingTotalCnt = function(obj) {
 		alert("추가 토핑은 최대 7개까지 선택 가능합니다.");
 		reset = true;
 	}
+	
 	if(reset) {
 		obj.val("");
 		obj.parent().parent().find(".ico_or_chk").hide();
@@ -227,11 +227,11 @@ var setToppingTotalCnt = function(obj) {
 
 	if(toppingTotalCnt == 0) {
 		$("#toppingTotalCnt").text("");
-		$("#toppingTotalAmount").html("총 0원");
+		$("#toppingTotalAmount").html("총 0 원");
 		$("#toppingDisplayList").hide();
 	} else {
 		$("#toppingTotalCnt").text("("+toppingTotalCnt+")");
-		$("#toppingTotalAmount").text("총 "+toppingTotalAmount.cvtNumber()+"원");
+		$("#toppingTotalAmount").text("총 "+toppingTotalAmount.cvtNumber()+" 원");
 		$("#toppingDisplayList").show();
 	}
 
@@ -305,7 +305,7 @@ var setTopping = function() {
 		}
 
 	$("#toppingList").val(toppingList);
-	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + "원");
+	$("#toppingTotalAmt").text(totalAmt.cvtNumber() + " 원");
 	$("#toppingDisplayList").html(html);
 	if(toppingList != "") {
 		var totalAmtStr = totalAmt.cvtNumber();
@@ -325,8 +325,6 @@ var setTopping = function() {
 
 
 var showLayer = function(layerNm) {
-	//alert("layerNm : "+layerNm);
-	
 	$.ajax({
 		type: "GET",
 		url: "<c:url value='/Pizza/BuyPizza/'/>"+layerNm+".pz", 
@@ -337,7 +335,7 @@ var showLayer = function(layerNm) {
 			$(".pop_"+layerNm).find('.pop_wrap').css('top',top+30+'px');
 		},
 		error: function (error){
-			alert("다시시도해주세요.");
+			alert("다시시도해주세요.mktoppinglayer안");
 		}
 	});
 };
