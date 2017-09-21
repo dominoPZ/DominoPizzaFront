@@ -701,7 +701,7 @@ function share(optn) {
 						<li class="active"><a href="#">제품 상세보기</a></li>
 						<li><a href="#">토핑 및 원산지</a></li>
 						<li><a href="#">영양성분</a></li>
-					</ul>
+					</ul> 
 					<div class="tab_content_wrap">
 						<div class="tab_content active">
 							<div class="detail_view_info">

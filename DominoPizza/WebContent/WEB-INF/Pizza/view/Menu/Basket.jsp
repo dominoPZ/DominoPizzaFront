@@ -283,7 +283,7 @@ function alertBranch(){
 								
 								<c:forEach items="${BUYLIST}" var="map" varStatus="loop" >
 								<tr>
-								
+								 
 										<td>
 											<div class="prd_info_view">
 												<div class="prd_img">

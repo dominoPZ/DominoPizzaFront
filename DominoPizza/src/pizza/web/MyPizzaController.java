@@ -118,7 +118,7 @@ public class MyPizzaController {
 		}
 		return JSONArray.toJSONString(list);
 	}
-	
+	 
 	//하프앤하프 메뉴 - 피자 2개, 도우, 사이즈 선택에 따른 가격 출력용
 	@ResponseBody
 	@RequestMapping(value="/Pizza/BuyPizza/pizzaPrice.pz", produces="text/html; charset=UTF-8")
