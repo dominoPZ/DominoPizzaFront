@@ -18,6 +18,7 @@ import pizza.service.SNutrientDTO;
 import pizza.service.SaileCouponDTO;
 import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
+import pizza.service.ToppingDTO;
 
 
 
@@ -123,6 +124,11 @@ public class ServiceImpl implements pizza.service.Service {
 
 	public void setsrc(Map map) {
 		dao.setsrc(map);
+		
+	}
+
+	public ToppingDTO callTopping(Map map) {
+		return dao.callTopping(map);
 		
 	}
 

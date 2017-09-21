@@ -19,6 +19,7 @@ import pizza.service.SNutrientDTO;
 import pizza.service.SaileCouponDTO;
 import pizza.service.SideMenuList;
 import pizza.service.StoresDTO;
+import pizza.service.ToppingDTO;
 
 
 @Repository
@@ -138,6 +139,10 @@ public class Daotest {
 			template.insert("mybatissetsrc",map);
 		
 	}
+
+		public ToppingDTO callTopping(Map map) {
+			return template.selectOne("mybatiscallTopping",map);
+		}
 
 	
 	

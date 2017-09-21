@@ -318,6 +318,15 @@ function alertBranch(){
 										</td>
 										<td><span id="qty${loop.count}" ><fmt:formatNumber type="number">${map.price }</fmt:formatNumber> </span></td>
 										<td>
+											<div class="lst_type v5">
+												<ul>
+												<c:if test="${!empty map.toppingList}">
+												<c:forEach items="${map.toppingList }" var="tdto" varStatus="tloop" >
+											<li>${tdto.t_name }(${tdto.t_size}) ${tdto.t_price }</li>
+												</c:forEach>
+												</c:if>
+											</ul>
+											</div>
 										</td>
 										<td>
 										<div class="sel_box">

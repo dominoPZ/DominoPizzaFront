@@ -326,7 +326,10 @@ var addTopping = function() {
 	$("#topping_info_pop").html("");
 	$.ajax({
 		type: "POST",
-		url: "<c:url value='/Pizza/BuyPizza/toppingLayer_LEJ.pz'/>",
+		url: "<c:url value='/Pizza/BuyPizza/toppingLayer.pz'/>",
+		data: { 'where':'hnh'
+			//'code_01': $("#pizza_select1").val()+$("#size").val() 
+			},
 		//data: { 'code_01': $("#pizza_select1").val()+$("#size").val() },
 		success:function(data) {
 			$("#topping_info_pop").html(data).addClass("open");

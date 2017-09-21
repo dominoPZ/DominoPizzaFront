@@ -815,6 +815,12 @@ var goBranch = function(){
 							<td class="txt_align_lft" id="goods_name">
 								<span>${dto.name } ${dto.dough}&nbsp;${dto.size }</span>
 								<span style="display:none;" id="goods_name_brief">${dto.name }${dto.size } (${dto.qty })</span>
+								<c:if test="${!empty dto.toppingList }">
+								<br/>
+								<c:forEach items="${dto.toppingList }" var="tdto" varStatus="tloop"  >
+								<span class="txt_orange">+ ${tdto.t_name}(${tdto.t_size })</span>
+								</c:forEach>
+								</c:if>
 							</td>
 							<td>${dto.qty }</td>
 							<td><fmt:formatNumber>${dto.price }</fmt:formatNumber> </td>
